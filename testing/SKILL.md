@@ -1,9 +1,9 @@
 ---
-name: test
-description: Run test suite. Use when user asks to "run tests", "/test", "execute tests", or requests running the test suite.
+name: testing
+description: Run test suite and report results. Use when user asks to "run tests", "/test", "/testing", "execute tests", or requests running the test suite.
 ---
 
-# Test Running
+# Testing
 
 ## Commands (Node/Frontend - Vitest)
 
