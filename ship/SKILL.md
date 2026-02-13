@@ -1,3 +1,7 @@
+---
+name: ship
+description: Stage all changes, commit, and push. Use when user asks to "ship", "commit and push", "add all and push", or requests staging all changes, committing, and pushing.
+---
 
 # Ship Changes
 

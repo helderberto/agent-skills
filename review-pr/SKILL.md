@@ -1,3 +1,7 @@
+---
+name: review-pr
+description: Review pull requests. Use when user asks to "review a PR", "/review-pr", or wants to review a pull request.
+---
 
 # Review Pull Request
 

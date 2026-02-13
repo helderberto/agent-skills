@@ -1,3 +1,7 @@
+---
+name: coverage
+description: Check test coverage for unstaged changes. Use when user asks to "check coverage", "/coverage", or wants to see which unstaged changes lack test coverage.
+---
 
 # Coverage Check
 

@@ -1,3 +1,7 @@
+---
+name: audit-deps
+description: Check dependencies for vulnerabilities. Use when user asks to "audit dependencies", "/audit-deps", "check for vulnerabilities", or wants to check dependency health.
+---
 
 # Dependency Audit
 

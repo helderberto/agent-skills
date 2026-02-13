@@ -1,3 +1,7 @@
+---
+name: open-pr
+description: Open current PR in browser. Use when user asks to "open pr", "/open-pr", or wants to open the current pull request in the browser.
+---
 
 # Open Pull Request
 

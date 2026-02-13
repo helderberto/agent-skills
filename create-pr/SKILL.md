@@ -1,3 +1,7 @@
+---
+name: create-pr
+description: Create GitHub pull requests. Use when user asks to "create a pull request", "open a PR", "/create-pr", or requests creating pull requests.
+---
 
 # Pull Request
 

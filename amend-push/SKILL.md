@@ -1,3 +1,7 @@
+---
+name: amend-push
+description: Amend last commit and force push. Use when user asks to "amend and push", "/amend-push", or wants to amend the last commit and force push.
+---
 
 # Amend and Push
 

@@ -1,3 +1,7 @@
+---
+name: open-repo
+description: Open repository in browser. Use when user asks to "open repo", "/open-repo", or wants to open the current repository in the browser.
+---
 
 # Open Repository
 

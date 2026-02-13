@@ -1,3 +1,7 @@
+---
+name: test
+description: Run test suite. Use when user asks to "run tests", "/test", "execute tests", or requests running the test suite.
+---
 
 # Test Running
 
