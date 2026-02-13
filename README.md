@@ -42,7 +42,7 @@ npx skills add helderberto/skills --agent claude-code --all
 
 When developing skills locally:
 ```bash
-cd ~/workspace/labs/skills
+cd /path/to/skills
 npx skills add . --agent claude-code --all
 ```
 
