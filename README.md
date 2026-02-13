@@ -1,29 +1,26 @@
 # Agent Skills
 
-Personal collection of Claude Code agent skills.
+Personal collection of Claude Code agent skills - centralized repository for development workflows.
 
 ## About
 
 Skills are managed using the [skills CLI](https://www.npmjs.com/package/skills) - a tool for installing and managing reusable AI agent capabilities.
 
+**Philosophy:** Skills are centralized in this repository and consumed via GitHub, not duplicated across projects.
+
 ## Installation
 
-Install all skills:
+Install from GitHub (recommended):
 ```bash
-npx skills add helderberto/skills
+npx skills add helderberto/skills --agent claude-code --all
 ```
 
 Install specific skill:
 ```bash
-npx skills add helderberto/skills --skill commit
+npx skills add helderberto/skills --agent claude-code --skill commit
 ```
 
-Install for specific agent:
-```bash
-npx skills add helderberto/skills --agent claude-code
-```
-
-List available skills before installing:
+List available skills:
 ```bash
 npx skills add helderberto/skills --list
 ```
@@ -35,18 +32,27 @@ List installed skills:
 npx skills list
 ```
 
-Update skills to latest version:
+Update to latest version:
 ```bash
-# Remove old versions and reinstall
 npx skills remove --all -y
 npx skills add helderberto/skills --agent claude-code --all
 ```
 
-Remove skills:
+## Development
+
+When developing skills locally:
 ```bash
-npx skills remove --all -y
+cd ~/workspace/labs/skills
+npx skills add . --agent claude-code --all
 ```
+
+This installs from the local repository for testing before pushing.
 
 ## Structure
 
-Each skill is a directory containing a `SKILL.md` file with instructions for Claude Code. Complex skills include reference files for progressive disclosure.
+Each skill is a directory containing:
+- `SKILL.md` - Main instructions (keep under 50 lines)
+- Reference files - For progressive disclosure (patterns, examples, templates)
+- `scripts/` - Executable helpers (when needed)
+
+Skills follow progressive disclosure: core workflow in SKILL.md, details in supporting files.
