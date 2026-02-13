@@ -10,6 +10,8 @@ Skills are managed using the [skills CLI](https://www.npmjs.com/package/skills) 
 
 ## Installation
 
+### Local (Project-specific)
+
 Install from GitHub (recommended):
 ```bash
 npx skills add helderberto/skills --agent claude-code --all
@@ -20,12 +22,21 @@ Install specific skill:
 npx skills add helderberto/skills --agent claude-code --skill commit
 ```
 
+### Global (All Projects)
+
+Install globally:
+```bash
+npx skills add helderberto/skills --agent claude-code --all --global
+```
+
 List available skills:
 ```bash
 npx skills add helderberto/skills --list
 ```
 
 ## Managing Skills
+
+### Local
 
 List installed skills:
 ```bash
@@ -36,6 +47,19 @@ Update to latest version:
 ```bash
 npx skills remove --all -y
 npx skills add helderberto/skills --agent claude-code --all
+```
+
+### Global
+
+List globally installed skills:
+```bash
+npx skills list --global
+```
+
+Update global installation:
+```bash
+npx skills remove --all --global -y
+npx skills add helderberto/skills --agent claude-code --all --global
 ```
 
 ## Development
