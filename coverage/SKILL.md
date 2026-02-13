@@ -25,35 +25,10 @@ Sequential:
 2. Run coverage:
    - `npm run test:ci`
    - `npm run coverage:report`
-3. Parse `coverage/lcov.info`:
-   - Find changed files (SF: lines)
-   - Extract line coverage (DA: lines)
-   - DA format: `DA:line_number,hit_count` (0=uncovered)
-4. Map changed lines to coverage:
-   - Match file paths
-   - Check hit count for changed line numbers
-   - Collect uncovered lines
-5. Report:
-   - File:line_number for uncovered changes
-   - Summary: X/Y changed lines covered
-
-## lcov Format
-
-Parse `coverage/lcov.info`:
-```
-SF:src/utils/helper.ts
-DA:10,1    # line 10, covered (hit 1 time)
-DA:11,0    # line 11, NOT covered
-DA:12,5    # line 12, covered (hit 5 times)
-end_of_record
-SF:src/another.ts
-...
-```
-
-Key:
-- `SF:` - source file path
-- `DA:line,hits` - line coverage (0 = uncovered)
-- Match SF paths to git diff file paths
+3. Parse `coverage/lcov.info` (see `lcov-format.md` for format details)
+4. Map changed lines to coverage data
+5. Report uncovered lines: `file.ts:42`
+6. Summary: X/Y changed lines covered
 
 ## Rules
 
