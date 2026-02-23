@@ -1,6 +1,7 @@
 ---
 name: git-safety-hooks
 description: Set up Claude Code hooks to block dangerous git commands (push, reset --hard, clean, branch -D, etc.) before they execute. Use when user wants to prevent destructive git operations or add git safety guardrails.
+disable-model-invocation: true
 ---
 
 # Git Safety Hooks

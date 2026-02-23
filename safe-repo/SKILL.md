@@ -1,6 +1,7 @@
 ---
 name: safe-repo
 description: Check for sensitive data in repository. Use when user asks to "check for sensitive data", "/safe-repo", or wants to verify no company/credential data is in the repository.
+disable-model-invocation: true
 ---
 
 # Safe Repository Check
