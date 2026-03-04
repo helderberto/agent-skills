@@ -2,6 +2,7 @@
 name: coverage
 description: Check test coverage for unstaged changes. Use when user asks to "check coverage", "/coverage", or wants to see which unstaged changes lack test coverage.
 compatibility: Requires a test runner configured with lcov coverage output (vitest, jest, etc.)
+allowed-tools: Bash(git:*) Bash(npm:*) Read
 ---
 
 # Coverage Check
@@ -26,7 +27,7 @@ Sequential:
 2. Run coverage:
    - `npm run test:ci`
    - `npm run coverage:report`
-3. Parse `coverage/lcov.info` (see `lcov-format.md` for format details)
+3. Parse `coverage/lcov.info` (see [lcov-format.md](lcov-format.md) for format details)
 4. Map changed lines to coverage data
 5. Report uncovered lines: `file.ts:42`
 6. Summary: X/Y changed lines covered

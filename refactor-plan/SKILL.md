@@ -1,6 +1,8 @@
 ---
 name: refactor-plan
 description: Create structured refactoring plans. Use when user wants to plan a refactor, needs a refactoring strategy, or mentions breaking down large changes into small commits.
+compatibility: Requires gh CLI with an active authenticated session
+allowed-tools: Bash(gh:*) Bash(git:*) Read Glob Grep
 ---
 
 # Refactor Planning
@@ -26,7 +28,7 @@ Apply Martin Fowler's principle: "Make each refactoring step as small as possibl
 - Sequential, not parallel changes
 
 ### 4. Create GitHub Issue
-Use `gh issue create` with template (see `template.md`)
+Use `gh issue create` with template (see [template.md](template.md))
 
 Include:
 - Problem statement

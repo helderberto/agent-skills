@@ -2,6 +2,8 @@
 name: ship
 description: Stage all changes, commit, and push. Use when user asks to "ship", "commit and push", "add all and push", or requests staging all changes, committing, and pushing.
 disable-model-invocation: true
+compatibility: Requires git. Optionally uses npm scripts for lint and test.
+allowed-tools: Bash(git:*) Bash(npm:*) Read Glob
 ---
 
 # Ship Changes
@@ -12,21 +14,13 @@ disable-model-invocation: true
 - Diff: !`git diff HEAD`
 - Log: !`git log --oneline -10`
 
-## Package manager detection
-
-Check lockfile before running commands:
-- `bun.lock` → `bun`
-- `pnpm-lock.yaml` → `pnpm`
-- `yarn.lock` → `yarn`
-- default → `npm`
-
 ## Workflow
 
 1. Review all changes from status and diff
 2. Analyze recent commit style from log
 3. Check for quality check commands:
    - If `package.json` exists, check for `lint` and `test` scripts
-   - Run available checks in parallel: `{pm} run lint`, `{pm} test`
+   - Run available checks in parallel: `npm run lint`, `npm test`
    - If no package.json, skip quality checks
 4. If checks fail: report errors, STOP — do not commit or push
 5. Generate commit message based on changed files matching repo style

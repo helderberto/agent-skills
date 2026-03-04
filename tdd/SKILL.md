@@ -1,6 +1,8 @@
 ---
 name: tdd
-description: Test-driven development with red-green-refactor loop. Use when user wants to build features or fix bugs using TDD, mentions "red-green-refactor", wants test-first development, or requests TDD workflow.
+description: Guides test-driven development with red-green-refactor loop. Use when user wants to build features or fix bugs using TDD, mentions "red-green-refactor", wants test-first development, or requests TDD workflow.
+compatibility: Requires a configured test runner (jest, vitest, or bun test)
+allowed-tools: Bash Read Glob Grep Write
 ---
 
 # Test-Driven Development
@@ -9,7 +11,7 @@ description: Test-driven development with red-green-refactor loop. Use when user
 
 Tests verify behavior through public interfaces, not implementation. Good tests survive refactors.
 
-See `principles.md` for testing philosophy and anti-patterns.
+See [principles.md](principles.md) for testing philosophy and anti-patterns.
 
 ## Workflow
 
@@ -47,4 +49,4 @@ Once all tests GREEN:
 **DO NOT** write all tests first, then all implementation.
 **DO** use vertical slices: one test → one implementation → repeat.
 
-See `examples.md` for workflow demonstrations.
+See [examples.md](examples.md) for workflow demonstrations.

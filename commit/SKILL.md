@@ -2,6 +2,8 @@
 name: commit
 description: Create git commits following repository style. Use when user asks to "create a commit", "commit changes", "/commit", or requests committing code to git.
 disable-model-invocation: true
+compatibility: Requires git
+allowed-tools: Bash(git:*) Read
 ---
 
 # Git Commit

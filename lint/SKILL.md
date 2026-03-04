@@ -1,24 +1,22 @@
 ---
 name: lint
 description: Run linting and formatting checks. Use when user asks to "run linter", "/lint", "check linting", "fix lint errors", or requests code linting/formatting.
+compatibility: Requires npm with a lint script
+allowed-tools: Bash(npm:*) Read Glob
 ---
 
 # Linting
 
-## Package manager detection
-
-Check lockfile: `bun.lock` → bun, `pnpm-lock.yaml` → pnpm, `yarn.lock` → yarn, else npm.
-
 ## Linter detection
 
 Check `package.json` devDependencies:
-- `@biomejs/biome` → `{pm} run check` / fix: `{pm} run check --write`
-- `oxlint` → `{pm} run lint` / fix: `{pm} run lint --fix`
-- `eslint` (default) → `{pm} run lint` / fix: `{pm} run lint:fix`
+- `@biomejs/biome` → `npm run check` / fix: `npm run check --write`
+- `oxlint` → `npm run lint` / fix: `npm run lint --fix`
+- `eslint` (default) → `npm run lint` / fix: `npm run lint:fix`
 
 ## Workflow
 
-1. Detect package manager and linter
+1. Detect linter from devDependencies
 2. Run lint command
 3. For fixes: run fix variant (only when requested)
 4. Report `file:line` references for all errors
@@ -26,5 +24,5 @@ Check `package.json` devDependencies:
 ## Rules
 
 - Use project's `package.json` scripts
-- Never use `npx`/`bunx` directly
+- Never use `npx` directly
 - Don't auto-fix unless requested
