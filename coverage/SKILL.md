@@ -1,6 +1,7 @@
 ---
 name: coverage
 description: Check test coverage for unstaged changes. Use when user asks to "check coverage", "/coverage", or wants to see which unstaged changes lack test coverage.
+compatibility: Requires a test runner configured with lcov coverage output (vitest, jest, etc.)
 ---
 
 # Coverage Check

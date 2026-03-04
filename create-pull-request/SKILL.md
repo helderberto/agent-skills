@@ -3,7 +3,8 @@ name: create-pull-request
 description: Create GitHub pull requests. Use when user asks to "create a pull request", "open a PR", "/create-pull-request", or requests creating a pull request.
 argument-hint: "[--draft]"
 disable-model-invocation: true
-allowed-tools: Bash(gh *), Bash(git *), Read, Glob
+allowed-tools: Bash(gh:*) Bash(git:*) Read Glob
+compatibility: Requires git and gh CLI with an active authenticated session
 ---
 
 # Create Pull Request
