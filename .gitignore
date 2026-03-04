@@ -3,7 +3,7 @@
 .adal/
 .agent/
 .augment/
-.claude/
+.claude/settings.local.json
 .cline/
 .codebuddy/
 .commandcode/
