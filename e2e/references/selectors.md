@@ -1,91 +1,97 @@
-# Selector Strategy for E2E Tests
+# Selector Strategy for Cypress
 
 ## Priority order (most to least preferred)
 
-### 1. Role + name (best)
+### 1. Role + name — `@testing-library/cypress`
+
 Mirrors how assistive technologies see the page. Resilient to style changes.
 
 ```typescript
-// Playwright
-page.getByRole('button', { name: 'Submit' })
-page.getByRole('textbox', { name: 'Email' })
-page.getByRole('heading', { name: 'Sign in' })
-page.getByRole('link', { name: 'Home' })
-
-// Cypress + Testing Library
 cy.findByRole('button', { name: 'Submit' })
+cy.findByRole('textbox', { name: 'Email' })
+cy.findByRole('heading', { name: 'Sign in' })
+cy.findByRole('link', { name: 'Home' })
+cy.findByRole('checkbox', { name: 'Remember me' })
 ```
 
-### 2. Label (forms)
+### 2. Label — forms
 
 ```typescript
-// Playwright
-page.getByLabel('Email address')
-
-// Cypress
 cy.findByLabelText('Email address')
+cy.findByLabelText('Password')
 ```
 
 ### 3. Text content
 
 ```typescript
-// Playwright
-page.getByText('Welcome back')
-
-// Cypress
 cy.findByText('Welcome back')
+cy.findByText(/welcome/i)   // regex for case-insensitive
 ```
 
 ### 4. Placeholder
 
 ```typescript
-page.getByPlaceholder('Search...')
+cy.findByPlaceholderText('Search...')
 ```
 
-### 5. `data-testid` (last resort)
+### 5. `data-testid` — last resort
+
 Use when there's no accessible label and adding one isn't feasible.
 
 ```typescript
-// Playwright
-page.getByTestId('submit-button')
+cy.get('[data-testid="submit-button"]')
 
 // Renders as:
-<button data-testid="submit-button">Submit</button>
+// <button data-testid="submit-button">Submit</button>
 ```
 
-**Avoid**: CSS classes, IDs tied to styling, XPath, nth-child selectors.
+## Install @testing-library/cypress
 
-## Why avoid CSS selectors?
+```bash
+npm install --save-dev @testing-library/cypress
+```
 
 ```typescript
-// Fragile — breaks on refactor
-page.locator('.btn-primary')
-page.locator('#submit')
-page.locator('form > div:nth-child(2) > input')
+// cypress/support/commands.ts
+import '@testing-library/cypress/add-commands'
+```
+
+## Why avoid CSS selectors
+
+```typescript
+// Fragile — breaks on refactor or style change
+cy.get('.btn-primary')
+cy.get('#submit')
+cy.get('form > div:nth-child(2) > input')
 
 // Resilient — describes behavior, not structure
-page.getByRole('button', { name: 'Submit' })
+cy.findByRole('button', { name: 'Submit' })
 ```
 
-## Playwright cheat sheet
+## Common patterns
 
 ```typescript
-// Navigation
-await page.goto('/login')
+// Type into input
+cy.findByLabelText('Email').type('user@example.com')
 
-// Filling forms
-await page.getByLabel('Email').fill('user@example.com')
-await page.getByLabel('Password').fill('secret')
+// Clear and retype
+cy.findByLabelText('Email').clear().type('new@example.com')
 
-// Clicking
-await page.getByRole('button', { name: 'Sign in' }).click()
+// Select option
+cy.findByLabelText('Country').select('Brazil')
 
-// Assertions
-await expect(page).toHaveURL('/dashboard')
-await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible()
-await expect(page.getByText('Error')).not.toBeVisible()
+// Check checkbox
+cy.findByRole('checkbox', { name: 'Remember me' }).check()
 
-// Waiting (Playwright auto-waits, but explicit when needed)
-await page.waitForURL('/dashboard')
-await expect(page.getByRole('status')).toHaveText('Saved')
+// Assert visibility
+cy.findByRole('alert').should('be.visible')
+cy.findByText('Saved').should('be.visible')
+cy.findByRole('dialog').should('not.exist')
+
+// Assert URL
+cy.url().should('include', '/dashboard')
+cy.url().should('eq', Cypress.config().baseUrl + '/dashboard')
+
+// Wait for element (auto-retries — no cy.wait needed)
+cy.findByRole('heading', { name: 'Dashboard' }).should('be.visible')
 ```

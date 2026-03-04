@@ -1,60 +1,67 @@
 ---
 name: e2e
-description: Write end-to-end tests for user flows. Use when user asks to "write e2e tests", "/e2e", "add Playwright tests", "add Cypress tests", or wants to test a user flow end-to-end.
-compatibility: Requires Playwright or Cypress installed and configured.
+description: Write end-to-end tests for user flows using Cypress. Use when user asks to "write e2e tests", "/e2e", "add Cypress tests", or wants to test a user flow end-to-end.
+compatibility: Requires Cypress installed and configured.
 allowed-tools: Read Glob Grep Write
 ---
 
-# End-to-End Tests
+# End-to-End Tests (Cypress)
 
 ## Detection
 
-Read `package.json` devDependencies:
-- `@playwright/test` → Playwright (preferred)
-- `cypress` → Cypress
+Run in parallel:
 
-Read existing test files to match project conventions.
+- Check `package.json` for `cypress` version
+- Read `cypress.config.ts` for baseUrl and test file patterns
+- Read 1-2 existing test files in `cypress/e2e/` to match conventions
 
 ## Workflow
 
-1. Detect framework and read existing e2e tests (1-2 files)
-2. Understand the user flow to test — ask if unclear
-3. Identify selectors strategy (see [selectors.md](references/selectors.md))
-4. Write tests matching existing style:
-   - File location: `e2e/`, `tests/e2e/`, or `cypress/e2e/`
-   - One file per flow or feature
+1. Read existing tests and config to match project style
+2. Understand the user flow — ask if unclear
+3. Identify selectors (see [selectors.md](references/selectors.md))
+4. Write tests in `cypress/e2e/` — one file per flow or feature
 
-## Playwright format
-
-```typescript
-import { test, expect } from '@playwright/test'
-
-test('user can log in', async ({ page }) => {
-  await page.goto('/login')
-  await page.getByLabel('Email').fill('user@example.com')
-  await page.getByLabel('Password').fill('password')
-  await page.getByRole('button', { name: 'Sign in' }).click()
-  await expect(page).toHaveURL('/dashboard')
-})
-```
-
-## Cypress format
+## Format
 
 ```typescript
 describe('login flow', () => {
-  it('user can log in', () => {
+  beforeEach(() => {
     cy.visit('/login')
+  })
+
+  it('logs in with valid credentials', () => {
     cy.findByLabelText('Email').type('user@example.com')
     cy.findByLabelText('Password').type('password')
     cy.findByRole('button', { name: 'Sign in' }).click()
     cy.url().should('include', '/dashboard')
+    cy.findByRole('heading', { name: 'Dashboard' }).should('be.visible')
+  })
+
+  it('shows error with invalid credentials', () => {
+    cy.findByLabelText('Email').type('wrong@example.com')
+    cy.findByLabelText('Password').type('wrong')
+    cy.findByRole('button', { name: 'Sign in' }).click()
+    cy.findByRole('alert').should('contain.text', 'Invalid credentials')
   })
 })
 ```
 
+## Selector priority
+
+Prefer `@testing-library/cypress` commands when installed:
+
+1. `cy.findByRole('button', { name: 'Submit' })` — best
+2. `cy.findByLabelText('Email')` — forms
+3. `cy.findByText('Welcome')` — text content
+4. `cy.get('[data-testid="submit"]')` — last resort
+
+See [selectors.md](references/selectors.md) for full guide.
+
 ## Rules
 
-- Prefer accessible selectors: `getByRole`, `getByLabel`, `getByText`
-- Use `data-testid` only as last resort (see [selectors.md](references/selectors.md))
-- One assertion per logical outcome — not one assertion per test
-- Test behavior, not implementation
+- Use `@testing-library/cypress` selectors when available, else `cy.get`
+- Use `data-testid` only as last resort
+- One logical outcome per `it` block
+- Test behavior, not implementation details
+- Never use `cy.wait(<number>)` — use `cy.findBy*` auto-retry instead
