@@ -7,27 +7,28 @@ compatibility: Requires npm, bun, or pnpm
 
 # Dependency Audit
 
+## Package manager detection
+
+Check lockfile: `bun.lock` → bun, `pnpm-lock.yaml` → pnpm, `yarn.lock` → yarn, else npm.
+
 ## Commands
 
-Run in parallel:
-- `npm audit` - security vulnerabilities
-- `npm outdated` - outdated packages
+Run in parallel based on detected package manager:
+- npm: `npm audit` + `npm outdated`
+- pnpm: `pnpm audit` + `pnpm outdated`
+- yarn: `yarn audit` + `yarn outdated`
+- bun: `bun audit`
 
 ## Workflow
 
-1. Run security audit and outdated check
-2. Report critical vulnerabilities with fix commands
-3. List outdated packages (major vs minor/patch)
-4. Check for unused deps: grep imports in src/
-
-## Report
-
-- Critical vulns: package + CVE + fix command
-- Outdated: table of package/current/latest/type
-- Unused: packages in package.json but not imported
+1. Detect package manager
+2. Run audit and outdated check in parallel
+3. Report critical vulnerabilities with CVE + fix command (see [severity-levels.md](references/severity-levels.md))
+4. List outdated packages: table of package/current/latest/type (major vs minor/patch)
+5. Check for unused deps: grep imports in `src/`
 
 ## Rules
 
-- Use `npm audit`, never `npx`
+- Never use `npx`/`bunx` directly
 - Focus on actionable items
 - Prioritize: security > major updates > unused > minor updates

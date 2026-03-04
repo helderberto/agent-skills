@@ -6,12 +6,11 @@ disable-model-invocation: true
 
 # Git Commit
 
-## Context
+## Pre-loaded context
 
-Run in parallel:
-- `git status` (never -uall)
-- `git diff HEAD`
-- `git log --oneline -10`
+- Status: !`git status`
+- Diff: !`git diff HEAD`
+- Log: !`git log --oneline -10`
 
 ## Message Style
 

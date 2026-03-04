@@ -40,7 +40,7 @@ Group by severity:
 
 Use `file:line` references for all findings. Include suggested fix for each critical issue.
 
-See [examples.md](examples.md) for output format reference.
+See [examples.md](examples.md) for output format and [review-checklist.md](references/review-checklist.md) for full checklist.
 
 ## Rules
 
