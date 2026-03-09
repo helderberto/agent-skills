@@ -1,7 +1,7 @@
 ---
 name: tdd
-description: Guides test-driven development with red-green-refactor loop. Use when user wants to build features or fix bugs using TDD, mentions "red-green-refactor", wants test-first development, or requests TDD workflow.
-compatibility: Requires a configured test runner (jest, vitest, or bun test)
+description: Guides test-driven development with red-green-refactor loop. Use when user wants to build features or fix bugs using TDD, mentions "red-green-refactor", wants test-first development, or requests TDD workflow. Don't use for writing tests after implementation, adding tests to existing untested code, or one-off test fixes.
+compatibility: Requires a configured test runner (jest or vitest)
 allowed-tools: Bash Read Glob Grep Write
 ---
 
@@ -11,7 +11,7 @@ allowed-tools: Bash Read Glob Grep Write
 
 Tests verify behavior through public interfaces, not implementation. Good tests survive refactors.
 
-See [principles.md](principles.md) for testing philosophy and anti-patterns.
+See [principles.md](references/principles.md) for testing philosophy and anti-patterns.
 
 ## Workflow
 
@@ -49,4 +49,10 @@ Once all tests GREEN:
 **DO NOT** write all tests first, then all implementation.
 **DO** use vertical slices: one test → one implementation → repeat.
 
-See [examples.md](examples.md) for workflow demonstrations.
+See [examples.md](references/examples.md) for workflow demonstrations.
+
+## Error Handling
+
+- If test runner is not found → check `package.json` for `test` script; ask user which runner to use
+- If tests go RED after refactor → revert the refactor immediately and re-attempt in smaller steps
+- If a test cannot be made GREEN with minimal code → revisit the interface design with the user before continuing

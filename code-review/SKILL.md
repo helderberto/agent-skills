@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: Review a GitHub Pull Request for bugs, security, performance, and code quality. Use when user asks to review a PR or wants pull request feedback.
+description: Review a GitHub Pull Request for bugs, security, performance, and code quality. Use when user asks to review a PR or wants pull request feedback. Don't use for reviewing local uncommitted changes, creating new PRs, or merging branches.
 argument-hint: "[bugs|security|performance]"
 disable-model-invocation: true
 context: fork
@@ -40,10 +40,16 @@ Group by severity:
 
 Use `file:line` references for all findings. Include suggested fix for each critical issue.
 
-See [examples.md](examples.md) for output format and [review-checklist.md](references/review-checklist.md) for full checklist.
+See [examples.md](references/examples.md) for output format and [review-checklist.md](references/review-checklist.md) for full checklist.
 
 ## Rules
 
 - Review ALL changed files, not just the latest commit
 - Be specific: file:line + issue + suggested fix
 - Separate critical issues from suggestions
+
+## Error Handling
+
+- If `gh pr view` fails → run `gh auth status` to verify authentication; ask user for PR number if not on a PR branch
+- If a changed file is deleted in the PR → skip reading it; note it was removed
+- If diff is too large → prioritize changed files with highest risk (auth, payments, data mutation)

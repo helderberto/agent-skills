@@ -1,6 +1,6 @@
 ---
 name: commit
-description: Create git commits following repository style. Use when user asks to "create a commit", "commit changes", "/commit", or requests committing code to git.
+description: Create git commits following repository style. Use when user asks to "create a commit", "commit changes", "/commit", or requests committing code to git. Don't use for pushing code, creating pull requests, or reviewing changes.
 disable-model-invocation: true
 compatibility: Requires git
 allowed-tools: Bash(git:*) Read
@@ -36,3 +36,9 @@ Match repo's existing commit patterns from log.
 - NEVER commit secrets
 - Only commit when requested
 - Match existing commit patterns
+
+## Error Handling
+
+- If pre-commit hook fails → fix the reported issue, re-stage changed files, create a NEW commit (never `--amend`)
+- If nothing to commit → report clean working tree and stop
+- If staged files contain secrets → abort, warn user, unstage the file

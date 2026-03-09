@@ -1,9 +1,9 @@
 ---
 name: safe-repo
-description: Check for sensitive data in repository. Use when user asks to "check for sensitive data", "/safe-repo", or wants to verify no company/credential data is in the repository.
+description: Check for sensitive data in repository. Use when user asks to "check for sensitive data", "/safe-repo", or wants to verify no company/credential data is in the repository. Don't use for general code review, adding .gitignore entries, or scanning non-git directories.
 disable-model-invocation: true
 compatibility: Requires git
-allowed-tools: Bash(git:*) Read Grep
+allowed-tools: Bash(git:*) Bash(bash:*) Read Grep
 ---
 
 # Safe Repository Check
@@ -14,14 +14,12 @@ Security audit for sensitive data in repository. Check for credentials, API keys
 
 ## Workflow
 
-1. Get tracked files: `git ls-files` (avoids local gitignored files)
-2. Search for credential patterns (see [patterns.md](patterns.md)):
-   - API keys, passwords, tokens, AWS credentials
-   - Private key files (.pem, .key, _rsa)
-3. Check for sensitive tracked files (.env, secrets)
+1. Run `bash scripts/scan-secrets.sh` to scan all tracked files for credential patterns
+   (see [references/patterns.md](references/patterns.md) for full pattern list)
+2. Check for sensitive tracked files (.env, secrets)
 4. Analyze git history for removed secrets
 5. Review `.gitignore` for proper patterns
-6. Report findings (see [report-template.md](report-template.md))
+6. Report findings (see [assets/report-template.md](assets/report-template.md))
 
 ## Rules
 
@@ -31,3 +29,9 @@ Security audit for sensitive data in repository. Check for credentials, API keys
 - Verify `.gitignore` covers sensitive patterns
 - Report tracked files with secrets and historical commits
 - Never output actual secret values in report
+
+## Error Handling
+
+- If `git ls-files` returns nothing → verify the current directory is a git repository; run `git status` to confirm
+- If git history scan is slow → limit to last 100 commits with `git log --oneline -100`
+- If false positives are high → cross-reference against patterns in [references/patterns.md](references/patterns.md) before reporting

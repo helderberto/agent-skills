@@ -1,6 +1,6 @@
 ---
 name: i18n
-description: Audit internationalization coverage and find hardcoded strings. Use when user asks to "check i18n", "/i18n", "find hardcoded strings", "check translations", or wants to verify translation coverage.
+description: Audit internationalization coverage and find hardcoded strings. Use when user asks to "check i18n", "/i18n", "find hardcoded strings", "check translations", or wants to verify translation coverage. Don't use for backend string extraction, non-frontend code, or projects without an i18n library.
 allowed-tools: Read Glob Grep
 ---
 
@@ -48,3 +48,9 @@ Key: errors.networkTimeout  missing in: pt-BR
 - Only flag user-visible strings (skip internal IDs, CSS classes, URLs, enum values)
 - Suggest translation key names in camelCase matching project convention
 - Never auto-modify locale files — report only
+
+## Error Handling
+
+- If no i18n library detected → report project may not use i18n; still list any hardcoded strings found
+- If no locale files found → skip missing-key comparison; only report hardcoded strings
+- If locale files are not JSON (e.g. `.po`, `.yaml`) → read them anyway and adapt key comparison logic

@@ -1,6 +1,6 @@
 ---
 name: audit-deps
-description: Check dependencies for vulnerabilities. Use when user asks to "audit dependencies", "/audit-deps", "check for vulnerabilities", or wants to check dependency health.
+description: Check dependencies for vulnerabilities. Use when user asks to "audit dependencies", "/audit-deps", "check for vulnerabilities", or wants to check dependency health. Don't use for yarn, pnpm, or bun projects (npm only), or for reviewing code quality.
 disable-model-invocation: true
 compatibility: Requires npm
 allowed-tools: Bash(npm:*) Read Grep Glob
@@ -26,3 +26,9 @@ Run in parallel:
 - Never use `npx` directly
 - Focus on actionable items
 - Prioritize: security > major updates > unused > minor updates
+
+## Error Handling
+
+- If `npm audit` fails → run `npm install` first to generate `package-lock.json`, then retry
+- If `npm outdated` returns nothing → report all dependencies are current
+- If `npm` is not found → report incompatibility; this skill requires npm

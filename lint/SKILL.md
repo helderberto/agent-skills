@@ -1,6 +1,6 @@
 ---
 name: lint
-description: Run linting and formatting checks. Use when user asks to "run linter", "/lint", "check linting", "fix lint errors", or requests code linting/formatting.
+description: Run linting and formatting checks. Use when user asks to "run linter", "/lint", "check linting", "fix lint errors", or requests code linting/formatting. Don't use for running tests, type-checking only, or projects without a lint script in package.json.
 compatibility: Requires npm with a lint script
 allowed-tools: Bash(npm:*) Read Glob
 ---
@@ -26,3 +26,9 @@ Check `package.json` devDependencies:
 - Use project's `package.json` scripts
 - Never use `npx` directly
 - Don't auto-fix unless requested
+
+## Error Handling
+
+- If no lint script found in `package.json` → check `scripts` for alternative names (`check`, `lint:check`); report if none exist
+- If linter exits with parse errors → report each file-level parse error separately with `file:line`
+- If linter config file is missing → report which config file is expected and stop

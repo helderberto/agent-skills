@@ -1,8 +1,8 @@
 ---
 name: a11y
-description: Audit accessibility compliance in frontend code. Use when user asks to "check accessibility", "/a11y", "audit a11y", "check WCAG", or wants to find accessibility issues.
+description: Audit accessibility compliance in frontend code. Use when user asks to "check accessibility", "/a11y", "audit a11y", "check WCAG", or wants to find accessibility issues. Don't use for backend code, non-UI files, or projects without HTML/JSX output.
 compatibility: Requires React/Vue/Svelte project with JSX or HTML output. Optionally uses @axe-core/cli against a running dev server.
-allowed-tools: Read Glob Grep Bash(npx:*) Bash(bunx:*)
+allowed-tools: Read Glob Grep Bash(npx:*)
 ---
 
 # Accessibility Audit
@@ -37,3 +37,9 @@ Use `file:line` references. Include the fix for each finding.
 - Report `file:line` + violation + WCAG criterion + suggested fix
 - Never auto-fix — always show what to change and why
 - Prioritize keyboard navigation and screen reader issues
+
+## Error Handling
+
+- If `@axe-core/cli` fails (no running dev server) → fall back to static analysis only; note axe scan was skipped
+- If no JSX/HTML files found → report project structure is incompatible and stop
+- If framework is undetected → scan all `.html`, `.jsx`, `.tsx`, `.vue` files

@@ -1,6 +1,6 @@
 ---
 name: ship
-description: Stage all changes, commit, and push. Use when user asks to "ship", "commit and push", "add all and push", or requests staging all changes, committing, and pushing.
+description: Stage all changes, commit, and push. Use when user asks to "ship", "commit and push", "add all and push", or requests staging all changes, committing, and pushing. Don't use for selective staging, creating pull requests, or reviewing changes before committing.
 disable-model-invocation: true
 compatibility: Requires git. Optionally uses npm scripts for lint and test.
 allowed-tools: Bash(git:*) Bash(npm:*) Read Glob
@@ -39,3 +39,9 @@ allowed-tools: Bash(git:*) Bash(npm:*) Read Glob
 - NEVER skip hooks
 - NEVER commit secrets
 - Push to current branch only
+
+## Error Handling
+
+- If lint or tests fail → report all errors, stop; do not commit or push
+- If `git push` is rejected (non-fast-forward) → run `git pull --rebase` then retry push once
+- If pre-commit hook fails → fix reported issues, re-stage, create a NEW commit (never `--amend`)

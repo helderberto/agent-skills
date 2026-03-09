@@ -1,6 +1,6 @@
 ---
 name: create-pull-request
-description: Create GitHub pull requests. Use when user asks to "create a pull request", "open a PR", "/create-pull-request", or requests creating a pull request.
+description: Create GitHub pull requests. Use when user asks to "create a pull request", "open a PR", "/create-pull-request", or requests creating a pull request. Don't use for reviewing PRs, merging branches, or committing local changes.
 argument-hint: "[--draft]"
 disable-model-invocation: true
 allowed-tools: Bash(gh:*) Bash(git:*) Read Glob
@@ -34,7 +34,7 @@ If `--draft` is passed, create as draft PR.
    - Push with `-u` if needed
    - Create PR with `gh pr create` using HEREDOC (add `--draft` if requested)
 
-See [examples.md](examples.md) for output format and [gh-flags.md](references/gh-flags.md) for advanced options.
+See [examples.md](references/examples.md) for output format and [gh-flags.md](references/gh-flags.md) for advanced options.
 
 ## Rules
 
@@ -45,3 +45,9 @@ See [examples.md](examples.md) for output format and [gh-flags.md](references/gh
 - NEVER force push to main/master
 - NEVER push without user confirmation if already on main/master
 - NEVER create PR with uncommitted changes — commit first
+
+## Error Handling
+
+- If `gh pr create` fails with "already exists" → run `gh pr view` and return existing PR URL
+- If branch is not pushed → run `git push -u origin HEAD` before creating PR
+- If `gh auth status` fails → ask user to run `gh auth login` and retry

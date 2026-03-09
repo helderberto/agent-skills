@@ -1,6 +1,6 @@
 ---
 name: e2e
-description: Write end-to-end tests for user flows using Cypress. Use when user asks to "write e2e tests", "/e2e", "add Cypress tests", or wants to test a user flow end-to-end.
+description: Write end-to-end tests for user flows using Cypress. Use when user asks to "write e2e tests", "/e2e", "add Cypress tests", or wants to test a user flow end-to-end. Don't use for unit tests, component tests, or projects using Playwright, Puppeteer, or other non-Cypress frameworks.
 compatibility: Requires Cypress installed and configured.
 allowed-tools: Read Glob Grep Write
 ---
@@ -65,3 +65,9 @@ See [selectors.md](references/selectors.md) for full guide.
 - One logical outcome per `it` block
 - Test behavior, not implementation details
 - Never use `cy.wait(<number>)` — use `cy.findBy*` auto-retry instead
+
+## Error Handling
+
+- If `cypress` is not in `package.json` → stop and ask user to install Cypress first
+- If `cypress.config.ts` is missing → ask user to run `npx cypress open` to initialize config
+- If `baseUrl` is unreachable → verify the dev server is running before writing tests that require it

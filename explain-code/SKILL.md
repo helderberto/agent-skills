@@ -1,6 +1,6 @@
 ---
 name: explain-code
-description: Explains code with visual diagrams and analogies. Use when explaining how code works, teaching about a codebase, or when the user asks "how does this work?"
+description: Explains code with visual diagrams and analogies. Use when explaining how code works, teaching about a codebase, or when the user asks "how does this work?" Don't use for modifying code, fixing bugs, or generating new implementations.
 ---
 
 When explaining code, always include:
@@ -11,3 +11,8 @@ When explaining code, always include:
 4. **Highlight a gotcha**: What's a common mistake or misconception?
 
 Keep explanations conversational. For complex concepts, use multiple analogies.
+
+## Error Handling
+
+- If code references external files or modules → read them before explaining to avoid incomplete context
+- If a diagram would be too complex → split into multiple focused diagrams, each covering one concept
