@@ -30,3 +30,5 @@ When designing interfaces, ask:
 - Can I hide more complexity inside?
 
 Deep modules are easier to test: fewer entry points mean fewer test cases needed to cover the surface area.
+
+For anti-patterns and detailed principles, see the [architecture-audit deep modules reference](../../architecture-audit/references/deep-modules.md).
