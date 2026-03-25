@@ -1,32 +1,37 @@
 ---
-name: testing
-description: Run test suite and report results. Use when user asks to "run tests", "/test", "/testing", "execute tests", or requests running the test suite. Don't use for writing new tests, checking coverage, or running a single specific test file.
-compatibility: Requires npm with a test script
+name: checks
+description: Pre-commit quality gate: auto-fix formatting/lint, verify types, run tests. Use when user asks to "run checks", "/checks", "verify before commit", or wants to validate code quality. Don't use for committing, pushing, or writing new tests.
+compatibility: Requires npm with lint and/or test scripts
 allowed-tools: Bash(npm:*) Read Glob
 ---
 
-# Testing
+# Checks
 
-## Commands
+## Pre-loaded context
 
-| Script | Command |
-|---|---|
-| run | `npm test` |
-| watch | `npm run test:watch` |
-| ci+coverage | `npm run test:ci` |
+- Scripts: !`cat package.json 2>/dev/null | python3 -c "import sys,json; d=json.load(sys.stdin); print(json.dumps(d.get('scripts',{})))" 2>/dev/null || echo "no package.json"`
 
 ## Workflow
 
-1. Run `npm test`
-2. Report results concisely: show failing test names and file paths
+1. Read `package.json` scripts to confirm available scripts
+2. **Format + lint fix**: run `npm run lint-fix` or `npm run lint:fix` (whichever exists)
+3. **Lint + types**: run `npm run lint` (runs `tsc --noEmit` + eslint)
+4. **Tests**: run `npm test`
+5. Report overall **PASS** or **FAIL** with file:line error references
 
 ## Rules
 
-- Default to `npm test`
-- Don't modify tests unless requested
+- Always auto-fix before reporting errors
+- Run lint-fix → lint check → test sequentially
+- If lint-fix fails, still run lint check and tests; report all failures at the end
+- Report errors as `file:line` references
+- Never commit, stage, or push anything
 
 ## Error Handling
 
-- If `npm test` script not found → check `package.json` scripts for alternatives (`jest`, `vitest`, `test:run`); report if none exist
-- If tests time out → report the timeout and suggest increasing `--testTimeout` in the runner config
-- If test runner crashes (exit code other than 0 or 1) → report the crash output and stop
+- If no `package.json` → report and stop
+- If neither `lint-fix` nor `lint:fix` script exists → skip fix, still run `lint`
+- If `lint` script missing → skip lint entirely, note it was skipped
+- If `test` script missing → skip tests, note it was skipped
+- If tests time out → report and suggest increasing `--testTimeout` in runner config
+- If runner crashes (exit code other than 0 or 1) → report crash output and stop
