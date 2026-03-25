@@ -11,7 +11,7 @@ Behaviors to test:
 ### Tracer Bullet
 ```typescript
 // RED
-test('valid credentials return user', () => {
+it('valid credentials return user', () => {
   const result = authenticate('user@test.com', 'pass123')
   expect(result).toEqual({ email: 'user@test.com' })
 })
@@ -25,7 +25,7 @@ function authenticate(email: string, password: string) {
 ### Incremental Loop
 ```typescript
 // RED
-test('invalid credentials return error', () => {
+it('invalid credentials return error', () => {
   const result = authenticate('user@test.com', 'wrong')
   expect(result).toEqual({ error: 'Invalid credentials' })
 })
@@ -53,37 +53,37 @@ function authenticate(email: string, password: string) {
 
 ## Example 2: Horizontal vs Vertical
 
-### WRONG - Horizontal Slices
+### WRONG — Horizontal Slices
 ```typescript
 // Write all tests first (RED phase)
-test('add item to cart')
-test('remove item from cart')
-test('calculate total')
-test('apply discount')
-test('checkout')
+it('add item to cart')
+it('remove item from cart')
+it('calculate total')
+it('apply discount')
+it('checkout')
 
 // Then write all implementation (GREEN phase)
 // This produces bad tests - you're testing imagined behavior
 ```
 
-### RIGHT - Vertical Slices
+### RIGHT — Vertical Slices
 ```typescript
 // Test 1 → Implementation 1
-test('add item to cart', () => { ... })
+it('add item to cart', () => { ... })
 function addItem() { ... }
 
 // Test 2 → Implementation 2
-test('remove item from cart', () => { ... })
+it('remove item from cart', () => { ... })
 function removeItem() { ... }
 
 // Each cycle learns from previous implementation
 ```
 
-## Example 3: Testing Public Interface
+## Example 3: Good vs Bad Tests
 
-### Good - Tests Public Behavior
+### Good — Tests Public Behavior
 ```typescript
-test('user can add item to cart', () => {
+it('user can add item to cart', () => {
   const cart = new ShoppingCart()
   cart.addItem({ id: 1, name: 'Book', price: 10 })
 
@@ -92,14 +92,32 @@ test('user can add item to cart', () => {
 })
 ```
 
-### Bad - Tests Implementation
+### Bad — Tests Implementation
 ```typescript
-test('cart items array contains item', () => {
+it('cart items array contains item', () => {
   const cart = new ShoppingCart()
   cart.addItem({ id: 1, name: 'Book', price: 10 })
 
   // Accessing private internals
   expect(cart._items).toHaveLength(1)
   expect(cart._items[0].id).toBe(1)
+})
+```
+
+## Example 4: Verify Through Interface, Not External State
+
+```typescript
+// BAD: bypasses interface to verify
+it('createUser saves to database', async () => {
+  await createUser({ name: 'Alice' })
+  const row = await db.query('SELECT * FROM users WHERE name = ?', ['Alice'])
+  expect(row).toBeDefined()
+})
+
+// GOOD: verifies through interface
+it('createUser makes user retrievable', async () => {
+  const user = await createUser({ name: 'Alice' })
+  const retrieved = await getUser(user.id)
+  expect(retrieved.name).toBe('Alice')
 })
 ```
