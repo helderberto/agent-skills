@@ -33,5 +33,6 @@ allowed-tools: Bash(npm:*) Read Glob
 - If neither `lint-fix` nor `lint:fix` script exists → skip fix, still run `lint`
 - If `lint` script missing → skip lint entirely, note it was skipped
 - If `test` script missing → skip tests, note it was skipped
+- If all scripts missing → report nothing to run, stop
 - If tests time out → report and suggest increasing `--testTimeout` in runner config
 - If runner crashes (exit code other than 0 or 1) → report crash output and stop
