@@ -1,7 +1,6 @@
 ---
 name: write-a-skill
-description: Create new agent skills with proper structure, frontmatter, and progressive disclosure. Use when user wants to create, write, or build a new skill, or asks "make a skill for X".
-allowed-tools: Read Glob Grep Write Bash
+description: Create new agent skills with proper structure and progressive disclosure. Use when user wants to create, write, or build a new skill, or asks "make a skill for X".
 ---
 
 # Write a Skill
@@ -31,8 +30,6 @@ Use `references/` for content that exceeds SKILL.md's budget or is rarely needed
 ---
 name: skill-name
 description: One sentence what it does. Use when [specific triggers]. Don't use when [anti-triggers].
-compatibility: Requires X        # optional
-allowed-tools: Bash Read Write   # space-separated
 ---
 
 # Skill Name
@@ -53,9 +50,6 @@ allowed-tools: Bash Read Write   # space-separated
 |---|---|---|
 | `name` | yes | kebab-case, matches directory |
 | `description` | yes | agent's only signal for when to load this skill |
-| `allowed-tools` | yes | space-separated Claude Code tool names |
-| `compatibility` | no | env/runtime prerequisites |
-| `disable-model-invocation` | no | set `true` to skip LLM, run scripts only |
 
 ## Description Rules
 

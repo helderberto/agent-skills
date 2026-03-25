@@ -1,8 +1,6 @@
 ---
 name: e2e
 description: Write end-to-end tests for user flows using Cypress. Use when user asks to "write e2e tests", "/e2e", "add Cypress tests", or wants to test a user flow end-to-end. Don't use for unit tests, component tests, or projects using Playwright, Puppeteer, or other non-Cypress frameworks.
-compatibility: Requires Cypress installed and configured.
-allowed-tools: Read Glob Grep Write
 ---
 
 # End-to-End Tests (Cypress)

@@ -1,8 +1,6 @@
 ---
 name: refactor-plan
 description: Create structured refactoring plans. Use when user wants to plan a refactor, needs a refactoring strategy, or mentions breaking down large changes into small commits. Don't use for implementing code changes directly, small one-line fixes, or renaming a single variable.
-compatibility: Requires gh CLI with an active authenticated session
-allowed-tools: Bash(gh:*) Bash(git:*) Read Glob Grep
 ---
 
 # Refactor Planning

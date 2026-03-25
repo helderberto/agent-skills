@@ -1,9 +1,6 @@
 ---
 name: ship
 description: Commit and push changes using atomic commits. Use when user asks to "ship", "commit and push", or requests committing and pushing changes. Don't use for creating pull requests or reviewing changes before committing.
-disable-model-invocation: true
-compatibility: Requires git. Optionally uses npm scripts for lint and test.
-allowed-tools: Bash(git:*) Bash(npm:*) Read Glob
 ---
 
 # Ship Changes

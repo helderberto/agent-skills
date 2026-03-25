@@ -1,8 +1,6 @@
 ---
 name: tdd
 description: Guides test-driven development with red-green-refactor loop. Use when user wants to build features or fix bugs using TDD, mentions "red-green-refactor", wants test-first development, or requests TDD workflow. Don't use for writing tests after implementation, adding tests to existing untested code, or one-off test fixes.
-compatibility: Requires a configured test runner (jest or vitest)
-allowed-tools: Bash Read Glob Grep Write
 ---
 
 # Test-Driven Development

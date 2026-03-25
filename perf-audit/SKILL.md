@@ -1,8 +1,6 @@
 ---
 name: perf-audit
 description: Audit frontend bundle size and performance. Use when user asks to "audit performance", "/perf-audit", "analyze bundle", "check bundle size", or wants to find performance bottlenecks. Don't use for backend performance, database query optimization, or projects without a frontend build step.
-compatibility: Requires a production build. Supports Vite, webpack, Next.js, and Rollup.
-allowed-tools: Read Glob Grep Bash(npx:*) Bash(ls:*)
 ---
 
 # Performance Audit

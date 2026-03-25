@@ -1,8 +1,6 @@
 ---
 name: coverage
 description: Check test coverage for unstaged changes. Use when user asks to "check coverage", "/coverage", or wants to see which unstaged changes lack test coverage. Don't use for projects without lcov coverage output, running the full test suite without coverage, or checking coverage of already-committed changes.
-compatibility: Requires a test runner configured with lcov coverage output (vitest, jest, etc.)
-allowed-tools: Bash(git:*) Bash(npm:*) Bash(python3:*) Read
 ---
 
 # Coverage Check

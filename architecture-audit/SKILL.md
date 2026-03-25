@@ -1,8 +1,6 @@
 ---
 name: architecture-audit
 description: Explore a codebase to surface architectural friction and propose deep-module refactors as GitHub issue RFCs. Use when user wants to improve architecture, find refactoring opportunities, consolidate tightly-coupled modules, or make a codebase more testable and AI-navigable. Don't use for small one-off refactors or single-file cleanups.
-compatibility: Requires gh CLI with an active authenticated session
-allowed-tools: Agent Bash(gh:*) Bash(git:*) Read Glob Grep
 ---
 
 # Architecture Audit

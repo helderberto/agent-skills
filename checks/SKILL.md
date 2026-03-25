@@ -1,8 +1,6 @@
 ---
 name: checks
 description: Pre-commit quality gate: auto-fix formatting/lint, verify types, run tests. Use when user asks to "run checks", "/checks", "verify before commit", or wants to validate code quality. Don't use for committing, pushing, or writing new tests.
-compatibility: Requires npm with lint and/or test scripts
-allowed-tools: Bash(npm:*) Read Glob
 ---
 
 # Checks

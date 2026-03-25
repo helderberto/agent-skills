@@ -1,7 +1,6 @@
 ---
 name: i18n
 description: Audit internationalization coverage and find hardcoded strings. Use when user asks to "check i18n", "/i18n", "find hardcoded strings", "check translations", or wants to verify translation coverage. Don't use for backend string extraction, non-frontend code, or projects without an i18n library.
-allowed-tools: Read Glob Grep
 ---
 
 # i18n Audit

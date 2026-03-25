@@ -1,9 +1,6 @@
 ---
 name: deps-audit
 description: Check dependencies for vulnerabilities. Use when user asks to "audit dependencies", "/deps-audit", "check for vulnerabilities", or wants to check dependency health. Don't use for yarn, pnpm, or bun projects (npm only), or for reviewing code quality.
-disable-model-invocation: true
-compatibility: Requires npm
-allowed-tools: Bash(npm:*) Read Grep Glob
 ---
 
 # Dependency Audit

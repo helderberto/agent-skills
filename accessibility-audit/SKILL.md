@@ -1,8 +1,6 @@
 ---
 name: accessibility-audit
 description: Audit accessibility compliance in frontend code. Use when user asks to "check accessibility", "/accessibility-audit", "audit a11y", "check WCAG", or wants to find accessibility issues. Don't use for backend code, non-UI files, or projects without HTML/JSX output.
-compatibility: Requires React/Vue/Svelte project with JSX or HTML output. Optionally uses @axe-core/cli against a running dev server.
-allowed-tools: Read Glob Grep Bash(npx:*)
 ---
 
 # Accessibility Audit

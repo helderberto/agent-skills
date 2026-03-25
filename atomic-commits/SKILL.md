@@ -1,9 +1,6 @@
 ---
 name: atomic-commits
 description: Group unstaged changes into atomic commits by concern, then push. Use when user asks to "atomic commits", "commit by group", "group commits", or wants to split changes into related commits before pushing.
-disable-model-invocation: true
-compatibility: Requires git
-allowed-tools: Bash(git:*) Read Glob
 ---
 
 # Atomic Commits

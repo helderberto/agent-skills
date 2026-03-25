@@ -1,9 +1,6 @@
 ---
 name: safe-repo
 description: Check for sensitive data in repository. Use when user asks to "check for sensitive data", "/safe-repo", or wants to verify no company/credential data is in the repository. Don't use for general code review, adding .gitignore entries, or scanning non-git directories.
-disable-model-invocation: true
-compatibility: Requires git
-allowed-tools: Bash(git:*) Bash(bash:*) Read Grep
 ---
 
 # Safe Repository Check

@@ -1,12 +1,6 @@
 ---
 name: code-review
 description: Review a GitHub Pull Request for bugs, security, performance, and code quality. Use when user asks to review a PR or wants pull request feedback. Don't use for reviewing local uncommitted changes, creating new PRs, or merging branches.
-argument-hint: "[bugs|security|performance]"
-disable-model-invocation: true
-context: fork
-agent: Explore
-allowed-tools: Bash(gh:*) Read Glob Grep
-compatibility: Requires gh CLI with an active authenticated session
 ---
 
 # Review Pull Request
