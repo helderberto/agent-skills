@@ -1,6 +1,6 @@
 ---
 name: ship
-description: Stage all changes, commit, and push. Use when user asks to "ship", "commit and push", "add all and push", or requests staging all changes, committing, and pushing. Don't use for selective staging, creating pull requests, or reviewing changes before committing.
+description: Commit and push changes using atomic commits. Use when user asks to "ship", "commit and push", or requests committing and pushing changes. Don't use for creating pull requests or reviewing changes before committing.
 disable-model-invocation: true
 compatibility: Requires git. Optionally uses npm scripts for lint and test.
 allowed-tools: Bash(git:*) Bash(npm:*) Read Glob
@@ -23,15 +23,16 @@ allowed-tools: Bash(git:*) Bash(npm:*) Read Glob
    - Run available checks in parallel: `npm run lint`, `npm test`
    - If no package.json, skip quality checks
 4. If checks fail: report errors, STOP — do not commit or push
-5. Generate commit message based on changed files matching repo style
-6. Stage all files: `git add -A`
-7. Commit with HEREDOC format
+5. Group changed files by logical concern to form atomic commits
+6. For each group: stage specific files by name, commit with HEREDOC format
+7. If all changes form one logical unit, stage files by name (never `git add -A` or `git add .`)
 8. Push: `git push` (current branch)
 9. Run `git status` after to verify
 
 ## Rules
 
-- Stage ALL changes with `git add -A`
+- Stage files by name, never `git add -A` or `git add .`
+- Group changes into atomic commits when they serve distinct purposes
 - Generate message from changed files, match repo style
 - Only run package manager commands if package.json exists with those scripts
 - NEVER push if lint or tests fail
