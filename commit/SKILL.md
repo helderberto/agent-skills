@@ -42,3 +42,7 @@ Match repo's existing commit patterns from log.
 - If pre-commit hook fails → fix the reported issue, re-stage changed files, create a NEW commit (never `--amend`)
 - If nothing to commit → report clean working tree and stop
 - If staged files contain secrets → abort, warn user, unstage the file
+
+## See Also
+
+- [atomic-commits](../atomic-commits/SKILL.md) — split changes into grouped commits by concern

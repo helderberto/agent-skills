@@ -50,3 +50,7 @@ Include:
 - If `gh issue create` fails → run `gh auth status` to verify authentication; offer to print the plan as markdown instead
 - If test coverage is insufficient → note coverage gaps in the plan and add "add tests for X" as the first commit
 - If codebase exploration reveals scope is larger than expected → revise the plan with user before proceeding
+
+## See Also
+
+- [tdd](../tdd/SKILL.md) — implement refactored code using test-driven development
