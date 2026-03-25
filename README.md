@@ -80,3 +80,7 @@ Each skill is a directory containing:
 - `scripts/` - Executable helpers (when needed)
 
 Skills follow progressive disclosure: core workflow in SKILL.md, details in supporting files.
+
+## License
+
+[MIT](LICENSE) © Helder Burato Berto
