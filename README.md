@@ -91,6 +91,7 @@ This installs from the local repository for testing before pushing.
 | `i18n` | Audit internationalization coverage, find hardcoded strings |
 | `lint` | Run linting and formatting checks |
 | `perf-audit` | Audit frontend bundle size and performance |
+| `prose-fix` | Fix formatting, typos, and clarity issues in markdown and text files |
 | `refactor-plan` | Create structured refactoring plans |
 | `safe-repo` | Check for sensitive data in repository |
 | `ship` | Commit and push changes using atomic commits |
