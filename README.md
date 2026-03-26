@@ -72,6 +72,31 @@ npx skills add . --agent claude-code --all
 
 This installs from the local repository for testing before pushing.
 
+## Skills
+
+| Skill | Description |
+|-------|-------------|
+| `a11y-audit` | Audit accessibility compliance in frontend code |
+| `architecture-audit` | Surface architectural friction, propose refactors as GitHub issue RFCs |
+| `atomic-commits` | Group unstaged changes into atomic commits by concern, then push |
+| `checks` | Pre-commit quality gate: auto-fix formatting/lint, verify types, run tests |
+| `code-review` | Review a GitHub PR for bugs, security, performance, and code quality |
+| `commit` | Create git commits following repository style |
+| `coverage` | Check test coverage for unstaged changes |
+| `create-pull-request` | Create GitHub pull requests |
+| `deps-audit` | Check dependencies for vulnerabilities (npm only) |
+| `e2e` | Write end-to-end tests for user flows using Cypress |
+| `explain-code` | Explain code with visual diagrams and analogies |
+| `grill-me` | Stress-test a plan or design through relentless interview |
+| `i18n` | Audit internationalization coverage, find hardcoded strings |
+| `lint` | Run linting and formatting checks |
+| `perf-audit` | Audit frontend bundle size and performance |
+| `refactor-plan` | Create structured refactoring plans |
+| `safe-repo` | Check for sensitive data in repository |
+| `ship` | Commit and push changes using atomic commits |
+| `tdd` | Guide test-driven development with red-green-refactor loop |
+| `write-a-skill` | Create new agent skills with proper structure |
+
 ## Structure
 
 Each skill is a directory containing:
