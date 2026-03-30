@@ -96,6 +96,7 @@ This installs from the local repository for testing before pushing.
 | `safe-repo` | Check for sensitive data in repository |
 | `ship` | Commit and push changes using atomic commits |
 | `tdd` | Guide test-driven development with red-green-refactor loop |
+| `write-a-prd` | Create a PRD through codebase exploration, user interview, and module design |
 | `write-a-skill` | Create new agent skills with proper structure |
 
 ## Structure
