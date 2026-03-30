@@ -1,6 +1,6 @@
 # PRD Template
 
-Use this template when writing PRDs. Save to `specs/<kebab-case-name>.md` in the project root.
+Use this template when writing PRDs. Save to `prds/<kebab-case-name>.md` in the project root.
 
 ```markdown
 ## Problem Statement
@@ -66,13 +66,13 @@ Data format caveats, privacy considerations, performance concerns, or anything t
 
 ## Filename Convention
 
-Use kebab-case derived from the feature name: `specs/instructor-analytics-dashboard.md`
+Use kebab-case derived from the feature name: `prds/instructor-analytics-dashboard.md`
 
 Add a top-level heading matching the feature title.
 
 ## Example
 
-`specs/instructor-analytics-dashboard.md`:
+`prds/instructor-analytics-dashboard.md`:
 
 ```markdown
 # Instructor Analytics Dashboard

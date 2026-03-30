@@ -24,7 +24,7 @@ If a question can be answered by exploring the codebase, explore instead of aski
 Sketch major modules to build or modify. Favor [deep modules](references/deep-modules.md) — simple interface, rich implementation, testable in isolation. Present to user and ask which modules need tests.
 
 ### 5. Write PRD
-Use template from [assets/template.md](assets/template.md). Save to `specs/<kebab-case-name>.md` in the project root (create the `specs/` directory if it doesn't exist).
+Use template from [assets/template.md](assets/template.md). Save to `prds/<kebab-case-name>.md` in the project root (create the `prds/` directory if it doesn't exist).
 
 ## Rules
 
@@ -35,6 +35,6 @@ Use template from [assets/template.md](assets/template.md). Save to `specs/<keba
 
 ## Error Handling
 
-- If `specs/` directory doesn't exist → create it before writing
+- If `prds/` directory doesn't exist → create it before writing
 - If codebase exploration reveals scope is much larger than expected → surface this and re-scope with user before continuing
 - If user gives terse answers during interview → offer concrete options (A/B/C) rather than open-ended questions
