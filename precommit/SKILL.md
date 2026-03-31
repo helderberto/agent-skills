@@ -1,17 +1,13 @@
 ---
-name: checks
-description: "Pre-commit quality gate: auto-fix formatting/lint, verify types, run tests. Use when user asks to \"run checks\", \"/checks\", \"verify before commit\", or wants to validate code quality. Don't use for committing, pushing, or writing new tests."
+name: precommit
+description: "Pre-commit quality gate: auto-fix formatting/lint, verify types, run tests. Use when user asks to \"run precommit\", \"/precommit\", \"verify before commit\", or wants to validate code quality. Don't use for committing, pushing, or writing new tests."
 ---
 
-# Checks
-
-## Pre-loaded context
-
-- Scripts: !`cat package.json 2>/dev/null | python3 -c "import sys,json; d=json.load(sys.stdin); print(json.dumps(d.get('scripts',{})))" 2>/dev/null || echo "no package.json"`
+# Precommit
 
 ## Workflow
 
-1. Read `package.json` scripts to confirm available scripts
+1. Read `package.json` to identify available scripts
 2. **Format + lint fix**: run `npm run lint-fix` or `npm run lint:fix` (whichever exists)
 3. **Lint + types**: run `npm run lint` (runs `tsc --noEmit` + eslint)
 4. **Tests**: run `npm test`
