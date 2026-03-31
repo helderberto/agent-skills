@@ -7,29 +7,28 @@ description: Create new agent skills with proper structure and progressive discl
 
 ## Process
 
-1. **Clarify scope** — ask what task/domain, what triggers it, whether it needs scripts or just instructions
-2. **Explore existing skills** — `ls` the skills repo, read similar skills for conventions
-3. **Draft** — create `SKILL.md` + supporting files
-4. **Review with user** — confirm coverage, ask what's missing
+1. **Clarify scope** -- ask what task/domain, what triggers it, whether it needs scripts or just instructions
+2. **Explore existing skills** -- `ls` the skills repo, read similar skills for conventions
+3. **Draft** -- create `SKILL.md`
+4. **Review with user** -- confirm coverage, ask what's missing
 
 ## Structure
 
 ```
 skill-name/
-├── SKILL.md              # Required. Keep under 50 lines.
-└── references/           # Optional. One file per domain/concern.
-    ├── examples.md
-    └── patterns.md
+├── SKILL.md              # Required. All instructions live here.
+└── scripts/              # Optional. Executable helpers only.
+    └── scan-secrets.sh
 ```
 
-Use `references/` for content that exceeds SKILL.md's budget or is rarely needed.
+Keep everything in SKILL.md. Only use `scripts/` for executable files (.sh, .py) that are called via Bash.
 
 ## SKILL.md Template
 
 ```md
 ---
 name: skill-name
-description: One sentence what it does. Use when [specific triggers]. Don't use when [anti-triggers].
+description: One sentence what it does. Use when [triggers]. Don't use when [anti-triggers].
 ---
 
 # Skill Name
@@ -41,7 +40,7 @@ description: One sentence what it does. Use when [specific triggers]. Don't use 
 [hard constraints]
 
 ## Error Handling
-[if X → do Y]
+[if X -- do Y]
 ```
 
 ## Frontmatter Fields
@@ -49,7 +48,7 @@ description: One sentence what it does. Use when [specific triggers]. Don't use 
 | Field | Required | Notes |
 |---|---|---|
 | `name` | yes | kebab-case, matches directory |
-| `description` | yes | agent's only signal for when to load this skill |
+| `description` | yes | Agent's only signal for when to load this skill |
 
 ## Description Rules
 
@@ -63,12 +62,36 @@ The description is the **only thing the agent sees** when choosing which skill t
 **Good:** `Groups unstaged changes into atomic commits by concern. Use when user says "atomic commits" or wants to split changes before pushing.`
 **Bad:** `Helps with commits.`
 
-See [references/examples.md](references/examples.md) for annotated real skills.
+## Examples
+
+**Minimal skill** -- pure instructions, fits in ~20 lines:
+```md
+---
+name: grill-me
+description: Interview the user relentlessly about a plan. Use when user says "grill me".
+---
+
+[instructions...]
+```
+
+**Pre-loaded context** -- `!` prefix auto-runs commands on load:
+```md
+## Pre-loaded context
+
+- Status: !`git status`
+- Diff: !`git diff HEAD`
+```
+
+Avoids wasting a turn fetching context the agent always needs.
 
 ## Rules
 
-- SKILL.md must stay under 50 lines of content
 - No time-sensitive info (versions, dates) in skills
-- Add `references/` files only when SKILL.md would exceed budget
 - Include error handling for foreseeable failure modes
 - Test the skill by invoking it before shipping
+
+## Anti-patterns
+
+- Description without triggers: `"Helps with testing."` -- useless
+- Hardcoded versions or dates that go stale
+- No error handling for skills that run Bash commands

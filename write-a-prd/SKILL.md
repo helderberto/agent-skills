@@ -5,70 +5,91 @@ description: Create a PRD through user interview, codebase exploration, and modu
 
 # PRD Writing
 
-You may skip steps if you don't consider them necessary. If user provided a description via arguments, skip straight to Step 2.
+Skip steps already satisfied. If user provided a description via arguments, skip to Step 2.
 
 ## Workflow
 
 ### 1. Gather problem description
-Ask the user for a long, detailed description of the problem they want to solve and any potential ideas for solutions.
+Ask the user for a detailed description of the problem and any solution ideas.
 
 ### 2. Explore codebase
-Verify the user's assertions and understand the current state of the codebase: relevant data models, existing services, API routes, and frontend structure. Note what already exists vs. what needs to be built.
+Verify assertions and map current state: data models, services, API routes, frontend structure, and test patterns. Note what exists vs. what must be built.
 
 ### 3. Interview
-Interview the user relentlessly about every aspect of this plan until you reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one. One question at a time; lead with your recommended answer and let the user confirm or correct.
+Interview relentlessly, one question at a time. Lead with your recommended answer; let the user confirm or correct. If a question can be answered by exploring code, explore instead of asking. For terse answers, offer concrete options (A/B/C).
 
-If a question can be answered by exploring the codebase, explore instead of asking. If the user gives terse answers, offer concrete options (A/B/C).
+Walk these branches (skip any already resolved):
+
+- **Scope & Surface** -- Where does this live? New page/view or integrated? Which user roles?
+- **Data & Concepts** -- Precise definitions for each new concept. What data exists, what's missing?
+- **Behavior & Interaction** -- How does the user interact? Sorting, filtering, search, time ranges?
+- **Display & Output** -- Numbers, tables, charts, forms? Exportable? URL-driven state?
+- **Access & Privacy** -- Who sees what? Role-based restrictions? Sensitive data concerns?
+- **Boundaries** -- What is explicitly out of scope? Adjacent features to defer?
+- **Integration** -- Schema changes? New or extended services? External dependencies?
 
 ### 4. Design modules
-Sketch the major modules to build or modify. Actively look for opportunities to extract **deep modules** — a simple, testable interface that encapsulates a lot of functionality and rarely changes (as opposed to a shallow module that leaks implementation details).
+Sketch major modules to build or modify. Favor **deep modules** -- a simple interface (1-3 entry points) hiding a large implementation that rarely changes, over shallow modules where the interface is nearly as complex as the implementation.
 
-Present the modules to the user. Confirm which modules they want tests written for.
+Signals of shallow design: many small functions with 1:1 query mapping, callers compose multiple calls, adding a feature requires changing the interface.
+
+Present modules to user. Confirm which need tests.
 
 ### 5. Write PRD
-Save to `prds/<kebab-case-name>.md` in the project root (create `prds/` if it doesn't exist). Use this template:
+Save to `prds/<kebab-case-name>.md` (create `prds/` if missing).
 
-```markdown
+~~~markdown
+# Feature Name
+
 ## Problem Statement
 
-The problem the user is facing, from the user's perspective.
+The problem from the user's perspective. Focus on pain and impact.
 
 ## Solution
 
-The solution to the problem, from the user's perspective.
+The solution from the user's perspective. Describe the experience, not the architecture.
 
 ## User Stories
 
-A long, numbered list of user stories covering all aspects of the feature:
+Long numbered list. Cover happy path, edge cases, error states.
 
 1. As a <actor>, I want <feature>, so that <benefit>
 
 ## Implementation Decisions
 
-- Modules to build or modify and their interfaces
-- Architectural decisions
-- Schema changes
-- API contracts
-- Technical clarifications
+### New Modules
+- Module name, purpose, and public interface (function signatures with param types)
+- Why each module exists as a separate unit
 
-Do NOT include specific file paths or code snippets — they go stale fast.
+### Architectural Decisions
+- Key definitions (precise meaning of domain terms)
+- Data flow from storage to display
+- State management approach
+
+### Schema Changes
+- New tables/columns needed, or "None required"
+
+### API Contracts
+- New routes, request/response shapes
+
+### Navigation
+- Where the feature is accessed, new routes added
+
+Do NOT include file paths or code snippets -- they go stale.
 
 ## Testing Decisions
 
-- What makes a good test for this feature (test external behavior, not implementation details)
-- Which modules will be tested
-- Prior art: similar test patterns already in the codebase
+- What makes a good test (behavior, not implementation)
+- Which modules need tests
+- Key test cases (empty state, boundaries, isolation)
+- Prior art: similar test patterns in the codebase
 
 ## Out of Scope
 
-What is explicitly not included in this PRD.
-
-## Further Notes
-
-Any additional context or open questions.
-```
+Explicit list. Be specific -- vague exclusions invite scope creep.
+~~~
 
 ## Error Handling
 
-- `prds/` missing → create it before writing
-- Codebase exploration reveals scope much larger than expected → surface this and re-scope with user before continuing
+- `prds/` missing -- create it
+- Scope larger than expected -- surface and re-scope with user before continuing

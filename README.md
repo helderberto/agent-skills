@@ -103,11 +103,8 @@ This installs from the local repository for testing before pushing.
 ## Structure
 
 Each skill is a directory containing:
-- `SKILL.md` - Main instructions (keep under 50 lines)
-- Reference files - For progressive disclosure (patterns, examples, templates)
+- `SKILL.md` - All instructions, references, and templates in a single file
 - `scripts/` - Executable helpers (when needed)
-
-Skills follow progressive disclosure: core workflow in SKILL.md, details in supporting files.
 
 ## License
 

@@ -30,9 +30,26 @@ Sequential:
    git diff -U0 --no-color > /tmp/changes.diff
    python3 scripts/parse-lcov.py --lcov coverage/lcov.info --diff /tmp/changes.diff
    ```
-   See [lcov-format.md](references/lcov-format.md) for lcov format details.
 4. Report uncovered lines from stdout: `file.ts:42`
 5. Summary from stderr: X/Y changed lines covered
+
+## LCOV Format
+
+Parse `coverage/lcov.info`:
+```
+SF:src/utils/helper.ts
+DA:10,1    # line 10, covered (hit 1 time)
+DA:11,0    # line 11, NOT covered
+DA:12,5    # line 12, covered (hit 5 times)
+end_of_record
+```
+
+Key fields:
+- `SF:` -- source file path
+- `DA:line,hits` -- `0` = uncovered, `>0` = covered
+- `end_of_record` -- end of file section
+
+Match `SF:` paths to `git diff` files. For each changed line, check `DA:` entry. If `hits` is `0`, report as uncovered.
 
 ## Rules
 
@@ -44,6 +61,6 @@ Sequential:
 
 ## Error Handling
 
-- If `npm run test:ci` fails → report test failures and stop; coverage cannot be generated with failing tests
-- If `coverage/lcov.info` not found after test run → verify `coverage.reporter` includes `lcov` in the test runner config
-- If `git diff` returns no changes → report no unstaged changes to check
+- `npm run test:ci` fails -- report test failures and stop
+- `coverage/lcov.info` not found -- verify `coverage.reporter` includes `lcov` in test runner config
+- `git diff` returns no changes -- report no unstaged changes to check

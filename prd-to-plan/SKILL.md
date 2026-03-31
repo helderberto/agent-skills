@@ -5,7 +5,7 @@ description: Turn a PRD into a multi-phase implementation plan using tracer-bull
 
 # PRD to Plan
 
-Break a PRD into a phased implementation plan using vertical slices (tracer bullets). Output is a Markdown file in `./plans/`.
+Break a PRD into phased vertical slices (tracer bullets). Output: `plans/<name>.md`.
 
 ## Pre-loaded context
 
@@ -14,51 +14,59 @@ Break a PRD into a phased implementation plan using vertical slices (tracer bull
 ## Workflow
 
 ### 1. Read the PRD
-Open the PRD file the user referenced (e.g. `prds/<name>.md`). If no name given, list available PRDs and ask which one to use.
+Open the PRD file. If no name given, list available PRDs and ask.
 
 ### 2. Explore the codebase
-If not already explored, read the codebase to understand current architecture, existing patterns, and integration layers.
+Understand current architecture, existing patterns, and integration points.
 
 ### 3. Identify durable architectural decisions
-Before slicing, identify high-level decisions unlikely to change throughout implementation:
+Before slicing, extract decisions that hold across all phases:
 
 - Route structures / URL patterns
 - Database schema shape
-- Key data models
-- Authentication / authorization approach
+- Key data models and definitions
+- Auth/authorization approach
 - Third-party service boundaries
 
-These go in the plan header so every phase can reference them.
-
 ### 4. Draft vertical slices
-Break the PRD into **tracer bullet** phases. Each phase is a thin vertical slice that cuts through ALL integration layers end-to-end, not a horizontal slice of one layer.
+Each phase is a thin **tracer bullet** -- a narrow but complete path through every integration layer (schema, service, API, UI, tests). A completed phase is demoable on its own.
 
-- Each slice delivers a narrow but complete path through every layer (schema, API, UI, tests)
-- A completed slice is demoable or verifiable on its own
-- Prefer many thin slices over few thick ones
-- Do NOT include specific file names, function names, or implementation details likely to change
-- DO include durable decisions: route paths, schema shapes, data model names
-- Map each phase to the user stories from the PRD it addresses
+**Deriving tasks from the PRD:**
+
+| PRD Section | Becomes |
+|---|---|
+| New Modules | Implement module with interface |
+| Schema Changes | Migration + validation |
+| API Contracts | Route returning shape |
+| Navigation | Wire component to route |
+| User Stories | Verify coverage; add task if missing |
+| Testing Decisions | Tests land in the phase where their module lands |
+| Out of Scope | Never create tasks for these |
+
+**Within each slice, order by dependency:** schema -> service -> API -> UI -> tests. Happy paths before edge cases.
+
+**Phase naming:** use a goal phrase answering "what can we demo when this is done?" (e.g., "Phase 1 -- Revenue visible end-to-end"), not a layer name.
+
+**When to use layer-by-layer instead:** If the PRD has complex schema changes that all modules depend on and no single user story can stand alone without the full schema, build the data foundation first, then slice the rest vertically.
+
+**Phase count:** 2-3 for single-module, 3-5 for multi-module, 5+ means consider splitting the PRD.
 
 ### 5. Quiz the user
-Present the proposed breakdown as a numbered list. For each phase show:
+Present the breakdown. For each phase show:
 
-- **Title**: short descriptive name
-- **User stories covered**: which PRD user stories this addresses
+- **Title**: short goal phrase
+- **User stories covered**: which PRD stories this addresses
+- **Done when**: the testable condition
 
-Ask the user:
-- Does the granularity feel right? (too coarse / too fine)
-- Should any phases be merged or split?
-
-Iterate until the user approves the breakdown.
+Ask: Does the granularity feel right? Should any phases merge or split? Iterate until approved.
 
 ### 6. Save plan
-Save to `plans/<same-stem-as-prd>.md`. Create `plans/` if missing. Use this template:
+Save to `plans/<same-stem-as-prd>.md` (create `plans/` if missing).
 
-```markdown
+~~~markdown
 # Plan: <Feature Name>
 
-> Source PRD: <brief identifier or file path>
+> Source PRD: `prds/<name>.md`
 
 ## Architectural decisions
 
@@ -70,41 +78,43 @@ Durable decisions that apply across all phases:
 
 ---
 
-## Phase 1: <Title>
+## Phase 1 -- <Goal>
 
 **User stories**: <list from PRD>
 
 ### What to build
 
-A concise description of this vertical slice — end-to-end behavior, not layer-by-layer implementation.
+Concise description of this vertical slice -- end-to-end behavior, not layer-by-layer.
 
-### Acceptance criteria
+### Done when
 
-- [ ] Criterion 1
-- [ ] Criterion 2
+<Specific, testable condition. e.g., "Instructor sees total revenue for a course; service tests pass against in-memory DB.">
 
 ---
 
 <!-- Repeat for each phase -->
-```
 
-### 7. Report
-Print the saved path and one line per phase: `Phase N — <title> (<N> acceptance criteria)`.
+## Out of Scope
+
+Carried forward from PRD verbatim.
+
+## Open Questions
+
+Gaps found in the PRD needing resolution. Blank if none.
+~~~
+
+Print saved path and one line per phase: `Phase N -- <title> (<condition summary>)`.
 
 ## Rules
 
-- Phases must be derived from PRD user stories — never invented
-- Each phase must be demoable or verifiable end-to-end on its own
-- Acceptance criteria must be testable, not vague
+- Phases derive from PRD user stories -- never invented
+- Each phase must be demoable end-to-end on its own
+- "Done when" must be testable, not vague
 - Never modify the source PRD
-- Carry PRD's Out of Scope section forward verbatim
+- Carry PRD's Out of Scope forward verbatim
 
 ## Error Handling
 
-- PRD not found → list available PRDs and ask user to confirm
-- PRD missing key sections → note gaps inline and continue
-- `plans/` missing → create it before writing
-
-## See Also
-
-- [write-a-prd](../write-a-prd/SKILL.md) — produces the PRD this skill consumes
+- PRD not found -- list available PRDs and ask
+- PRD missing sections -- note gaps inline and continue
+- `plans/` missing -- create it

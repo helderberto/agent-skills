@@ -26,6 +26,26 @@ Match repo's existing commit patterns from log.
 4. Commit with HEREDOC format matching repo style
 5. Run `git status` after to verify
 
+## Examples
+
+**Bug fix** -- single file:
+```bash
+git add src/auth.ts
+git commit -m "fix: null check in login handler"
+```
+
+**Feature** -- multiple related files:
+```bash
+git add src/components/SearchBar.tsx src/hooks/useSearch.ts
+git commit -m "add search bar component"
+```
+
+**Refactor** -- extraction:
+```bash
+git add src/utils/validation.ts
+git commit -m "extract email validation to util"
+```
+
 ## Rules
 
 - NEVER amend unless requested
@@ -36,10 +56,10 @@ Match repo's existing commit patterns from log.
 
 ## Error Handling
 
-- If pre-commit hook fails → fix the reported issue, re-stage changed files, create a NEW commit (never `--amend`)
-- If nothing to commit → report clean working tree and stop
-- If staged files contain secrets → abort, warn user, unstage the file
+- Pre-commit hook fails -- fix issue, re-stage, create NEW commit (never `--amend`)
+- Nothing to commit -- report clean working tree and stop
+- Staged files contain secrets -- abort, warn user, unstage the file
 
 ## See Also
 
-- [atomic-commits](../atomic-commits/SKILL.md) — split changes into grouped commits by concern
+- [atomic-commits](../atomic-commits/SKILL.md) -- split changes into grouped commits by concern

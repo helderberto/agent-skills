@@ -26,15 +26,48 @@ Apply Martin Fowler's principle: "Make each refactoring step as small as possibl
 - Sequential, not parallel changes
 
 ### 4. Create GitHub Issue
-Use `gh issue create` with template (see [assets/template.md](assets/template.md))
 
-Include:
-- Problem statement
-- Solution approach
-- Detailed commit plan
-- Implementation decisions
-- Testing strategy
-- Out of scope items
+```bash
+gh issue create --title "Refactor: <title>" --body "$(cat <<'EOF'
+## Problem Statement
+
+The problem from the developer's perspective.
+
+## Solution
+
+The approach from the developer's perspective.
+
+## Commits
+
+Detailed plan broken into the tiniest commits possible. Each leaves codebase working.
+
+1. Add new interface type
+2. Update service to accept new interface (keep old code path)
+3. Add tests for new code path
+4. Update consumers to use new interface
+5. Remove old code path
+
+## Implementation Decisions
+
+- Modules to build/modify and their interfaces
+- Architectural decisions
+- Schema changes
+- API contracts
+
+Do NOT include file paths or code snippets -- they go stale.
+
+## Testing Decisions
+
+- What makes a good test (behavior, not implementation)
+- Which modules need tests
+- Prior art: similar test patterns in the codebase
+
+## Out of Scope
+
+What is explicitly not included.
+EOF
+)"
+```
 
 ## Rules
 
@@ -45,10 +78,10 @@ Include:
 
 ## Error Handling
 
-- If `gh issue create` fails → run `gh auth status` to verify authentication; offer to print the plan as markdown instead
-- If test coverage is insufficient → note coverage gaps in the plan and add "add tests for X" as the first commit
-- If codebase exploration reveals scope is larger than expected → revise the plan with user before proceeding
+- `gh issue create` fails -- run `gh auth status` to verify auth; offer to print as markdown instead
+- Test coverage insufficient -- note gaps and add "add tests for X" as first commit
+- Scope larger than expected -- revise plan with user before proceeding
 
 ## See Also
 
-- [tdd](../tdd/SKILL.md) — implement refactored code using test-driven development
+- [tdd](../tdd/SKILL.md) -- implement refactored code using test-driven development

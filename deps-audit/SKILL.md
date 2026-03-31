@@ -14,9 +14,27 @@ Run in parallel:
 ## Workflow
 
 1. Run audit and outdated check in parallel
-2. Report critical vulnerabilities with CVE + fix command (see [severity-levels.md](references/severity-levels.md))
+2. Report vulnerabilities with CVE + fix command using severity table below
 3. List outdated packages: table of package/current/latest/type (major vs minor/patch)
 4. Check for unused deps: grep imports in `src/`
+
+## Severity Levels
+
+| Level | CVSS | Action |
+|---|---|---|
+| **Critical** | 9.0-10.0 | Fix immediately, block merge |
+| **High** | 7.0-8.9 | Fix before next release |
+| **Moderate** | 4.0-6.9 | Fix in current sprint |
+| **Low** | 0.1-3.9 | Fix when convenient |
+
+For each critical/high vulnerability report:
+```
+Package: <name>@<version>
+CVE: CVE-YYYY-XXXXX
+Severity: Critical
+Description: <one line>
+Fix: npm audit fix --force  (or: npm install <pkg>@<safe-version>)
+```
 
 ## Rules
 
@@ -26,6 +44,6 @@ Run in parallel:
 
 ## Error Handling
 
-- If `npm audit` fails → run `npm install` first to generate `package-lock.json`, then retry
-- If `npm outdated` returns nothing → report all dependencies are current
-- If `npm` is not found → report incompatibility; this skill requires npm
+- `npm audit` fails -- run `npm install` first to generate `package-lock.json`, then retry
+- `npm outdated` returns nothing -- report all dependencies are current
+- `npm` not found -- report incompatibility; this skill requires npm
