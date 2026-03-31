@@ -13,10 +13,10 @@ Tests verify behavior through public interfaces, not implementation details. See
 
 ### 1. Planning
 
-- [ ] Confirm interface design with user
+- [ ] Ask user: "What should the public interface look like? Which behaviors are most important to test?"
 - [ ] Identify opportunities for [deep modules](references/deep-modules.md) (small interface, deep implementation)
 - [ ] Design interfaces for [testability](references/interface-design.md)
-- [ ] List behaviors to test (prioritize critical paths)
+- [ ] List behaviors to test (prioritize critical paths — you can't test everything)
 - [ ] Get user approval before writing code
 
 ### 2. Tracer Bullet
@@ -36,6 +36,14 @@ GREEN: Minimal code to pass → passes
 ```
 
 One test at a time. Minimal code to pass. No refactoring while RED.
+
+### Checklist (each cycle)
+
+- [ ] Test describes behavior, not implementation
+- [ ] Test uses public interface only
+- [ ] Test would survive internal refactor
+- [ ] Code is minimal for this test
+- [ ] No speculative features added
 
 ### 4. Refactor
 
