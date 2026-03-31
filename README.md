@@ -94,6 +94,7 @@ This installs from the local repository for testing before pushing.
 | `prd-to-plan` | Turn a PRD into a multi-phase implementation plan using tracer-bullet vertical slices |
 | `prose-fix` | Fix formatting, typos, and clarity issues in markdown and text files |
 | `refactor-plan` | Create structured refactoring plans |
+| `revise` | Structurally edit and improve article drafts — reorder sections, tighten arguments, improve clarity |
 | `safe-repo` | Check for sensitive data in repository |
 | `ship` | Commit and push changes using atomic commits |
 | `tdd` | Guide test-driven development with red-green-refactor loop |
