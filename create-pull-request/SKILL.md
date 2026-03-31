@@ -17,15 +17,25 @@ If `--draft` is passed, create as draft PR.
 ## Workflow
 
 1. Run in parallel:
-   - `git diff HEAD`
-   - `git diff [base-branch]...HEAD`
+   - `git fetch origin && git remote show origin | grep 'HEAD branch' | cut -d' ' -f5` (get base branch)
+   - `git rev-parse --abbrev-ref HEAD | grep -oE '[A-Z]+-[0-9]+'` (extract ticket ID)
    - Search for PR template (see [template-locations.md](references/template-locations.md))
-2. Read template if found
-3. Review ALL commits (not just latest)
-4. Draft title (<70 chars) and body:
-   - Use template structure if available
-   - Otherwise: Summary + Test plan
-5. In parallel:
+2. Run in parallel:
+   - `git diff HEAD`
+   - `git diff [base-branch]...HEAD --unified=0`
+3. Read template if found
+4. Review ALL commits (not just latest)
+5. Ask user via AskUserQuestion (ask all at once where possible):
+   - **Effort** (required): how long the task took in hours (planning, reading, testing, all included)
+   - **Changes** (required): general overview of what was done
+   - **Testing** (optional): testing done that isn't visible in the diff
+   - **Tricky parts** (optional): anything hard, requiring multiple attempts, or non-obvious
+6. Draft title and body:
+   - Title must match: `/^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\(.*\))?: .+$/`
+   - Use template structure if available; otherwise: Summary + Test plan
+   - Reference ticket ID in body if found (e.g. `Resolves TICKET-123`)
+   - Incorporate user's answers into description — don't just repeat the diff
+7. In parallel:
    - Create branch if needed
    - Push with `-u` if needed
    - Create PR with `gh pr create` using HEREDOC (add `--draft` if requested)
