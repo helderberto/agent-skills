@@ -88,6 +88,7 @@ This installs from the local repository for testing before pushing.
 | `e2e` | Write end-to-end tests for user flows using Cypress |
 | `explain-code` | Explain code with visual diagrams and analogies |
 | `grill-me` | Stress-test a plan or design through relentless interview |
+| `harden` | Harden existing code by splitting large functions, adding edge-case coverage, and backfilling unit tests |
 | `i18n` | Audit internationalization coverage, find hardcoded strings |
 | `lint` | Run linting and formatting checks |
 | `perf-audit` | Audit frontend bundle size and performance |
