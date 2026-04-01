@@ -30,9 +30,11 @@ If `--draft` is passed, create as draft PR.
    - **Changes** (required): general overview of what was done
    - **Testing** (optional): testing done that isn't visible in the diff
    - **Tricky parts** (optional): anything hard, requiring multiple attempts, or non-obvious
+   - If template found, also surface any template-specific fields that can't be inferred from the diff (e.g. "Does this include breaking changes?", "What type of change is this?")
 6. Draft title and body:
    - Title must match: `/^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\(.*\))?: .+$/`
-   - Use template structure if available; otherwise: Summary + Test plan
+   - **If template found**: use the template verbatim as the body base — fill every section/placeholder using diff + user answers; check applicable checkboxes; do NOT add sections not in the template; do NOT omit any template sections
+   - **If no template**: use Summary + Test plan
    - Reference ticket ID in body if found (e.g. `Resolves TICKET-123`)
    - Incorporate user's answers into description — don't just repeat the diff
 7. In parallel:
@@ -44,7 +46,7 @@ See [examples.md](references/examples.md) for output format and [gh-flags.md](re
 
 ## Rules
 
-- Use PR template if available
+- If a PR template exists, the body MUST be the filled template — not a summary that references it
 - Analyze ALL commits, not just the latest
 - Return PR URL when done
 - Use `gh` CLI only
