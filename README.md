@@ -79,7 +79,7 @@ This installs from the local repository for testing before pushing.
 | `a11y-audit` | Audit accessibility compliance in frontend code |
 | `architecture-audit` | Surface architectural friction, propose refactors as GitHub issue RFCs |
 | `atomic-commits` | Group unstaged changes into atomic commits by concern, then push |
-| `precommit` | Pre-commit quality gate: auto-fix formatting/lint, verify types, run tests |
+| `validate-code` | Validate code quality: auto-fix formatting/lint, verify types, run tests |
 | `code-review` | Review a GitHub PR for bugs, security, performance, and code quality |
 | `commit` | Create git commits following repository style |
 | `coverage` | Check test coverage for unstaged changes |
