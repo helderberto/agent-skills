@@ -1,9 +1,9 @@
 ---
-name: harden
-description: Harden existing code by splitting large functions, adding edge-case coverage, and backfilling unit tests. Use when user asks to "harden", "make robust", "add missing tests", "split functions", or wants to improve reliability of existing code. Don't use for new features (use tdd), refactoring plans (use refactor-plan), or code review (use code-review).
+name: fortify
+description: Fortify existing code by splitting large functions, adding edge-case coverage, and backfilling unit tests. Use when user asks to "fortify", "harden", "bulletproof", "make robust", "make solid", "strengthen", "add missing tests", "split functions", or wants to improve reliability of existing code. Don't use for new features (use tdd), refactoring plans (use refactor-plan), or code review (use code-review).
 ---
 
-# Harden
+# Fortify
 
 Target: $ARGUMENTS (file, directory, or module — if blank, use unstaged changes)
 
@@ -65,7 +65,7 @@ One item at a time. Run tests after each cycle. Never batch.
 ## Output format
 
 ```
-## Hardening Report
+## Fortify Report
 
 ### Audit
 - [ ] Split: `processOrder` (45 lines, validation + persistence + notification)
