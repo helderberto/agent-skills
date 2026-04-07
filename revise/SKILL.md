@@ -9,7 +9,7 @@ Structurally edit an article draft through an interactive, section-by-section pr
 
 ## Step 1 — Understand Context
 
-Before editing, ask the user via AskUserQuestion (skip questions they already answered):
+Before editing, ask the user (skip questions they already answered). Use AskUserQuestion when available; otherwise ask directly:
 
 1. **Audience**: "Who is the target audience?" — Options: "Beginners", "Experienced developers", "General tech readers"
 2. **Venue**: "Where will this be published?" — Options: "Blog post", "Newsletter", "Documentation"

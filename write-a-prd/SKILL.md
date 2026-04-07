@@ -16,7 +16,7 @@ Ask the user for a detailed description of the problem and any solution ideas.
 Verify assertions and map current state: data models, services, API routes, frontend structure, and test patterns. Note what exists vs. what must be built.
 
 ### 3. Interview
-Interview relentlessly. Use AskUserQuestion for each question — lead with your recommended answer as the first option (Recommended); the user confirms by selecting it or corrects via another option / "Other". Group related questions when possible (up to 4 per call). If a question can be answered by exploring code, explore instead of asking.
+Interview relentlessly. Lead with your recommended answer as the first option (Recommended); the user confirms by selecting it or corrects via another option. Group related questions when possible (up to 4). Use AskUserQuestion when available; otherwise present options as a numbered list. If a question can be answered by exploring code, explore instead of asking.
 
 Walk these branches (skip any already resolved):
 
@@ -33,7 +33,7 @@ Sketch major modules to build or modify. Favor **deep modules** -- a simple inte
 
 Signals of shallow design: many small functions with 1:1 query mapping, callers compose multiple calls, adding a feature requires changing the interface.
 
-Present modules to user. Confirm which need tests via AskUserQuestion (multiSelect): list each module as an option with a description of what tests would cover.
+Present modules to user. Confirm which need tests (multiSelect): list each module as an option with a description of what tests would cover. Use AskUserQuestion when available; otherwise present as a checklist for the user to confirm.
 
 ### 5. Write PRD
 Save to `prds/<kebab-case-name>.md` (create `prds/` if missing).

@@ -25,7 +25,7 @@ If `--draft` is passed, create as draft PR.
    - `git diff [base-branch]...HEAD --unified=0`
 3. Read template if found
 4. Review ALL commits (not just latest)
-5. Ask user via AskUserQuestion (ask all at once where possible):
+5. Ask the user (use AskUserQuestion when available; otherwise ask directly). Ask all at once where possible:
    - **Effort** (required): how long the task took in hours (planning, reading, testing, all included)
    - **Changes** (required): general overview of what was done
    - **Testing** (optional): testing done that isn't visible in the diff

@@ -14,7 +14,7 @@ Break a PRD into phased vertical slices (tracer bullets). Output: `plans/<name>.
 ## Workflow
 
 ### 1. Read the PRD
-Open the PRD file. If no name given, ask via AskUserQuestion: "Which PRD should we plan?" — list each available PRD as an option.
+Open the PRD file. If no name given, ask: "Which PRD should we plan?" — list each available PRD as an option. Use AskUserQuestion when available; otherwise present as a numbered list.
 
 ### 2. Explore the codebase
 Understand current architecture, existing patterns, and integration points.
@@ -58,7 +58,7 @@ Present the breakdown. For each phase show:
 - **User stories covered**: which PRD stories this addresses
 - **Done when**: the testable condition
 
-Ask via AskUserQuestion: "Does the phase breakdown look right?" — Options: "Looks good, proceed (Recommended)", "Merge some phases", "Split some phases", "Reorder phases". Iterate until approved.
+Ask: "Does the phase breakdown look right?" — Options: "Looks good, proceed (Recommended)", "Merge some phases", "Split some phases", "Reorder phases". Use AskUserQuestion when available; otherwise present as numbered options. Iterate until approved.
 
 ### 6. Save plan
 Save to `plans/<same-stem-as-prd>.md` (create `plans/` if missing).

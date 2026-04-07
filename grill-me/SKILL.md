@@ -7,13 +7,13 @@ Interview me relentlessly about every aspect of this plan until we reach a share
 
 If a question can be answered by exploring the codebase, explore the codebase instead of asking.
 
-For each question, use AskUserQuestion with your recommended answer as the first option (Recommended). I can confirm by selecting it, correct by choosing another option, or provide a custom answer via "Other".
+For each question, present your recommended answer as the first option (Recommended). I can confirm by selecting it, correct by choosing another option, or provide a custom answer. Use AskUserQuestion when available; otherwise present options as a numbered list.
 
 Track progress as a visible decision tree:
 - `[OPEN]` — not yet resolved
 - `[RESOLVED]` — committed
 
-Ask one question at a time via AskUserQuestion. After I answer, commit the decision explicitly, then move to the next open branch.
+Ask one question at a time. After I answer, commit the decision explicitly, then move to the next open branch.
 
 When all branches are resolved, produce:
 - **Decision log** — what we committed to
