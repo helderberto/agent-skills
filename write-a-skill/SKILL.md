@@ -7,7 +7,9 @@ description: Create new agent skills with proper structure and progressive discl
 
 ## Process
 
-1. **Clarify scope** -- ask what task/domain, what triggers it, whether it needs scripts or just instructions
+1. **Clarify scope** -- ask via AskUserQuestion:
+   - "What type of skill?" — Options: "Pure instructions (no scripts)", "Instructions + helper scripts", "Wrapper around CLI tool"
+   - "Does it need pre-loaded context?" — Options: "Yes — auto-run commands on load (Recommended)", "No — gather context during workflow"
 2. **Explore existing skills** -- `ls` the skills repo, read similar skills for conventions
 3. **Draft** -- create `SKILL.md`
 4. **Review with user** -- confirm coverage, ask what's missing

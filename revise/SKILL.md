@@ -9,11 +9,11 @@ Structurally edit an article draft through an interactive, section-by-section pr
 
 ## Step 1 — Understand Context
 
-Before editing, ask the user (skip questions they already answered):
+Before editing, ask the user via AskUserQuestion (skip questions they already answered):
 
-1. **Who is the audience?** (beginners, experienced devs, general tech readers)
-2. **What is the one takeaway?** (the single thing the reader should remember)
-3. **Where will it be published?** (blog, newsletter, docs — affects tone and length)
+1. **Audience**: "Who is the target audience?" — Options: "Beginners", "Experienced developers", "General tech readers"
+2. **Venue**: "Where will this be published?" — Options: "Blog post", "Newsletter", "Documentation"
+3. **Takeaway**: "What is the one thing the reader should remember?" — ask separately as text (too specific for predefined options)
 
 ## Step 2 — Analyze Structure
 

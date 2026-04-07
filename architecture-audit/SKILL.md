@@ -30,7 +30,7 @@ Show a numbered list. For each candidate:
 - **Dependency category**: see [references/dependency-categories.md](references/dependency-categories.md)
 - **Test impact**: what existing tests would be replaced by boundary tests
 
-Do NOT propose interfaces yet. Ask: "Which of these would you like to explore?"
+Do NOT propose interfaces yet. Ask via AskUserQuestion: "Which candidate would you like to explore?" — list each candidate as an option with its cluster name as label and coupling summary as description.
 
 ### 3. User picks a candidate
 
@@ -62,7 +62,9 @@ Each sub-agent outputs:
 
 Present designs sequentially, compare in prose, then give your own recommendation. Be opinionated — if elements from multiple designs combine well, propose a hybrid.
 
-### 6. User picks an interface (or accepts recommendation)
+### 6. User picks an interface
+
+Ask via AskUserQuestion: "Which interface design should we use?" — list each design as an option with preview showing the interface signature. Add "Your recommendation" as first option (Recommended) with the hybrid/recommended design in preview.
 
 ## Rules
 

@@ -32,7 +32,7 @@ For each file, list findings in three buckets:
 | **Edge cases** | Missing null/empty/boundary checks at system boundaries, unhandled error paths, implicit assumptions |
 | **Test gaps** | Untested public functions, branches with no coverage, missing sad-path tests |
 
-Present the audit as a checklist. Ask user: **"Which items should I address?"** (default: all).
+Present the audit as a checklist. Ask via AskUserQuestion (multiSelect): **"Which items should I address?"** — list each finding as an option, with "All items" as first option marked (Recommended).
 
 ### 3. Harden (TDD loop per item)
 

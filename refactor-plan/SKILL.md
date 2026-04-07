@@ -14,7 +14,7 @@ description: Create structured refactoring plans. Use when user wants to plan a 
 
 ### 2. Define Scope
 - Interview user about implementation details
-- Present alternative approaches
+- Present alternative approaches via AskUserQuestion — each approach as an option with trade-offs in description; use preview to show code sketches when applicable
 - Define exactly what changes and what stays
 - Check test coverage in affected areas
 
