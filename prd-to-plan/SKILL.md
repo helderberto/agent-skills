@@ -9,7 +9,7 @@ Break a PRD into phased vertical slices (tracer bullets). Output: `plans/<name>.
 
 ## Pre-loaded context
 
-- Available PRDs: !`ls prds/ 2>/dev/null || echo "no prds/ directory found"`
+Before proceeding, use the Glob tool to list files in `prds/` directory.
 
 ## Workflow
 

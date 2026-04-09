@@ -9,8 +9,9 @@ Target: $ARGUMENTS (file, directory, or module — if blank, use unstaged change
 
 ## Pre-loaded context
 
-- package.json: !`cat package.json 2>/dev/null`
 - Unstaged changes: !`git diff --name-only`
+
+Before proceeding, use the Read tool to read `package.json` (for test runner config).
 
 ## Workflow
 
