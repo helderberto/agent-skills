@@ -9,7 +9,7 @@ Target: $ARGUMENTS (file, directory, or module — if blank, use unstaged change
 
 ## Pre-loaded context
 
-- Test runner: !`node -e "const p=require('./package.json'); console.log(p.scripts?.test || 'none')"`
+- package.json: !`cat package.json 2>/dev/null`
 - Unstaged changes: !`git diff --name-only`
 
 ## Workflow

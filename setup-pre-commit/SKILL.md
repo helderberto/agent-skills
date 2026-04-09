@@ -8,7 +8,7 @@ description: "Set up Husky pre-commit hooks with lint-staged (Prettier), type ch
 ## Pre-loaded context
 
 - Package manager lock: !`ls package-lock.json pnpm-lock.yaml yarn.lock bun.lockb 2>/dev/null`
-- Scripts: !`node -e "const p=require('./package.json'); console.log(Object.keys(p.scripts||{}).join(', '))" 2>/dev/null`
+- package.json: !`cat package.json 2>/dev/null`
 - Prettier config: !`ls .prettierrc .prettierrc.* prettier.config.* 2>/dev/null`
 
 ## What This Sets Up
