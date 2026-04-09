@@ -53,11 +53,8 @@ description: "Set up Husky pre-commit hooks with lint-staged (Prettier), type ch
    {
      "useTabs": false,
      "tabWidth": 2,
-     "printWidth": 80,
      "singleQuote": true,
-     "trailingComma": "all",
-     "semi": true,
-     "arrowParens": "always"
+     "trailingComma": "all"
    }
    ```
 
