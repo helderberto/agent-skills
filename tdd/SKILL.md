@@ -55,6 +55,17 @@ Once all tests GREEN, look for [refactor candidates](references/refactoring.md):
 
 **Never refactor while RED.**
 
+## Anti-Rationalization
+
+| Excuse | Rebuttal |
+|---|---|
+| "This is too small for TDD" | Small functions have edge cases too. A 1-min test prevents a 30-min debug. |
+| "I'll write tests after" | That's not TDD. Tests written after miss the design feedback loop. |
+| "The test is obvious, skip RED" | If it's obvious, writing it takes 10 seconds. Skip nothing. |
+| "I need to refactor first" | Never refactor while RED. Get to GREEN, then refactor. |
+| "Mocking is too complex here" | Complexity in mocking signals a design problem. Simplify the interface. |
+| "I'll batch these 3 tests" | One test at a time. Batching hides which change broke what. |
+
 ## Error Handling
 
 - If test runner not found → check `package.json` for `test` script; ask user which runner to use
