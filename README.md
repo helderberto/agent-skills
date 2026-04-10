@@ -92,7 +92,6 @@ This installs from the local repository for testing before pushing.
 | `i18n` | Audit internationalization coverage, find hardcoded strings |
 | `lint` | Run linting and formatting checks |
 | `perf-audit` | Audit frontend bundle size and performance |
-| `prd-to-plan` | Turn a PRD into a multi-phase implementation plan using tracer-bullet vertical slices |
 | `prose-fix` | Fix formatting, typos, and clarity issues in markdown and text files |
 | `refactor-plan` | Create structured refactoring plans |
 | `revise` | Structurally edit and improve article drafts — reorder sections, tighten arguments, improve clarity |
@@ -101,7 +100,6 @@ This installs from the local repository for testing before pushing.
 | `source-driven` | Implement features using official docs for exact dependency versions instead of training data |
 | `ship` | Commit and push changes using atomic commits |
 | `tdd` | Guide test-driven development with red-green-refactor loop |
-| `write-a-prd` | Create a PRD through user interview, codebase exploration, and module design, saved locally to prds/ |
 | `write-a-skill` | Create new agent skills with proper structure |
 
 ## Structure
