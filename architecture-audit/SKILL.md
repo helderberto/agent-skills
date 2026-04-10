@@ -66,12 +66,19 @@ Present designs sequentially, compare in prose, then give your own recommendatio
 
 Ask: "Which interface design should we use?" — list each design as an option with preview showing the interface signature. Add "Your recommendation" as first option (Recommended) with the hybrid/recommended design in preview. Use AskUserQuestion when available; otherwise present as a numbered list.
 
+### 7. Write improvement PRD
+
+Save a markdown file named `architecture-<cluster-name>.md` using the template in [references/improvement-template.md](references/improvement-template.md). If `.tracerkit/prds/` exists, save there; otherwise, save in `prds/`.
+
+Fill with concrete details: file paths, function names, migration steps. Share the file path with the user when done.
+
 ## Rules
 
 - Never propose an interface before the user picks a candidate (Step 3)
 - Old unit tests on shallow modules are waste once boundary tests exist — note them for deletion
 - Classify every candidate's dependency type before designing interfaces
 - Show the problem space framing (Step 4) before sub-agents finish — don't wait
+- PRD must reference concrete files and functions, not abstract concepts
 
 ## Error Handling
 
