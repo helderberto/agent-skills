@@ -97,8 +97,8 @@ This installs from the local repository for testing before pushing.
 | `refactor-plan` | Create structured refactoring plans |
 | `revise` | Structurally edit and improve article drafts — reorder sections, tighten arguments, improve clarity |
 | `safe-repo` | Check for sensitive data in repository |
-| `source-driven` | Implement features using official docs for exact dependency versions instead of training data |
 | `setup-pre-commit` | Set up Husky pre-commit hooks with lint-staged, Prettier, type checking, and tests |
+| `source-driven` | Implement features using official docs for exact dependency versions instead of training data |
 | `ship` | Commit and push changes using atomic commits |
 | `tdd` | Guide test-driven development with red-green-refactor loop |
 | `write-a-prd` | Create a PRD through user interview, codebase exploration, and module design, saved locally to prds/ |
