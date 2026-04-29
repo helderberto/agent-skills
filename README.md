@@ -105,9 +105,11 @@ This installs from the local repository for testing before pushing.
 
 ## Structure
 
-Each skill is a directory containing:
-- `SKILL.md` - All instructions, references, and templates in a single file
-- `scripts/` - Executable helpers (when needed)
+Each skill is a self-contained directory:
+
+- `SKILL.md` — entry point: frontmatter, workflow, rules, error handling
+- `references/` — deep, skill-specific material loaded on demand (optional)
+- `scripts/` — executable helpers a skill invokes (optional)
 
 ## License
 
