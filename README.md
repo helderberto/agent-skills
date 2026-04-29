@@ -92,6 +92,7 @@ This installs from the local repository for testing before pushing.
 | `i18n` | Audit internationalization coverage, find hardcoded strings |
 | `lint` | Run linting and formatting checks |
 | `perf-audit` | Audit frontend bundle size and performance |
+| `pr-reply` | Draft friendly, concise replies to pull request review comments |
 | `prose-fix` | Fix formatting, typos, and clarity issues in markdown and text files |
 | `refactor-plan` | Create structured refactoring plans |
 | `revise` | Structurally edit and improve article drafts — reorder sections, tighten arguments, improve clarity |
