@@ -80,16 +80,17 @@ This installs from the local repository for testing before pushing.
 | `architecture-audit` | Surface architectural friction, propose refactors as GitHub issue RFCs |
 | `atomic-commits` | Group unstaged changes into atomic commits by concern, then push |
 | `caveman` | Ultra-compressed communication mode — cuts token usage by dropping filler while keeping technical accuracy |
-| `validate-code` | Validate code quality: auto-fix formatting/lint, verify types, run tests |
 | `code-review` | Review a GitHub PR for bugs, security, performance, and code quality |
 | `commit` | Create git commits following repository style |
 | `coverage` | Check test coverage for unstaged changes |
+| `create-adr` | Record an Architecture Decision Record — gated 1–3 sentence note of what was decided and why |
 | `create-pull-request` | Create GitHub pull requests |
 | `deps-audit` | Check dependencies for vulnerabilities (npm only) |
+| `diagnose` | Disciplined diagnosis loop for hard bugs and perf regressions — feedback loop first |
 | `e2e` | Write end-to-end tests for user flows using Cypress |
 | `explain-code` | Explain code with visual diagrams and analogies |
-| `grill-me` | Stress-test a plan or design through relentless interview |
 | `fortify` | Fortify existing code by splitting large functions, adding edge-case coverage, and backfilling unit tests |
+| `grill-me` | Stress-test a plan or design through relentless interview |
 | `i18n` | Audit internationalization coverage, find hardcoded strings |
 | `lint` | Run linting and formatting checks |
 | `perf-audit` | Audit frontend bundle size and performance |
@@ -99,10 +100,12 @@ This installs from the local repository for testing before pushing.
 | `revise` | Structurally edit and improve article drafts — reorder sections, tighten arguments, improve clarity |
 | `safe-repo` | Check for sensitive data in repository |
 | `setup-pre-commit` | Set up Husky pre-commit hooks with lint-staged, Prettier, type checking, and tests |
-| `source-driven` | Implement features using official docs for exact dependency versions instead of training data |
 | `ship` | Commit and push changes using atomic commits |
+| `source-driven` | Implement features using official docs for exact dependency versions instead of training data |
 | `tdd` | Guide test-driven development with red-green-refactor loop |
+| `validate-code` | Validate code quality: auto-fix formatting/lint, verify types, run tests |
 | `write-a-skill` | Create new agent skills with proper structure |
+| `zoom-out` | Go up a layer of abstraction — map relevant modules and callers |
 
 ## Structure
 
