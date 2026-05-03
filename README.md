@@ -79,6 +79,7 @@ This installs from the local repository for testing before pushing.
 | `a11y-audit` | Audit accessibility compliance in frontend code |
 | `architecture-audit` | Surface architectural friction, propose refactors as GitHub issue RFCs |
 | `atomic-commits` | Group unstaged changes into atomic commits by concern, then push |
+| `caveman` | Ultra-compressed communication mode — cuts token usage by dropping filler while keeping technical accuracy |
 | `validate-code` | Validate code quality: auto-fix formatting/lint, verify types, run tests |
 | `code-review` | Review a GitHub PR for bugs, security, performance, and code quality |
 | `commit` | Create git commits following repository style |
