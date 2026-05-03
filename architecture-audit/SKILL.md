@@ -1,11 +1,30 @@
 ---
 name: architecture-audit
-description: Explore a codebase to surface architectural friction and propose deep-module refactors as GitHub issue RFCs. Use when user wants to improve architecture, find refactoring opportunities, consolidate tightly-coupled modules, or make a codebase more testable and AI-navigable. Don't use for small one-off refactors or single-file cleanups.
+description: Explore a codebase to surface architectural friction and propose refactors toward deep modules (simple interface, large implementation) as GitHub issue RFCs. Use when user wants to improve architecture, find refactoring opportunities, consolidate tightly-coupled modules, or make a codebase more testable and AI-navigable. Don't use for small one-off refactors or single-file cleanups.
 ---
 
 # Architecture Audit
 
-A **deep module** has a simple interface hiding a large implementation. Deep modules are more testable, more AI-navigable, and let you test at the boundary instead of inside. See [references/deep-modules.md](references/deep-modules.md) for examples and anti-patterns.
+A **deep module** has a simple interface hiding a large implementation. Deep modules are more testable, more AI-navigable, and let you test at the seam instead of inside. See [references/deep-modules.md](references/deep-modules.md) for examples and anti-patterns.
+
+## Glossary
+
+Use these terms exactly in every suggestion — don't drift into "component," "service," "API," or "boundary." Consistent language is the point. Full definitions in [references/language.md](references/language.md).
+
+- **Module** — anything with an interface and an implementation (function, class, package, slice).
+- **Interface** — everything a caller must know to use the module: types, invariants, error modes, ordering, config. Not just the type signature.
+- **Implementation** — the code inside.
+- **Depth** — leverage at the interface: a lot of behaviour behind a small interface. **Deep** = high leverage. **Shallow** = interface nearly as complex as the implementation.
+- **Seam** — where an interface lives; a place behaviour can be altered without editing in place. (Use this, not "boundary.")
+- **Adapter** — a concrete thing satisfying an interface at a seam.
+- **Leverage** — what callers get from depth.
+- **Locality** — what maintainers get from depth: change, bugs, knowledge concentrated in one place.
+
+Key principles:
+
+- **Deletion test**: imagine deleting the module. If complexity vanishes, it was a pass-through. If complexity reappears across N callers, it was earning its keep.
+- **The interface is the test surface.**
+- **One adapter = hypothetical seam. Two adapters = real seam.**
 
 ## Workflow
 
@@ -13,10 +32,11 @@ A **deep module** has a simple interface hiding a large implementation. Deep mod
 
 Use the Agent tool with subagent_type=Explore to navigate the codebase organically. Note where you experience friction:
 
-- Understanding one concept requires bouncing between many small files
-- A module's interface is nearly as complex as its implementation
+- Understanding one concept requires bouncing between many small **modules**
+- A module's **interface** is nearly as complex as its **implementation** (shallow module)
 - Pure functions extracted just for testability, but real bugs hide in how they're called
-- Tightly-coupled modules create integration risk at the seams between them
+- Tightly-coupled modules create integration risk at the **seams** between them
+- A module fails the **deletion test** — deleting it makes complexity vanish (pass-through), or its complexity is duplicated across N callers (earning its keep but in the wrong place)
 - Areas that are untested or hard to test
 
 The friction you encounter IS the signal.
@@ -28,7 +48,7 @@ Show a numbered list. For each candidate:
 - **Cluster**: which modules/concepts are involved
 - **Why they're coupled**: shared types, call patterns, co-ownership of a concept
 - **Dependency category**: see [references/dependency-categories.md](references/dependency-categories.md)
-- **Test impact**: what existing tests would be replaced by boundary tests
+- **Test impact**: what existing tests would be replaced by tests at the new seam
 
 Do NOT propose interfaces yet. Ask: "Which candidate would you like to explore?" — list each candidate as an option with its cluster name as label and coupling summary as description. Use AskUserQuestion when available; otherwise present as a numbered list.
 
@@ -75,10 +95,11 @@ Fill with concrete details: file paths, function names, migration steps. Share t
 ## Rules
 
 - Never propose an interface before the user picks a candidate (Step 3)
-- Old unit tests on shallow modules are waste once boundary tests exist — note them for deletion
+- Old unit tests on shallow modules are waste once seam tests exist — note them for deletion
 - Classify every candidate's dependency type before designing interfaces
 - Show the problem space framing (Step 4) before sub-agents finish — don't wait
 - PRD must reference concrete files and functions, not abstract concepts
+- Don't introduce a new seam unless something actually varies across it (one adapter = hypothetical, two = real)
 
 ## Error Handling
 
