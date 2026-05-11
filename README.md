@@ -184,6 +184,8 @@ Every skill is a self-contained directory:
 
 Skills auto-trigger when their `description` matches user intent. Workflow skills (`prd`, `plan`, `build`, `check`, `review`, `ship`) are typically invoked explicitly as `/hb:<name>`.
 
+For the full structure, frontmatter rules, and authoring checklist, see [docs/skill-anatomy.md](docs/skill-anatomy.md).
+
 ### Artifact convention
 
 Workflow skills write structured artifacts to `.specs/`:
@@ -197,7 +199,7 @@ The `.specs/` directory is local-first. Add it to `.gitignore` if you prefer spe
 
 ## Contributing
 
-PRs welcome. See the `write-a-skill` skill for the expected structure, then open a PR against `main`.
+PRs welcome. Read [docs/skill-anatomy.md](docs/skill-anatomy.md) for the expected structure (or use the `write-a-skill` skill to scaffold one interactively), then open a PR against `main`.
 
 ---
 
