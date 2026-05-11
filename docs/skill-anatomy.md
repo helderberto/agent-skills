@@ -54,7 +54,7 @@ Example from `commit`:
 
 > Create git commits following repository style. Use when user asks to "create a commit", "commit changes", "/commit", or requests committing code to git. Don't use for pushing code, creating pull requests, or reviewing changes.
 
-The "Don't use for" line prevents the skill from triggering when a neighbor is the better fit. This matters a lot once you have 40+ skills — overlap kills auto-routing.
+The "Don't use for" line prevents the skill from triggering when a neighbor is the better fit. This matters more as the catalog grows — overlap kills auto-routing.
 
 ### Body sections
 

@@ -60,7 +60,7 @@ Cursor will then route prompts like "plan the dark mode feature" or "build the n
 ## Limitations
 
 - Cursor does not support slash-style invocation (e.g., `/hb:prd`). Reference skills by name in prompts: "use the prd skill to ...".
-- Rules can grow Cursor's context fast. Load only the skills you actively need per project rather than all 35.
+- Rules can grow Cursor's context fast. Load only the skills you actively need per project rather than the entire set.
 - Cursor does not auto-detect when a skill applies. State the skill in your prompt explicitly.
 
 ## Updating

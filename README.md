@@ -4,7 +4,7 @@
 
 **Personal SDLC toolbelt for AI coding agents — from PRD to ship.**
 
-43 skills that encode the workflows, quality gates, and engineering practices I use day-to-day. Pure Markdown, zero runtime deps, installable as a [Claude Code](https://claude.com/claude-code) plugin or copied into any agent that reads instruction files.
+A collection of skills that encode the workflows, quality gates, and engineering practices I use day-to-day. Pure Markdown, zero runtime deps, installable as a [Claude Code](https://claude.com/claude-code) plugin or copied into any agent that reads instruction files.
 
 ```
   DEFINE          PLAN            BUILD            VERIFY            REVIEW           SHIP
@@ -119,7 +119,7 @@ For quick standalone tasks, you don't need the workflow — just describe what y
 
 ## Skills
 
-43 skills organized by SDLC phase. Expand a phase to browse; click a skill to read its `SKILL.md`.
+Organized by SDLC phase. Expand a phase to browse; click a skill to read its `SKILL.md`.
 
 <details>
 <summary><b>DEFINE</b></summary>
@@ -228,7 +228,7 @@ For quick standalone tasks, you don't need the workflow — just describe what y
 agent-skills/
 ├── .claude-plugin/      Plugin manifest + marketplace entry (Claude Code)
 ├── .opencode/skills →   Symlink to skills/ for OpenCode discovery
-├── skills/              43 skills, one folder per skill, each with SKILL.md
+├── skills/              one folder per skill, each with SKILL.md
 ├── docs/                Skill anatomy + per-agent setup guides
 ├── AGENTS.md            Intent → skill mapping (drives OpenCode auto-routing)
 ├── CONTRIBUTING.md      How to contribute new skills or improvements

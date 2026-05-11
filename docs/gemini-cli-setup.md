@@ -46,7 +46,7 @@ Gemini reads `GEMINI.md` automatically at session start.
 gemini skills list
 ```
 
-You should see all 35 skills from this repo plus any others you've installed.
+You should see every skill from this repo plus any others you've installed.
 
 ## Updating
 
