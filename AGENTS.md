@@ -60,6 +60,7 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Audit dependencies for CVEs             | `deps-audit`                                   |
 | Check for sensitive data in repo        | `safe-repo`                                    |
 | Run linter / formatter                  | `lint`                                         |
+| Run the test suite                      | `testing`                                      |
 | Run tests with coverage on changes      | `coverage`                                     |
 | Validate code (lint + types + tests)    | `validate-code`                                |
 | Write end-to-end tests (Cypress)        | `e2e`                                          |
