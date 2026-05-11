@@ -127,6 +127,7 @@ For quick standalone tasks, you don't need the workflow — just describe what y
 | | `fortify` | Split large functions, add edge-case coverage, backfill missing tests |
 | | `e2e` | Write end-to-end tests for user flows using Cypress |
 | **VERIFY** | `check` | Verify plan checkboxes against codebase; mark or unmark |
+| | `testing` | Run the test suite and report results (`npm test`) |
 | | `coverage` | Test coverage for unstaged changes |
 | | `validate-code` | Auto-fix lint, verify types, run tests |
 | | `lint` | Run linting and formatting checks |
