@@ -1,3 +1,6 @@
+# Workflow artifacts (local cache for prd, plan)
+.specs/
+
 # Agent directories (skills CLI)
 .agents/
 .adal/
