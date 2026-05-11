@@ -2,7 +2,7 @@
 
 **Personal SDLC toolbelt for AI coding agents — from PRD to ship.**
 
-42 skills that encode the workflows, quality gates, and engineering practices I use day-to-day. Pure Markdown, zero runtime deps, installable as a [Claude Code](https://claude.com/claude-code) plugin or copied into any agent that reads instruction files.
+43 skills that encode the workflows, quality gates, and engineering practices I use day-to-day. Pure Markdown, zero runtime deps, installable as a [Claude Code](https://claude.com/claude-code) plugin or copied into any agent that reads instruction files.
 
 ```
   DEFINE          PLAN            BUILD            VERIFY            REVIEW           SHIP
@@ -113,51 +113,106 @@ For quick standalone tasks, you don't need the workflow — just describe what y
 
 ## Skills
 
-| Phase | Skill | What it does |
-|-------|-------|--------------|
-| **DEFINE** | `prd` | Interview + codebase scan → structured PRD in `.specs/prds/<slug>.md` |
-| | `grill-me` | Stress-test a plan or design through relentless interview |
-| **PLAN** | `plan` | Turn PRD into multi-phase implementation plan (tracer-bullet vertical slices) |
-| | `refactor-plan` | Structured refactoring plan, breaks large changes into small commits |
-| | `architecture-audit` | Surface architectural friction, propose refactors toward deep modules |
-| | `zoom-out` | Go up a layer of abstraction — map relevant modules and callers |
-| **BUILD** | `build` | Implement next incomplete phase of a plan with feedback loops |
-| | `tdd` | Red → green → refactor loop for any new logic |
-| | `source-driven` | Implement using official docs for exact dependency versions |
-| | `fortify` | Split large functions, add edge-case coverage, backfill missing tests |
-| | `e2e` | Write end-to-end tests for user flows using Cypress |
-| **VERIFY** | `check` | Verify plan checkboxes against codebase; mark or unmark |
-| | `testing` | Run the test suite and report results (`npm test`) |
-| | `coverage` | Test coverage for unstaged changes |
-| | `validate-code` | Auto-fix lint, verify types, run tests |
-| | `lint` | Run linting and formatting checks |
-| | `diagnose` | Disciplined diagnosis loop for hard bugs and perf regressions |
-| | `visual-validate` | Browser-driven UI validation via Chrome DevTools or Playwright MCP |
-| **REVIEW** | `review` | Orchestrated REVIEW phase — detect scope, run relevant audits, consolidate findings |
-| | `code-review` | Five-axis review of a PR (correctness, readability, architecture, security, performance) |
-| | `a11y-audit` | Accessibility compliance audit (WCAG) |
-| | `i18n` | Find hardcoded strings, check translation coverage |
-| | `perf-audit` | Frontend bundle size and performance audit |
-| | `deps-audit` | Check dependencies for vulnerabilities (npm) |
-| | `safe-repo` | Sensitive data scan; `--diff` mode for in-flight changes |
-| | `harden` | Proactive security hardening at trust boundaries (OWASP-style) |
-| **SHIP** | `ship` | Pre-launch gate + atomic commits + push (`--fast` to skip gate) |
-| | `commit` | Single commit following repository style |
-| | `atomic-commits` | Group unstaged changes into atomic commits by concern |
-| | `create-pull-request` | Open a GitHub PR with structured body |
-| | `pr-reply` | Draft concise replies to PR review comments |
-| | `create-adr` | Record a 1–3 sentence Architecture Decision Record |
-| | `deprecate` | Manage deprecation and migration of old systems |
-| | `ci-cd` | Set up or modify CI/CD pipelines (GitHub Actions, Buildkite) |
-| **CROSS** | `brief` | Session briefing — active features, progress, suggested focus |
-| | `doubt-driven-development` | Adversarial fresh-context review of non-trivial decisions |
-| | `context-engineer` | Optimize what loads into agent context; recover when output degrades |
-| | `explain-code` | Explain code with visual diagrams and analogies |
-| | `setup-pre-commit` | Configure Husky + lint-staged for commit-time gates |
-| | `write-a-skill` | Author a new skill with proper structure |
-| | `caveman` | Ultra-compressed communication mode (cuts ~75% tokens) |
-| | `prose-fix` | Fix typos, dashes, formatting in markdown |
-| | `revise` | Structurally edit and improve article drafts |
+43 skills organized by SDLC phase. Expand a phase to browse; click a skill to read its `SKILL.md`.
+
+<details>
+<summary><b>DEFINE</b></summary>
+
+| Skill | What it does |
+|-------|--------------|
+| [`prd`](skills/prd/SKILL.md) | Interview + codebase scan → structured PRD in `.specs/prds/<slug>.md` |
+| [`grill-me`](skills/grill-me/SKILL.md) | Stress-test a plan or design through relentless interview |
+
+</details>
+
+<details>
+<summary><b>PLAN</b></summary>
+
+| Skill | What it does |
+|-------|--------------|
+| [`plan`](skills/plan/SKILL.md) | Turn PRD into multi-phase implementation plan (tracer-bullet vertical slices) |
+| [`refactor-plan`](skills/refactor-plan/SKILL.md) | Structured refactoring plan, breaks large changes into small commits |
+| [`architecture-audit`](skills/architecture-audit/SKILL.md) | Surface architectural friction, propose refactors toward deep modules |
+| [`zoom-out`](skills/zoom-out/SKILL.md) | Go up a layer of abstraction — map relevant modules and callers |
+
+</details>
+
+<details>
+<summary><b>BUILD</b></summary>
+
+| Skill | What it does |
+|-------|--------------|
+| [`build`](skills/build/SKILL.md) | Implement next incomplete phase of a plan with feedback loops |
+| [`tdd`](skills/tdd/SKILL.md) | Red → green → refactor loop for any new logic |
+| [`source-driven`](skills/source-driven/SKILL.md) | Implement using official docs for exact dependency versions |
+| [`fortify`](skills/fortify/SKILL.md) | Split large functions, add edge-case coverage, backfill missing tests |
+| [`e2e`](skills/e2e/SKILL.md) | Write end-to-end tests for user flows using Cypress |
+
+</details>
+
+<details>
+<summary><b>VERIFY</b></summary>
+
+| Skill | What it does |
+|-------|--------------|
+| [`check`](skills/check/SKILL.md) | Verify plan checkboxes against codebase; mark or unmark |
+| [`testing`](skills/testing/SKILL.md) | Run the test suite and report results (`npm test`) |
+| [`coverage`](skills/coverage/SKILL.md) | Test coverage for unstaged changes |
+| [`validate-code`](skills/validate-code/SKILL.md) | Auto-fix lint, verify types, run tests |
+| [`lint`](skills/lint/SKILL.md) | Run linting and formatting checks |
+| [`diagnose`](skills/diagnose/SKILL.md) | Disciplined diagnosis loop for hard bugs and perf regressions |
+| [`visual-validate`](skills/visual-validate/SKILL.md) | Browser-driven UI validation via Chrome DevTools or Playwright MCP |
+
+</details>
+
+<details>
+<summary><b>REVIEW</b></summary>
+
+| Skill | What it does |
+|-------|--------------|
+| [`review`](skills/review/SKILL.md) | Orchestrated REVIEW phase — detect scope, run relevant audits, consolidate findings |
+| [`code-review`](skills/code-review/SKILL.md) | Five-axis review of a PR (correctness, readability, architecture, security, performance) |
+| [`a11y-audit`](skills/a11y-audit/SKILL.md) | Accessibility compliance audit (WCAG) |
+| [`i18n`](skills/i18n/SKILL.md) | Find hardcoded strings, check translation coverage |
+| [`perf-audit`](skills/perf-audit/SKILL.md) | Frontend bundle size and performance audit |
+| [`deps-audit`](skills/deps-audit/SKILL.md) | Check dependencies for vulnerabilities (npm) |
+| [`safe-repo`](skills/safe-repo/SKILL.md) | Sensitive data scan; `--diff` mode for in-flight changes |
+| [`harden`](skills/harden/SKILL.md) | Proactive security hardening at trust boundaries (OWASP-style) |
+
+</details>
+
+<details>
+<summary><b>SHIP</b></summary>
+
+| Skill | What it does |
+|-------|--------------|
+| [`ship`](skills/ship/SKILL.md) | Pre-launch gate + atomic commits + push (`--fast` to skip gate) |
+| [`commit`](skills/commit/SKILL.md) | Single commit following repository style |
+| [`atomic-commits`](skills/atomic-commits/SKILL.md) | Group unstaged changes into atomic commits by concern |
+| [`create-pull-request`](skills/create-pull-request/SKILL.md) | Open a GitHub PR with structured body |
+| [`pr-reply`](skills/pr-reply/SKILL.md) | Draft concise replies to PR review comments |
+| [`create-adr`](skills/create-adr/SKILL.md) | Record a 1–3 sentence Architecture Decision Record |
+| [`deprecate`](skills/deprecate/SKILL.md) | Manage deprecation and migration of old systems |
+| [`ci-cd`](skills/ci-cd/SKILL.md) | Set up or modify CI/CD pipelines (GitHub Actions, Buildkite) |
+
+</details>
+
+<details>
+<summary><b>MISC</b></summary>
+
+| Skill | What it does |
+|-------|--------------|
+| [`brief`](skills/brief/SKILL.md) | Session briefing — active features, progress, suggested focus |
+| [`doubt-driven-development`](skills/doubt-driven-development/SKILL.md) | Adversarial fresh-context review of non-trivial decisions |
+| [`context-engineer`](skills/context-engineer/SKILL.md) | Optimize what loads into agent context; recover when output degrades |
+| [`explain-code`](skills/explain-code/SKILL.md) | Explain code with visual diagrams and analogies |
+| [`setup-pre-commit`](skills/setup-pre-commit/SKILL.md) | Configure Husky + lint-staged for commit-time gates |
+| [`write-a-skill`](skills/write-a-skill/SKILL.md) | Author a new skill with proper structure |
+| [`caveman`](skills/caveman/SKILL.md) | Ultra-compressed communication mode (cuts ~75% tokens) |
+| [`prose-fix`](skills/prose-fix/SKILL.md) | Fix typos, dashes, formatting in markdown |
+| [`revise`](skills/revise/SKILL.md) | Structurally edit and improve article drafts |
+
+</details>
 
 ---
 
@@ -167,7 +222,7 @@ For quick standalone tasks, you don't need the workflow — just describe what y
 agent-skills/
 ├── .claude-plugin/      Plugin manifest + marketplace entry (Claude Code)
 ├── .opencode/skills →   Symlink to skills/ for OpenCode discovery
-├── skills/              42 skills, one folder per skill, each with SKILL.md
+├── skills/              43 skills, one folder per skill, each with SKILL.md
 ├── docs/                Per-agent setup guides (Cursor, Gemini CLI, OpenCode)
 ├── AGENTS.md            Intent → skill mapping (drives OpenCode auto-routing)
 ├── LICENSE              MIT
