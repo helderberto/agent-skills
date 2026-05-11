@@ -1,0 +1,23 @@
+{
+  "name": "hb",
+  "description": "Helder's personal SDLC toolbelt for AI coding agents — from PRD to ship. Bundles the tracer-bullet workflow alongside TDD, code review, audits, and shipping skills.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Helder Burato Berto",
+    "email": "helder.burato@gmail.com"
+  },
+  "homepage": "https://github.com/helderberto/agent-skills",
+  "repository": "https://github.com/helderberto/agent-skills",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "ai-workflow",
+    "agent-skills",
+    "sdlc",
+    "tracer-bullet",
+    "developer-tools",
+    "markdown",
+    "plugin"
+  ],
+  "skills": "./skills"
+}
