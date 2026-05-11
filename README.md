@@ -62,11 +62,12 @@ Open the project in OpenCode. The `.opencode/skills` symlink and root `AGENTS.md
 <details>
 <summary><b>Cursor</b></summary>
 
-Copy individual skills into `.cursor/rules/`:
+Clone the repo, then copy individual skills into `.cursor/rules/`:
 
 ```bash
-cp /path/to/agent-skills/skills/tdd/SKILL.md .cursor/rules/tdd.md
-cp /path/to/agent-skills/skills/code-review/SKILL.md .cursor/rules/code-review.md
+git clone https://github.com/helderberto/agent-skills.git
+cp agent-skills/skills/tdd/SKILL.md .cursor/rules/tdd.md
+cp agent-skills/skills/code-review/SKILL.md .cursor/rules/code-review.md
 ```
 
 See [docs/cursor-setup.md](docs/cursor-setup.md) for the recommended starter set.
@@ -75,7 +76,8 @@ See [docs/cursor-setup.md](docs/cursor-setup.md) for the recommended starter set
 
 ---
 
-## Workflow Example
+<details>
+<summary><b>Workflow example</b> — full SDLC walkthrough</summary>
 
 A non-trivial feature flows through all six phases. Each workflow skill is one invocation:
 
@@ -108,6 +110,8 @@ AI:  Pre-launch gate (validate-code + safe-repo --diff).
 ```
 
 For quick standalone tasks, you don't need the workflow — just describe what you want and the relevant skill triggers ("write tests for X", "audit deps", "create an ADR for Y").
+
+</details>
 
 ---
 
@@ -223,23 +227,12 @@ agent-skills/
 ├── .claude-plugin/      Plugin manifest + marketplace entry (Claude Code)
 ├── .opencode/skills →   Symlink to skills/ for OpenCode discovery
 ├── skills/              43 skills, one folder per skill, each with SKILL.md
-├── docs/                Per-agent setup guides (Cursor, Gemini CLI, OpenCode)
+├── docs/                Skill anatomy + per-agent setup guides
 ├── AGENTS.md            Intent → skill mapping (drives OpenCode auto-routing)
+├── CONTRIBUTING.md      How to contribute new skills or improvements
 ├── LICENSE              MIT
 └── README.md
 ```
-
-### Skill anatomy
-
-Every skill is a self-contained directory:
-
-- `SKILL.md` — entry point with YAML frontmatter (`name`, `description`) followed by workflow, rules, error handling, verification
-- `references/` *(optional)* — deep material loaded on demand
-- `scripts/` *(optional)* — executable helpers a skill invokes
-
-Skills auto-trigger when their `description` matches user intent. Workflow skills (`prd`, `plan`, `build`, `check`, `review`, `ship`) are typically invoked explicitly as `/hb:<name>`.
-
-For the full structure, frontmatter rules, and authoring checklist, see [docs/skill-anatomy.md](docs/skill-anatomy.md).
 
 ### Artifact convention
 
@@ -254,7 +247,7 @@ The `.specs/` directory is local-first. Add it to `.gitignore` if you prefer spe
 
 ## Contributing
 
-PRs welcome. Read [docs/skill-anatomy.md](docs/skill-anatomy.md) for the expected structure (or use the `write-a-skill` skill to scaffold one interactively), then open a PR against `main`.
+PRs welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for workflow, conventions, and where to start.
 
 ---
 
