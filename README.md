@@ -22,7 +22,7 @@ Each phase has a dedicated **workflow skill** that orchestrates the smaller tool
 <details open>
 <summary><b>Claude Code (recommended)</b></summary>
 
-Install globally via the marketplace — available across every project automatically, no per-project setup needed:
+Install via the marketplace:
 
 ```
 /plugin marketplace add helderberto/agent-skills
@@ -30,26 +30,6 @@ Install globally via the marketplace — available across every project automati
 ```
 
 After install, skills are available as `/hb:<skill-name>` — e.g. `/hb:prd`, `/hb:tdd`, `/hb:ship`. Most skills also auto-trigger from natural language ("review this PR", "check accessibility", etc.) based on their description.
-
-**Verify installation**:
-
-```
-/plugin list
-```
-
-You should see `hb@helderberto-skills` in the list.
-
-**Update to the latest version**:
-
-```
-/plugin update hb@helderberto-skills
-```
-
-**Local development** (point Claude Code at a local clone instead of the marketplace):
-
-```bash
-claude --plugin-dir /path/to/agent-skills
-```
 
 </details>
 
