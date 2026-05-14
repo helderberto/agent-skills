@@ -94,6 +94,7 @@ When the user has a non-trivial task, follow this flow even without explicit com
 - Description starts with what the skill does, followed by trigger conditions ("Use when...")
 - Supporting files live under the skill's `references/` subfolder when content exceeds ~100 lines
 - Bump `.claude-plugin/plugin.json` `version` (semver) on every user-visible change to a skill so plugin consumers can track updates
+- Create an annotated git tag `vX.Y.Z` matching the bumped version (`git tag -a vX.Y.Z -m "..."`) summarizing what changed since the previous tag, then `git push --tags`
 
 ## Boundaries
 
