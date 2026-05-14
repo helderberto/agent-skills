@@ -1,7 +1,7 @@
 {
   "name": "hb",
   "description": "Helder's personal SDLC toolbelt for AI coding agents — from PRD to ship. Bundles the tracer-bullet workflow alongside TDD, code review, audits, and shipping skills.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": {
     "name": "Helder Burato Berto",
     "email": "helder.burato@gmail.com"
