@@ -49,14 +49,38 @@ After all sections are revised:
 4. Check that no concept is used before it is introduced
 5. Report a summary of structural changes made
 
+## Step 5 — Polish Pass
+
+After structural edits, run a single cosmetic pass over the file. Order: formatting → typos → clarity.
+
+### Formatting
+| Issue | Replace with |
+|-------|-------------|
+| Em dash ` — ` (with spaces) | Period, comma, colon, or parentheses depending on context |
+| Em dash `—` (no spaces) | Split into two sentences or use comma |
+| Double spaces | Single space |
+
+### Typos
+- Misspelled words
+- Wrong word form (e.g. "teh" → "the", "dont" → "don't")
+- Missing apostrophes in contractions
+
+### Sentence Clarity
+- Remove filler words ("very", "just", "really", "basically", "actually")
+- Split run-on sentences into two
+- Flatten weak constructions ("is able to" → "can", "in order to" → "to")
+
+Workflow: grep for `—` first, fix all formatting, then typos, then clarity. Grep again to confirm no em dashes remain. Never add words — only remove or substitute. Never rewrite a sentence that is already clear.
+
+Report what was changed by category.
+
 ## Rules
 
 - Always read the file before editing
-- Always confirm structural changes with the user before rewriting
+- Always confirm structural changes with the user before rewriting (Steps 1–3)
 - Preserve the author's voice — restructure and tighten, don't impose a new style
 - Preserve code blocks, technical terms, and proper nouns exactly
-- Do not fix typos or formatting — that is prose-fix's job
-- If the article is already well-structured, say so and suggest prose-fix instead
+- If the article is already well-structured, skip to Step 5 (or suggest prose-fix instead for a lighter pass)
 
 ## Scope
 
