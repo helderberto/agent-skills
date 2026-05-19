@@ -75,7 +75,7 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Restructure an article draft            | `revise`                                       |
 | Ultra-compressed communication mode     | `caveman`                                      |
 | Hand off mid-session work to a fresh agent | `handoff`                                   |
-| Author a new skill                      | `write-a-skill`                                |
+| Author a new skill                      | `create-skill`                                 |
 
 ### Lifecycle Mapping (Implicit Flow)
 
@@ -93,7 +93,7 @@ When the user has a non-trivial task, follow this flow even without explicit com
 - Every skill lives in `skills/<name>/SKILL.md` (or `<name>/SKILL.md` if flat at root — see structure section)
 - YAML frontmatter requires `name` and `description`
 - Description starts with what the skill does, followed by trigger conditions ("Use when...")
-- Supporting files live under the skill's `references/` subfolder when content exceeds ~100 lines
+- Supporting files split into subfolders: `references/` (long-form docs loaded on demand), `scripts/` (deterministic helpers), `assets/` (templates/icons used in output). Split when `SKILL.md` exceeds ~150 lines
 - Bump `.claude-plugin/plugin.json` `version` (semver) on every user-visible change to a skill so plugin consumers can track updates
 - Create an annotated git tag `vX.Y.Z` matching the bumped version (`git tag -a vX.Y.Z -m "..."`) summarizing what changed since the previous tag, then `git push --tags`
 

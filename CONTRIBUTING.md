@@ -26,11 +26,11 @@ When in doubt, open an issue first to discuss scope.
    ```
    Branch name examples: `feat/visual-validate`, `fix/safe-repo-diff`, `docs/cursor-setup`.
 
-2. **Read [`docs/skill-anatomy.md`](docs/skill-anatomy.md)** if you're adding or modifying a skill. It covers directory layout, frontmatter rules, description writing, and the authoring checklist.
+2. **Read [`skills/create-skill/SKILL.md`](skills/create-skill/SKILL.md)** if you're adding or modifying a skill. It covers directory layout, frontmatter rules, description writing, and the review checklist.
 
-3. **Scaffold a new skill** using the `write-a-skill` skill itself (interactive walkthrough), or copy an existing skill's structure as a template.
+3. **Scaffold a new skill** using the `create-skill` skill itself (interactive walkthrough), or copy an existing skill's structure as a template.
 
-4. **Run the authoring checklist** from `docs/skill-anatomy.md` before opening the PR.
+4. **Run the review checklist** from `skills/create-skill/SKILL.md` before opening the PR.
 
 5. **Commit** with [Conventional Commits](https://www.conventionalcommits.org/):
    - `feat(<skill>): add ...` — new skill or new behavior
@@ -56,8 +56,8 @@ When in doubt, open an issue first to discuss scope.
 | You want to... | Read this |
 |----------------|-----------|
 | Understand the plugin structure | [README.md](README.md) |
-| Write a new skill from scratch | [docs/skill-anatomy.md](docs/skill-anatomy.md) |
-| Scaffold a skill interactively | Invoke `/hb:write-a-skill` |
+| Write a new skill from scratch | [skills/create-skill/SKILL.md](skills/create-skill/SKILL.md) |
+| Scaffold a skill interactively | Invoke `/hb:create-skill` |
 | Configure another agent | [`docs/cursor-setup.md`](docs/cursor-setup.md), [`docs/gemini-cli-setup.md`](docs/gemini-cli-setup.md), [`docs/opencode-setup.md`](docs/opencode-setup.md) |
 | Question scope before coding | Open an issue |
 

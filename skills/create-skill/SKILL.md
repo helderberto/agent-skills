@@ -1,9 +1,9 @@
 ---
-name: write-a-skill
+name: create-skill
 description: Create new agent skills with proper structure, progressive disclosure, and bundled resources. Use when user wants to create, write, or build a new skill, or asks "make a skill for X".
 ---
 
-# Writing Skills
+# Creating Skills
 
 ## Process
 
@@ -26,11 +26,19 @@ skill-name/
 ├── SKILL.md              # Required. Metadata + instructions.
 ├── references/           # Optional. Long-form docs the agent reads on demand.
 │   └── <topic>.md
-└── scripts/              # Optional. Deterministic helpers (.sh, .py) called via Bash.
-    └── helper.sh
+├── scripts/              # Optional. Deterministic helpers (.sh, .py) called via Bash.
+│   └── helper.sh
+└── assets/               # Optional. Files used in output (templates, icons, fonts).
+    └── template.md
 ```
 
 Keep the entry point in `SKILL.md`. Link from `SKILL.md` to `references/<topic>.md` rather than inlining — preserves progressive disclosure.
+
+### Progressive disclosure (three levels)
+
+1. **Metadata** (`name` + `description`) — always in context (~100 words). Sole signal for triggering.
+2. **`SKILL.md` body** — loaded when skill triggers. Keep under ~150 lines; the spec ceiling is ~500.
+3. **Bundled resources** (`references/`, `scripts/`, `assets/`) — loaded on demand or executed without loading.
 
 ## SKILL.md Template
 
@@ -58,7 +66,7 @@ Orchestrator skills (e.g. `review`, `ship`) replace `Workflow` with explicit pha
 
 | Field | Required | Notes |
 |---|---|---|
-| `name` | yes | kebab-case, matches directory |
+| `name` | yes | kebab-case, matches directory. Avoid version suffixes (`-v2`, `-new`) — evolve in place or deprecate |
 | `description` | yes | Agent's only signal for when to load this skill |
 | `argument-hint` | no | One-line hint shown next to the skill name (e.g. `'[slug]'`, `'<idea>'`) |
 
@@ -81,6 +89,8 @@ The description is **the only thing the agent sees** when deciding which skill t
 - First sentence: what it does
 - Second sentence: `Use when [triggers]`
 - Third sentence: `Don't use for [anti-triggers]`
+
+**Combat under-triggering**: Claude tends to under-trigger skills. If a skill is useful but rarely fires, make the description more assertive — list extra phrases the user might say, name file types or contexts explicitly, even add `Make sure to use this skill whenever...` when warranted. Anti-triggers stay important, but the trigger clause should be generous.
 
 **Good**:
 
@@ -113,6 +123,23 @@ Split into `references/<topic>.md` when:
 - `SKILL.md` exceeds ~150 lines
 - Content has distinct domains (e.g. patterns vs. report template)
 - Advanced material is rarely needed during the main workflow
+
+**Domain organization**: when a skill supports multiple variants, split by variant so the agent loads only the relevant one:
+
+```
+cloud-deploy/
+├── SKILL.md              # workflow + variant selection
+└── references/
+    ├── aws.md
+    ├── gcp.md
+    └── azure.md
+```
+
+## Writing Style
+
+- **Imperative form** for instructions (`Run X`, `Check Y` — not `You should run X`)
+- **Explain the why** instead of stacking `ALWAYS`/`NEVER` in caps. Today's models have theory of mind; reasoning lands better than rigid rules
+- A single `MUST` is fine when a hard constraint exists; a wall of caps is a yellow flag — reframe and explain
 
 ## Pre-loaded Context
 

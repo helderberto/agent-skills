@@ -214,7 +214,7 @@ Organized by SDLC phase. Expand a phase to browse; click a skill to read its `SK
 | [`context-engineer`](skills/context-engineer/SKILL.md) | Optimize what loads into agent context; recover when output degrades |
 | [`explain-code`](skills/explain-code/SKILL.md) | Explain code with visual diagrams and analogies |
 | [`setup-pre-commit`](skills/setup-pre-commit/SKILL.md) | Configure Husky + lint-staged for commit-time gates |
-| [`write-a-skill`](skills/write-a-skill/SKILL.md) | Author a new skill with proper structure |
+| [`create-skill`](skills/create-skill/SKILL.md) | Author a new skill with proper structure |
 | [`caveman`](skills/caveman/SKILL.md) | Ultra-compressed communication mode (cuts ~75% tokens) |
 | [`prose-fix`](skills/prose-fix/SKILL.md) | Fix typos, dashes, formatting in markdown |
 | [`revise`](skills/revise/SKILL.md) | Structurally edit and improve article drafts |
