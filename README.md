@@ -209,6 +209,7 @@ Organized by SDLC phase. Expand a phase to browse; click a skill to read its `SK
 | Skill | What it does |
 |-------|--------------|
 | [`brief`](skills/brief/SKILL.md) | Session briefing — active features, progress, suggested focus |
+| [`handoff`](skills/handoff/SKILL.md) | Compact the current conversation into a handoff doc for a fresh agent |
 | [`doubt-driven-development`](skills/doubt-driven-development/SKILL.md) | Adversarial fresh-context review of non-trivial decisions |
 | [`context-engineer`](skills/context-engineer/SKILL.md) | Optimize what loads into agent context; recover when output degrades |
 | [`explain-code`](skills/explain-code/SKILL.md) | Explain code with visual diagrams and analogies |
