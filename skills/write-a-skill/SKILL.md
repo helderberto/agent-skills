@@ -18,12 +18,13 @@ description: Create new agent skills with proper structure and progressive discl
 
 ```
 skill-name/
-├── SKILL.md              # Required. All instructions live here.
-└── scripts/              # Optional. Executable helpers only.
+├── SKILL.md              # Required. Metadata + instructions.
+├── references/           # Optional. Long-form docs the agent reads on demand.
+└── scripts/              # Optional. Executable helpers (.sh, .py) called via Bash.
     └── scan-secrets.sh
 ```
 
-Keep everything in SKILL.md. Only use `scripts/` for executable files (.sh, .py) that are called via Bash.
+Keep instructions in `SKILL.md`. Split material longer than ~150 lines into `references/` and link from `SKILL.md` rather than inlining — preserves progressive disclosure.
 
 ## SKILL.md Template
 
@@ -51,6 +52,9 @@ description: One sentence what it does. Use when [triggers]. Don't use when [ant
 |---|---|---|
 | `name` | yes | kebab-case, matches directory |
 | `description` | yes | Agent's only signal for when to load this skill |
+| `argument-hint` | no | One-line hint shown next to the skill name (e.g. `'[slug]'`, `'<idea>'`) |
+
+Avoid `compatibility:` and `allowed-tools:` — legacy `npx skills` CLI fields, not part of the Claude Code plugin spec.
 
 ## Description Rules
 
