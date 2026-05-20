@@ -19,11 +19,11 @@ If `--draft` is passed, create as draft PR.
 1. Run in parallel:
    - `git fetch origin && git remote show origin | grep 'HEAD branch' | cut -d' ' -f5` (get base branch)
    - `git rev-parse --abbrev-ref HEAD | grep -oE '[A-Z]+-[0-9]+'` (extract ticket ID)
-   - Search for PR template (see [template-locations.md](references/template-locations.md))
+   - Search for PR template — start with `.github/pull_request_template.md`, then the other paths in [template-locations.md](references/template-locations.md)
 2. Run in parallel:
    - `git diff HEAD`
    - `git diff [base-branch]...HEAD --unified=0`
-3. Read template if found
+3. If a PR template was found, read it in full — it becomes the canonical structure for the PR body. Do not paraphrase or skip sections.
 4. Review ALL commits (not just latest)
 5. Ask the user (use AskUserQuestion when available; otherwise ask directly). Ask all at once where possible:
    - **Effort** (required): how long the task took in hours (planning, reading, testing, all included)
