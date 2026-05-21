@@ -63,7 +63,7 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Run the test suite                      | `testing`                                      |
 | Run tests with coverage on changes      | `coverage`                                     |
 | Validate code (lint + types + tests)    | `validate-code`                                |
-| Write end-to-end tests (Cypress)        | `e2e`                                          |
+| Write end-to-end tests (Cypress) or (Playwright) | `e2e`, `playwright-e2e`               |
 | Commit a single change                  | `commit`                                       |
 | Group changes into atomic commits       | `atomic-commits`                               |
 | Commit and push                         | `ship`                                         |
