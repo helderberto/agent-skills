@@ -196,7 +196,6 @@ Organized by SDLC phase. Expand a phase to browse; click a skill to read its `SK
 | [`commit`](skills/commit/SKILL.md) | Single commit following repository style |
 | [`atomic-commits`](skills/atomic-commits/SKILL.md) | Group unstaged changes into atomic commits by concern |
 | [`create-pull-request`](skills/create-pull-request/SKILL.md) | Open a GitHub PR with structured body |
-| [`pr-reply`](skills/pr-reply/SKILL.md) | Draft concise replies to PR review comments |
 | [`create-adr`](skills/create-adr/SKILL.md) | Record a 1–3 sentence Architecture Decision Record |
 | [`deprecate`](skills/deprecate/SKILL.md) | Manage deprecation and migration of old systems |
 | [`ci-cd`](skills/ci-cd/SKILL.md) | Set up or modify CI/CD pipelines (GitHub Actions, Buildkite) |
