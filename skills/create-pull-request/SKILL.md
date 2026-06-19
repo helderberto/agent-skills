@@ -1,6 +1,6 @@
 ---
 name: create-pull-request
-description: Create GitHub pull requests. Use when user asks to "create a pull request", "open a pull request", "open a PR", "make a PR", "submit a PR", "push a PR", "/create-pull-request", or requests creating a pull request. Don't use for reviewing PRs, merging branches, or committing local changes.
+description: Create a GitHub pull request — fills the repo's PR template, conventional-commit title, ticket refs. Draft mode via `--draft`.
 disable-model-invocation: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: build
-description: Implement one phase of a plan. Reads plan, finds next incomplete phase, implements it, runs feedback loops, marks checkboxes, offers commit. One phase per invocation. Use when the user wants to implement, code, build, or work on the next phase of a plan.
+description: Implement one phase of a plan. Reads plan, finds next incomplete phase, implements it, runs feedback loops, marks checkboxes, offers commit. One phase per invocation.
 argument-hint: '[slug]'
 disable-model-invocation: true
 ---

@@ -1,6 +1,6 @@
 ---
 name: review
-description: Orchestrated REVIEW phase — analyze the diff, decide which audits apply, run them in order, consolidate findings. Use before merging a PR, before shipping a significant change, or when user asks to "review", "/review", "do a full review". Don't use for single-file fixes (use `code-review` directly) or post-merge audits.
+description: Orchestrated REVIEW phase — analyze the diff, decide which audits apply, run them in order, consolidate findings.
 argument-hint: '[PR-number-or-branch]'
 disable-model-invocation: true
 ---
