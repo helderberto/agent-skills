@@ -1,5 +1,7 @@
 # Deep Modules
 
+Uses the deep-module vocabulary — see [codebase-design](../../codebase-design/SKILL.md) for canonical definitions. This file collects audit-specific examples, anti-patterns, and friction signals.
+
 A deep module has a **simple interface** hiding a **large implementation**. Depth = functionality / interface complexity. Maximize depth.
 
 ```

@@ -5,26 +5,9 @@ description: Explore a codebase to surface architectural friction and propose re
 
 # Architecture Audit
 
-A **deep module** has a simple interface hiding a large implementation. Deep modules are more testable, more AI-navigable, and let you test at the seam instead of inside. See [references/deep-modules.md](references/deep-modules.md) for examples and anti-patterns.
+Audit a codebase for architectural friction and propose refactors toward **deep modules** (simple interface, large implementation). Deep modules are more testable, more AI-navigable, and let you test at the seam instead of inside.
 
-## Glossary
-
-Use these terms exactly in every suggestion — don't drift into "component," "service," "API," or "boundary." Consistent language is the point. Full definitions in [references/language.md](references/language.md).
-
-- **Module** — anything with an interface and an implementation (function, class, package, slice).
-- **Interface** — everything a caller must know to use the module: types, invariants, error modes, ordering, config. Not just the type signature.
-- **Implementation** — the code inside.
-- **Depth** — leverage at the interface: a lot of behaviour behind a small interface. **Deep** = high leverage. **Shallow** = interface nearly as complex as the implementation.
-- **Seam** — where an interface lives; a place behaviour can be altered without editing in place. (Use this, not "boundary.")
-- **Adapter** — a concrete thing satisfying an interface at a seam.
-- **Leverage** — what callers get from depth.
-- **Locality** — what maintainers get from depth: change, bugs, knowledge concentrated in one place.
-
-Key principles:
-
-- **Deletion test**: imagine deleting the module. If complexity vanishes, it was a pass-through. If complexity reappears across N callers, it was earning its keep.
-- **The interface is the test surface.**
-- **One adapter = hypothetical seam. Two adapters = real seam.**
+Uses the deep-module vocabulary and principles — see [codebase-design](../codebase-design/SKILL.md) for the canonical glossary (module, interface, depth, seam, adapter, leverage, locality) and core principles (deletion test, interface-as-test-surface, one-adapter-is-hypothetical). Use those terms exactly in every suggestion. For audit-specific examples and anti-patterns (pass-through, temporal decomposition, classitis, signs a module is too shallow), see [references/deep-modules.md](references/deep-modules.md).
 
 ## Workflow
 
@@ -47,7 +30,7 @@ Show a numbered list. For each candidate:
 
 - **Cluster**: which modules/concepts are involved
 - **Why they're coupled**: shared types, call patterns, co-ownership of a concept
-- **Dependency category**: see [references/dependency-categories.md](references/dependency-categories.md)
+- **Dependency category**: see [codebase-design DEEPENING.md](../codebase-design/references/DEEPENING.md)
 - **Test impact**: what existing tests would be replaced by tests at the new seam
 
 Do NOT propose interfaces yet. Ask: "Which candidate would you like to explore?" — list each candidate as an option with its cluster name as label and coupling summary as description. Use AskUserQuestion when available; otherwise present as a numbered list.
@@ -77,7 +60,7 @@ Each sub-agent outputs:
 1. Interface signature
 2. Usage example
 3. What complexity it hides internally
-4. Dependency strategy (see [references/dependency-categories.md](references/dependency-categories.md))
+4. Dependency strategy (see [codebase-design DEEPENING.md](../codebase-design/references/DEEPENING.md))
 5. Trade-offs
 
 Present designs sequentially, compare in prose, then give your own recommendation. Be opinionated — if elements from multiple designs combine well, propose a hybrid.
@@ -94,11 +77,7 @@ Fill with concrete details: file paths, function names, migration steps. Share t
 
 ## Rules
 
-- Never propose an interface before the user picks a candidate (Step 3)
 - Old unit tests on shallow modules are waste once seam tests exist — note them for deletion
-- Classify every candidate's dependency type before designing interfaces
-- Show the problem space framing (Step 4) before sub-agents finish — don't wait
-- PRD must reference concrete files and functions, not abstract concepts
 - Don't introduce a new seam unless something actually varies across it (one adapter = hypothetical, two = real)
 
 ## Error Handling
