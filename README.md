@@ -119,6 +119,23 @@ For quick standalone tasks, you don't need the workflow — just describe what y
 
 ## Skills
 
+Skills come in two modes. **User-invoked** ones are called explicitly with `/hb:<name>` and never auto-trigger (`disable-model-invocation: true`). **Model-invoked** ones auto-route by description and are also callable explicitly.
+
+### User-invoked
+
+Invoke these explicitly with `/hb:<name>` — they don't auto-trigger.
+
+| Skill | What it does |
+|-------|--------------|
+| [`grill-me`](skills/grill-me/SKILL.md) | Stress-test a plan or design through relentless interview (runs `grilling`) |
+| [`prototype`](skills/prototype/SKILL.md) | Build a throwaway prototype — runnable terminal app or toggleable UI variations — to flesh out a design |
+| [`fortify`](skills/fortify/SKILL.md) | Split large functions, add edge-case coverage, backfill missing tests |
+| [`lint`](skills/lint/SKILL.md) | Run linting and formatting checks |
+| [`handoff`](skills/handoff/SKILL.md) | Compact the current conversation into a handoff doc for a fresh agent |
+| [`teach`](skills/teach/SKILL.md) | Stateful teaching workspace — lessons, references, learning records tied to a mission |
+
+### Model-invoked
+
 Organized by SDLC phase. Expand a phase to browse; click a skill to read its `SKILL.md`.
 
 <details>
@@ -127,7 +144,7 @@ Organized by SDLC phase. Expand a phase to browse; click a skill to read its `SK
 | Skill | What it does |
 |-------|--------------|
 | [`prd`](skills/prd/SKILL.md) | Interview + codebase scan → structured PRD in `.specs/prds/<slug>.md` |
-| [`grill-me`](skills/grill-me/SKILL.md) | Stress-test a plan or design through relentless interview |
+| [`grilling`](skills/grilling/SKILL.md) | Relentless plan/design interview, one question at a time (engine behind `grill-me`) |
 
 </details>
 
@@ -137,9 +154,8 @@ Organized by SDLC phase. Expand a phase to browse; click a skill to read its `SK
 | Skill | What it does |
 |-------|--------------|
 | [`plan`](skills/plan/SKILL.md) | Turn PRD into multi-phase implementation plan (tracer-bullet vertical slices) |
-| [`refactor-plan`](skills/refactor-plan/SKILL.md) | Structured refactoring plan, breaks large changes into small commits |
 | [`architecture-audit`](skills/architecture-audit/SKILL.md) | Surface architectural friction, propose refactors toward deep modules |
-| [`zoom-out`](skills/zoom-out/SKILL.md) | Go up a layer of abstraction — map relevant modules and callers |
+| [`codebase-design`](skills/codebase-design/SKILL.md) | Shared deep-module vocabulary for designing or improving an interface |
 
 </details>
 
@@ -151,7 +167,6 @@ Organized by SDLC phase. Expand a phase to browse; click a skill to read its `SK
 | [`build`](skills/build/SKILL.md) | Implement next incomplete phase of a plan with feedback loops |
 | [`tdd`](skills/tdd/SKILL.md) | Red → green → refactor loop for any new logic |
 | [`source-driven`](skills/source-driven/SKILL.md) | Implement using official docs for exact dependency versions |
-| [`fortify`](skills/fortify/SKILL.md) | Split large functions, add edge-case coverage, backfill missing tests |
 | [`e2e`](skills/e2e/SKILL.md) | Write end-to-end tests for user flows using Cypress |
 
 </details>
@@ -165,7 +180,6 @@ Organized by SDLC phase. Expand a phase to browse; click a skill to read its `SK
 | [`testing`](skills/testing/SKILL.md) | Run the test suite and report results (`npm test`) |
 | [`coverage`](skills/coverage/SKILL.md) | Test coverage for unstaged changes |
 | [`validate-code`](skills/validate-code/SKILL.md) | Auto-fix lint, verify types, run tests |
-| [`lint`](skills/lint/SKILL.md) | Run linting and formatting checks |
 | [`diagnose`](skills/diagnose/SKILL.md) | Disciplined diagnosis loop for hard bugs and perf regressions |
 | [`visual-validate`](skills/visual-validate/SKILL.md) | Browser-driven UI validation via Chrome DevTools or Playwright MCP |
 
@@ -195,9 +209,9 @@ Organized by SDLC phase. Expand a phase to browse; click a skill to read its `SK
 | [`ship`](skills/ship/SKILL.md) | Pre-launch gate + atomic commits + push (`--fast` to skip gate) |
 | [`commit`](skills/commit/SKILL.md) | Single commit following repository style |
 | [`atomic-commits`](skills/atomic-commits/SKILL.md) | Group unstaged changes into atomic commits by concern |
+| [`resolving-merge-conflicts`](skills/resolving-merge-conflicts/SKILL.md) | Resolve an in-progress git merge/rebase conflict |
 | [`create-pull-request`](skills/create-pull-request/SKILL.md) | Open a GitHub PR with structured body |
 | [`create-adr`](skills/create-adr/SKILL.md) | Record a 1–3 sentence Architecture Decision Record |
-| [`deprecate`](skills/deprecate/SKILL.md) | Manage deprecation and migration of old systems |
 | [`ci-cd`](skills/ci-cd/SKILL.md) | Set up or modify CI/CD pipelines (GitHub Actions, Buildkite) |
 
 </details>
@@ -208,11 +222,8 @@ Organized by SDLC phase. Expand a phase to browse; click a skill to read its `SK
 | Skill | What it does |
 |-------|--------------|
 | [`brief`](skills/brief/SKILL.md) | Session briefing — active features, progress, suggested focus |
-| [`handoff`](skills/handoff/SKILL.md) | Compact the current conversation into a handoff doc for a fresh agent |
-| [`doubt-driven-development`](skills/doubt-driven-development/SKILL.md) | Adversarial fresh-context review of non-trivial decisions |
 | [`context-engineer`](skills/context-engineer/SKILL.md) | Optimize what loads into agent context; recover when output degrades |
 | [`explain-code`](skills/explain-code/SKILL.md) | Explain code with visual diagrams and analogies |
-| [`teach`](skills/teach/SKILL.md) | Stateful teaching workspace — lessons, references, learning records tied to a mission |
 | [`setup-pre-commit`](skills/setup-pre-commit/SKILL.md) | Configure Husky + lint-staged for commit-time gates |
 | [`create-skill`](skills/create-skill/SKILL.md) | Author a new skill with proper structure |
 | [`caveman`](skills/caveman/SKILL.md) | Ultra-compressed communication mode (cuts ~75% tokens) |

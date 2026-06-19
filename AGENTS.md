@@ -49,9 +49,10 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Implement using official docs           | `source-driven`                                |
 | Bug, error, unexpected behavior         | `diagnose`                                     |
 | Backfill tests / split large functions  | `fortify`                                      |
-| Refactoring strategy                    | `refactor-plan`                                |
+| Design or improve a module's interface  | `codebase-design`                              |
 | Architectural friction in codebase      | `architecture-audit`                           |
-| Explain code or codebase area           | `explain-code`, `zoom-out`                     |
+| Prototype a design (terminal app or UI) | `prototype`                                    |
+| Explain code or codebase area           | `explain-code`                                 |
 | Code review on a PR                     | `code-review`                                  |
 | Reply to PR review comment              | `pr-reply`                                     |
 | Check accessibility                     | `a11y-audit`                                   |
@@ -66,6 +67,7 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Write end-to-end tests (Cypress)        | `e2e`                                          |
 | Commit a single change                  | `commit`                                       |
 | Group changes into atomic commits       | `atomic-commits`                               |
+| Resolve a merge/rebase conflict         | `resolving-merge-conflicts`                    |
 | Commit and push                         | `ship`                                         |
 | Create a pull request                   | `create-pull-request`                          |
 | Record an architectural decision        | `create-adr`                                   |
@@ -82,7 +84,7 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 When the user has a non-trivial task, follow this flow even without explicit commands:
 
 - **DEFINE** → `prd` (interview-driven), with `grill-me` to stress-test
-- **PLAN** → `plan` (PRD to vertical-slice phases), with `refactor-plan` or `architecture-audit` as needed
+- **PLAN** → `plan` (PRD to vertical-slice phases), with `architecture-audit` or `codebase-design` as needed
 - **BUILD** → `build` (one phase per invocation), driven by `tdd` and `source-driven`
 - **VERIFY** → `check` (plan vs codebase), plus `coverage`, `validate-code`, `diagnose` on failure
 - **REVIEW** → `code-review`, plus `a11y-audit`, `i18n`, `perf-audit`, `deps-audit`, `safe-repo`
