@@ -212,7 +212,6 @@ Organized by SDLC phase. Expand a phase to browse; click a skill to read its `SK
 | [`resolving-merge-conflicts`](skills/resolving-merge-conflicts/SKILL.md) | Resolve an in-progress git merge/rebase conflict |
 | [`create-pull-request`](skills/create-pull-request/SKILL.md) | Open a GitHub PR with structured body |
 | [`create-adr`](skills/create-adr/SKILL.md) | Record a 1–3 sentence Architecture Decision Record |
-| [`ci-cd`](skills/ci-cd/SKILL.md) | Set up or modify CI/CD pipelines (GitHub Actions, Buildkite) |
 
 </details>
 
