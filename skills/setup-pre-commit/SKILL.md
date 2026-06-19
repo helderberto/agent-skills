@@ -5,12 +5,6 @@ description: "Set up Husky pre-commit hooks with lint-staged (Prettier), type ch
 
 # Setup Pre-Commit Hooks
 
-## Pre-loaded context
-
-Before proceeding, use the Read tool to read `package.json`, and Glob tool to detect:
-- Lock file: `package-lock.json`, `pnpm-lock.yaml`, `yarn.lock`, `bun.lockb`
-- Prettier config: `.prettierrc`, `.prettierrc.*`, `prettier.config.*`
-
 ## What This Sets Up
 
 - **Husky** pre-commit hook

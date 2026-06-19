@@ -8,20 +8,9 @@ argument-hint: '[url]'
 
 Drive a real browser via MCP to verify a UI change works as intended. Auto-detects which browser MCP is available (`chrome-devtools` preferred, `playwright` fallback). Screenshots, interactions, and console capture confirm the change is real — not just type-checked.
 
-## Pre-loaded context
-
-- Available MCPs: !`echo "Check via tool availability at runtime"`
-- Branch: !`git branch --show-current`
-- Last-changed UI files: !`git diff --name-only HEAD~1 -- '*.jsx' '*.tsx' '*.html' '*.css' 2>/dev/null | head -20`
-
 ## MCP Auto-Detection
 
-At the start of the workflow, detect which MCP is available:
-
-1. Check for `chrome-devtools` MCP tools (`mcp__chrome-devtools__*`)
-2. If absent, check for `playwright` MCP tools (`mcp__playwright__*` or similar namespacing)
-3. If neither → STOP with clear message: "No browser MCP available. Install `chrome-devtools` or `playwright` MCP server to use this skill."
-
+Prefer `chrome-devtools` MCP tools (`mcp__chrome-devtools__*`); fall back to `playwright` (`mcp__playwright__*`) if absent. If neither is available, STOP and tell the user to install one.
 State the detected MCP at the start: "Using chrome-devtools MCP for visual validation."
 
 ## Workflow

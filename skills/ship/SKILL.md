@@ -8,12 +8,6 @@ argument-hint: '[--fast]'
 
 Ship runs a **pre-launch gate** before committing. By default: `validate-code` + `safe-repo`. The gate ensures nothing broken or unsafe leaves the working tree.
 
-## Pre-loaded context
-
-- Status: !`git status`
-- Diff: !`git diff HEAD`
-- Log: !`git log --oneline -10`
-
 ## Arguments
 
 - `--fast` — skip the pre-launch gate. Use only for hotfixes or commits to disposable branches. State the reason in the commit message body.
@@ -42,15 +36,9 @@ Ship runs a **pre-launch gate** before committing. By default: `validate-code` +
 
 ## Rules
 
-- Pre-launch gate runs by default; only skip via `--fast` with a stated reason
-- Stage files by name, never `git add -A` or `git add .`
+- Pre-launch gate runs by default; only skip via `--fast` with a stated reason; never `--fast` on main/release branches
 - Group changes into atomic commits when they serve distinct purposes
-- Generate message from changed files, match repo style
-- NEVER push if pre-launch gate fails
 - NEVER force push (`-f` or `--force`)
-- NEVER skip hooks
-- NEVER commit secrets
-- Push to current branch only
 
 ## Error Handling
 

@@ -10,12 +10,6 @@ Workflow orchestrator for the REVIEW phase of the SDLC. Decides **which audits a
 
 This is a **workflow-guided** skill: it does not auto-invoke other skills silently. It announces which skill comes next, runs it, then moves to the next.
 
-## Pre-loaded context
-
-- Branch: !`git branch --show-current`
-- Diff stat (vs main): !`git diff --stat $(git merge-base HEAD origin/main 2>/dev/null || git merge-base HEAD main) 2>/dev/null || git diff --stat HEAD~10`
-- Files changed: !`git diff --name-only $(git merge-base HEAD origin/main 2>/dev/null || git merge-base HEAD main) 2>/dev/null || git diff --name-only HEAD~10`
-
 ## Workflow
 
 ### Phase 1 — Scope detection

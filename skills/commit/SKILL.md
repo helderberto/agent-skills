@@ -5,12 +5,6 @@ description: Create git commits following repository style. Use when user asks t
 
 # Git Commit
 
-## Pre-loaded context
-
-- Status: !`git status`
-- Diff: !`git diff HEAD`
-- Log: !`git log --oneline -10`
-
 ## Message Style
 
 Match repo's existing commit patterns from log.
@@ -51,14 +45,10 @@ git commit -m "extract email validation to util"
 - NEVER amend unless requested
 - NEVER skip hooks
 - NEVER commit secrets
-- Only commit when requested
-- Match existing commit patterns
 
 ## Error Handling
 
 - Pre-commit hook fails -- fix issue, re-stage, create NEW commit (never `--amend`)
-- Nothing to commit -- report clean working tree and stop
-- Staged files contain secrets -- abort, warn user, unstage the file
 
 ## See Also
 

@@ -141,19 +141,6 @@ cloud-deploy/
 - **Explain the why** instead of stacking `ALWAYS`/`NEVER` in caps. Today's models have theory of mind; reasoning lands better than rigid rules
 - A single `MUST` is fine when a hard constraint exists; a wall of caps is a yellow flag — reframe and explain
 
-## Pre-loaded Context
-
-Workflow skills can pre-load shell output via the `!` prefix:
-
-```markdown
-## Pre-loaded context
-
-- Status: !`git status`
-- Diff: !`git diff HEAD`
-```
-
-The harness executes each command and injects its output as context. Use for state the skill always needs — git status, package.json, file listings.
-
 ## Review Checklist
 
 Before shipping a new or modified skill:
@@ -166,13 +153,12 @@ Before shipping a new or modified skill:
 - [ ] No time-sensitive info (versions, dates)
 - [ ] No `compatibility:` or `allowed-tools:` legacy fields
 - [ ] Cross-refs to neighbor skills use relative paths (e.g. `[validate-code](../validate-code/SKILL.md)`)
+- [ ] When a skill references invoking another skill, use bare `/<skill-name>` (not `/hb:`) — portable across agents; required for user-invoked skills (`disable-model-invocation: true`) since they don't auto-trigger
 - [ ] Added to README skills table under the correct phase
 - [ ] Added to `AGENTS.md` intent → skill mapping
 - [ ] No existing skill already covers this use case
 
 ## Anti-patterns
 
-- Description without triggers: `"Helps with testing."` — useless
-- Hardcoded versions or dates that go stale
 - No error handling for skills that run Bash commands
 - Inlining 200+ lines of reference material instead of splitting into `references/`

@@ -5,12 +5,6 @@ description: Group unstaged changes into atomic commits by concern, then push. U
 
 # Atomic Commits
 
-## Pre-loaded context
-
-- Status: !`git status`
-- Diff: !`git diff HEAD`
-- Log: !`git log --oneline -10`
-
 ## Goal
 
 Group all unstaged/untracked changes into atomic commits — one commit per logical concern — then push.
@@ -35,28 +29,16 @@ Group all unstaged/untracked changes into atomic commits — one commit per logi
 
 ## Grouping Rules
 
-- One commit = one reason to change
 - Formatting-only changes (whitespace, quotes, indentation) go in their own commit, separate from logic changes
-- Never mix unrelated concerns in one commit (e.g. bug fix + formatting + config)
 - If a file has both logic and formatting changes, keep them together in the logic commit
 - Tests and the code they test can be in the same commit
 
-## Commit Message Rules
-
-- Match existing commit patterns from `git log`
-- Extreme concision, imperative mood
-- Focus on "why" not "what"
-
 ## Rules
 
-- NEVER use `git add .` or `git add -A`
-- NEVER amend unless requested
-- NEVER skip hooks
-- NEVER commit secrets
+- NEVER amend on hook failure — fix, re-stage, create a NEW commit
 - NEVER push if there are unstaged changes left unintentionally — confirm with user first
 
 ## Error Handling
 
-- If pre-commit hook fails → fix reported issue, re-stage changed files, create a NEW commit (never `--amend`)
 - If `git push` is rejected (non-fast-forward) → run `git pull --rebase` then retry push once
 - If unsure how to group a file → ask the user before committing

@@ -7,10 +7,6 @@ description: Implement features using official docs for exact dependency version
 
 Never rely on training data for API usage. Read the actual source of truth.
 
-## Pre-loaded context
-
-- Dependencies: !`cat package.json | grep -E '"dependencies"|"devDependencies"' -A 50 | head -60`
-
 ## Workflow
 
 ### 1. Identify Dependencies
@@ -44,15 +40,6 @@ Add a brief comment on non-obvious API usage:
 ```
 
 Only cite when the usage is surprising or version-specific. Don't over-comment obvious calls.
-
-## Anti-Rationalization
-
-| Excuse | Rebuttal |
-|---|---|
-| "I know this API from training data" | Training data may be outdated or wrong. Check the version. |
-| "The docs are too slow to fetch" | One fetch now prevents hours debugging a hallucinated API later. |
-| "It's a minor utility, no need to check" | Minor utilities have breaking changes between versions too. |
-| "I'll verify later" | Unverified code compounds. Verify now or mark UNVERIFIED. |
 
 ## Rules
 
