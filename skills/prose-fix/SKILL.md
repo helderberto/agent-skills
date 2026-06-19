@@ -10,18 +10,21 @@ Scan the target file(s) for formatting issues, typos, and weak prose. Fix in pla
 ## What to Fix
 
 ### Formatting
-| Issue | Replace with |
-|-------|-------------|
-| Em dash ` — ` (with spaces) | Period, comma, colon, or parentheses depending on context |
-| Em dash `—` (no spaces) | Split into two sentences or use comma |
-| Double spaces | Single space |
+
+| Issue                     | Replace with                                              |
+| ------------------------- | --------------------------------------------------------- |
+| Em dash `—` (with spaces) | Period, comma, colon, or parentheses depending on context |
+| Em dash `—` (no spaces)   | Split into two sentences or use comma                     |
+| Double spaces             | Single space                                              |
 
 ### Typos
+
 - Misspelled words
 - Wrong word form (e.g. "teh" → "the", "dont" → "don't")
 - Missing apostrophes in contractions
 
 ### Sentence Clarity
+
 - Remove filler words ("very", "just", "really", "basically", "actually")
 - Split run-on sentences into two
 - Flatten weak constructions ("is able to" → "can", "in order to" → "to")
