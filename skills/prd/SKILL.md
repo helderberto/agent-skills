@@ -1,6 +1,6 @@
 ---
 name: prd
-description: Create a PRD through user interview, codebase exploration, and module design. Use when starting a new feature or change.
+description: Create a PRD through user interview, codebase exploration, and module design.
 argument-hint: <idea>
 disable-model-invocation: true
 ---
