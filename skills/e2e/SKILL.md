@@ -47,14 +47,9 @@ describe('login flow', () => {
 
 ## Selector priority
 
-Prefer `@testing-library/cypress` commands when installed:
+Prefer `@testing-library/cypress` commands when installed, e.g. `cy.findByRole('button', { name: 'Submit' })`; use `cy.get('[data-testid="submit"]')` only as a last resort.
 
-1. `cy.findByRole('button', { name: 'Submit' })` — best
-2. `cy.findByLabelText('Email')` — forms
-3. `cy.findByText('Welcome')` — text content
-4. `cy.get('[data-testid="submit"]')` — last resort
-
-See [selectors.md](references/selectors.md) for full guide.
+See [selectors.md](references/selectors.md) for the full priority guide.
 
 ## Rules
 

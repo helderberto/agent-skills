@@ -44,6 +44,4 @@ Security audit for sensitive data in repository. Check for credentials, API keys
 
 ## Error Handling
 
-- If `git ls-files` returns nothing → verify the current directory is a git repository; run `git status` to confirm
 - If git history scan is slow → limit to last 100 commits with `git log --oneline -100`
-- If false positives are high → cross-reference against patterns in [references/patterns.md](references/patterns.md) before reporting

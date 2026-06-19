@@ -21,9 +21,7 @@ Check `package.json` devDependencies:
 
 ## Rules
 
-- Use project's `package.json` scripts
-- Never use `npx` directly
-- Don't auto-fix unless requested
+- Use project's `package.json` scripts, never `npx` directly
 
 ## Error Handling
 

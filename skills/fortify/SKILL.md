@@ -77,22 +77,9 @@ One item at a time. Run tests after each cycle. Never batch.
 Tests: 42 passed (was 35) | 0 failed
 ```
 
-## Anti-Rationalization
-
-| Excuse | Rebuttal |
-|---|---|
-| "This function is fine at 40 lines" | If it has multiple responsibilities, split it. Length is a smell, not the rule. |
-| "No one will pass null here" | System boundaries surprise you. Guard at the edges. |
-| "It's internal code, no tests needed" | Internal code breaks too. If it has logic, it needs a test. |
-| "Adding tests will slow us down" | Backfilling tests now is cheaper than debugging regressions later. |
-| "The happy path covers it" | Bugs live in sad paths. Test the errors, the empties, the boundaries. |
-| "I'll harden it in a follow-up" | Follow-ups never happen. Harden now or accept the risk explicitly. |
-
 ## Rules
 
 - Never change external behavior — hardening is internal improvement
-- If splitting a function would require changing its public API, flag it and ask before proceeding
-- Always run tests between items — stop if anything breaks
 - Skip files with zero test infrastructure unless user explicitly asks to set it up
 
 ## Error Handling

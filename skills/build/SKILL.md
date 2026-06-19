@@ -151,11 +151,7 @@ Wait for the user's response. Never guess or work around a blocker silently.
 
 ## Rules
 
-- **One phase per invocation** — never auto-advance to the next phase
 - **Never modify PRD content** — the PRD is read-only
 - **Never modify plan content** beyond marking checkboxes `[x]`
-- **Never skip a phase** — phases must be completed in order
 - **Never impose conventions** — follow the project's existing setup
-- **HITL at every decision point** — commits, blockers, and branch creation require user approval
-- **Feedback loops are mandatory** — always run available checks before marking items complete
 - **Do not push to remote** — only commit locally

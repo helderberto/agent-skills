@@ -53,12 +53,7 @@ Match `SF:` paths to `git diff` files. For each changed line, check `DA:` entry.
 
 ## Anti-Rationalization
 
-| Excuse | Rebuttal |
-|---|---|
-| "Coverage doesn't guarantee quality" | True, but uncovered code guarantees zero automated verification. |
-| "It's just a config change" | Config changes break production too. If there's logic, check coverage. |
-| "100% is overkill" | Nobody asked for 100%. Check that *changed* lines are covered. |
-| "The test suite is already green" | Green suite with uncovered changes = false confidence. |
+Check that *changed* lines are covered — not global coverage %. A green suite with uncovered changes is false confidence.
 
 ## Rules
 

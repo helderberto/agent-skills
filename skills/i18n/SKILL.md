@@ -22,10 +22,7 @@ Read locale files to understand key structure (e.g. `src/locales/en.json`).
    - String literals in JSX: `<p>Hello world</p>`
    - String props: `placeholder="Search..."`, `label="Submit"`
    - `aria-label="Close menu"`
-3. Compare locale files — find missing keys between locales:
-   ```bash
-   # keys in en.json but missing in pt.json
-   ```
+3. Compare locale files — find missing keys between locales
 4. Report findings
 
 ## Output format
