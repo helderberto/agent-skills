@@ -217,7 +217,6 @@ Focused capabilities the agent applies automatically based on the task (also cal
 | Skill | What it does |
 |-------|--------------|
 | [`brief`](skills/brief/SKILL.md) | Session briefing — active features, progress, suggested focus |
-| [`context-engineer`](skills/context-engineer/SKILL.md) | Optimize what loads into agent context; recover when output degrades |
 | [`explain-code`](skills/explain-code/SKILL.md) | Explain code with visual diagrams and analogies |
 | [`setup-pre-commit`](skills/setup-pre-commit/SKILL.md) | Configure Husky + lint-staged for commit-time gates |
 | [`caveman`](skills/caveman/SKILL.md) | Ultra-compressed communication mode (cuts ~75% tokens) |
