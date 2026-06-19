@@ -166,7 +166,6 @@ Focused capabilities the agent applies automatically based on the task (also cal
 
 | Skill | What it does |
 |-------|--------------|
-| [`testing`](skills/testing/SKILL.md) | Run the test suite and report results (`npm test`) |
 | [`coverage`](skills/coverage/SKILL.md) | Test coverage for unstaged changes |
 | [`validate-code`](skills/validate-code/SKILL.md) | Auto-fix lint, verify types, run tests |
 | [`lint`](skills/lint/SKILL.md) | Run linting and formatting checks |
