@@ -209,7 +209,6 @@ Organized by SDLC phase. Expand a phase to browse; click a skill to read its `SK
 | [`ship`](skills/ship/SKILL.md) | Pre-launch gate + atomic commits + push (`--fast` to skip gate) |
 | [`commit`](skills/commit/SKILL.md) | Single commit following repository style |
 | [`atomic-commits`](skills/atomic-commits/SKILL.md) | Group unstaged changes into atomic commits by concern |
-| [`resolving-merge-conflicts`](skills/resolving-merge-conflicts/SKILL.md) | Resolve an in-progress git merge/rebase conflict |
 | [`create-pull-request`](skills/create-pull-request/SKILL.md) | Open a GitHub PR with structured body |
 | [`create-adr`](skills/create-adr/SKILL.md) | Record a 1–3 sentence Architecture Decision Record |
 
