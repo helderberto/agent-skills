@@ -143,6 +143,7 @@ Plus deliberate tools you invoke on demand:
 | [`grill-me`](skills/grill-me/SKILL.md) | Stress-test a plan or design through relentless interview (runs `grilling`) |
 | [`teach`](skills/teach/SKILL.md) | Stateful teaching workspace — lessons, references, learning records tied to a mission |
 | [`handoff`](skills/handoff/SKILL.md) | Compact the current conversation into a handoff doc for a fresh agent |
+| [`create-pull-request`](skills/create-pull-request/SKILL.md) | Open a GitHub PR with structured body |
 | [`create-skill`](skills/create-skill/SKILL.md) | Author a new skill with proper structure |
 
 ### Model-invoked
@@ -196,7 +197,6 @@ Focused capabilities the agent applies automatically based on the task (also cal
 |-------|--------------|
 | [`commit`](skills/commit/SKILL.md) | Single commit following repository style |
 | [`atomic-commits`](skills/atomic-commits/SKILL.md) | Group unstaged changes into atomic commits by concern |
-| [`create-pull-request`](skills/create-pull-request/SKILL.md) | Open a GitHub PR with structured body |
 | [`create-adr`](skills/create-adr/SKILL.md) | Record a 1–3 sentence Architecture Decision Record |
 
 </details>
