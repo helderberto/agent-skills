@@ -1,7 +1,6 @@
 ---
 name: fortify
 description: Fortify existing code by splitting large functions, adding edge-case coverage, and backfilling unit tests. Use when user asks to "fortify", "harden", "bulletproof", "make robust", "make solid", "strengthen", "add missing tests", "split functions", or wants to improve reliability of existing code. Don't use for new features (use tdd), refactoring plans, or code review (use code-review).
-disable-model-invocation: true
 ---
 
 # Fortify

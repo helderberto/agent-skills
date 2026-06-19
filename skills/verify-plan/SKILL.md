@@ -2,6 +2,7 @@
 name: verify-plan
 description: Verify implementation against plan. Shows progress and finds blockers. Use after implementing a plan.
 argument-hint: '[slug]'
+disable-model-invocation: true
 ---
 
 # Verify Plan

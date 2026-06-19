@@ -2,6 +2,7 @@
 name: plan
 description: Turn a PRD into a multi-phase implementation plan using tracer-bullet vertical slices. Use after /prd.
 argument-hint: '[slug]'
+disable-model-invocation: true
 ---
 
 # PRD to Plan

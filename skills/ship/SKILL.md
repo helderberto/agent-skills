@@ -2,6 +2,7 @@
 name: ship
 description: Commit and push changes with a pre-launch gate (validate-code + safe-repo) by default. Use when user asks to "ship", "commit and push", or requests committing and pushing changes. Don't use for creating pull requests or reviewing changes before committing.
 argument-hint: '[--fast]'
+disable-model-invocation: true
 ---
 
 # Ship Changes

@@ -1,7 +1,6 @@
 ---
 name: lint
 description: Run linting and formatting checks. Use when user asks to "run linter", "/lint", "check linting", "fix lint errors", or requests code linting/formatting. Don't use for running tests, type-checking only, or projects without a lint script in package.json.
-disable-model-invocation: true
 ---
 
 # Linting

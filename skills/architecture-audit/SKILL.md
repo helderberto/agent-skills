@@ -1,6 +1,7 @@
 ---
 name: architecture-audit
 description: Explore a codebase to surface architectural friction and propose refactors toward deep modules (simple interface, large implementation) as GitHub issue RFCs. Use when user wants to improve architecture, find refactoring opportunities, consolidate tightly-coupled modules, or make a codebase more testable and AI-navigable. Don't use for small one-off refactors or single-file cleanups.
+disable-model-invocation: true
 ---
 
 # Architecture Audit
