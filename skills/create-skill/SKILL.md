@@ -67,8 +67,9 @@ Orchestrator skills (e.g. `review`, `ship`) replace `Workflow` with explicit pha
 | Field | Required | Notes |
 |---|---|---|
 | `name` | yes | kebab-case, matches directory. Avoid version suffixes (`-v2`, `-new`) — evolve in place or deprecate |
-| `description` | yes | Agent's only signal for when to load this skill |
+| `description` | yes | Agent's only signal for when to auto-load a model-invoked skill |
 | `argument-hint` | no | One-line hint shown next to the skill name (e.g. `'[slug]'`, `'<idea>'`) |
+| `disable-model-invocation` | no | `true` = user-invoked only (never auto-triggers) — see Description Requirements |
 
 Avoid `compatibility:` and `allowed-tools:` — legacy `npx skills` CLI fields, not part of the Claude Code plugin spec.
 
@@ -90,7 +91,9 @@ The description is **the only thing the agent sees** when deciding which skill t
 - Second sentence: `Use when [triggers]`
 - Third sentence: `Don't use for [anti-triggers]`
 
-**Combat under-triggering**: Claude tends to under-trigger skills. If a skill is useful but rarely fires, make the description more assertive — list extra phrases the user might say, name file types or contexts explicitly, even add `Make sure to use this skill whenever...` when warranted. Anti-triggers stay important, but the trigger clause should be generous.
+The trigger/anti-trigger sentences exist for **model routing**. A **user-invoked** skill (`disable-model-invocation: true`) never auto-triggers — the user types it — so those clauses are dead weight that still burns context tokens every turn. Keep user-invoked descriptions to one what-it-does sentence (plus a sequencing cross-ref like `Use after /prd` if it helps). The rules below apply only to model-invoked skills.
+
+**Combat under-triggering** (model-invoked): Claude tends to under-trigger skills. If a skill is useful but rarely fires, make the description more assertive — list extra phrases the user might say, name file types or contexts explicitly, even add `Make sure to use this skill whenever...` when warranted. Anti-triggers stay important, but the trigger clause should be generous.
 
 **Good**:
 
@@ -140,13 +143,15 @@ cloud-deploy/
 - **Imperative form** for instructions (`Run X`, `Check Y` — not `You should run X`)
 - **Explain the why** instead of stacking `ALWAYS`/`NEVER` in caps. Today's models have theory of mind; reasoning lands better than rigid rules
 - A single `MUST` is fine when a hard constraint exists; a wall of caps is a yellow flag — reframe and explain
+- **Leading words**: anchor behavior with compact, pretrained concepts (`tight`, `red`, `deep`, `surgical`) reused across the skill. One word carries distributed meaning in few tokens and doubles as a trigger when it appears in prompts or code. Strengthen a weak word rather than piling on more rules
+- **No-op test**: delete any sentence that doesn't change default behavior. Prefer deletion to rewriting — stale layers accumulate otherwise
 
 ## Review Checklist
 
 Before shipping a new or modified skill:
 
 - [ ] Folder name matches `name:` field
-- [ ] Description has three sentences (what, when, when-not)
+- [ ] Description: model-invoked → three sentences (what, when, when-not); user-invoked → one what-it-does sentence
 - [ ] Body has Workflow + Rules + Error Handling sections
 - [ ] `SKILL.md` under ~150 lines (split into `references/` if longer)
 - [ ] Concrete examples included
@@ -157,8 +162,3 @@ Before shipping a new or modified skill:
 - [ ] Added to README skills table under the correct phase
 - [ ] Added to `AGENTS.md` intent → skill mapping
 - [ ] No existing skill already covers this use case
-
-## Anti-patterns
-
-- No error handling for skills that run Bash commands
-- Inlining 200+ lines of reference material instead of splitting into `references/`
