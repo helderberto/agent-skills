@@ -76,30 +76,7 @@ Always validate at the **system boundary** (route handler, message consumer), no
 - Check magic bytes if file type is security-critical (don't trust extension or `mimetype`)
 - Store outside webroot or behind authenticated access
 
-## Triaging `npm audit` / CVE findings
-
-```
-Critical or High severity?
-├── Vulnerable code reachable in your app?
-│   ├── YES → Fix immediately
-│   └── NO (dev-only, unused path) → Fix soon, not a blocker
-└── Fix available?
-    ├── YES → Update to patched version
-    └── NO → Workaround / replace dep / allowlist with review date
-```
-
-Defer with documented reason and review date. Never silent allowlist.
-
-## Secrets Management
-
-```
-.env.example   → committed (template, placeholder values)
-.env           → NOT committed (real secrets)
-.env.local     → NOT committed (local overrides)
-*.pem, *.key   → NOT committed
-```
-
-Pre-commit check: `git diff --cached | grep -iE "password|secret|api_key|token"`. Better: `safe-repo --diff` as part of `ship`.
+For dependency CVEs see `deps-audit`; for secrets and sensitive data see `safe-repo`.
 
 ## Rules
 
@@ -109,16 +86,6 @@ Pre-commit check: `git diff --cached | grep -iE "password|secret|api_key|token"`
 - Authorization checked on every protected endpoint
 - Strip sensitive fields from API responses by default
 - Never trust client-side validation as a security boundary
-
-## Red Flags
-
-- User input flowing directly into SQL string, shell command, or HTML render
-- Secrets in source code or commit history
-- API endpoint without authentication or authorization check
-- CORS wildcard (`*`) or no CORS config
-- No rate limit on auth endpoints
-- Stack traces returned to users
-- Dependencies with known critical CVEs and no plan
 
 ## Verification
 
