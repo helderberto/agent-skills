@@ -95,5 +95,5 @@ PRD body structure. Omit empty sections. No file paths or code snippets.
 
 Present options and wait for the user's choice:
 
-1. Run `/hb:plan <slug>` (Recommended)
+1. Run `/plan <slug>` (Recommended)
 2. Done for now

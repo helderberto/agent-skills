@@ -12,7 +12,7 @@ A collection of skills that encode the workflows, quality gates, and engineering
  │ Idea │ ────▶ │ Spec │ ─────▶ │ Code │ ──────▶ │ Test │ ──────▶ │  QA  │ ──────▶ │  Go  │
  │Refine│       │ PRD  │        │ Impl │         │Debug │         │ Gate │         │ Live │
  └──────┘       └──────┘        └──────┘         └──────┘         └──────┘         └──────┘
- /hb:prd        /hb:plan        /hb:build        /hb:check        /hb:review       /hb:ship
+ /hb:prd        /hb:plan        /hb:build        /hb:verify-plan  /hb:review       /hb:ship
 ```
 
 Each phase has a dedicated **workflow skill** that orchestrates the smaller toolbelt skills underneath it. Workflow skills are designed to be invoked explicitly; everything else auto-routes by description.
@@ -96,7 +96,7 @@ You: /hb:build dark-mode
 AI:  Implements next incomplete phase. TDD loop, lint, type-check.
      Marks checkboxes in the plan. Offers a commit.
 
-You: /hb:check dark-mode
+You: /hb:verify-plan dark-mode
 AI:  Verifies plan checkboxes against actual codebase.
      Reports total progress and remaining blockers.
 
@@ -176,7 +176,7 @@ Organized by SDLC phase. Expand a phase to browse; click a skill to read its `SK
 
 | Skill | What it does |
 |-------|--------------|
-| [`check`](skills/check/SKILL.md) | Verify plan checkboxes against codebase; mark or unmark |
+| [`verify-plan`](skills/verify-plan/SKILL.md) | Verify plan checkboxes against codebase; mark or unmark |
 | [`testing`](skills/testing/SKILL.md) | Run the test suite and report results (`npm test`) |
 | [`coverage`](skills/coverage/SKILL.md) | Test coverage for unstaged changes |
 | [`validate-code`](skills/validate-code/SKILL.md) | Auto-fix lint, verify types, run tests |

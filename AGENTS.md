@@ -44,7 +44,7 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | --------------------------------------- | ---------------------------------------------- |
 | New feature with unclear requirements   | `prd` → `plan` → `build`                       |
 | Implement next phase of a plan          | `build`                                        |
-| Check plan progress                     | `check`, `brief`                               |
+| Check plan progress                     | `verify-plan`, `brief`                         |
 | Test-first development                  | `tdd`                                          |
 | Implement using official docs           | `source-driven`                                |
 | Bug, error, unexpected behavior         | `diagnose`                                     |
@@ -86,7 +86,7 @@ When the user has a non-trivial task, follow this flow even without explicit com
 - **DEFINE** → `prd` (interview-driven), with `grill-me` to stress-test
 - **PLAN** → `plan` (PRD to vertical-slice phases), with `architecture-audit` or `codebase-design` as needed
 - **BUILD** → `build` (one phase per invocation), driven by `tdd` and `source-driven`
-- **VERIFY** → `check` (plan vs codebase), plus `coverage`, `validate-code`, `diagnose` on failure
+- **VERIFY** → `verify-plan` (plan vs codebase), plus `coverage`, `validate-code`, `diagnose` on failure
 - **REVIEW** → `code-review`, plus `a11y-audit`, `i18n`, `perf-audit`, `deps-audit`, `safe-repo`
 - **SHIP** → `validate-code` → `ship` → `create-pull-request`
 

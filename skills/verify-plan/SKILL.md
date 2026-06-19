@@ -1,10 +1,10 @@
 ---
-name: check
+name: verify-plan
 description: Verify implementation against plan. Shows progress and finds blockers. Use after implementing a plan.
 argument-hint: '[slug]'
 ---
 
-# Check Implementation
+# Verify Plan
 
 Verify plan checkboxes against the codebase. Unmark items that don't hold up (`[x]` → `[ ]`).
 
@@ -85,7 +85,7 @@ If all items verified (total checked = total):
 
 ### 6. Next steps
 
-If blockers exist, list items to fix, then re-run `/hb:check <slug>`.
+If blockers exist, list items to fix, then re-run `/verify-plan <slug>`.
 
 If all items verified, suggest creating a PR or shipping.
 

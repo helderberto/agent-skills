@@ -1,6 +1,6 @@
 ---
 name: visual-validate
-description: Validate UI changes in a real browser using Chrome DevTools or Playwright MCP. Takes screenshots, compares before/after, exercises interactions, captures console errors. Use when user asks to "visual validate", "/hb:visual-validate", "check the UI", "screenshot before/after", or finishes a UI change. Don't use for unit tests (use `tdd`), E2E user flows (use `e2e`), or backend changes.
+description: Validate UI changes in a real browser using Chrome DevTools or Playwright MCP. Takes screenshots, compares before/after, exercises interactions, captures console errors. Use when user asks to "visual validate", "/visual-validate", "check the UI", "screenshot before/after", or finishes a UI change. Don't use for unit tests (use `tdd`), E2E user flows (use `e2e`), or backend changes.
 argument-hint: '[url]'
 ---
 

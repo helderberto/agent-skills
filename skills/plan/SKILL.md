@@ -1,6 +1,6 @@
 ---
 name: plan
-description: Turn a PRD into a multi-phase implementation plan using tracer-bullet vertical slices. Use after /hb:prd.
+description: Turn a PRD into a multi-phase implementation plan using tracer-bullet vertical slices. Use after /prd.
 argument-hint: '[slug]'
 ---
 
@@ -142,13 +142,13 @@ Gaps found in the PRD needing resolution. Blank if none.
 
 Print one line per phase: `Phase N — <title> (<condition summary>)`. Present options and wait:
 
-1. Run `/hb:build <slug>` (Recommended)
-2. Run `/hb:check <slug>`
+1. Run `/build <slug>` (Recommended)
+2. Run `/verify-plan <slug>`
 3. Done for now
 
 ## Execution guidance
 
-To implement this plan phase by phase, run `/hb:build <slug>`. It handles branch creation, implementation, feedback loops, checkbox marking, and commits — one phase per invocation.
+To implement this plan phase by phase, run `/build <slug>`. It handles branch creation, implementation, feedback loops, checkbox marking, and commits — one phase per invocation.
 
 ## Rules
 

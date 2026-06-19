@@ -11,7 +11,7 @@ Overview of active features, progress, and suggested focus.
 
 ### 1. Discover plans
 
-Glob `.specs/plans/*.md`. Slug = filename without `.md`. If no plans found, output: `No plans found — run /hb:prd to start one.`
+Glob `.specs/plans/*.md`. Slug = filename without `.md`. If no plans found, output: `No plans found — run /prd to start one.`
 
 ### 2. Count progress
 
@@ -45,6 +45,6 @@ If multiple incomplete plans → select the one closest to completion.
 
 Present options and wait for the user's choice:
 
-1. Continue focused feature — `/hb:build <slug>` (Recommended)
-2. Start new feature — `/hb:prd`
-3. Check progress — `/hb:check <slug>`
+1. Continue focused feature — `/build <slug>` (Recommended)
+2. Start new feature — `/prd`
+3. Check progress — `/verify-plan <slug>`

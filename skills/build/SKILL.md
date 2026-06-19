@@ -21,8 +21,8 @@ Use argument as `<slug>`. If empty, list plans as numbered options and wait for 
 Accepts slug or `@file` reference:
 
 ```
-/hb:build dark-mode-support
-/hb:build @.specs/plans/dark-mode-support.md
+/build dark-mode-support
+/build @.specs/plans/dark-mode-support.md
 ```
 
 If argument starts with `@`, treat it as a file path — read that file directly as the plan.
@@ -41,7 +41,7 @@ The **next incomplete phase** is the first phase that has at least one unchecked
 
 If all phases are complete (zero unchecked items across all phases):
 
-> All phases complete. Run `/hb:check <slug>` to verify.
+> All phases complete. Run `/verify-plan <slug>` to verify.
 
 Stop here.
 
@@ -129,11 +129,11 @@ If the user chooses to commit:
 
 1. Stage the implementation files (not `.specs/` artifacts unless the project dogfoods TracerKit)
 2. Create a commit with a message following the project's commit conventions
-3. Confirm: "Committed. Run `/hb:build <slug>` for Phase N+1, or `/hb:check <slug>` to verify."
+3. Confirm: "Committed. Run `/build <slug>` for Phase N+1, or `/verify-plan <slug>` to verify."
 
 If the user chooses to review:
 
-> Ready for review. Run `/hb:build <slug>` again when ready to continue.
+> Ready for review. Run `/build <slug>` again when ready to continue.
 
 ### 9. Blockers during implementation
 

@@ -70,7 +70,7 @@ Print the file path and the rendered content. Don't auto-commit — let the user
 - Never use `git add` here — the user stages explicitly.
 - Title is the decision, not the question. "Use Postgres for write model" — not "Which database for write model?"
 - Sentences should be tight and present-tense. No hedging, no "we are considering."
-- ADR ≠ PRD. If the work is forward-looking (specs, plans, user stories), redirect to `/hb:prd`.
+- ADR ≠ PRD. If the work is forward-looking (specs, plans, user stories), redirect to `/prd`.
 - ADR ≠ CLAUDE.md. If it's a repo convention, gotcha, or general rule, redirect to `learn`/`learner`.
 
 ## Example
