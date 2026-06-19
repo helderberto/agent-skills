@@ -12,12 +12,6 @@ If mode is one of the following, adjust the review:
 - SECURITY: Focus only on security issues
 - PERFORMANCE: Focus only on performance issues
 
-## Pre-loaded context
-
-- PR details: !`gh pr view`
-- PR diff: !`gh pr diff`
-- Changed files: !`gh pr diff --name-only`
-
 ## Workflow
 
 1. Analyze the diff and pre-loaded PR context
@@ -34,13 +28,9 @@ Group by severity:
 
 Use `file:line` references for all findings. Include suggested fix for each critical issue.
 
-See [examples.md](references/examples.md) for output format and [review-checklist.md](references/review-checklist.md) for full checklist.
-
 ## Rules
 
 - Review ALL changed files, not just the latest commit
-- Be specific: file:line + issue + suggested fix
-- Separate critical issues from suggestions
 
 ## Error Handling
 

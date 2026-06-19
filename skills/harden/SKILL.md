@@ -48,18 +48,7 @@ Security as a constraint on every line that touches user data, auth, or external
 - Store sessions in client-accessible storage (e.g., localStorage for auth tokens)
 - Expose stack traces or internal errors to users
 
-## OWASP Top 10 — Quick Reference
-
-| Risk | Mitigation |
-|------|------------|
-| Injection (SQL/NoSQL/OS) | Parameterized queries; ORM with bound params; never concat user input |
-| Broken authentication | bcrypt/argon2 hashing; httpOnly+secure+sameSite cookies; rate-limit auth endpoints |
-| XSS | Framework auto-escape; sanitize with DOMPurify if HTML is unavoidable |
-| Broken access control | Check authorization on EVERY endpoint; verify ownership, not just authentication |
-| Misconfiguration | helmet for headers; CORS restricted to known origins via env var |
-| Sensitive data exposure | Strip sensitive fields before API response; env vars for secrets |
-| Insufficient logging | Log auth failures, access denials, input rejections |
-| SSRF | Allowlist outbound destinations; never fetch user-provided URLs without validation |
+See [OWASP Top 10 quick reference](references/owasp.md).
 
 ## Input Validation at Boundaries
 

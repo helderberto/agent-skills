@@ -30,18 +30,7 @@ Before the `RESOURCES.md` is well-populated, your focus should be to find high-q
 
 Some topics may require more skills than knowledge. Learning more about theoretical physics might be more knowledge-based. For yoga, more skills-based.
 
-### Fluency vs Storage Strength
-
-You should be careful to split between two types of learning:
-
-- **Fluency strength**: in-the-moment retrieval of knowledge
-- **Storage strength**: long-term retention of knowledge
-
-Fluency can give the user an illusory sense of mastery, but storage strength is the real goal. Try to design lessons which build long-term retention by desirable difficulty:
-
-- Using retrieval practice (recall from memory)
-- Spacing (distributing practice over time)
-- Interleaving (mixing up different but related topics in practice - for skills practice only)
+Keep lessons short; one lesson = one tangible win. Build long-term retention by spacing and interleaving practice, and by retrieval practice (recall from memory).
 
 ## Lessons
 
@@ -49,7 +38,7 @@ A lesson is the main thing you produce — the unit in which knowledge and skill
 
 A lesson should be **beautiful** — clean, readable typography and layout — since the user will return to these later to review. Think Tufte.
 
-The lesson should be short, and completable very quickly. Learners' working memory is very small, and we need to stay within it. But each lesson should give the user a single tangible win that they can build on. It should be directly tied to the mission, and should be in the user's zone of proximal development.
+The lesson should be short, and completable very quickly. Each lesson should give the user a single tangible win that they can build on. It should be directly tied to the mission, and should be in the user's zone of proximal development.
 
 If possible, open the lesson file for the user by running a CLI command.
 
@@ -85,13 +74,11 @@ Lessons should be designed around a skill the user is going to learn. The knowle
 
 Knowledge should first be gathered from trusted resources. Use `RESOURCES.md` to keep track of them. Lessons should be littered with citations - links to external resources to back up any claim made. This increases the trustworthiness of the lesson.
 
-For acquiring knowledge, difficulty is the enemy. It eats working memory you need for understanding.
-
 ## Skills
 
 If knowledge is all about acquisition, skills are about durability and flexibility. Make the knowledge stick.
 
-For skill acquisition, difficulty is the tool. Effortful retrieval is what builds storage strength. Skills should be taught through interactive lessons. There are several tools at your disposal:
+Skills should be taught through interactive lessons. There are several tools at your disposal:
 
 - Interactive lessons, using quizzes and light in-browser tasks
 - Lessons which guide the user through a list of real-world steps to take (for instance, yoga poses)
