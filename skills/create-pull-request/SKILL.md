@@ -9,17 +9,12 @@ Mode: $ARGUMENTS
 
 If `--draft` is passed, create as draft PR.
 
-## Pre-loaded context
-
-- Branch status: !`git status && git branch -vv`
-- Recent commits: !`git log --oneline -10`
-
 ## Workflow
 
 1. Run in parallel:
    - `git fetch origin && git remote show origin | grep 'HEAD branch' | cut -d' ' -f5` (get base branch)
    - `git rev-parse --abbrev-ref HEAD | grep -oE '[A-Z]+-[0-9]+'` (extract ticket ID)
-   - Search for PR template — start with `.github/pull_request_template.md`, then the other paths in [template-locations.md](references/template-locations.md)
+   - Search for PR template in order: `.github/pull_request_template.md`, `.github/PULL_REQUEST_TEMPLATE.md`, `.github/PULL_REQUEST_TEMPLATE/` (directory of templates), `docs/pull_request_template.md`, `pull_request_template.md`
 2. Run in parallel:
    - `git diff HEAD`
    - `git diff [base-branch]...HEAD --unified=0`
@@ -42,20 +37,11 @@ If `--draft` is passed, create as draft PR.
    - Push with `-u` if needed
    - Create PR with `gh pr create` using HEREDOC (add `--draft` if requested)
 
-See [examples.md](references/examples.md) for output format and [gh-flags.md](references/gh-flags.md) for advanced options.
-
 ## Rules
 
 - If a PR template exists, the body MUST be the filled template — not a summary that references it
-- Analyze ALL commits, not just the latest
 - Return PR URL when done
 - Use `gh` CLI only
 - NEVER force push to main/master
 - NEVER push without user confirmation if already on main/master
 - NEVER create PR with uncommitted changes — commit first
-
-## Error Handling
-
-- If `gh pr create` fails with "already exists" → run `gh pr view` and return existing PR URL
-- If branch is not pushed → run `git push -u origin HEAD` before creating PR
-- If `gh auth status` fails → ask user to run `gh auth login` and retry
