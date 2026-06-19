@@ -119,7 +119,7 @@ For quick standalone tasks, you don't need the workflow — just describe what y
 
 ## Skills
 
-Skills come in two modes. **User-invoked** ones you type explicitly (`/hb:<name>`) and never auto-trigger (`disable-model-invocation: true`) — the SDLC workflow spine plus deliberate, heavyweight, or interactive tools. **Model-invoked** ones auto-route by description (and are still callable explicitly) — focused capabilities the agent reaches for based on the task.
+Skills come in two modes. **User-invoked** ones you type explicitly (`/hb:<name>`) and never auto-trigger (`disable-model-invocation: true`) — the SDLC workflow spine plus deliberate, heavyweight, or interactive tools. Their descriptions stay a single what-it-does sentence: trigger phrases are dead weight when nothing auto-routes, yet still cost context tokens every turn. **Model-invoked** ones auto-route by description (and are still callable explicitly) — focused capabilities the agent reaches for based on the task, so their descriptions carry the trigger and anti-trigger clauses that routing depends on.
 
 ### User-invoked
 
