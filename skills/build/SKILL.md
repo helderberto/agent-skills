@@ -1,8 +1,7 @@
 ---
 name: build
-description: Implement one phase of a plan. Reads plan, finds next incomplete phase, implements it, runs feedback loops, marks checkboxes, offers commit. One phase per invocation.
+description: Implement one phase of a plan — reads the plan, finds the next incomplete phase, implements it with feedback loops, marks checkboxes, offers a commit (one phase per invocation). Use after /plan when a plan exists at `.specs/plans/<slug>.md`, or when the user asks to build or implement the next phase. Don't use for ad-hoc changes with no plan (use /tdd) or to check progress (use /verify-plan).
 argument-hint: '[slug]'
-disable-model-invocation: true
 ---
 
 # Build Phase

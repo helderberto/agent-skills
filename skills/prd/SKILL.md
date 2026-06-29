@@ -1,8 +1,7 @@
 ---
 name: prd
-description: Create a PRD through user interview, codebase exploration, and module design.
+description: Create a PRD through user interview, codebase exploration, and module design. Use when starting a feature with unclear requirements, when the user asks to spec or define what to build, or says "write a PRD". Don't use when requirements are crisp and a plan already exists (use /plan or /build).
 argument-hint: <idea>
-disable-model-invocation: true
 ---
 
 # PRD Writing

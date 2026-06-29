@@ -1,8 +1,7 @@
 ---
 name: verify-plan
-description: Verify implementation against plan. Shows progress and finds blockers. Use after implementing a plan.
+description: Verify implementation against a plan — shows progress and finds blockers. Use after /build, or when the user asks to check plan progress or what's left. Don't use to implement phases (use /build) or for general test runs (use /validate-code).
 argument-hint: '[slug]'
-disable-model-invocation: true
 ---
 
 # Verify Plan

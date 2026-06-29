@@ -1,8 +1,7 @@
 ---
 name: review
-description: Orchestrated REVIEW phase — analyze the diff, decide which audits apply, run them in order, consolidate findings.
+description: Orchestrated REVIEW phase — analyze the diff, decide which audits apply, run them in order, consolidate findings. Use for a full pre-ship review or when the user asks to run all relevant audits on changes or a PR. Don't use to implement fixes (use /build or /tdd) or for a single focused audit (call it directly, e.g. /a11y-audit, /code-review).
 argument-hint: '[PR-number-or-branch]'
-disable-model-invocation: true
 ---
 
 # Review Phase

@@ -1,7 +1,6 @@
 ---
 name: teach
-description: Teach the user a new skill or concept, within this workspace.
-disable-model-invocation: true
+description: Teach the user a new skill or concept within this workspace — stateful lessons, references, and learning records tied to a mission. Use when the user asks to learn, be taught, or understand a concept or technology in depth. Don't use to explain a specific code area (use /explain-code) or answer a one-off question.
 argument-hint: "What would you like to learn about?"
 ---
 

@@ -15,7 +15,7 @@ A collection of skills that encode the workflows, quality gates, and engineering
  /hb:prd        /hb:plan        /hb:build        /hb:verify-plan  /hb:review       /hb:ship
 ```
 
-Each phase has a dedicated **workflow skill** that orchestrates the smaller toolbelt skills underneath it. Workflow skills are designed to be invoked explicitly; everything else auto-routes by description.
+Each phase has a dedicated **workflow skill** that orchestrates the smaller toolbelt skills underneath it. Type the spine in order, or let it chain — every skill auto-routes by description. Only the outward-facing steps that push work out of your hands (`ship`, `create-pull-request`) are gated against auto-triggering, so you always pull that trigger yourself.
 
 ---
 
@@ -119,11 +119,11 @@ For quick standalone tasks, you don't need the workflow — just describe what y
 
 ## Skills
 
-Skills come in two modes. **User-invoked** ones you type explicitly (`/hb:<name>`) and never auto-trigger (`disable-model-invocation: true`) — the SDLC workflow spine plus deliberate, heavyweight, or interactive tools. Their descriptions stay a single what-it-does sentence: trigger phrases are dead weight when nothing auto-routes, yet still cost context tokens every turn. **Model-invoked** ones auto-route by description (and are still callable explicitly) — focused capabilities the agent reaches for based on the task, so their descriptions carry the trigger and anti-trigger clauses that routing depends on.
+Skills come in two modes. **User-invoked** ones never auto-trigger (`disable-model-invocation: true`) — reserved for outward-facing, irreversible actions you must pull the trigger on yourself: `ship` and `create-pull-request`. Everything else is **model-invoked**: it auto-routes by description and stays callable explicitly as `/hb:<name>`. Model-invoked descriptions carry the trigger and anti-trigger clauses routing depends on; the two user-invoked ones keep a single what-it-does sentence, since trigger phrases are dead weight when nothing auto-routes.
 
-### User-invoked
+### SDLC workflow
 
-The six-phase SDLC workflow — type each to advance:
+The six-phase spine. Type each to advance, or let one phase chain into the next:
 
 | Skill | Phase | What it does |
 |-------|-------|--------------|
@@ -132,23 +132,11 @@ The six-phase SDLC workflow — type each to advance:
 | [`build`](skills/build/SKILL.md) | BUILD | Implement next incomplete phase of a plan with feedback loops |
 | [`verify-plan`](skills/verify-plan/SKILL.md) | VERIFY | Verify plan checkboxes against codebase; mark or unmark |
 | [`review`](skills/review/SKILL.md) | REVIEW | Detect scope, run relevant audits, consolidate findings |
-| [`ship`](skills/ship/SKILL.md) | SHIP | Pre-launch gate + atomic commits + push (`--fast` to skip gate) |
+| [`ship`](skills/ship/SKILL.md) | SHIP | Pre-launch gate + atomic commits + push (`--fast` to skip gate) · **user-invoked** |
 
-Plus deliberate tools you invoke on demand:
+### On-demand tools
 
-| Skill | What it does |
-|-------|--------------|
-| [`architecture-audit`](skills/architecture-audit/SKILL.md) | Surface architectural friction, propose refactors toward deep modules as RFCs |
-| [`prototype`](skills/prototype/SKILL.md) | Build a throwaway prototype — terminal app or toggleable UI variations — to flesh out a design |
-| [`grill-me`](skills/grill-me/SKILL.md) | Stress-test a plan or design through relentless interview (runs `grilling`) |
-| [`teach`](skills/teach/SKILL.md) | Stateful teaching workspace — lessons, references, learning records tied to a mission |
-| [`handoff`](skills/handoff/SKILL.md) | Compact the current conversation into a handoff doc for a fresh agent |
-| [`create-pull-request`](skills/create-pull-request/SKILL.md) | Open a GitHub PR with structured body |
-| [`create-skill`](skills/create-skill/SKILL.md) | Author a new skill with proper structure |
-
-### Model-invoked
-
-Focused capabilities the agent applies automatically based on the task (also callable explicitly). Expand a group to browse.
+Focused capabilities the agent applies automatically based on the task (all callable explicitly too). Expand a group to browse.
 
 <details>
 <summary><b>Build &amp; test</b></summary>
@@ -198,6 +186,7 @@ Focused capabilities the agent applies automatically based on the task (also cal
 | [`commit`](skills/commit/SKILL.md) | Single commit following repository style |
 | [`atomic-commits`](skills/atomic-commits/SKILL.md) | Group unstaged changes into atomic commits by concern |
 | [`create-adr`](skills/create-adr/SKILL.md) | Record a 1–3 sentence Architecture Decision Record |
+| [`create-pull-request`](skills/create-pull-request/SKILL.md) | Open a GitHub PR with structured body · **user-invoked** |
 
 </details>
 
@@ -207,6 +196,9 @@ Focused capabilities the agent applies automatically based on the task (also cal
 | Skill | What it does |
 |-------|--------------|
 | [`codebase-design`](skills/codebase-design/SKILL.md) | Shared deep-module vocabulary for designing or improving an interface |
+| [`architecture-audit`](skills/architecture-audit/SKILL.md) | Surface architectural friction, propose refactors toward deep modules as RFCs |
+| [`prototype`](skills/prototype/SKILL.md) | Build a throwaway prototype — terminal app or toggleable UI variations — to flesh out a design |
+| [`grill-me`](skills/grill-me/SKILL.md) | Stress-test a plan or design through relentless interview (runs `grilling`) |
 | [`grilling`](skills/grilling/SKILL.md) | Relentless plan/design interview, one question at a time (engine behind `grill-me`) |
 
 </details>
@@ -217,7 +209,10 @@ Focused capabilities the agent applies automatically based on the task (also cal
 | Skill | What it does |
 |-------|--------------|
 | [`brief`](skills/brief/SKILL.md) | Session briefing — active features, progress, suggested focus |
+| [`handoff`](skills/handoff/SKILL.md) | Compact the current conversation into a handoff doc for a fresh agent |
+| [`teach`](skills/teach/SKILL.md) | Stateful teaching workspace — lessons, references, learning records tied to a mission |
 | [`explain-code`](skills/explain-code/SKILL.md) | Explain code with visual diagrams and analogies |
+| [`create-skill`](skills/create-skill/SKILL.md) | Author a new skill with proper structure |
 | [`setup-pre-commit`](skills/setup-pre-commit/SKILL.md) | Configure Husky + lint-staged for commit-time gates |
 | [`caveman`](skills/caveman/SKILL.md) | Ultra-compressed communication mode (cuts ~75% tokens) |
 | [`prose-fix`](skills/prose-fix/SKILL.md) | Fix typos, dashes, formatting in markdown |
