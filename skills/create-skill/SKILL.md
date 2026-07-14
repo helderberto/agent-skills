@@ -50,17 +50,20 @@ description: One sentence what it does. Use when [triggers]. Don't use when [ant
 
 # Skill Name
 
-## Workflow
-[numbered steps]
-
-## Rules
-[hard constraints]
-
-## Error Handling
-[if X — do Y]
+[body — steps, reference, or both]
 ```
 
-Orchestrator skills (e.g. `review`, `ship`) replace `Workflow` with explicit phases that announce each sub-skill being invoked.
+A skill's body is built from two content types that mix freely: **steps** (ordered actions the agent takes) and **reference** (definitions, rules, facts consulted on demand). A skill can be all steps, all reference, or both — let the content pick the shape. Don't force `Workflow` / `Rules` / `Error Handling` headings onto a skill that doesn't need them; empty scaffolding sections are no-ops (see Failure Modes).
+
+- **Step-shaped** skills (e.g. `build`, `diagnose`): number the actions in order. Orchestrators (`review`, `ship`) use explicit phases that announce each sub-skill invoked.
+- **Reference-shaped** skills (e.g. `codebase-design`): a flat peer-set of rules under headings is fine, not a smell.
+
+### Completion criteria
+
+Every step ends on a **completion criterion** — the condition that tells the agent the step is done. Make it:
+
+- **Checkable** — the agent can tell done from not-done (not "handle the errors" but "every error path returns a typed result").
+- **Exhaustive** where it matters — "every modified file has a test", not "add some tests". A vague criterion invites premature completion (see below).
 
 ## Frontmatter Fields
 
@@ -70,8 +73,20 @@ Orchestrator skills (e.g. `review`, `ship`) replace `Workflow` with explicit pha
 | `description` | yes | Agent's only signal for when to auto-load a model-invoked skill |
 | `argument-hint` | no | One-line hint shown next to the skill name (e.g. `'[slug]'`, `'<idea>'`) |
 | `disable-model-invocation` | no | `true` = user-invoked only (never auto-triggers) — see Description Requirements |
+| `effort` | no | Override reasoning effort for the current turn: `low` / `medium` / `high` / `xhigh`. Match it to task complexity — see Effort Routing |
 
-Avoid `compatibility:` and `allowed-tools:` — legacy `npx skills` CLI fields, not part of the Claude Code plugin spec.
+Avoid `compatibility:` and `allowed-tools:` — legacy `npx skills` CLI fields, not part of the Claude Code plugin spec. `model:` is documented but **ignored at runtime for skills** (works for subagents only) — don't set it.
+
+## Effort Routing
+
+A skill's `effort` overrides session effort for the turn it fires, then resets. Set it so trivial work runs cheap and hard work runs deep, without the user touching `/effort`. Only mark a skill when it deviates from the `medium` default — leave medium skills unmarked to keep frontmatter quiet.
+
+| Effort | Fits | Examples |
+|---|---|---|
+| `low` | mechanical, single-place edits | `prose-fix`, `lint`, `commit`, `coverage` |
+| `medium` | single-file additions, known-cause fixes (implicit default — leave unset) | `tdd`-adjacent, `e2e`, `source-driven` |
+| `high` | multi-file features, unknown-cause debugging, refactors, review | `build`, `plan`, `diagnose`, `code-review` |
+| `xhigh` | architecture, migrations, security-sensitive work | `architecture-audit`, `harden` |
 
 ## Description Requirements
 
@@ -145,6 +160,18 @@ cloud-deploy/
 - A single `MUST` is fine when a hard constraint exists; a wall of caps is a yellow flag — reframe and explain
 - **Leading words**: anchor behavior with compact, pretrained concepts (`tight`, `red`, `deep`, `surgical`) reused across the skill. One word carries distributed meaning in few tokens and doubles as a trigger when it appears in prompts or code. Strengthen a weak word rather than piling on more rules
 - **No-op test**: delete any sentence that doesn't change default behavior. Prefer deletion to rewriting — stale layers accumulate otherwise
+- **Prompt the positive**: state the target behavior, not the banned one — "don't think of an elephant" names the elephant. Keep a prohibition only as a hard guardrail you can't phrase positively, and even then pair it with what to do instead. (Description anti-triggers are the exception — `Don't use for X` routes correctly and stays.)
+
+## Failure Modes
+
+Diagnose a misbehaving skill against these — most problems are one of them:
+
+- **Premature completion** — the agent stops a step before it's genuinely done, attention slipping to *being done*. Fix the completion criterion first (sharpen, make exhaustive); only if it's irreducibly fuzzy *and* you see the rush, split the later steps out of view so the agent can't race ahead.
+- **Duplication** — the same meaning in more than one place. Costs tokens and maintenance, and inflates the meaning's apparent importance. Keep one source of truth.
+- **Sediment** — stale layers that accumulate because adding feels safe and removing feels risky. The default fate of any skill without pruning discipline.
+- **Sprawl** — simply too long, even when every line is live. Cure with progressive disclosure (push reference into `references/`) and splitting by variant.
+- **No-op** — a line the model already obeys by default. Delete it. A weak leading word (`be thorough` when the agent already is) is a no-op; the fix is a stronger word (`relentless`), not more rules.
+- **Negation** — steering by prohibition, which backfires (see Prompt the positive).
 
 ## Review Checklist
 
@@ -152,7 +179,9 @@ Before shipping a new or modified skill:
 
 - [ ] Folder name matches `name:` field
 - [ ] Description: model-invoked → three sentences (what, when, when-not); user-invoked → one what-it-does sentence
-- [ ] Body has Workflow + Rules + Error Handling sections
+- [ ] Body shape fits the content (steps, reference, or both) — no empty scaffolding sections
+- [ ] Every step has a checkable completion criterion; exhaustive where it matters
+- [ ] `effort` set if the task deviates from the `medium` default (low for mechanical, high/xhigh for heavy)
 - [ ] `SKILL.md` under ~150 lines (split into `references/` if longer)
 - [ ] Concrete examples included
 - [ ] No time-sensitive info (versions, dates)
