@@ -1,5 +1,6 @@
 ---
 name: prototype
+effort: high
 description: Build a throwaway prototype to flesh out a design — a runnable terminal app for state/business-logic questions, or several radically different UI variations toggleable from one route. Use when the user wants to explore or compare design directions before committing, or says "prototype", "mock up", or "try a few approaches". Don't use for production implementation (use /build or /tdd).
 ---
 

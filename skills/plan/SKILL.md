@@ -1,5 +1,6 @@
 ---
 name: plan
+effort: high
 description: Turn a PRD into a multi-phase implementation plan using tracer-bullet vertical slices. Use after /prd when a PRD exists at `.specs/prds/<slug>.md`, or when the user asks to break work into phases or slices. Don't use without a PRD, or for single-file changes with obvious scope.
 argument-hint: '[slug]'
 ---

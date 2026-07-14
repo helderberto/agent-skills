@@ -1,5 +1,6 @@
 ---
 name: coverage
+effort: low
 description: Check test coverage for unstaged changes. Use when user asks to "check coverage", "/coverage", or wants to see which unstaged changes lack test coverage. Don't use for projects without lcov coverage output, running the full test suite without coverage, or checking coverage of already-committed changes.
 ---
 

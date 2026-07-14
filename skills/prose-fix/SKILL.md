@@ -1,5 +1,6 @@
 ---
 name: prose-fix
+effort: low
 description: Fix prose formatting, typos, and clarity issues in markdown or text files. Use when user asks to "fix dashes", "fix typos", "clean up text", "improve sentences", or "/prose-fix". Don't use for code style, linting, or full rewrites.
 ---
 

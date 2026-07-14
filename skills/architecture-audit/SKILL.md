@@ -1,5 +1,6 @@
 ---
 name: architecture-audit
+effort: xhigh
 description: Explore a codebase to surface architectural friction and propose refactors toward deep modules (simple interface, large implementation) as GitHub issue RFCs. Use when the user asks to audit architecture, find structural friction, or identify refactor opportunities across a codebase. Don't use for single-module interface design (use /codebase-design) or code-level review of a diff (use /code-review).
 ---
 

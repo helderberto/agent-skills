@@ -1,5 +1,6 @@
 ---
 name: validate-pr
+effort: high
 description: Validate a PR by fanning out independent review agents in parallel, each on a different lens, then consolidate and dedupe their findings into one verdict. Use when the user says "validate this PR", "spawn agents to review", or wants multiple independent perspectives at once. Don't use for a single-lens review (use /code-review) or sequential audit-skill orchestration (use /review).
 argument-hint: '[PR-number-or-branch] [agent-count]'
 ---

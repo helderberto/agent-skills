@@ -1,5 +1,6 @@
 ---
 name: harden
+effort: xhigh
 description: Harden code proactively against vulnerabilities at the boundary where untrusted input enters the system. Use when implementing auth, handling user input, storing or transmitting sensitive data, integrating external APIs, adding file uploads, or any code that crosses a trust boundary. Don't use for reactive secret scanning (use `safe-repo`) or dependency CVE checks (use `deps-audit`).
 ---
 
