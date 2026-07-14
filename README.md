@@ -172,6 +172,7 @@ Focused capabilities the agent applies automatically based on the task (all call
 |-------|--------------|
 | [`code-review`](skills/code-review/SKILL.md) | Five-axis review of a PR (correctness, readability, architecture, security, performance) |
 | [`validate-pr`](skills/validate-pr/SKILL.md) | Fan out independent review agents in parallel (one lens each), consolidate + dedupe into one verdict |
+| [`triage-review`](skills/triage-review/SKILL.md) | Triage existing PR review comments (Copilot + human), verify against code, classify Address/Skip/Optional/Discuss |
 | [`a11y-audit`](skills/a11y-audit/SKILL.md) | Accessibility compliance audit (WCAG) |
 | [`i18n`](skills/i18n/SKILL.md) | Find hardcoded strings, check translation coverage |
 | [`perf-audit`](skills/perf-audit/SKILL.md) | Frontend bundle size and performance audit |
