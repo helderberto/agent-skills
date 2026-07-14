@@ -121,6 +121,8 @@ For quick standalone tasks, you don't need the workflow — just describe what y
 
 Skills come in two modes. **User-invoked** ones never auto-trigger (`disable-model-invocation: true`) — reserved for outward-facing, irreversible actions you must pull the trigger on yourself: `ship` and `create-pull-request`. Everything else is **model-invoked**: it auto-routes by description and stays callable explicitly as `/hb:<name>`. Model-invoked descriptions carry the trigger and anti-trigger clauses routing depends on; the two user-invoked ones keep a single what-it-does sentence, since trigger phrases are dead weight when nothing auto-routes.
 
+Skills also carry an **effort** hint: mechanical ones (`lint`, `commit`, `prose-fix`) run at low reasoning effort, heavy ones (`architecture-audit`, `harden`, `diagnose`) at high or xhigh, and the rest at the implicit medium default. The override lasts only for the turn the skill fires — so complexity matches the task without you touching `/effort`.
+
 ### SDLC workflow
 
 The six-phase spine. Type each to advance, or let one phase chain into the next:
@@ -186,6 +188,7 @@ Focused capabilities the agent applies automatically based on the task (all call
 |-------|--------------|
 | [`commit`](skills/commit/SKILL.md) | Single commit following repository style |
 | [`atomic-commits`](skills/atomic-commits/SKILL.md) | Group unstaged changes into atomic commits by concern |
+| [`resolving-merge-conflicts`](skills/resolving-merge-conflicts/SKILL.md) | Resolve an in-progress merge/rebase conflict by recovering each side's intent |
 | [`create-adr`](skills/create-adr/SKILL.md) | Record a 1–3 sentence Architecture Decision Record |
 | [`create-pull-request`](skills/create-pull-request/SKILL.md) | Open a GitHub PR with structured body · **user-invoked** |
 
@@ -198,6 +201,8 @@ Focused capabilities the agent applies automatically based on the task (all call
 |-------|--------------|
 | [`codebase-design`](skills/codebase-design/SKILL.md) | Shared deep-module vocabulary for designing or improving an interface |
 | [`architecture-audit`](skills/architecture-audit/SKILL.md) | Surface architectural friction, propose refactors toward deep modules as RFCs |
+| [`domain-modeling`](skills/domain-modeling/SKILL.md) | Build and sharpen the project's ubiquitous language and glossary |
+| [`research`](skills/research/SKILL.md) | Investigate a question against primary sources; capture cited findings as Markdown |
 | [`prototype`](skills/prototype/SKILL.md) | Build a throwaway prototype — terminal app or toggleable UI variations — to flesh out a design |
 | [`grill-me`](skills/grill-me/SKILL.md) | Stress-test a plan or design through relentless interview (runs `grilling`) |
 | [`grilling`](skills/grilling/SKILL.md) | Relentless plan/design interview, one question at a time (engine behind `grill-me`) |
