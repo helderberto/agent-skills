@@ -9,7 +9,7 @@ A tiny interactive terminal app that lets the user drive a state model by hand. 
 - "I want to feel out what the API should look like before writing it."
 - Anything where the user wants to **press buttons and watch state change**.
 
-If the question is "what should this look like" — wrong branch. Use [UI.md](UI.md).
+If the question is "what should this look like" — wrong branch. Use [ui.md](ui.md).
 
 ## Process
 

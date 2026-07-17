@@ -2,7 +2,7 @@
 
 Generate **several radically different UI variations** on a single route, switchable from a floating bottom bar. The user flips between variants in the browser, picks one (or steals bits from each), then throws the rest away.
 
-If the question is about logic/state rather than what something looks like — wrong branch. Use [LOGIC.md](LOGIC.md).
+If the question is about logic/state rather than what something looks like — wrong branch. Use [logic.md](logic.md).
 
 ## When this is the right shape
 
