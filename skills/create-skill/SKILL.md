@@ -1,6 +1,6 @@
 ---
 name: create-skill
-description: Create new agent skills with proper structure, progressive disclosure, and bundled resources. Use when user wants to create, write, or build a new skill, or asks "make a skill for X".
+description: Create new agent skills with proper structure, progressive disclosure, and bundled resources. Use when user wants to create, write, or build a new skill, or asks "make a skill for X". Don't use for benchmarking or optimizing a skill's triggering with evals (use skill-creator), or for one-off prose edits to an existing skill.
 ---
 
 # Creating Skills
