@@ -26,7 +26,7 @@ Ship runs a **pre-launch gate** before committing. By default: `validate-code` +
 
 3. Review all changes from status and diff
 4. Analyze recent commit style from log
-5. Group changed files by logical concern using [atomic-commits grouping rules](../atomic-commits/SKILL.md#grouping-rules)
+5. Group changed files by logical concern using [commit grouping rules](../commit/SKILL.md#grouping-rules)
 6. For each group: stage specific files by name, commit with HEREDOC format
 7. If all changes form one logical unit, stage files by name (never `git add -A` or `git add .`)
 
