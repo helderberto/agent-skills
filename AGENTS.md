@@ -79,7 +79,6 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Stress-test a plan or design            | `grill-me`                                     |
 | Fix prose / typos in markdown           | `prose-fix`                                    |
 | Restructure an article draft            | `revise`                                       |
-| Ultra-compressed communication mode     | `caveman`                                      |
 | Hand off mid-session work to a fresh agent | `handoff`                                   |
 | Author a new skill                      | `create-skill`                                 |
 

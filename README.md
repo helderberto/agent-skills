@@ -221,7 +221,6 @@ Focused capabilities the agent applies automatically based on the task (all call
 | [`explain-code`](skills/explain-code/SKILL.md) | Explain code with visual diagrams and analogies |
 | [`create-skill`](skills/create-skill/SKILL.md) | Author a new skill with proper structure |
 | [`setup-pre-commit`](skills/setup-pre-commit/SKILL.md) | Configure Husky + lint-staged for commit-time gates |
-| [`caveman`](skills/caveman/SKILL.md) | Ultra-compressed communication mode (cuts ~75% tokens) |
 | [`prose-fix`](skills/prose-fix/SKILL.md) | Fix typos, dashes, formatting in markdown |
 | [`revise`](skills/revise/SKILL.md) | Structurally edit and improve article drafts |
 
