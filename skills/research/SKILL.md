@@ -1,7 +1,7 @@
 ---
 name: research
-description: Investigate a question against primary sources and capture the findings as a cited Markdown file. Use when the user wants a topic researched, docs or API facts gathered, or reading legwork delegated to a background agent. Don't use for implementing against pinned dependency versions (use source-driven) or searching the current codebase (use grep/explore).
 effort: medium
+description: Investigate a question against primary sources and capture the findings as a cited Markdown file. Use when the user wants a topic researched, docs or API facts gathered, or reading legwork delegated to a background agent. Don't use for implementing against pinned dependency versions (use source-driven) or searching the current codebase (use grep/explore).
 ---
 
 # Research

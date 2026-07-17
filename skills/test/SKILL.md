@@ -1,5 +1,6 @@
 ---
 name: test
+effort: high
 description: VERIFY phase — prove the code works. Run validation (lint, types, tests) plus coverage on changes, and when a plan exists verify its checkboxes against the codebase. Use after /build, when the user asks to verify, test, or confirm work holds up, or to check plan progress. Don't use to implement phases (use /build) or write new tests from scratch (use /tdd).
 argument-hint: '[slug]'
 ---

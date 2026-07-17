@@ -1,7 +1,7 @@
 ---
 name: resolving-merge-conflicts
-description: Resolve an in-progress git merge or rebase conflict by recovering each side's intent, then finishing the merge. Use when a merge or rebase is mid-conflict, git reports conflicted files, or the user asks to resolve conflicts. Don't use for preventing future conflicts, general git operations, or rewriting history where nothing is conflicted.
 effort: high
+description: Resolve an in-progress git merge or rebase conflict by recovering each side's intent, then finishing the merge. Use when a merge or rebase is mid-conflict, git reports conflicted files, or the user asks to resolve conflicts. Don't use for preventing future conflicts, general git operations, or rewriting history where nothing is conflicted.
 ---
 
 # Resolving Merge Conflicts
