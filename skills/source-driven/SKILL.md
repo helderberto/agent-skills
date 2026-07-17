@@ -41,14 +41,6 @@ Add a brief comment on non-obvious API usage:
 
 Only cite when the usage is surprising or version-specific. Don't over-comment obvious calls.
 
-## Rules
-
-- NEVER guess API signatures — fetch or read source
-- NEVER assume "latest" docs match the installed version
-- Always mark unverified claims with `// UNVERIFIED`
-- Prefer `node_modules/` source over training knowledge when docs unavailable
-- Don't cite every line — only non-obvious or version-sensitive usage
-
 ## Error Handling
 
 - Docs URL returns 404 → try GitHub repo README, then `node_modules/` source

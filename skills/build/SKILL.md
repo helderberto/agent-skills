@@ -19,14 +19,7 @@ The argument (if provided) is: $ARGUMENTS
 
 Use argument as `<slug>`. If empty, list plans as numbered options and wait for the user's choice.
 
-Accepts slug or `@file` reference:
-
-```
-/build dark-mode-support
-/build @.specs/plans/dark-mode-support.md
-```
-
-If argument starts with `@`, treat it as a file path — read that file directly as the plan.
+Accepts a slug or an `@path` reference — `@` means read that file directly as the plan (e.g. `/build @.specs/plans/dark-mode-support.md`).
 
 ## Workflow
 

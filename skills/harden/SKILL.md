@@ -8,14 +8,6 @@ description: Harden code proactively against vulnerabilities at the boundary whe
 
 Security as a constraint on every line that touches user data, auth, or external systems. This skill is **proactive**: applied during implementation, not after. For reactive scans, use `safe-repo` (sensitive data) or `deps-audit` (CVEs).
 
-## When to Use
-
-- Building anything that accepts user input
-- Implementing authentication or authorization
-- Storing or transmitting sensitive data
-- Integrating with external APIs or webhooks
-- Adding file uploads, payments, or PII handling
-
 ## Three-Tier Boundary System
 
 ### Always do (no exceptions)
@@ -28,6 +20,7 @@ Security as a constraint on every line that touches user data, auth, or external
 - Set security headers: CSP, HSTS, X-Frame-Options, X-Content-Type-Options
 - Session cookies: `httpOnly`, `secure`, `sameSite`
 - Use environment variables for secrets; reference, never inline
+- Strip sensitive fields from API responses by default
 
 ### Ask first (human approval required)
 
@@ -65,17 +58,6 @@ Always validate at the **system boundary** (route handler, message consumer), no
 - Enforce max size before processing
 - Check magic bytes if file type is security-critical (don't trust extension or `mimetype`)
 - Store outside webroot or behind authenticated access
-
-For dependency CVEs see `deps-audit`; for secrets and sensitive data see `safe-repo`.
-
-## Rules
-
-- Validate at boundaries; trust internal code
-- Use framework defaults (helmet, parameterized ORMs, framework escaping)
-- Read secrets from env vars; never inline
-- Authorization checked on every protected endpoint
-- Strip sensitive fields from API responses by default
-- Never trust client-side validation as a security boundary
 
 ## Verification
 

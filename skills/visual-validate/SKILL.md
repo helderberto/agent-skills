@@ -77,9 +77,6 @@ State the detected MCP at the start: "Using chrome-devtools MCP for visual valid
 
 ## Rules
 
-- Always auto-detect MCP at the start; never assume one is available
-- Always take before + after screenshots — single screenshot is not a comparison
-- Never start the dev server yourself; ask the user
 - Never modify files during validation; this is read-only browser interaction
 - Always close the browser page at the end (`close_page`) to free resources
 - Capture console messages even on PASS — silent regressions surface in console first
@@ -93,7 +90,5 @@ State the detected MCP at the start: "Using chrome-devtools MCP for visual valid
 
 ## Choosing chrome-devtools vs playwright
 
-- **chrome-devtools** preferred when: you need DevTools-specific features (lighthouse audit, network throttling, performance profiling, memory snapshots)
-- **playwright** preferred when: you need cross-browser testing (Firefox, Safari/WebKit) or are validating against an existing Playwright test setup
-
-If both are installed, this skill defaults to **chrome-devtools** for the richer audit surface. Override by stating "use playwright" in the user prompt.
+- **chrome-devtools**: DevTools-specific features — lighthouse audit, network throttling, performance profiling, memory snapshots.
+- **playwright**: cross-browser testing (Firefox, Safari/WebKit) or an existing Playwright setup.

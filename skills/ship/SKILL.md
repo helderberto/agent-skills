@@ -11,7 +11,7 @@ Ship runs a **pre-launch gate** before committing. By default: `validate-code` +
 
 ## Arguments
 
-- `--fast` — skip the pre-launch gate. Use only for hotfixes or commits to disposable branches. State the reason in the commit message body.
+- `--fast` — skip the pre-launch gate. Only for hotfixes, disposable branches (spike/prototype/CI), or when the gate already passed manually this session. Never on main/release. State the reason in the commit body.
 
 ## Workflow
 
@@ -43,20 +43,6 @@ Ship runs a **pre-launch gate** before committing. By default: `validate-code` +
 
 ## Error Handling
 
-- If `validate-code` fails → report all errors, stop; do not commit or push
-- If `safe-repo` flags sensitive data → report findings, stop; do not commit or push
 - If `git push` is rejected (non-fast-forward) → run `git pull --rebase` then retry push once
 - If pre-commit hook fails → fix reported issues, re-stage, create a NEW commit (never `--amend`)
 - If `--fast` is used → log "Pre-launch gate skipped via --fast" in agent output for traceability
-
-## When to use `--fast`
-
-Acceptable cases:
-- Hotfix where the bug is worse than skipping the gate
-- Disposable branch (spike, prototype, ephemeral CI testing)
-- Pre-launch gate already passed manually in this session
-
-Not acceptable:
-- "It's faster" — gate exists precisely to catch issues before push
-- "Tests are flaky" — fix the flaky tests, don't skip the gate
-- Production releases — never skip the gate on main/release branches
