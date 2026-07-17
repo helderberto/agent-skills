@@ -213,7 +213,6 @@ Focused capabilities the agent applies automatically based on the task (all call
 
 | Skill | What it does |
 |-------|--------------|
-| [`brief`](skills/brief/SKILL.md) | Session briefing — active features, progress, suggested focus |
 | [`handoff`](skills/handoff/SKILL.md) | Compact the current conversation into a handoff doc for a fresh agent |
 | [`teach`](skills/teach/SKILL.md) | Stateful teaching workspace — lessons, references, learning records tied to a mission |
 | [`explain-code`](skills/explain-code/SKILL.md) | Explain code with visual diagrams and analogies |

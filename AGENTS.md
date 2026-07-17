@@ -44,7 +44,7 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | --------------------------------------- | ---------------------------------------------- |
 | New feature with unclear requirements   | `spec` → `plan` → `build`                      |
 | Implement next phase of a plan          | `build`                                        |
-| Verify work + check plan progress       | `test`, `brief`                                |
+| Verify work + check plan progress       | `test`                                         |
 | Test-first development                  | `tdd`                                          |
 | Implement using official docs           | `source-driven`                                |
 | Research a question against sources     | `research`                                     |
