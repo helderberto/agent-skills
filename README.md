@@ -204,8 +204,7 @@ Focused capabilities the agent applies automatically based on the task (all call
 | [`domain-modeling`](skills/domain-modeling/SKILL.md) | Build and sharpen the project's ubiquitous language and glossary |
 | [`research`](skills/research/SKILL.md) | Investigate a question against primary sources; capture cited findings as Markdown |
 | [`prototype`](skills/prototype/SKILL.md) | Build a throwaway prototype — terminal app or toggleable UI variations — to flesh out a design |
-| [`grill-me`](skills/grill-me/SKILL.md) | Stress-test a plan or design through relentless interview (runs `grilling`) |
-| [`grilling`](skills/grilling/SKILL.md) | Relentless plan/design interview, one question at a time (engine behind `grill-me`) |
+| [`grill-me`](skills/grill-me/SKILL.md) | Stress-test a plan or design through relentless interview, one question at a time |
 
 </details>
 
