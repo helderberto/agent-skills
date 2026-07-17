@@ -90,7 +90,7 @@ If validation is green and all items verified (total checked = total):
 ### 6. Next steps
 
 - Blockers → list items to fix, then re-run `/test <slug>`
-- Clean → suggest `/review`, then `/ship`
+- Clean → `/review` is an optional QA pass for non-trivial changes (not a ship gate — `/ship` runs its own validate-code + safe-repo gate), then `/ship`
 
 ## Rules
 

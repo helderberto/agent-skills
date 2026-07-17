@@ -133,8 +133,8 @@ The six-phase spine. Type each to advance, or let one phase chain into the next:
 | [`plan`](skills/plan/SKILL.md) | PLAN | Turn spec into multi-phase implementation plan (tracer-bullet vertical slices) |
 | [`build`](skills/build/SKILL.md) | BUILD | Implement next incomplete phase of a plan with feedback loops |
 | [`test`](skills/test/SKILL.md) | TEST | Validate (lint/types/tests) + coverage, and verify plan checkboxes against codebase |
-| [`review`](skills/review/SKILL.md) | REVIEW | Fan out parallel reviewers (scope-detected audits + independent agent lenses), consolidate into one verdict |
-| [`ship`](skills/ship/SKILL.md) | SHIP | Pre-launch gate + atomic commits + push (`--fast` to skip gate) · **user-invoked** |
+| [`review`](skills/review/SKILL.md) | REVIEW | Fan out parallel reviewers (scope-detected audits + independent agent lenses), consolidate into one verdict — **optional QA pass**, not a ship gate |
+| [`ship`](skills/ship/SKILL.md) | SHIP | Pre-launch gate (validate-code + safe-repo) + atomic commits + push (`--fast` to skip gate) · **user-invoked** |
 
 ### On-demand tools
 
