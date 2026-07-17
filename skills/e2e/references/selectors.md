@@ -45,17 +45,6 @@ cy.get('[data-testid="submit-button"]')
 // <button data-testid="submit-button">Submit</button>
 ```
 
-## Install @testing-library/cypress
-
-```bash
-npm install --save-dev @testing-library/cypress
-```
-
-```typescript
-// cypress/support/commands.ts
-import '@testing-library/cypress/add-commands'
-```
-
 ## Why avoid CSS selectors
 
 ```typescript
@@ -66,32 +55,4 @@ cy.get('form > div:nth-child(2) > input')
 
 // Resilient — describes behavior, not structure
 cy.findByRole('button', { name: 'Submit' })
-```
-
-## Common patterns
-
-```typescript
-// Type into input
-cy.findByLabelText('Email').type('user@example.com')
-
-// Clear and retype
-cy.findByLabelText('Email').clear().type('new@example.com')
-
-// Select option
-cy.findByLabelText('Country').select('Brazil')
-
-// Check checkbox
-cy.findByRole('checkbox', { name: 'Remember me' }).check()
-
-// Assert visibility
-cy.findByRole('alert').should('be.visible')
-cy.findByText('Saved').should('be.visible')
-cy.findByRole('dialog').should('not.exist')
-
-// Assert URL
-cy.url().should('include', '/dashboard')
-cy.url().should('eq', Cypress.config().baseUrl + '/dashboard')
-
-// Wait for element (auto-retries — no cy.wait needed)
-cy.findByRole('heading', { name: 'Dashboard' }).should('be.visible')
 ```

@@ -25,15 +25,8 @@ List each finding with actionable recommendations:
 
 ## If Clean
 
-Use this security assessment:
-
 ```
 **Repository Security Assessment**
 
-From an offensive security perspective, this repository provides no credential-based attack surface. The user demonstrates security awareness by:
-- Storing secrets in external files
-- Never committing those files to version control
-- Cleaning up unused references
-
-Repository is safe for public exposure.
+No credentials or sensitive data found in tracked files or history. Repository is clean.
 ```
