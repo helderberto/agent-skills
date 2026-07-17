@@ -27,7 +27,7 @@ Accepts a plan `<slug>` or `@file` reference. If omitted, glob `.specs/plans/*.m
 Run and collect all results — don't stop at the first failure:
 
 1. `/validate-code` — auto-fix formatting/lint, verify types, run the full test suite
-2. `/coverage` — coverage for unstaged changes
+2. **Changed-line coverage** — if the project emits coverage, confirm the lines you changed (`git diff -U0`) are exercised, not just the global %. Skip when the project has no coverage tooling.
 
 Capture pass/fail and any uncovered changed lines.
 
