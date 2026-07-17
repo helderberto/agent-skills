@@ -5,7 +5,7 @@
     "email": "helder.burato@gmail.com"
   },
   "metadata": {
-    "description": "Helder's personal SDLC toolbelt for AI coding agents — covering define, plan, build, verify, review, and ship."
+    "description": "Helder's personal SDLC toolbelt for AI coding agents — covering spec, plan, build, test, review, and ship."
   },
   "plugins": [
     {
@@ -14,7 +14,7 @@
         "source": "github",
         "repo": "helderberto/agent-skills"
       },
-      "description": "Personal SDLC toolbelt: tracer-bullet workflow (prd, plan, build, check, brief) plus TDD, code review, audits, and shipping skills."
+      "description": "Personal SDLC toolbelt: tracer-bullet workflow (spec, plan, build, test, review, ship) plus TDD, code review, audits, and shipping skills."
     }
   ]
 }
