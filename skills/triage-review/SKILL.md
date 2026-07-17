@@ -1,7 +1,7 @@
 ---
 name: triage-review
 effort: high
-description: Fetch unresolved review comments on a GitHub PR (Copilot bot + human reviewers), verify each against the current code, and classify as Address / Skip / Optional / Discuss with a one-line rationale. Use when the user asks which review comments to address, to triage Copilot/reviewer feedback, sort signal from noise on a PR, or decide what makes sense to fix and what not. Don't use to reply to or resolve threads (out of scope — this is read-only), or to generate a fresh review (use /code-review or /validate-pr).
+description: Fetch unresolved review comments on a GitHub PR (Copilot bot + human reviewers), verify each against the current code, and classify as Address / Skip / Optional / Discuss with a one-line rationale. Use when the user asks which review comments to address, to triage Copilot/reviewer feedback, sort signal from noise on a PR, or decide what makes sense to fix and what not. Don't use to reply to or resolve threads (out of scope — this is read-only), or to generate a fresh review (use /code-review or /review).
 argument-hint: '[PR-number-or-branch]'
 ---
 
@@ -11,7 +11,7 @@ Consume the review comments **already on a PR** — Copilot and human reviewers 
 
 **Read-only.** Never reply to threads, resolve conversations, or post anything. The output is a decision aid for the user.
 
-Distinct from siblings: `/code-review` and `/validate-pr` *generate* new findings; this skill *evaluates existing* reviewer comments.
+Distinct from siblings: `/code-review` and `/review` *generate* new findings; this skill *evaluates existing* reviewer comments.
 
 ## Workflow
 

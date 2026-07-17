@@ -133,7 +133,7 @@ The six-phase spine. Type each to advance, or let one phase chain into the next:
 | [`plan`](skills/plan/SKILL.md) | PLAN | Turn PRD into multi-phase implementation plan (tracer-bullet vertical slices) |
 | [`build`](skills/build/SKILL.md) | BUILD | Implement next incomplete phase of a plan with feedback loops |
 | [`verify-plan`](skills/verify-plan/SKILL.md) | VERIFY | Verify plan checkboxes against codebase; mark or unmark |
-| [`review`](skills/review/SKILL.md) | REVIEW | Detect scope, run relevant audits, consolidate findings |
+| [`review`](skills/review/SKILL.md) | REVIEW | Fan out parallel reviewers (scope-detected audits + independent agent lenses), consolidate into one verdict |
 | [`ship`](skills/ship/SKILL.md) | SHIP | Pre-launch gate + atomic commits + push (`--fast` to skip gate) · **user-invoked** |
 
 ### On-demand tools
@@ -171,7 +171,6 @@ Focused capabilities the agent applies automatically based on the task (all call
 | Skill | What it does |
 |-------|--------------|
 | [`code-review`](skills/code-review/SKILL.md) | Five-axis review of a PR (correctness, readability, architecture, security, performance) |
-| [`validate-pr`](skills/validate-pr/SKILL.md) | Fan out independent review agents in parallel (one lens each), consolidate + dedupe into one verdict |
 | [`triage-review`](skills/triage-review/SKILL.md) | Triage existing PR review comments (Copilot + human), verify against code, classify Address/Skip/Optional/Discuss |
 | [`a11y-audit`](skills/a11y-audit/SKILL.md) | Accessibility compliance audit (WCAG) |
 | [`i18n`](skills/i18n/SKILL.md) | Find hardcoded strings, check translation coverage |
@@ -201,6 +200,7 @@ Focused capabilities the agent applies automatically based on the task (all call
 | Skill | What it does |
 |-------|--------------|
 | [`codebase-design`](skills/codebase-design/SKILL.md) | Shared deep-module vocabulary for designing or improving an interface |
+| [`frontend-ui-engineering`](skills/frontend-ui-engineering/SKILL.md) | Front-load UI construction decisions — prop API, state placement, required states, a11y by construction |
 | [`architecture-audit`](skills/architecture-audit/SKILL.md) | Surface architectural friction, propose refactors toward deep modules as RFCs |
 | [`domain-modeling`](skills/domain-modeling/SKILL.md) | Build and sharpen the project's ubiquitous language and glossary |
 | [`research`](skills/research/SKILL.md) | Investigate a question against primary sources; capture cited findings as Markdown |

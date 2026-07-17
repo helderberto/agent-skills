@@ -55,7 +55,6 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Prototype a design (terminal app or UI) | `prototype`                                    |
 | Explain code or codebase area           | `explain-code`                                 |
 | Code review on a PR                     | `code-review`                                  |
-| Validate a PR with parallel review agents | `validate-pr`                                |
 | Triage existing PR review comments (what to fix) | `triage-review`                        |
 | Reply to PR review comment              | `pr-reply`                                     |
 | Check accessibility                     | `a11y-audit`                                   |
@@ -90,7 +89,7 @@ When the user has a non-trivial task, follow this flow even without explicit com
 - **PLAN** → `plan` (PRD to vertical-slice phases), with `architecture-audit` or `codebase-design` as needed
 - **BUILD** → `build` (one phase per invocation), driven by `tdd` and `source-driven`
 - **VERIFY** → `verify-plan` (plan vs codebase), plus `coverage`, `validate-code`, `diagnose` on failure
-- **REVIEW** → `code-review` (or `validate-pr` for parallel multi-agent review; `triage-review` to sort existing reviewer comments), plus `a11y-audit`, `i18n`, `perf-audit`, `deps-audit`, `safe-repo`
+- **REVIEW** → `review` (orchestrates the audits below as parallel reviewers plus independent agent lenses; `code-review` for a single in-thread lens; `triage-review` to sort existing reviewer comments), covering `a11y-audit`, `i18n`, `perf-audit`, `deps-audit`, `safe-repo`, `harden`
 - **SHIP** → `validate-code` → `ship` → `create-pull-request`
 
 ## Conventions
