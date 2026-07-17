@@ -72,7 +72,7 @@ Ask: "Which interface design should we use?" — list each design as an option w
 
 ### 7. Write improvement PRD
 
-Save a markdown file named `architecture-<cluster-name>.md` using the template in [references/improvement-template.md](references/improvement-template.md). If `.specs/prds/` exists, save there; otherwise, save in `prds/`.
+Save a markdown file named `architecture-<cluster-name>.md` using the template in [references/improvement-template.md](references/improvement-template.md). If `.specs/specs/` exists, save there; otherwise, save in `specs/`.
 
 Fill with concrete details: file paths, function names, migration steps. Share the file path with the user when done.
 

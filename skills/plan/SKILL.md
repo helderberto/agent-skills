@@ -1,13 +1,13 @@
 ---
 name: plan
 effort: high
-description: Turn a PRD into a multi-phase implementation plan using tracer-bullet vertical slices. Use after /prd when a PRD exists at `.specs/prds/<slug>.md`, or when the user asks to break work into phases or slices. Don't use without a PRD, or for single-file changes with obvious scope.
+description: Turn a spec into a multi-phase implementation plan using tracer-bullet vertical slices. Use after /spec when a spec exists at `.specs/specs/<slug>.md`, or when the user asks to break work into phases or slices. Don't use without a spec, or for single-file changes with obvious scope.
 argument-hint: '[slug]'
 ---
 
-# PRD to Plan
+# Plan
 
-Break a PRD into phased vertical slices (tracer bullets).
+Break a spec into phased vertical slices (tracer bullets).
 
 **Interactive prompts**: present options as a numbered list and wait for the user's choice.
 
@@ -17,13 +17,13 @@ Output: `.specs/plans/<slug>.md`.
 
 The argument (if provided) is: $ARGUMENTS
 
-Use argument as `<slug>`. If empty, list PRDs as numbered options and wait for the user's choice.
+Use argument as `<slug>`. If empty, list specs as numbered options and wait for the user's choice.
 
 ## Workflow
 
-### 1. Read the PRD
+### 1. Read the spec
 
-Read `.specs/prds/<slug>.md`. If missing, list PRDs as numbered options and wait for the user's choice.
+Read `.specs/specs/<slug>.md`. If missing, list specs as numbered options and wait for the user's choice.
 
 If `.specs/plans/<slug>.md` exists, present options and wait:
 
@@ -50,9 +50,9 @@ Before slicing, extract decisions that hold across all phases:
 
 Each phase: thin vertical slice through all layers (schema → service → API → UI → tests). Demoable alone.
 
-**Deriving tasks from the PRD:**
+**Deriving tasks from the spec:**
 
-| PRD Section       | Becomes                                          |
+| Spec Section       | Becomes                                          |
 | ----------------- | ------------------------------------------------ |
 | New Modules       | Implement module with interface                  |
 | Schema Changes    | Migration + validation                           |
@@ -75,10 +75,10 @@ Each phase: thin vertical slice through all layers (schema → service → API �
 - 1 module touched → 2–3 phases max
 - 2–3 modules touched → 3–5 phases max
 - 4+ modules or 6+ phases → stop and present options:
-  1. Split the PRD (Recommended)
+  1. Split the spec (Recommended)
   2. Continue anyway
 
-Count "modules touched" by scanning the PRD's New Modules and Schema Changes sections.
+Count "modules touched" by scanning the spec's New Modules and Schema Changes sections.
 
 Assign an agent tag to tasks where appropriate:
 
@@ -117,7 +117,7 @@ Durable decisions that apply across all phases:
 
 ## Phase 1 — <Goal>
 
-**User stories**: <list from PRD>
+**User stories**: <list from spec>
 
 ### What to build
 
@@ -134,17 +134,17 @@ Concise description of this vertical slice — end-to-end behavior, not layer-by
 
 ## Out of Scope
 
-Carried forward from PRD verbatim.
+Carried forward from spec verbatim.
 
 ## Open Questions
 
-Gaps found in the PRD needing resolution. Blank if none.
+Gaps found in the spec needing resolution. Blank if none.
 ```
 
 Print one line per phase: `Phase N — <title> (<condition summary>)`. Present options and wait:
 
 1. Run `/build <slug>` (Recommended)
-2. Run `/verify-plan <slug>`
+2. Run `/test <slug>`
 3. Done for now
 
 ## Execution guidance
@@ -153,9 +153,9 @@ To implement this plan phase by phase, run `/build <slug>`. It handles branch cr
 
 ## Rules
 
-- Phases derive from PRD user stories — never invented
+- Phases derive from spec user stories — never invented
 - Each phase must be demoable end-to-end on its own
 - "Done when" must be a checkbox list of testable conditions, not prose
 - **Safety valve**: if a phase has >5 "Done when" items, stop and split it into smaller phases before continuing
-- Never modify the source PRD content
-- Carry PRD's Out of Scope forward verbatim
+- Never modify the source spec content
+- Carry spec's Out of Scope forward verbatim

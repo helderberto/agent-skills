@@ -106,7 +106,7 @@ The description is **the only thing the agent sees** when deciding which skill t
 - Second sentence: `Use when [triggers]`
 - Third sentence: `Don't use for [anti-triggers]`
 
-The trigger/anti-trigger sentences exist for **model routing**. A **user-invoked** skill (`disable-model-invocation: true`) never auto-triggers — the user types it — so those clauses are dead weight that still burns context tokens every turn. Keep user-invoked descriptions to one what-it-does sentence (plus a sequencing cross-ref like `Use after /prd` if it helps). The rules below apply only to model-invoked skills.
+The trigger/anti-trigger sentences exist for **model routing**. A **user-invoked** skill (`disable-model-invocation: true`) never auto-triggers — the user types it — so those clauses are dead weight that still burns context tokens every turn. Keep user-invoked descriptions to one what-it-does sentence (plus a sequencing cross-ref like `Use after /spec` if it helps). The rules below apply only to model-invoked skills.
 
 **Combat under-triggering** (model-invoked): Claude tends to under-trigger skills. If a skill is useful but rarely fires, make the description more assertive — list extra phrases the user might say, name file types or contexts explicitly, even add `Make sure to use this skill whenever...` when warranted. Anti-triggers stay important, but the trigger clause should be generous.
 

@@ -1,7 +1,7 @@
 ---
 name: build
 effort: high
-description: Implement one phase of a plan — reads the plan, finds the next incomplete phase, implements it with feedback loops, marks checkboxes, offers a commit (one phase per invocation). Use after /plan when a plan exists at `.specs/plans/<slug>.md`, or when the user asks to build or implement the next phase. Don't use for ad-hoc changes with no plan (use /tdd) or to check progress (use /verify-plan).
+description: Implement one phase of a plan — reads the plan, finds the next incomplete phase, implements it with feedback loops, marks checkboxes, offers a commit (one phase per invocation). Use after /plan when a plan exists at `.specs/plans/<slug>.md`, or when the user asks to build or implement the next phase. Don't use for ad-hoc changes with no plan (use /tdd) or to check progress (use /test).
 argument-hint: '[slug]'
 ---
 
@@ -42,7 +42,7 @@ The **next incomplete phase** is the first phase that has at least one unchecked
 
 If all phases are complete (zero unchecked items across all phases):
 
-> All phases complete. Run `/verify-plan <slug>` to verify.
+> All phases complete. Run `/test <slug>` to verify.
 
 Stop here.
 
@@ -128,9 +128,9 @@ Present the changes and ask:
 
 If the user chooses to commit:
 
-1. Stage the implementation files (not `.specs/` artifacts unless the project dogfoods TracerKit)
+1. Stage the implementation files (not `.specs/` artifacts unless the project commits its specs)
 2. Create a commit with a message following the project's commit conventions
-3. Confirm: "Committed. Run `/build <slug>` for Phase N+1, or `/verify-plan <slug>` to verify."
+3. Confirm: "Committed. Run `/build <slug>` for Phase N+1, or `/test <slug>` to verify."
 
 If the user chooses to review:
 

@@ -1,11 +1,11 @@
 ---
-name: prd
+name: spec
 effort: high
-description: Create a PRD through user interview, codebase exploration, and module design. Use when starting a feature with unclear requirements, when the user asks to spec or define what to build, or says "write a PRD". Don't use when requirements are crisp and a plan already exists (use /plan or /build).
+description: Create a spec (PRD) through user interview, codebase exploration, and module design. Use when starting a feature with unclear requirements, when the user asks to spec or define what to build, or says "write a spec" or "write a PRD". Don't use when requirements are crisp and a plan already exists (use /plan or /build).
 argument-hint: <idea>
 ---
 
-# PRD Writing
+# Spec
 
 Skip satisfied steps. If argument provided, skip to Step 2.
 
@@ -24,7 +24,7 @@ If empty, go to Step 1; derive slug after gathering the idea. If provided, deriv
 5. Take the first 4 remaining words (or fewer if less exist)
 6. Join with hyphens → `<slug>`
 
-Output: `.specs/prds/<slug>.md`. If file exists, present options and wait:
+Output: `.specs/specs/<slug>.md`. If file exists, present options and wait:
 
 1. Overwrite existing (Recommended)
 2. Pick a new name
@@ -67,15 +67,15 @@ Shallow signals: many small 1:1 functions, callers compose multiple calls, featu
 
 Present modules. Confirm which need tests.
 
-### 5. Write PRD
+### 5. Write spec
 
-Save to `.specs/prds/<slug>.md` (create dir if missing).
+Save to `.specs/specs/<slug>.md` (create dir if missing).
 
 ```markdown
 # Feature Name
 ```
 
-PRD body structure. Omit empty sections. No file paths or code snippets.
+Spec body structure. Omit empty sections. No file paths or code snippets.
 
 ```
 ## Problem Statement

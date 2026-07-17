@@ -57,7 +57,7 @@ Spawn **all reviewers in a single message** (multiple Agent calls) so they run c
 - The exact diff command and the subset of changed files it cares about.
 - One-paragraph context (what the change does + ticket id if known).
 - Its instruction: for an audit-skill reviewer, **run that skill** via the Skill tool (fall back to the audit's checklist if skills aren't available to the subagent); for a lens reviewer, apply the lens directly.
-- If a plan/PRD exists (`.specs/plans/*.md`), point the test/correctness reviewers at it to check coverage against intent.
+- If a plan/spec exists (`.specs/plans/*.md`), point the test/correctness reviewers at it to check coverage against intent.
 - Output contract: concise findings, each with `file:line`, a severity (`critical` / `important` / `suggestion`), a one-line rationale, and a closing summary. **Read-only** — must not modify, stage, commit, or push.
 
 **Build/install collisions**: reviewers that mutate the working dir (`perf-audit` builds; `deps-audit` may touch `node_modules`) can clobber each other in the same checkout. Give those worktree isolation, or run them serially after the read-only ones.
