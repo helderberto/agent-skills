@@ -24,7 +24,10 @@ Group all unstaged/untracked changes into atomic commits — one commit per logi
    b. Write a commit message matching repo style from log
    c. Commit with HEREDOC format
    d. Run `git status` to confirm staging is clean before next group
-4. After all commits: `git push`
+4. Push the commits — but check the branch first:
+   a. `git branch --show-current`
+   b. If on the default branch (`main`/`master`): do NOT push. Most repos block or discourage direct pushes to the default branch (branch protection, pre-push hooks). Stop and tell the user, suggesting they move the commits onto a feature branch first (e.g. `git switch -c <feature-branch>`), then push.
+   c. Otherwise: `git push` (relies on the branch's configured upstream)
 5. Run `git status` to verify clean working tree
 
 ## Grouping Rules
@@ -41,4 +44,5 @@ Group all unstaged/untracked changes into atomic commits — one commit per logi
 ## Error Handling
 
 - If `git push` is rejected (non-fast-forward) → run `git pull --rebase` then retry push once
+- If a pre-push hook or branch-protection rule rejects the push → do not force or work around it; report the hook's message to the user and let them decide
 - If unsure how to group a file → ask the user before committing
