@@ -51,28 +51,9 @@ After all sections are revised:
 
 ## Step 5 — Polish Pass
 
-After structural edits, run a single cosmetic pass over the file. Order: formatting → typos → clarity.
+After structural edits, run a single cosmetic pass over the file: invoke `/prose-fix` on it (formatting → typos → clarity, in that order). That skill owns the formatting/typo/clarity rules — keeping them in one place avoids the two copies drifting apart.
 
-### Formatting
-| Issue | Replace with |
-|-------|-------------|
-| Em dash ` — ` (with spaces) | Period, comma, colon, or parentheses depending on context |
-| Em dash `—` (no spaces) | Split into two sentences or use comma |
-| Double spaces | Single space |
-
-### Typos
-- Misspelled words
-- Wrong word form (e.g. "teh" → "the", "dont" → "don't")
-- Missing apostrophes in contractions
-
-### Sentence Clarity
-- Remove filler words ("very", "just", "really", "basically", "actually")
-- Split run-on sentences into two
-- Flatten weak constructions ("is able to" → "can", "in order to" → "to")
-
-Workflow: grep for `—` first, fix all formatting, then typos, then clarity. Grep again to confirm no em dashes remain. Never add words — only remove or substitute. Never rewrite a sentence that is already clear.
-
-Report what was changed by category.
+Report what the polish pass changed by category.
 
 ## Rules
 
