@@ -4,7 +4,7 @@ Guidance for AI coding agents (Claude Code, Cursor, Gemini CLI, OpenCode, Copilo
 
 ## Repository Overview
 
-`helderberto/agent-skills` is a personal SDLC toolbelt for AI coding agents. Skills are packaged Markdown instructions that extend agent capabilities across the full lifecycle — from PRD to ship.
+`helderberto/agent-skills` is a personal SDLC toolbelt for AI coding agents. Skills are packaged Markdown instructions that extend agent capabilities across the full lifecycle — from spec to ship.
 
 ## Project Structure
 
@@ -42,14 +42,15 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 
 | User intent                             | Skill to invoke                                |
 | --------------------------------------- | ---------------------------------------------- |
-| New feature with unclear requirements   | `prd` → `plan` → `build`                       |
+| New feature with unclear requirements   | `spec` → `plan` → `build`                      |
 | Implement next phase of a plan          | `build`                                        |
-| Check plan progress                     | `verify-plan`, `brief`                         |
+| Verify work + check plan progress       | `test`, `brief`                                |
 | Test-first development                  | `tdd`                                          |
 | Implement using official docs           | `source-driven`                                |
 | Research a question against sources     | `research`                                     |
 | Bug, error, unexpected behavior         | `diagnose`                                     |
 | Backfill tests / split large functions  | `fortify`                                      |
+| Simplify code without changing behavior | `code-simplify`                                |
 | Design or improve a module's interface  | `codebase-design`                              |
 | Architectural friction in codebase      | `architecture-audit`                           |
 | Prototype a design (terminal app or UI) | `prototype`                                    |
@@ -85,10 +86,10 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 
 When the user has a non-trivial task, follow this flow even without explicit commands:
 
-- **DEFINE** → `prd` (interview-driven), with `grill-me` to stress-test
-- **PLAN** → `plan` (PRD to vertical-slice phases), with `architecture-audit` or `codebase-design` as needed
+- **SPEC** → `spec` (interview-driven), with `grill-me` to stress-test
+- **PLAN** → `plan` (spec to vertical-slice phases), with `architecture-audit` or `codebase-design` as needed
 - **BUILD** → `build` (one phase per invocation), driven by `tdd` and `source-driven`
-- **VERIFY** → `verify-plan` (plan vs codebase), plus `coverage`, `validate-code`, `diagnose` on failure
+- **TEST** → `test` (validate-code + coverage + plan vs codebase), with `diagnose` on failure
 - **REVIEW** → `review` (orchestrates the audits below as parallel reviewers plus independent agent lenses; `code-review` for a single in-thread lens; `triage-review` to sort existing reviewer comments), covering `a11y-audit`, `i18n`, `perf-audit`, `deps-audit`, `safe-repo`, `harden`
 - **SHIP** → `validate-code` → `ship` → `create-pull-request`
 

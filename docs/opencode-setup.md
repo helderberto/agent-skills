@@ -61,16 +61,16 @@ For features beyond a few files, follow the DEFINE → PLAN → BUILD → VERIFY
 
 ```
 You: I want to add dark mode support.
-OpenCode: [invokes prd skill, interviews, writes .tracerkit/prds/dark-mode.md]
+OpenCode: [invokes spec skill, interviews, writes .specs/specs/dark-mode.md]
 
 You: Plan it.
-OpenCode: [invokes plan skill, writes phases into .tracerkit/plans/dark-mode.md]
+OpenCode: [invokes plan skill, writes phases into .specs/plans/dark-mode.md]
 
 You: Build the next phase.
 OpenCode: [invokes build skill, implements, runs feedback loops, marks checkboxes]
 
 You: Verify.
-OpenCode: [invokes check skill, validates plan against codebase]
+OpenCode: [invokes test skill, validates plan against codebase]
 ```
 
 ## Customizing the agent persona

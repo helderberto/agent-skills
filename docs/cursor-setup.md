@@ -45,13 +45,13 @@ The skills below cover the most common moments where Cursor benefits from explic
 
 ## Workflow-style skills (tracer-bullet flow)
 
-If you want the full define → plan → build → verify loop in Cursor:
+If you want the full spec → plan → build → test loop in Cursor:
 
 ```bash
-cp /path/to/agent-skills/skills/prd/SKILL.md   .cursor/rules/prd.md
+cp /path/to/agent-skills/skills/spec/SKILL.md  .cursor/rules/spec.md
 cp /path/to/agent-skills/skills/plan/SKILL.md  .cursor/rules/plan.md
 cp /path/to/agent-skills/skills/build/SKILL.md .cursor/rules/build.md
-cp /path/to/agent-skills/skills/check/SKILL.md .cursor/rules/check.md
+cp /path/to/agent-skills/skills/test/SKILL.md  .cursor/rules/test.md
 cp /path/to/agent-skills/skills/brief/SKILL.md .cursor/rules/brief.md
 ```
 
@@ -59,7 +59,7 @@ Cursor will then route prompts like "plan the dark mode feature" or "build the n
 
 ## Limitations
 
-- Cursor does not support slash-style invocation (e.g., `/hb:prd`). Reference skills by name in prompts: "use the prd skill to ...".
+- Cursor does not support slash-style invocation (e.g., `/hb:spec`). Reference skills by name in prompts: "use the spec skill to ...".
 - Rules can grow Cursor's context fast. Load only the skills you actively need per project rather than the entire set.
 - Cursor does not auto-detect when a skill applies. State the skill in your prompt explicitly.
 

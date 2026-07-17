@@ -2,17 +2,17 @@
 
 [![Test Plugin Installation](https://github.com/helderberto/agent-skills/actions/workflows/test-plugin-install.yml/badge.svg)](https://github.com/helderberto/agent-skills/actions/workflows/test-plugin-install.yml)
 
-**Personal SDLC toolbelt for AI coding agents — from PRD to ship.**
+**Personal SDLC toolbelt for AI coding agents — from spec to ship.**
 
 A collection of skills that encode the workflows, quality gates, and engineering practices I use day-to-day. Pure Markdown, zero runtime deps, installable as a [Claude Code](https://claude.com/claude-code) plugin or copied into any agent that reads instruction files.
 
 ```
-  DEFINE          PLAN            BUILD            VERIFY            REVIEW           SHIP
+  SPEC            PLAN            BUILD            TEST             REVIEW           SHIP
  ┌──────┐       ┌──────┐        ┌──────┐         ┌──────┐         ┌──────┐         ┌──────┐
  │ Idea │ ────▶ │ Spec │ ─────▶ │ Code │ ──────▶ │ Test │ ──────▶ │  QA  │ ──────▶ │  Go  │
- │Refine│       │ PRD  │        │ Impl │         │Debug │         │ Gate │         │ Live │
+ │Refine│       │Slices│        │ Impl │         │Verify│         │ Gate │         │ Live │
  └──────┘       └──────┘        └──────┘         └──────┘         └──────┘         └──────┘
- /hb:prd        /hb:plan        /hb:build        /hb:verify-plan  /hb:review       /hb:ship
+ /hb:spec       /hb:plan        /hb:build        /hb:test         /hb:review       /hb:ship
 ```
 
 Each phase has a dedicated **workflow skill** that orchestrates the smaller toolbelt skills underneath it. Type the spine in order, or let it chain — every skill auto-routes by description. Only the outward-facing steps that push work out of your hands (`ship`, `create-pull-request`) are gated against auto-triggering, so you always pull that trigger yourself.
@@ -31,7 +31,7 @@ Install via the marketplace:
 /plugin install hb@helderberto-skills
 ```
 
-After install, skills are available as `/hb:<skill-name>` — e.g. `/hb:prd`, `/hb:tdd`, `/hb:ship`. Most skills also auto-trigger from natural language ("review this PR", "check accessibility", etc.) based on their description.
+After install, skills are available as `/hb:<skill-name>` — e.g. `/hb:spec`, `/hb:tdd`, `/hb:ship`. Most skills also auto-trigger from natural language ("review this PR", "check accessibility", etc.) based on their description.
 
 </details>
 
@@ -84,21 +84,21 @@ See [docs/cursor-setup.md](docs/cursor-setup.md) for the recommended starter set
 A non-trivial feature flows through all six phases. Each workflow skill is one invocation:
 
 ```
-You: /hb:prd add dark mode support
-AI:  Interviews, scans the codebase, writes .specs/prds/dark-mode.md.
+You: /hb:spec add dark mode support
+AI:  Interviews, scans the codebase, writes .specs/specs/dark-mode.md.
      Run /hb:plan dark-mode next?
 
 You: /hb:plan dark-mode
-AI:  Breaks the PRD into phased vertical slices.
+AI:  Breaks the spec into phased vertical slices.
      Writes .specs/plans/dark-mode.md.
 
 You: /hb:build dark-mode
 AI:  Implements next incomplete phase. TDD loop, lint, type-check.
      Marks checkboxes in the plan. Offers a commit.
 
-You: /hb:verify-plan dark-mode
-AI:  Verifies plan checkboxes against actual codebase.
-     Reports total progress and remaining blockers.
+You: /hb:test dark-mode
+AI:  Runs validation (lint, types, tests) + coverage, then verifies
+     plan checkboxes against the codebase. Reports progress + blockers.
 
 You: /hb:review
 AI:  Detects what changed, runs relevant audits in order
@@ -129,10 +129,10 @@ The six-phase spine. Type each to advance, or let one phase chain into the next:
 
 | Skill | Phase | What it does |
 |-------|-------|--------------|
-| [`prd`](skills/prd/SKILL.md) | DEFINE | Interview + codebase scan → structured PRD in `.specs/prds/<slug>.md` |
-| [`plan`](skills/plan/SKILL.md) | PLAN | Turn PRD into multi-phase implementation plan (tracer-bullet vertical slices) |
+| [`spec`](skills/spec/SKILL.md) | SPEC | Interview + codebase scan → structured spec in `.specs/specs/<slug>.md` |
+| [`plan`](skills/plan/SKILL.md) | PLAN | Turn spec into multi-phase implementation plan (tracer-bullet vertical slices) |
 | [`build`](skills/build/SKILL.md) | BUILD | Implement next incomplete phase of a plan with feedback loops |
-| [`verify-plan`](skills/verify-plan/SKILL.md) | VERIFY | Verify plan checkboxes against codebase; mark or unmark |
+| [`test`](skills/test/SKILL.md) | TEST | Validate (lint/types/tests) + coverage, and verify plan checkboxes against codebase |
 | [`review`](skills/review/SKILL.md) | REVIEW | Fan out parallel reviewers (scope-detected audits + independent agent lenses), consolidate into one verdict |
 | [`ship`](skills/ship/SKILL.md) | SHIP | Pre-launch gate + atomic commits + push (`--fast` to skip gate) · **user-invoked** |
 
@@ -148,6 +148,7 @@ Focused capabilities the agent applies automatically based on the task (all call
 | [`tdd`](skills/tdd/SKILL.md) | Red → green → refactor loop for any new logic |
 | [`source-driven`](skills/source-driven/SKILL.md) | Implement using official docs for exact dependency versions |
 | [`fortify`](skills/fortify/SKILL.md) | Split large functions, add edge-case coverage, backfill missing tests |
+| [`code-simplify`](skills/code-simplify/SKILL.md) | Reduce complexity without changing behavior — clarity over cleverness (Chesterton's Fence) |
 | [`e2e`](skills/e2e/SKILL.md) | Write end-to-end tests for user flows using Cypress |
 
 </details>
@@ -246,7 +247,7 @@ agent-skills/
 
 Workflow skills write structured artifacts to `.specs/`:
 
-- `.specs/prds/<slug>.md` — PRDs from `/hb:prd`
+- `.specs/specs/<slug>.md` — specs from `/hb:spec`
 - `.specs/plans/<slug>.md` — phased plans from `/hb:plan`
 
 The `.specs/` directory is local-first. Add it to `.gitignore` if you prefer specs as scratch space, or commit it if you want specs as versioned project documentation.

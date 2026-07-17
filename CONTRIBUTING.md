@@ -47,7 +47,7 @@ When in doubt, open an issue first to discuss scope.
 
 - **English only** for all written artifacts (code, comments, commits, PR titles/bodies, ADRs, docs)
 - **Skill names** are lowercase kebab-case: `code-review`, `safe-repo`
-- **Workflow skills** (`prd`, `plan`, `build`, `check`, `review`, `ship`) are invoked as `/hb:<name>`
+- **Workflow skills** (`spec`, `plan`, `build`, `test`, `review`, `ship`) are invoked as `/hb:<name>`
 - **Toolbelt skills** auto-trigger from the `description` field — write that carefully
 - **Don't add** `compatibility:` or `allowed-tools:` to frontmatter (legacy `npx skills` CLI fields, not part of the plugin spec)
 
