@@ -65,7 +65,6 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Check for sensitive data in repo        | `safe-repo`                                    |
 | Run linter / formatter                  | `lint`                                         |
 | Run the test suite                      | `testing`                                      |
-| Run tests with coverage on changes      | `coverage`                                     |
 | Validate code (lint + types + tests)    | `validate-code`                                |
 | Write end-to-end tests (Cypress)        | `e2e`                                          |
 | Commit changes (atomic, grouped by concern) | `commit`                                    |
@@ -88,7 +87,7 @@ When the user has a non-trivial task, follow this flow even without explicit com
 - **SPEC** → `spec` (interview-driven), with `grill-me` to stress-test
 - **PLAN** → `plan` (spec to vertical-slice phases), with `architecture-audit` or `codebase-design` as needed
 - **BUILD** → `build` (one phase per invocation), driven by `tdd` and `source-driven`
-- **TEST** → `test` (validate-code + coverage + plan vs codebase), with `diagnose` on failure
+- **TEST** → `test` (validate-code + changed-line coverage + plan vs codebase), with `diagnose` on failure
 - **REVIEW** → `review` (orchestrates the audits below as parallel reviewers plus independent agent lenses; `code-review` for a single in-thread lens; `triage-review` to sort existing reviewer comments), covering `a11y-audit`, `i18n`, `perf-audit`, `deps-audit`, `safe-repo`, `harden`
 - **SHIP** → `validate-code` → `ship` → `create-pull-request`
 

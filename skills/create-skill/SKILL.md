@@ -83,7 +83,7 @@ A skill's `effort` overrides session effort for the turn it fires, then resets. 
 
 | Effort | Fits | Examples |
 |---|---|---|
-| `low` | mechanical, single-place edits | `prose-fix`, `lint`, `commit`, `coverage` |
+| `low` | mechanical, single-place edits | `prose-fix`, `lint`, `commit` |
 | `medium` | single-file additions, known-cause fixes (implicit default — leave unset) | `tdd`-adjacent, `e2e`, `source-driven` |
 | `high` | multi-file features, unknown-cause debugging, refactors, review | `build`, `plan`, `diagnose`, `code-review` |
 | `xhigh` | architecture, migrations, security-sensitive work | `architecture-audit`, `harden` |

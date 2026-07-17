@@ -158,7 +158,6 @@ Focused capabilities the agent applies automatically based on the task (all call
 
 | Skill | What it does |
 |-------|--------------|
-| [`coverage`](skills/coverage/SKILL.md) | Test coverage for unstaged changes |
 | [`validate-code`](skills/validate-code/SKILL.md) | Auto-fix lint, verify types, run tests |
 | [`lint`](skills/lint/SKILL.md) | Run linting and formatting checks |
 | [`diagnose`](skills/diagnose/SKILL.md) | Disciplined diagnosis loop for hard bugs and perf regressions |
@@ -176,7 +175,7 @@ Focused capabilities the agent applies automatically based on the task (all call
 | [`a11y-audit`](skills/a11y-audit/SKILL.md) | Accessibility compliance audit (WCAG) |
 | [`i18n`](skills/i18n/SKILL.md) | Find hardcoded strings, check translation coverage |
 | [`perf-audit`](skills/perf-audit/SKILL.md) | Frontend bundle size and performance audit |
-| [`deps-audit`](skills/deps-audit/SKILL.md) | Check dependencies for vulnerabilities (npm) |
+| [`deps-audit`](skills/deps-audit/SKILL.md) | Check dependencies for vulnerabilities (npm/pnpm/yarn/pip/go/cargo) |
 | [`safe-repo`](skills/safe-repo/SKILL.md) | Sensitive data scan; `--diff` mode for in-flight changes |
 | [`harden`](skills/harden/SKILL.md) | Proactive security hardening at trust boundaries (OWASP-style) |
 
