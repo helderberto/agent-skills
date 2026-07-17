@@ -1,22 +1,29 @@
 ---
 name: deps-audit
-description: Check dependencies for vulnerabilities. Use when user asks to "audit dependencies", "/deps-audit", "check for vulnerabilities", or wants to check dependency health. Don't use for yarn, pnpm, or bun projects (npm only), or for reviewing code quality.
+description: Check dependencies for known vulnerabilities and staleness. Use when user asks to "audit dependencies", "/deps-audit", "check for vulnerabilities", or wants to check dependency health. Don't use for reviewing code quality.
 ---
 
 # Dependency Audit
 
-## Commands
+Detect the project's package manager from its lockfile and run that ecosystem's audit + outdated tooling. Don't assume npm.
 
-Run in parallel:
-- `npm audit`
-- `npm outdated`
+## Detection
+
+| Ecosystem | Lockfile | Audit | Outdated |
+|---|---|---|---|
+| npm | `package-lock.json` | `npm audit` | `npm outdated` |
+| pnpm | `pnpm-lock.yaml` | `pnpm audit` | `pnpm outdated` |
+| yarn | `yarn.lock` | `yarn npm audit` (berry) / `yarn audit` | `yarn outdated` |
+| Python | `requirements*.txt` / `uv.lock` / `poetry.lock` | `pip-audit` | `pip list --outdated` |
+| Go | `go.sum` | `govulncheck ./...` | `go list -m -u all` |
+| Rust | `Cargo.lock` | `cargo audit` | `cargo outdated` |
 
 ## Workflow
 
-1. Run audit and outdated check in parallel
-2. Report vulnerabilities with CVE + fix command using severity table below
+1. Detect the ecosystem from the lockfile; run audit + outdated (parallel where possible)
+2. Report vulnerabilities with advisory ID + fix command using the severity table below
 3. List outdated packages: table of package/current/latest/type (major vs minor/patch)
-4. Check for unused deps: grep imports in `src/`
+4. Check for obviously unused deps: grep imports in the source dir
 
 ## Severity Levels
 
@@ -28,22 +35,24 @@ Run in parallel:
 | **Low** | 0.1-3.9 | Fix when convenient |
 
 For each critical/high vulnerability report:
+
 ```
 Package: <name>@<version>
-CVE: CVE-YYYY-XXXXX
+Advisory: <CVE / GHSA / RUSTSEC id>
 Severity: Critical
 Description: <one line>
-Fix: npm audit fix --force  (or: npm install <pkg>@<safe-version>)
+Fix: <ecosystem fix command, e.g. npm audit fix / cargo update -p <pkg>>
 ```
 
 ## Rules
 
-- Never use `npx` directly
+- Detect the package manager from the lockfile — never assume npm
+- Prefer the project's own audit task if it defines one
 - Focus on actionable items
 - Prioritize: security > major updates > unused > minor updates
 
 ## Error Handling
 
-- `npm audit` fails -- run `npm install` first to generate `package-lock.json`, then retry
-- `npm outdated` returns nothing -- report all dependencies are current
-- `npm` not found -- report incompatibility; this skill requires npm
+- Audit tool missing for the ecosystem → report which tool to install (e.g. `pip-audit`, `govulncheck`, `cargo-audit`) and stop
+- Audit fails for a missing lockfile → generate it (install), then retry
+- Outdated returns nothing → report all dependencies are current

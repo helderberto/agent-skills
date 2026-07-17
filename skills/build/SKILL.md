@@ -84,16 +84,16 @@ Work through each unchecked item in order. For each item:
 
 ### 6. Run feedback loops
 
-After implementing the phase, detect and run available project scripts. Check `package.json` for these scripts (run only what exists):
+After implementing the phase, detect and run the project's checks — type check, tests, lint, format. Detect the toolchain from the manifest and prefer tasks the project already defines (see the detection table in [validate-code](../validate-code/SKILL.md)):
 
-| Script pattern                     | Purpose       |
-| ---------------------------------- | ------------- |
-| `typecheck`, `tsc`, `type-check`   | Type checking |
-| `test`, `vitest`, `jest`           | Tests         |
-| `lint`, `eslint`                   | Linting       |
-| `format:check`, `prettier --check` | Formatting    |
+| Ecosystem | Manifest | Checks (run what exists) |
+| --------- | -------- | ------------------------ |
+| Node      | `package.json` scripts | `typecheck`/`tsc`, `test`, `lint`, `format:check` |
+| Python    | `pyproject.toml`/`Makefile` | `mypy`, `pytest`, `ruff`, `black --check` |
+| Go        | `go.mod` | `go build ./...`, `go test ./...`, `go vet`, `gofmt -l` |
+| Rust      | `Cargo.toml` | `cargo check`, `cargo test`, `cargo clippy`, `cargo fmt --check` |
 
-Run each detected script. If any fails:
+Run each detected check. If any fails:
 
 1. Read the error output
 2. Fix the issue
