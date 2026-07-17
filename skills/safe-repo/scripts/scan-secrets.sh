@@ -12,7 +12,11 @@
 #   1 - secrets found
 #   2 - error (not a git repo, etc.)
 
-set -euo pipefail
+# Note: no `set -e` / no aborting `pipefail` — `grep` exits 1 on a no-match,
+# which is normal here (most files won't match most patterns). Under `set -e`
+# that would kill the scan on the first non-matching file and silently miss
+# everything after it.
+set -uo pipefail
 
 if ! git rev-parse --git-dir > /dev/null 2>&1; then
   echo "ERROR: not a git repository" >&2
@@ -39,20 +43,25 @@ scan() {
     if ! file "$file" 2>/dev/null | grep -q "text"; then
       continue
     fi
-    grep -nP "$pattern" "$file" 2>/dev/null | while IFS= read -r match; do
-      lineno=$(echo "$match" | cut -d: -f1)
+    # Process substitution (not a pipe) so `found` updates in this shell, and
+    # `|| true` so a no-match (grep exit 1) never aborts the loop.
+    while IFS= read -r match; do
+      [ -n "$match" ] || continue
+      lineno=${match%%:*}
       echo "$file:$lineno: $label"
       found=1
-    done
+    done < <(grep -inE "$pattern" "$file" 2>/dev/null || true)
   done <<< "$files"
 }
 
+# POSIX ERE patterns (grep -inE) — portable to BSD grep (macOS) which lacks -P.
+# Case-insensitivity comes from the -i flag, so no inline (?i).
 scan 'AKIA[0-9A-Z]{16}' "AWS Access Key ID"
-scan '(?i)(api[_-]?key|apikey)\s*[=:]\s*["\x27]?[A-Za-z0-9_\-]{16,}' "API Key assignment"
-scan '(?i)(password|passwd|pwd)\s*[=:]\s*["\x27][^"\x27\s]{6,}' "Hardcoded password"
-scan '(?i)(secret|token)\s*[=:]\s*["\x27][A-Za-z0-9_\-\.]{10,}' "Secret/token assignment"
+scan '(api[_-]?key|apikey)[[:space:]]*[=:][[:space:]]*["'\'']?[A-Za-z0-9_-]{16,}' "API Key assignment"
+scan '(password|passwd|pwd)[[:space:]]*[=:][[:space:]]*["'\''][^"'\''[:space:]]{6,}' "Hardcoded password"
+scan '(secret|token)[[:space:]]*[=:][[:space:]]*["'\''][A-Za-z0-9_.-]{10,}' "Secret/token assignment"
 scan '-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----' "Private key"
-scan '(?i)Authorization:\s*Bearer\s+[A-Za-z0-9\-_\.]{20,}' "Bearer token in code"
+scan 'Authorization:[[:space:]]*Bearer[[:space:]]+[A-Za-z0-9._-]{20,}' "Bearer token in code"
 
 if [ "$found" -eq 0 ]; then
   echo "No secret patterns found in tracked files." >&2
