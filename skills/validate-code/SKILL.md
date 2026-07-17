@@ -8,14 +8,14 @@ description: "Validate code quality: auto-fix formatting/lint, verify types, run
 ## Workflow
 
 1. Read `package.json` to identify available scripts
-2. **Format + lint fix**: run `npm run lint-fix` or `npm run lint:fix` (whichever exists)
+2. **Format + lint fix**: run `npm run lint-fix` or `npm run lint:fix` (whichever exists). These rewrite files in place and exit 0 silently — so capture what changed right after (`git diff --stat`, or `git status --short` if not yet committed) and remember it for the report. The user is about to commit; they need to know their working tree was modified.
 3. **Lint + types**: run `npm run lint` (runs `tsc --noEmit` + eslint)
 4. **Tests**: run `npm test`
-5. Report overall **PASS** or **FAIL** with file:line error references
+5. Report: an **Auto-fixed** section listing the files lint-fix changed (or "nothing auto-fixed"), then overall **PASS** or **FAIL** with `file:line` error references
 
 ## Rules
 
-- Always auto-fix before reporting errors
+- Always auto-fix before reporting errors — but never modify files silently; always report which files auto-fix changed
 - Run lint-fix → lint check → test sequentially
 - If lint-fix fails, still run lint check and tests; report all failures at the end
 - Report errors as `file:line` references
