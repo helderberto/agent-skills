@@ -152,7 +152,7 @@ Wait for the user's response. Never guess or work around a blocker silently.
 
 ## Rules
 
-- **Never modify PRD content** — the PRD is read-only
+- **Never modify spec content** — the spec is read-only
 - **Never modify plan content** beyond marking checkboxes `[x]`
 - **Never impose conventions** — follow the project's existing setup
 - **Do not push to remote** — only commit locally
