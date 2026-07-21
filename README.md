@@ -171,6 +171,7 @@ Focused capabilities the agent applies automatically based on the task (all call
 | Skill | What it does |
 |-------|--------------|
 | [`code-review`](skills/code-review/SKILL.md) | Five-axis review of a PR (correctness, readability, architecture, security, performance) |
+| [`visual-review`](skills/visual-review/SKILL.md) | Render a PR diff as an annotated HTML page — each hunk linked to a design/simplification principle with a suggested rewrite |
 | [`triage-review`](skills/triage-review/SKILL.md) | Triage existing PR review comments (Copilot + human), verify against code, classify Address/Skip/Optional/Discuss |
 | [`a11y-audit`](skills/a11y-audit/SKILL.md) | Accessibility compliance audit (WCAG) |
 | [`i18n`](skills/i18n/SKILL.md) | Find hardcoded strings, check translation coverage |

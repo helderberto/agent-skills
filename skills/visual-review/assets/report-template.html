@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!--
+  visual-review template. Clone and fill:
+   - {{PR_TITLE}} {{PR_NUMBER}} {{PR_AUTHOR}} {{PR_URL}} {{GENERATED_AT}}
+   - summary counts: {{N_MUSTFIX}} {{N_CONSIDER}} {{N_PRAISE}}
+   - one <section class="file"> per changed file
+   - one <article class="finding sev-*"> per finding (clone the sample below)
+  Keep everything inline — no external fonts/scripts/styles.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Visual Review — PR #{{PR_NUMBER}}</title>
+<style>
+  :root {
+    --bg: #0d1117; --panel: #161b22; --line: #30363d; --text: #e6edf3; --muted: #8b949e;
+    --add-bg: #12261e; --add-line: #2ea04326; --del-bg: #25171c; --del-line: #f8514926;
+    --mustfix: #f85149; --consider: #d29922; --praise: #2ea043;
+    --accent: #58a6ff;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; }
+  a { color: var(--accent); text-decoration: none; }
+  header { padding: 24px 32px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 5; }
+  header h1 { margin: 0 0 4px; font-size: 20px; }
+  header .meta { color: var(--muted); font-size: 13px; }
+  main { max-width: 1080px; margin: 0 auto; padding: 24px 32px 80px; }
+
+  .summary { display: flex; gap: 12px; margin: 4px 0 28px; flex-wrap: wrap; }
+  .pill { padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line);
+    background: var(--panel); cursor: pointer; user-select: none; font-size: 13px; }
+  .pill[aria-pressed="false"] { opacity: 0.4; }
+  .pill .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .dot.mustfix { background: var(--mustfix); } .dot.consider { background: var(--consider); } .dot.praise { background: var(--praise); }
+
+  .file { margin-bottom: 32px; }
+  .file > h2 { font-size: 14px; color: var(--muted); font-family: ui-monospace, monospace;
+    border-bottom: 1px solid var(--line); padding-bottom: 8px; margin: 0 0 16px; }
+
+  .finding { border: 1px solid var(--line); border-left-width: 4px; border-radius: 8px;
+    background: var(--panel); margin-bottom: 16px; overflow: hidden; }
+  .finding.sev-mustfix { border-left-color: var(--mustfix); }
+  .finding.sev-consider { border-left-color: var(--consider); }
+  .finding.sev-praise { border-left-color: var(--praise); }
+  .finding .head { display: flex; align-items: center; gap: 10px; padding: 12px 16px; flex-wrap: wrap; }
+  .badge { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em;
+    padding: 3px 8px; border-radius: 4px; }
+  .badge.mustfix { background: var(--del-line); color: var(--mustfix); }
+  .badge.consider { background: #d2992226; color: var(--consider); }
+  .badge.praise { background: var(--add-line); color: var(--praise); }
+  .tag { font-size: 12px; color: var(--muted); }
+  .loc { margin-left: auto; font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted); }
+
+  pre.diff { margin: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow-x: auto; }
+  pre.diff .row { display: block; padding: 1px 16px; white-space: pre; }
+  pre.diff .add { background: var(--add-bg); } pre.diff .add::before { content: "+ "; color: var(--praise); }
+  pre.diff .del { background: var(--del-bg); } pre.diff .del::before { content: "- "; color: var(--mustfix); }
+  pre.diff .ctx::before { content: "  "; color: var(--muted); }
+
+  .why { padding: 14px 16px; }
+  .why p { margin: 0 0 10px; }
+  .rewrite { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px; }
+  .rewrite > div { border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .rewrite h4 { margin: 0; font-size: 11px; text-transform: uppercase; letter-spacing: .04em;
+    padding: 6px 12px; color: var(--muted); background: #0d111780; }
+  .rewrite pre { margin: 0; padding: 10px 12px; overflow-x: auto; }
+  @media (max-width: 720px) { .rewrite { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>{{PR_TITLE}} <a href="{{PR_URL}}">#{{PR_NUMBER}}</a></h1>
+  <div class="meta">by {{PR_AUTHOR}} · generated {{GENERATED_AT}}</div>
+</header>
+<main>
+  <div class="summary" id="summary">
+    <span class="pill" data-sev="mustfix" role="button" aria-pressed="true"><span class="dot mustfix"></span>{{N_MUSTFIX}} must-fix</span>
+    <span class="pill" data-sev="consider" role="button" aria-pressed="true"><span class="dot consider"></span>{{N_CONSIDER}} consider</span>
+    <span class="pill" data-sev="praise" role="button" aria-pressed="true"><span class="dot praise"></span>{{N_PRAISE}} praise</span>
+  </div>
+
+  <!-- ===== one section per file ===== -->
+  <section class="file">
+    <h2>{{FILE_PATH}}</h2>
+
+    <!-- ===== SAMPLE FINDING CARD — clone per finding, set sev-{mustfix|consider|praise} ===== -->
+    <article class="finding sev-consider">
+      <div class="head">
+        <span class="badge consider">consider</span>
+        <span class="tag">Unnecessary memoization</span>
+        <span class="loc">{{FILE_PATH}}:42</span>
+      </div>
+      <pre class="diff"><span class="row del">const total = useMemo(() =&gt; items.reduce((a, b) =&gt; a + b.price, 0), [items]);</span><span class="row ctx">return &lt;Cart total={total} /&gt;;</span></pre>
+      <div class="why">
+        <p>The sum runs over a small array and is cheap; <code>useMemo</code> here adds a dependency array and a stale-closure surface for no measurable gain. Memoization pays off only when the work is expensive <em>and</em> the reference feeds a memoized child or effect.</p>
+        <div class="rewrite">
+          <div><h4>Before</h4><pre>const total = useMemo(<br>  () =&gt; items.reduce((a, b) =&gt; a + b.price, 0),<br>  [items]<br>);</pre></div>
+          <div><h4>After</h4><pre>const total = items.reduce(<br>  (a, b) =&gt; a + b.price,<br>  0<br>);</pre></div>
+        </div>
+      </div>
+    </article>
+    <!-- ===== end sample ===== -->
+
+  </section>
+</main>
+<script>
+  // severity filter — toggle pills to show/hide findings
+  const pressed = { mustfix: true, consider: true, praise: true };
+  document.getElementById('summary').addEventListener('click', (e) => {
+    const pill = e.target.closest('.pill');
+    if (!pill) return;
+    const sev = pill.dataset.sev;
+    pressed[sev] = !pressed[sev];
+    pill.setAttribute('aria-pressed', String(pressed[sev]));
+    document.querySelectorAll('.finding.sev-' + sev).forEach((el) => {
+      el.style.display = pressed[sev] ? '' : 'none';
+    });
+  });
+</script>
+</body>
+</html>
