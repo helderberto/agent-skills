@@ -83,7 +83,7 @@ Count "modules touched" by scanning the spec's New Modules and Schema Changes se
 Assign an agent tag to tasks where appropriate:
 
 - `[skill:diagnose]` — tracing a bug or unexpected runtime behavior
-- `[agent:test-auditor]` — writing or reviewing tests
+- `[agent:hb:test-auditor]` — writing or reviewing tests
 - `[skill:code-review]` — reviewing API surfaces, interfaces, or public contracts
 
 ### 5. Quiz the user
