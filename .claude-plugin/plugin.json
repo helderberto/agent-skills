@@ -20,5 +20,12 @@
     "plugin"
   ],
   "skills": "./skills",
-  "agents": "./agents"
+  "agents": [
+    "./agents/frontend-architect.md",
+    "./agents/git-detective.md",
+    "./agents/learner.md",
+    "./agents/parity-check.md",
+    "./agents/security-auditor.md",
+    "./agents/test-auditor.md"
+  ]
 }
