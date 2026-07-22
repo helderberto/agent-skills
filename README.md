@@ -226,6 +226,21 @@ Focused capabilities the agent applies automatically based on the task (all call
 
 ---
 
+## Agents
+
+Subagents the skills fan out to for independent, read-only perspectives (e.g. `/hb:review` spawns lenses, `/hb:plan` tags steps). Bundled with the plugin, so installing `hb` ships them too. **Claude Code only** — other agents consume `skills/` and ignore this directory.
+
+| Agent | Purpose |
+|-------|---------|
+| [`security-auditor`](agents/security-auditor.md) | Threat modeling, vulnerability assessment |
+| [`test-auditor`](agents/test-auditor.md) | Test effectiveness beyond coverage |
+| [`frontend-architect`](agents/frontend-architect.md) | Component design, deep modules, structural health |
+| [`parity-check`](agents/parity-check.md) | Audit code migrations for missing functionality |
+| [`git-detective`](agents/git-detective.md) | Investigate git history and trace changes |
+| [`learner`](agents/learner.md) | Capture insights into CLAUDE.md |
+
+---
+
 ## Structure
 
 ```
@@ -233,6 +248,7 @@ agent-skills/
 ├── .claude-plugin/      Plugin manifest + marketplace entry (Claude Code)
 ├── .opencode/skills →   Symlink to skills/ for OpenCode discovery
 ├── skills/              one folder per skill, each with SKILL.md
+├── agents/              subagent definitions (Claude Code only)
 ├── docs/                Skill anatomy + per-agent setup guides
 ├── AGENTS.md            Intent → skill mapping (drives OpenCode auto-routing)
 ├── CONTRIBUTING.md      How to contribute new skills or improvements

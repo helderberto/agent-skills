@@ -10,6 +10,7 @@ Guidance for AI coding agents (Claude Code, Cursor, Gemini CLI, OpenCode, Copilo
 
 ```
 skills/         → Core skills (one folder per skill, each with SKILL.md)
+agents/         → Subagent definitions the skills fan out to (Claude Code only)
 docs/           → Setup guides per agent (Cursor, Gemini CLI, OpenCode, Copilot)
 .claude-plugin/ → Plugin manifest + marketplace entry (Claude Code)
 ```
