@@ -36,7 +36,7 @@ Always include: **correctness (`code-review`)**, **sensitive-data scan (`safe-re
 
 | Reviewer | When | Kind | Suggested agent type |
 |----------|------|------|----------------------|
-| Correctness & bugs (`code-review`) | always | lens/skill | `code-reviewer` |
+| Correctness & bugs (`code-review`) | always | audit skill | `general-purpose` (runs `code-review`) |
 | Sensitive data (`safe-repo` diff-only) | always | audit skill | `general-purpose` |
 | Test effectiveness | always | lens | `test-quality` (or `test-auditor`) |
 | Accessibility (`a11y-audit`) | JSX/TSX/HTML/CSS changed | audit skill | `frontend-architect` (or `general-purpose`) |
@@ -69,7 +69,7 @@ Merge every subagent's findings into one report. Dedupe overlaps and **flag conv
 ```
 ## Review Summary
 
-**Scope**: <files/lines changed> · **Reviewers**: <code-review (code-reviewer), tests (test-quality), ...>
+**Scope**: <files/lines changed> · **Reviewers**: <code-review (general-purpose), tests (test-quality), ...>
 
 ### Critical (blocks merge)
 - <file:line> — <issue> — <which reviewer flagged it>
