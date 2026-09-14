@@ -1,66 +1,24 @@
 ---
 name: e2e
-description: Write end-to-end tests for user flows using Cypress. Use when user asks to "write e2e tests", "/e2e", "add Cypress tests", or wants to test a user flow end-to-end. Don't use for unit tests, component tests, or projects using Playwright, Puppeteer, or other non-Cypress frameworks.
+description: Write end-to-end tests for user flows with the project's E2E framework (Playwright, Cypress, or other). Use when user asks to "write e2e tests", "add Playwright/Cypress tests", or wants a user flow tested end-to-end. Don't use for unit or component tests (/tdd) or browser-driven manual validation (/visual-validate).
 ---
 
-# End-to-End Tests (Cypress)
+# End-to-End Tests
 
-## Detection
+## Detect the framework
 
-Run in parallel:
+Read the manifest and config (`playwright.config.*`, `cypress.config.*`, …) for the framework, base URL, and test location. Read 1–2 existing E2E tests and match their conventions. No E2E framework installed → stop and ask which to set up.
 
-- Check `package.json` for `cypress` version
-- Read `cypress.config.ts` for baseUrl and test file patterns
-- Read 1-2 existing test files in `cypress/e2e/` to match conventions
+## Write the test
 
-## Workflow
+One file per flow or feature; one logical outcome per test. Understand the user flow first — ask if unclear. Test behavior through the UI, not implementation details.
 
-1. Read existing tests and config to match project style
-2. Understand the user flow — ask if unclear
-3. Identify selectors (see [selectors.md](references/selectors.md))
-4. Write tests in `cypress/e2e/` — one file per flow or feature
+**Selector priority**, most to least resilient:
 
-## Format
+1. Role + accessible name (`getByRole('button', { name: 'Submit' })`)
+2. Label (form controls)
+3. Visible text
+4. Placeholder
+5. `data-testid` — last resort, when no accessible handle exists
 
-```typescript
-describe('login flow', () => {
-  beforeEach(() => {
-    cy.visit('/login')
-  })
-
-  it('logs in with valid credentials', () => {
-    cy.findByLabelText('Email').type('user@example.com')
-    cy.findByLabelText('Password').type('password')
-    cy.findByRole('button', { name: 'Sign in' }).click()
-    cy.url().should('include', '/dashboard')
-    cy.findByRole('heading', { name: 'Dashboard' }).should('be.visible')
-  })
-
-  it('shows error with invalid credentials', () => {
-    cy.findByLabelText('Email').type('wrong@example.com')
-    cy.findByLabelText('Password').type('wrong')
-    cy.findByRole('button', { name: 'Sign in' }).click()
-    cy.findByRole('alert').should('contain.text', 'Invalid credentials')
-  })
-})
-```
-
-## Selector priority
-
-Prefer `@testing-library/cypress` commands when installed, e.g. `cy.findByRole('button', { name: 'Submit' })`; use `cy.get('[data-testid="submit"]')` only as a last resort.
-
-See [selectors.md](references/selectors.md) for the full priority guide.
-
-## Rules
-
-- Use `@testing-library/cypress` selectors when available, else `cy.get`
-- Use `data-testid` only as last resort
-- One logical outcome per `it` block
-- Test behavior, not implementation details
-- Never use `cy.wait(<number>)` — use `cy.findBy*` auto-retry instead
-
-## Error Handling
-
-- If `cypress` is not in `package.json` → stop and ask user to install Cypress first
-- If `cypress.config.ts` is missing → ask user to run `npx cypress open` to initialize config
-- If `baseUrl` is unreachable → verify the dev server is running before writing tests that require it
+Never CSS classes, ids, or structural selectors — they break on refactor. Never fixed sleeps — use the framework's auto-waiting/retrying queries.

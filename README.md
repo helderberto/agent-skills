@@ -148,7 +148,7 @@ Focused capabilities the agent applies automatically based on the task (all call
 | [`tdd`](skills/tdd/SKILL.md) | Red → green → refactor loop for any new logic |
 | [`source-driven`](skills/source-driven/SKILL.md) | Implement using official docs for exact dependency versions |
 | [`fortify`](skills/fortify/SKILL.md) | Behavior-preserving improvement: split large functions, backfill tests, simplify (Chesterton's Fence) |
-| [`e2e`](skills/e2e/SKILL.md) | Write end-to-end tests for user flows using Cypress |
+| [`e2e`](skills/e2e/SKILL.md) | Write end-to-end tests for user flows with the project's E2E framework |
 
 </details>
 
