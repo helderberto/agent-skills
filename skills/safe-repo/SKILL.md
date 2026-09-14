@@ -1,6 +1,6 @@
 ---
 name: safe-repo
-description: Check for sensitive data in repository. Use when user asks to "check for sensitive data", "/safe-repo", or wants to verify no company/credential data is in the repository. Use `--diff` mode to scope to staged + unstaged changes only (e.g., before commit). Don't use for general code review, adding .gitignore entries, or scanning non-git directories.
+description: Check for sensitive data in the repository. Use when user asks to "check for sensitive data" or verify no credentials or company data are committed; `--diff` scopes to staged + unstaged changes (e.g. before commit). Don't use for general code review or scanning non-git directories.
 argument-hint: '[--diff]'
 ---
 

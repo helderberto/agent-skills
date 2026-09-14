@@ -1,6 +1,6 @@
 ---
 name: validate-code
-description: "Validate code quality: auto-fix formatting/lint, verify types, run tests. Use when user asks to \"validate code\", \"/validate-code\", \"check code\", or wants to validate before committing; also for lint-only asks (\"run linter\", \"fix lint errors\"). Don't use for committing, pushing, or writing new tests."
+description: Validate code quality — auto-fix formatting/lint, verify types, run tests. Use when user asks to "validate code", "check code", or validate before committing; also for lint-only asks ("run linter", "fix lint errors"). Don't use for committing, pushing, or writing new tests.
 ---
 
 # Validate Code
