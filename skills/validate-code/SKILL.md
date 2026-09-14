@@ -1,11 +1,11 @@
 ---
 name: validate-code
-description: "Validate code quality: auto-fix formatting/lint, verify types, run tests. Use when user asks to \"validate code\", \"/validate-code\", \"check code\", or wants to validate before committing. Don't use for committing, pushing, or writing new tests."
+description: "Validate code quality: auto-fix formatting/lint, verify types, run tests. Use when user asks to \"validate code\", \"/validate-code\", \"check code\", or wants to validate before committing; also for lint-only asks (\"run linter\", \"fix lint errors\"). Don't use for committing, pushing, or writing new tests."
 ---
 
 # Validate Code
 
-Run the project's own quality gates — format/lint fix, type check, tests — whatever this project defines. Detect the toolchain; never assume npm.
+Run the project's own quality gates — format/lint fix, type check, tests — whatever this project defines. Detect the toolchain; never assume npm. Lint-only ask → steps 1–3, skip tests.
 
 ## Workflow
 
