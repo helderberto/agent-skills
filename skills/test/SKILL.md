@@ -1,66 +1,38 @@
 ---
 name: test
 effort: high
-description: VERIFY phase — prove the code works. Run validation (lint, types, tests) plus coverage on changes, and when a plan exists verify its checkboxes against the codebase. Use after /build, when the user asks to verify, test, or confirm work holds up, or to check plan progress. Don't use to implement phases (use /build) or write new tests from scratch (use /tdd).
+description: VERIFY phase — run validation (lint, types, tests) plus changed-line coverage, and when a plan exists verify its checkboxes against the codebase. Use after /build, when the user asks to verify or confirm work holds up, or to check plan progress. Don't use to implement phases (use /build) or write new tests (use /tdd).
 argument-hint: '[slug]'
 ---
 
 # Test — Verify
 
-Tests are proof. Confirm the code actually works, then — if a plan exists — verify its claims against the codebase. Works for frontend and backend alike; validation and coverage run against whatever test runner the project uses.
-
-**Interactive prompts**: present options as a numbered list and wait for the user's choice.
+Tests are proof. Confirm the code works, then — if a plan exists — verify its claims against the codebase.
 
 ## Input
 
-The argument (if provided) is: $ARGUMENTS
-
-Accepts a plan `<slug>` or `@file` reference. If omitted, glob `.specs/plans/*.md`:
-
-- one plan → use it
-- several → list as numbered options and wait for the user's choice
-- none → run validation only (skip plan verification)
+`$ARGUMENTS` is a plan `<slug>` or `@file`. If omitted, glob `.specs/plans/*.md`: one → use it; several → list as options; none → validation only.
 
 ## Workflow
 
 ### 1. Validate (always)
 
-Run and collect all results — don't stop at the first failure:
+Collect all results — don't stop at the first failure:
 
-1. `/validate-code` — auto-fix formatting/lint, verify types, run the full test suite
-2. **Changed-line coverage** — if the project emits coverage, confirm the lines you changed (`git diff -U0`) are exercised, not just the global %. Skip when the project has no coverage tooling.
+1. `/validate-code` — auto-fix formatting/lint, verify types, full suite
+2. **Changed-line coverage** — if the project emits coverage, confirm the lines you changed (`git diff -U0`) are exercised, not just the global %. Skip without coverage tooling.
 
-Capture pass/fail and any uncovered changed lines.
+### 2. Verify plan claims (if a plan exists)
 
-### 2. Load the plan (if any)
+**Fast-path**: if the primary module file(s) from Phase 1 don't exist, report `0/N — not yet started` and skip the subagent.
 
-Read `.specs/plans/<slug>.md`. If there is no plan, skip to Report with just the validation results.
+Otherwise launch a **read-only general-purpose subagent** (no writes) that reads every plan section, checks every `- [ ]` / `- [x]` against the codebase, folds in the Step 1 results, and decides per checkbox whether it holds. Findings split into **BLOCKERS** (checked items that don't hold, failing tests, broken contracts) and **SUGGESTIONS**.
 
-**Fast-path**: if the primary module file(s) from Phase 1 don't exist, report `0/N — not yet started`, list Phase 1 done-when items, skip the subagent.
+### 3. Update checkboxes
 
-### 3. Verify plan claims (read-only subagent)
+In the plan: passing → `[x]`, failing → `[ ]`. This is the only file write this skill makes — never touch implementation code.
 
-Launch a **general-purpose subagent** (not `code-review`). It must be **read-only** — no writes, no edits. It should:
-
-1. Read every section of the plan — architectural decisions, each phase, done-when checkboxes
-2. Check every `- [ ]` / `- [x]` item against the codebase
-3. Fold in the Step 1 test results
-4. Decide, per checkbox, whether it holds (`[x]`) or not (`[ ]`)
-
-Collect findings into two categories:
-
-- **BLOCKERS** — checked items that don't hold up, failing tests, broken contracts
-- **SUGGESTIONS** — improvements, minor gaps, style issues
-
-### 4. Update checkboxes
-
-In `.specs/plans/<slug>.md`: items that pass → `[x]`, items that fail → `[ ]` (unmark). This is the only file write this skill makes.
-
-## Progress Algorithm
-
-Count `- [x]` and `- [ ]` lines under each `## Phase N` heading. Per-phase: `Phase N — title: checked/total`. Sum → `Total: checked/total`.
-
-### 5. Report
+### 4. Report
 
 ```text
 ## Verify: <slug>
@@ -69,31 +41,15 @@ Count `- [x]` and `- [ ]` lines under each `## Phase N` heading. Per-phase: `Pha
 - validate-code: pass/fail (detail)
 - coverage: X% of changed lines (uncovered: ...)
 
-### Progress            (omit if no plan)
+### Progress            (omit if no plan; `>` marks the first incomplete phase)
   Phase 1 — title: checked/total
 > Phase 2 — title: checked/total
   Total: checked/total
 
 ### BLOCKERS
-- (list or "None")
-
 ### SUGGESTIONS
-- (list or "None")
 ```
 
-The `>` marks the first incomplete phase (cursor).
+All green and every item verified → "All phases complete — implementation verified."
 
-If validation is green and all items verified (total checked = total):
-
-> All phases complete — implementation verified.
-
-### 6. Next steps
-
-- Blockers → list items to fix, then re-run `/test <slug>`
-- Clean → `/review` is an optional QA pass for non-trivial changes (not a ship gate — `/ship` runs its own validate-code + safe-repo gate), then `/ship`
-
-## Rules
-
-- The verification subagent must be **read-only** — no create, edit, or delete
-- The only file writes this skill makes are checkbox updates in the plan
-- Never modify implementation code — only observe and report
+Next: blockers → fix, re-run `/test <slug>`. Clean → `/review` is an optional QA pass (not a ship gate — `/ship` runs its own), then `/ship`.
