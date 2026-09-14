@@ -121,7 +121,7 @@ For quick standalone tasks, you don't need the workflow — just describe what y
 
 Skills come in two modes. **User-invoked** ones never auto-trigger (`disable-model-invocation: true`) — the outward-facing, irreversible actions you must pull the trigger on yourself (`ship`, `create-pull-request`), plus `teach`, which only ever starts by hand. Everything else is **model-invoked**: it auto-routes by description and stays callable explicitly as `/hb:<name>`. Model-invoked descriptions carry the trigger and anti-trigger clauses routing depends on; user-invoked ones keep a single what-it-does sentence, since trigger phrases are dead weight when nothing auto-routes.
 
-Skills also carry an **effort** hint: mechanical ones (`lint`, `commit`, `prose-fix`) run at low reasoning effort, heavy ones (`architecture-audit`, `harden`, `diagnose`) at high or xhigh, and the rest at the implicit medium default. The override lasts only for the turn the skill fires — so complexity matches the task without you touching `/effort`.
+Skills also carry an **effort** hint: mechanical ones (`commit`, `prose-fix`) run at low reasoning effort, heavy ones (`architecture-audit`, `harden`, `diagnose`) at high or xhigh, and the rest at the implicit medium default. The override lasts only for the turn the skill fires — so complexity matches the task without you touching `/effort`.
 
 ### SDLC workflow
 
@@ -147,8 +147,7 @@ Focused capabilities the agent applies automatically based on the task (all call
 |-------|--------------|
 | [`tdd`](skills/tdd/SKILL.md) | Red → green → refactor loop for any new logic |
 | [`source-driven`](skills/source-driven/SKILL.md) | Implement using official docs for exact dependency versions |
-| [`fortify`](skills/fortify/SKILL.md) | Split large functions, add edge-case coverage, backfill missing tests |
-| [`code-simplify`](skills/code-simplify/SKILL.md) | Reduce complexity without changing behavior — clarity over cleverness (Chesterton's Fence) |
+| [`fortify`](skills/fortify/SKILL.md) | Behavior-preserving improvement: split large functions, backfill tests, simplify (Chesterton's Fence) |
 | [`e2e`](skills/e2e/SKILL.md) | Write end-to-end tests for user flows using Cypress |
 
 </details>
@@ -159,7 +158,6 @@ Focused capabilities the agent applies automatically based on the task (all call
 | Skill | What it does |
 |-------|--------------|
 | [`validate-code`](skills/validate-code/SKILL.md) | Auto-fix lint, verify types, run tests |
-| [`lint`](skills/lint/SKILL.md) | Run linting and formatting checks |
 | [`diagnose`](skills/diagnose/SKILL.md) | Disciplined diagnosis loop for hard bugs and perf regressions |
 | [`visual-validate`](skills/visual-validate/SKILL.md) | Browser-driven UI validation via Chrome DevTools or Playwright MCP |
 
@@ -217,7 +215,6 @@ Focused capabilities the agent applies automatically based on the task (all call
 | [`teach`](skills/teach/SKILL.md) | Stateful teaching workspace — lessons, references, learning records tied to a mission · **user-invoked** |
 | [`explain-code`](skills/explain-code/SKILL.md) | Explain code with visual diagrams and analogies |
 | [`create-skill`](skills/create-skill/SKILL.md) | Author a new skill with proper structure |
-| [`setup-pre-commit`](skills/setup-pre-commit/SKILL.md) | Configure Husky + lint-staged for commit-time gates |
 | [`prose-fix`](skills/prose-fix/SKILL.md) | Fix typos, dashes, formatting in markdown |
 | [`revise`](skills/revise/SKILL.md) | Structurally edit and improve article drafts |
 
@@ -231,11 +228,8 @@ Subagents the skills fan out to for independent, read-only perspectives (e.g. `/
 
 | Agent | Purpose |
 |-------|---------|
-| [`security-auditor`](agents/security-auditor.md) | Threat modeling, vulnerability assessment |
 | [`test-auditor`](agents/test-auditor.md) | Test effectiveness beyond coverage |
-| [`frontend-architect`](agents/frontend-architect.md) | Component design, deep modules, structural health |
 | [`parity-check`](agents/parity-check.md) | Audit code migrations for missing functionality |
-| [`git-detective`](agents/git-detective.md) | Investigate git history and trace changes |
 | [`learner`](agents/learner.md) | Capture insights into CLAUDE.md |
 
 ---
