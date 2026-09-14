@@ -39,13 +39,13 @@ Always include: **correctness (`code-review`)**, **sensitive-data scan (`safe-re
 | Correctness & bugs (`code-review`) | always | audit skill | `general-purpose` (runs `code-review`) |
 | Sensitive data (`safe-repo` diff-only) | always | audit skill | `general-purpose` |
 | Test effectiveness | always | lens | `test-auditor` |
-| Accessibility (`a11y-audit`) | JSX/TSX/HTML/CSS changed | audit skill | `frontend-architect` (or `general-purpose`) |
-| User-facing strings (`i18n`) | new JSX text nodes / template literals in changed `.jsx/.tsx` | audit skill | `frontend-architect` (or `general-purpose`) |
+| Accessibility (`a11y-audit`) | JSX/TSX/HTML/CSS changed | audit skill | `general-purpose` |
+| User-facing strings (`i18n`) | new JSX text nodes / template literals in changed `.jsx/.tsx` | audit skill | `general-purpose` |
 | Bundle / perf (`perf-audit`) | `package.json`, `vite/webpack/next.config.*` changed | audit skill | `general-purpose` |
 | Dependencies (`deps-audit`) | `package.json` / lockfile changed | audit skill | `general-purpose` |
-| Security & trust boundaries (`harden`) | `routes/`, `api/`, `controllers/`, `models/`, `*.sql`, auth/input/external calls | audit skill | `security-auditor` |
+| Security & trust boundaries (`harden`) | `routes/`, `api/`, `controllers/`, `models/`, `*.sql`, auth/input/external calls | audit skill | `general-purpose` |
 | Type safety | heavy TS / type-level changes | lens | `general-purpose` |
-| Architecture friction | cross-module / structural changes | lens | `frontend-architect` |
+| Architecture friction | cross-module / structural changes | lens | `general-purpose` (runs `codebase-design` vocabulary) |
 
 Agent types are environment-specific. Match each reviewer to an **available** agent type (listed in the harness); if none fits, spawn `general-purpose` (or `Explore`) with a focused prompt. **Never invent an agent type.** Announce the chosen reviewers + agent types before spawning, and skip irrelevant ones with a one-line reason ("No frontend changes, skipping a11y-audit").
 
