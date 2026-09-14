@@ -7,43 +7,19 @@ argument-hint: <idea>
 
 # Spec
 
-Skip satisfied steps. If argument provided, skip to Step 2.
+Idea: $ARGUMENTS (if empty, ask for the problem and any solution ideas first).
 
-**Interactive prompts**: present options as a numbered list and wait for the user's choice.
-
-## Input
-
-The argument is: $ARGUMENTS
-
-If empty, go to Step 1; derive slug after gathering the idea. If provided, derive slug:
-
-1. Take only the text before the first `—` or `–` (if present)
-2. Strip leading command verbs: create, build, implement, add, update, fix, make, write, plan, get, show, support
-3. Lowercase the text
-4. Remove filler words: a, an, the, for, of, to, in, on, with, and, or, but, is, be
-5. Take the first 4 remaining words (or fewer if less exist)
-6. Join with hyphens → `<slug>`
-
-Output: `.specs/specs/<slug>.md`. If file exists, present options and wait:
-
-1. Overwrite existing (Recommended)
-2. Pick a new name
+Derive a kebab-case `<slug>` (≤4 meaningful words, no command verbs or filler). Output: `.specs/specs/<slug>.md`. If it exists, ask: overwrite (Recommended) or new name.
 
 ## Workflow
 
-### 1. Gather problem description
+### 1. Explore codebase
 
-Ask the user for a detailed description of the problem and any solution ideas.
+Map current state: data models, services, API routes, frontend, tests. Note exists vs. must build. Codebase first, then docs. Unverifiable claims → flag as uncertain, never fabricate.
 
-### 2. Explore codebase
+### 2. Interview
 
-Map current state: data models, services, API routes, frontend, tests. Note exists vs. must build.
-
-**Research protocol**: codebase first, then docs. Unverifiable claims → flag as uncertain, never fabricate.
-
-### 3. Interview
-
-One question at a time. Lead with your recommended answer (mark it `(Recommended)` and list first). Explore code instead of asking when possible. Present 2–4 options for each question — structured choices are faster than free-text.
+One question at a time, 2–4 options each, your recommended answer first and marked `(Recommended)`. Explore code instead of asking when possible.
 
 | Branch           | Key questions                           | Skip when                        |
 | ---------------- | --------------------------------------- | -------------------------------- |
@@ -55,29 +31,18 @@ One question at a time. Lead with your recommended answer (mark it `(Recommended
 | Boundaries       | Out of scope, deferred features         | Never skip                       |
 | Integration      | Schema, services, external deps         | Self-contained change            |
 
-### 3b. Gray areas
+Then surface **gray areas** — ambiguities, contradictions, unstated assumptions — each with proposed resolutions. Resolve all before continuing.
 
-Surface ambiguities, contradictions, unstated assumptions. For each gray area, present proposed resolution options. Resolve all before continuing.
+### 3. Design modules
 
-### 4. Design modules
+Sketch modules. Favor **deep modules** — simple interface (1–3 entry points) hiding large implementation. Shallow signals: many 1:1 functions, callers compose multiple calls, feature changes require interface changes. Confirm which modules need tests.
 
-Sketch modules. Favor **deep modules** — simple interface (1-3 entry points) hiding large implementation over shallow modules where interface ≈ implementation.
+### 4. Write spec
 
-Shallow signals: many small 1:1 functions, callers compose multiple calls, feature changes require interface changes.
+Save to `.specs/specs/<slug>.md`. Omit empty sections. No file paths or code snippets.
 
-Present modules. Confirm which need tests.
-
-### 5. Write spec
-
-Save to `.specs/specs/<slug>.md` (create dir if missing).
-
-```markdown
+```
 # Feature Name
-```
-
-Spec body structure. Omit empty sections. No file paths or code snippets.
-
-```
 ## Problem Statement
 ## Current State (skip if greenfield)
 ## Solution (user experience, not architecture)
@@ -92,9 +57,4 @@ Spec body structure. Omit empty sections. No file paths or code snippets.
 ## Out of Scope (be specific)
 ```
 
----
-
-Present options and wait for the user's choice:
-
-1. Run `/plan <slug>` (Recommended)
-2. Done for now
+Next: `/plan <slug>` (Recommended) or done for now.
