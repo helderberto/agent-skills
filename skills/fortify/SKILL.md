@@ -1,90 +1,42 @@
 ---
 name: fortify
 effort: high
-description: Fortify existing code by splitting large functions, adding edge-case coverage, and backfilling unit tests. Use when user asks to "fortify", "harden", "bulletproof", "make robust", "make solid", "strengthen", "add missing tests", "split functions", or wants to improve reliability of existing code. Don't use for new features (use tdd), refactoring plans, or code review (use code-review).
+description: Improve existing code without changing behavior — split large functions, backfill tests, add edge-case coverage, or simplify (flatten nesting, delete dead code, inline wrappers). Use when user asks to "fortify", "add missing tests", "split functions", "simplify", "clean up", or "reduce complexity". Don't use for new features (/tdd), security (/harden), or PR review (/code-review).
 ---
 
 # Fortify
 
 Target: $ARGUMENTS (file, directory, or module — if blank, use unstaged changes)
 
+Behavior is frozen — the test suite is the contract. Green before and after; if a test's meaning has to change, you've gone too far.
+
 ## Workflow
 
 ### 1. Scope
 
-Identify target files. If $ARGUMENTS is blank, use unstaged changed files.
-
-- Read each target file
-- Read its existing test file (co-located `*.test.ts` or `__tests__/`)
-- If no test file exists, note it
+- Identify target files (blank → unstaged changes)
+- Locate each file's tests using the project's convention (co-located, `__tests__/`, `tests/`, `spec/`); note files with none
+- Run the suite. If red, stop — don't fortify broken code
 
 ### 2. Audit
 
-For each file, list findings in three buckets:
+List findings, most-impactful first:
 
-| Bucket | What to look for |
-|---|---|
-| **Split** | Functions > 20 lines, multiple responsibilities, deeply nested logic (> 2 levels), God functions doing I/O + logic |
-| **Edge cases** | Missing null/empty/boundary checks at system boundaries, unhandled error paths, implicit assumptions |
-| **Test gaps** | Untested public functions, branches with no coverage, missing sad-path tests |
+| Bucket | What to look for | Fix |
+|---|---|---|
+| **Split** | Functions > 20 lines, multiple responsibilities, I/O mixed with logic | Extract pure logic into named helpers; keep I/O at the edges; preserve the original signature |
+| **Edge cases** | Missing null/empty/boundary checks at system boundaries, unhandled error paths | Test first, then guard |
+| **Test gaps** | Untested public functions, uncovered branches, missing sad-path tests | Backfill through the public interface |
+| **Simplify** | Nesting > 2 levels, dead code / unused params, duplicated logic, dense one-liners, shallow pass-through wrappers, speculative config never used | Guard clauses, delete, extract one helper, expand, inline (`/codebase-design` deletion test), remove |
 
-Present the audit as a checklist. Ask **"Which items should I address?"** — list each finding as an option, with "All items" as first option marked (Recommended). Use AskUserQuestion (multiSelect) when available; otherwise present as a numbered checklist.
+**Chesterton's Fence**: before removing anything, explain why it's there. If you can't, leave it and flag it.
 
-### 3. Harden (TDD loop per item)
+Present the audit as a checklist and ask which items to address — "All items" first, marked (Recommended).
 
-For each approved item, apply red-green-refactor:
+### 3. Apply — one item at a time
 
-```
-RED:    Write a failing test that exposes the gap
-GREEN:  Minimal code change to pass
-REFACTOR: Extract/simplify if the fix introduced complexity
-```
+Per approved item: RED (failing test exposing the gap, when the item adds behavior coverage) → GREEN (minimal change) → run tests. If red after the change, revert it and flag as blocked. Never batch.
 
-One item at a time. Run tests after each cycle. Never batch.
+### 4. Report
 
-**Splitting rules:**
-- Extract pure logic into named helpers — keep I/O at the edges
-- New functions must be testable through public interface when possible
-- Preserve the original function's signature (no breaking changes)
-
-**Test rules:**
-- Test behavior, not implementation
-- Each test gets a descriptive name: `it('returns empty array when input is null')`
-- Prefer real values over mocks; mock only external I/O
-
-### 4. Verify
-
-- Run full test suite
-- Confirm no regressions
-- Report summary: items addressed, tests added, functions extracted
-
-## Output format
-
-```
-## Fortify Report
-
-### Audit
-- [ ] Split: `processOrder` (45 lines, validation + persistence + notification)
-- [ ] Edge: `parseConfig` — no handling for missing file
-- [ ] Test: `formatOutput` — zero test coverage
-
-### Changes
-- Extracted `validateOrder()` from `processOrder()` (+1 fn, +3 tests)
-- Added null-guard to `parseConfig` (+2 tests)
-- Backfilled `formatOutput` tests (+4 tests)
-
-### Result
-Tests: 42 passed (was 35) | 0 failed
-```
-
-## Rules
-
-- Never change external behavior — hardening is internal improvement
-- Skip files with zero test infrastructure unless user explicitly asks to set it up
-
-## Error Handling
-
-- If no test runner found → ask user which runner to use before proceeding
-- If test suite fails before hardening → report failures and stop; don't harden broken code
-- If a split introduces a regression → revert that split immediately, note it as blocked
-- If target file has no exports (script/entrypoint) → audit only, skip test backfill unless user confirms
+Items addressed, tests added, functions extracted, items skipped with reason (Chesterton), suite result before/after.
