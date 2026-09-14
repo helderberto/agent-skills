@@ -1,94 +1,35 @@
 ---
 name: visual-validate
-description: Validate UI changes in a real browser using Chrome DevTools or Playwright MCP. Takes screenshots, compares before/after, exercises interactions, captures console errors. Use when user asks to "visual validate", "/visual-validate", "check the UI", "screenshot before/after", or finishes a UI change. Don't use for unit tests (use `tdd`), E2E user flows (use `e2e`), or backend changes.
+description: Validate UI changes in a real browser via a browser MCP (Chrome DevTools or Playwright) — before/after screenshots, interactions, console and network capture. Use when user asks to "visual validate", "check the UI", "screenshot before/after", or finishes a UI change. Don't use for unit tests (/tdd), E2E user flows (/e2e), or backend changes.
 argument-hint: '[url]'
 ---
 
 # Visual Validate
 
-Drive a real browser via MCP to verify a UI change works as intended. Auto-detects which browser MCP is available (`chrome-devtools` preferred, `playwright` fallback). Screenshots, interactions, and console capture confirm the change is real — not just type-checked.
+Drive a real browser to confirm a UI change is real — not just type-checked. Read-only: never modify files.
 
-## MCP Auto-Detection
+## Setup
 
-Prefer `chrome-devtools` MCP tools (`mcp__chrome-devtools__*`); fall back to `playwright` (`mcp__playwright__*`) if absent. If neither is available, STOP and tell the user to install one.
-State the detected MCP at the start: "Using chrome-devtools MCP for visual validation."
+- Use whichever browser MCP is available — `chrome-devtools` preferred (lighthouse, throttling, profiling), `playwright` for cross-browser or an existing Playwright setup. Neither → stop and tell the user to install one. State which you're using.
+- Confirm the dev server URL (`$ARGUMENTS`, or the project's default, else ask). If it isn't running, ask the user to start it — **never start it yourself**; port collisions are easy and dev servers are user state.
 
 ## Workflow
 
-### Phase 1 — Setup
+1. **Before**: screenshot the relevant page/component; capture the initial console state.
+2. **Exercise**: ask which interactions to validate (click, fill, resize to mobile, …); perform them; wait for animations and network to settle.
+3. **After**: screenshot again; collect console messages, failed and slow (>1s) network requests; run the accessibility audit if the MCP offers one.
+4. Close the page.
 
-1. Confirm the dev server URL with the user (default to `http://localhost:3000` if a Next.js/Vite project is detected; otherwise ask).
-2. If the dev server is not running, ask the user to start it. Do NOT start it automatically — port collisions are easy and dev servers are user state.
-3. Open the page via the detected MCP:
-   - chrome-devtools: `new_page` → `navigate_page`
-   - playwright: equivalent navigate tool
-
-### Phase 2 — Capture baseline (before)
-
-4. Take a "before" screenshot of the relevant page/component. Save reference to it.
-5. Capture the initial console state.
-6. If the user provides a specific element or component to focus on, take an element-scoped screenshot via DOM snapshot.
-
-### Phase 3 — Exercise the change
-
-7. Ask the user what interactions to validate (e.g., "click the toggle", "submit form with X data", "resize to mobile width").
-8. Execute interactions via MCP:
-   - chrome-devtools: `click`, `fill`, `hover`, `press_key`, `resize_page`
-   - playwright: equivalent tools
-9. Wait for any animations / network requests to settle (`wait_for` or equivalent).
-
-### Phase 4 — Capture after
-
-10. Take "after" screenshot(s).
-11. Capture console messages and any new network errors via `list_console_messages` and `list_network_requests`.
-12. Run accessibility audit on the final state via `lighthouse_audit` (chrome-devtools) if available.
-
-### Phase 5 — Report
-
-13. Present findings in this structure:
+## Report
 
 ```
 ## Visual Validation — <feature>
-
-**MCP**: chrome-devtools (or playwright)
-**URL**: <url>
-**Interactions exercised**: <list>
-
-### Screenshots
-- Before: <path or reference>
-- After: <path or reference>
-
-### Console
-- Errors: <count> — <summary>
-- Warnings: <count>
-
-### Network
-- Failed requests: <count>
-- Slow requests (>1s): <count>
-
-### Accessibility (if lighthouse_audit ran)
-- Score: <n>
-- Critical issues: <list>
-
-### Verdict
-- PASS: change works as intended, no new console errors, no a11y regressions
-- FAIL: console errors / a11y regressions / unexpected visual changes — list each issue with screenshot reference
+**MCP**: … · **URL**: … · **Interactions**: …
+Screenshots: before / after
+Console: <errors> errors, <warnings> warnings
+Network: <failed> failed, <slow> slow
+Accessibility: score / critical issues (if run)
+Verdict: PASS (works as intended, no new console errors, no a11y regression) or FAIL (each issue with screenshot reference)
 ```
 
-## Rules
-
-- Never modify files during validation; this is read-only browser interaction
-- Always close the browser page at the end (`close_page`) to free resources
-- Capture console messages even on PASS — silent regressions surface in console first
-
-## Error Handling
-
-- No MCP available → STOP with installation hint (chrome-devtools or playwright MCP server setup)
-- Dev server unreachable → ask user to confirm URL and start the server
-- Navigation timeout (>30s) → report and stop; likely a build error or wrong URL
-- MCP tool errors mid-flow → report which step failed, attempt cleanup (close_page), stop
-
-## Choosing chrome-devtools vs playwright
-
-- **chrome-devtools**: DevTools-specific features — lighthouse audit, network throttling, performance profiling, memory snapshots.
-- **playwright**: cross-browser testing (Firefox, Safari/WebKit) or an existing Playwright setup.
+Report console output even on PASS — silent regressions surface there first.
