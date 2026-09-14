@@ -1,7 +1,7 @@
 ---
 name: review
 effort: high
-description: Orchestrated REVIEW phase — fan out parallel read-only reviewers over a diff (scope-detected audit skills plus agent lenses), then consolidate into one severity-ranked verdict. Use for a full pre-ship review, "review this PR", or "spawn agents to review". Don't use for a single focused audit (call it directly) or to triage existing comments (/triage-review).
+description: Orchestrated REVIEW phase — fan out parallel read-only reviewers over a diff (scope-detected audit skills plus agent lenses), then consolidate into one severity-ranked verdict. Use for a full pre-ship review, "review/validate this PR", or "spawn agents to review". Don't use for a single-lens PR review (/code-review), one audit, or triaging existing comments (/triage-review).
 argument-hint: '[PR-number-or-branch] [agent-count]'
 ---
 
@@ -15,11 +15,11 @@ Reviewers come from two sources: **audit skills** selected by file type in the d
 
 ### 1. Resolve the diff
 
-PR number → `gh pr view` + `gh pr diff`. Branch → `git diff <base>...<branch>`. Nothing → `git merge-base HEAD main` (fall back `master`, `origin/HEAD`, then `HEAD~10` with a warning), then `git diff <base>...HEAD`. Empty diff → "Nothing to review", stop. State the scope: "Reviewing branch `X` vs `main` — 6 files, 224 insertions."
+PR number → `gh pr view` + `gh pr diff` (fails → current-branch diff, warn). Branch → `git diff <base>...<branch>`. Nothing → `git merge-base HEAD main` (fall back `master`, `origin/HEAD`, then `HEAD~10` with a warning), then `git diff <base>...HEAD`. Empty diff → "Nothing to review", stop. State the scope: "Reviewing branch `X` vs `main` — 6 files, 224 insertions."
 
 ### 2. Select reviewers
 
-Always: correctness (`code-review`), sensitive data (`safe-repo` diff-only), test effectiveness. Add the rest from the diff. Default 3–5 total; honor an explicit count from `$ARGUMENTS`.
+Always: correctness (`code-review`), sensitive data (`safe-repo` diff-only), test effectiveness. Add the rest from the diff. Default 3–5 total; honor an explicit count from `$ARGUMENTS` (2–5). Never spawn `e2e` or `visual-validate` — those are VERIFY phase, not REVIEW.
 
 | Reviewer | When | Agent type |
 |----------|------|------------|
@@ -38,7 +38,7 @@ Match each reviewer to an agent type **available in the harness**; never invent 
 
 ### 3. Fan out
 
-Spawn all reviewers in **one message** so they run concurrently. Each gets: repo path (note if it's a worktree), the exact diff command and its subset of files, one paragraph of context, its instruction (run the audit skill via the Skill tool, or apply the lens), a pointer to `.specs/plans/*.md` if present, and the output contract — findings with `file:line`, severity (`critical` / `important` / `suggestion`), one-line rationale. **Read-only**: no edits, staging, commits, or pushes.
+Spawn all reviewers in **one message** so they run concurrently. Each gets: repo path (note if it's a worktree), the exact diff command and its subset of files, one paragraph of context, its instruction (run the audit skill via the Skill tool — fall back to the skill's checklist if subagents can't load skills — or apply the lens), a pointer to `.specs/plans/*.md` if present, and the output contract — findings with `file:line`, severity (`critical` / `important` / `suggestion`), one-line rationale. **Read-only**: no edits, staging, commits, or pushes.
 
 **Build/install collisions**: `perf-audit` builds and `deps-audit` may touch `node_modules` — give those worktree isolation or run them serially after the read-only reviewers.
 

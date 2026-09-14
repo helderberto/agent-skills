@@ -9,7 +9,7 @@ argument-hint: <idea>
 
 Idea: $ARGUMENTS (if empty, ask for the problem and any solution ideas first).
 
-Derive a kebab-case `<slug>` (≤4 meaningful words, no command verbs or filler). Output: `.specs/specs/<slug>.md`. If it exists, ask: overwrite (Recommended) or new name.
+Derive a kebab-case `<slug>` from the text before the first `—`/`–` (≤4 meaningful words, no command verbs or filler). Output: `.specs/specs/<slug>.md`. If it exists, ask: overwrite (Recommended) or new name.
 
 ## Workflow
 

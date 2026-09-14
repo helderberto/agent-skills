@@ -5,14 +5,14 @@ description: Validate code quality — auto-fix formatting/lint, verify types, r
 
 # Validate Code
 
-Run the project's own quality gates — format/lint fix, type check, tests — whatever this project defines. Detect the toolchain; never assume npm. Lint-only ask → steps 1–3, skip tests.
+Run the project's own quality gates — format/lint fix, type check, tests — whatever this project defines. Detect the toolchain; never assume npm. Lint-only ask → steps 1–3, skip tests; check-only wording ("check lint", "run the linter" without "fix") → also skip the fix step.
 
 ## Workflow
 
 1. **Detect the project's commands.** Prefer a task the project already defines over a raw tool call:
    - Node → `package.json` scripts (`lint:fix`/`lint-fix`, `lint`, `typecheck`/`tsc`, `test`)
    - Python → `pyproject.toml` / `tox.ini` / `Makefile` (`ruff --fix`/`black`, `ruff`/`flake8`, `mypy`, `pytest`)
-   - Go → `gofmt -w`, `go vet`, `go build ./...`, `go test ./...`
+   - Go → `gofmt -w`, `golangci-lint run` / `go vet`, `go build ./...`, `go test ./...`
    - Rust → `cargo fmt`, `cargo clippy`, `cargo check`, `cargo test`
    - else → read the `Makefile` / CI config for the equivalent targets
 2. **Format + lint fix** (the fix variant). These rewrite files in place and exit 0 silently — capture what changed right after (`git status --short` / `git diff --stat`) and remember it for the report. The user is about to commit; they need to know their tree was modified.

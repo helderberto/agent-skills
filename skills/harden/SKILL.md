@@ -31,6 +31,11 @@ Validate at the **system boundary** (route handler, message consumer), not in bu
 - Rate limit on auth endpoints
 - Logs and error responses free of secrets, tokens, PII, stack traces
 - File uploads: allowlist MIME types, enforce max size before processing, check magic bytes when the type matters, store outside the webroot
+- Outbound requests: allowlist destinations; never fetch a user-provided URL unvalidated (SSRF)
+- CORS: explicit origin allowlist from config; no wildcard on authenticated endpoints
+- External integrations: verify webhook signatures, time out every external call, validate third-party response shapes before use; never deserialize untrusted input with unsafe loaders
+- Log security events (auth failures, access denials, input rejections) — without the payloads
+- Raw HTML from users only through a sanitizer (DOMPurify or equivalent)
 
 ## Verification
 
