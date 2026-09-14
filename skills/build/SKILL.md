@@ -1,7 +1,7 @@
 ---
 name: build
 effort: high
-description: Implement one phase of a plan — reads the plan, finds the next incomplete phase, implements it with feedback loops, marks checkboxes, offers a commit (one phase per invocation). Use after /plan when a plan exists at `.specs/plans/<slug>.md`, or when the user asks to build or implement the next phase. Don't use for ad-hoc changes with no plan (use /tdd) or to check progress (use /test).
+description: Implement one phase of a plan — finds the next unblocked incomplete phase, implements it with feedback loops, marks checkboxes, offers a commit. Use after /plan when a plan exists at `.specs/plans/<slug>.md`, or when the user asks to build the next phase. Don't use for ad-hoc changes with no plan (/tdd) or to check progress (/test).
 argument-hint: '[slug]'
 ---
 
@@ -9,143 +9,38 @@ argument-hint: '[slug]'
 
 Implement the next incomplete phase of a plan — one phase per invocation.
 
-**Context window**: recommend `/clear` before starting to maximize token budget.
-
-**Interactive prompts**: present options as a numbered list and wait for the user's choice.
-
 ## Input
 
-The argument (if provided) is: $ARGUMENTS
-
-Use argument as `<slug>`. If empty, list plans as numbered options and wait for the user's choice.
-
-Accepts a slug or an `@path` reference — `@` means read that file directly as the plan (e.g. `/build @.specs/plans/dark-mode-support.md`).
+`$ARGUMENTS` is a `<slug>` or an `@path` (read that file directly as the plan). If empty or the plan is missing, list `.specs/plans/*.md` as numbered options and wait.
 
 ## Workflow
 
-### 1. Load the plan
+### 1. Find the next incomplete phase
 
-Read `.specs/plans/<slug>.md`. If missing, list plans as numbered options and wait for the user's choice.
+Scan `## Phase N` headings and count `- [ ]` / `- [x]`. The next incomplete phase is the first with an unchecked item **and** whose `**Blocked by**` phases (if declared) are all complete. If the first incomplete phase is blocked, pick the next unblocked one and say why.
 
-### 2. Find the next incomplete phase
+All phases complete → "All phases complete. Run `/test <slug>` to verify." Stop.
 
-Scan the plan for `## Phase N` headings. For each phase, count `- [ ]` and `- [x]` checkboxes.
+### 2. Present the phase
 
-The **next incomplete phase** is the first phase that has at least one unchecked `- [ ]` item **and** whose `**Blocked by**` phases (if the plan declares them) are all complete. If the first incomplete phase is blocked, pick the next unblocked one and say why.
+Show the title and unchecked items. If on the default branch, offer to create `feat/<slug>` (Recommended) before touching code.
 
-If all phases are complete (zero unchecked items across all phases):
+### 3. Implement
 
-> All phases complete. Run `/test <slug>` to verify.
+For each unchecked item, in order: read the plan's architectural decisions and the item's context, explore the surrounding code, implement following the project's conventions (CLAUDE.md, linter, test setup), write tests alongside.
 
-Stop here.
+Stay inside the phase boundary — never implement items from other phases. Never impose conventions the project doesn't already use.
 
-### 3. Present the phase
+### 4. Feedback loops
 
-Show the phase title and its unchecked items:
+Detect and run the project's checks (types, tests, lint, format) — prefer tasks the project defines; detection table in [validate-code](../validate-code/SKILL.md). Fix and re-run until green. A check still failing after 3 attempts is a **blocker**: report the last error and ask whether to wait, skip the check, or abort the phase.
 
-```
-Phase N — <title> (M remaining)
-- [ ] First unchecked item
-- [ ] Second unchecked item
-```
+Anything the agent cannot provide (API key, external service, manual setup, design decision) is also a blocker — ask, never work around it silently.
 
-### 4. Offer a feature branch
+### 5. Mark checkboxes
 
-If on the default branch (main/master), ask:
+Flip completed items `- [ ]` → `- [x]` in the plan. This is the only plan edit; the spec is read-only.
 
-> Create branch `feat/<slug>`?
->
-> 1. Yes, create branch (Recommended)
-> 2. No, stay on current branch
+### 6. Offer commit
 
-If accepted, create and switch to the branch.
-
-If already on a feature branch, skip this step.
-
-### 5. Implement the phase
-
-Work through each unchecked item in order. For each item:
-
-1. Read the plan's architectural decisions and the current item's context
-2. Explore relevant code to understand existing patterns and conventions
-3. Implement the change — follow the project's conventions (CLAUDE.md, linter config, test setup)
-4. Write tests alongside implementation (follow the project's existing test patterns)
-
-**Do not** impose coding rules, style, or conventions. Follow what the project already uses.
-
-**Do not** implement items from other phases. Stay within the current phase boundary.
-
-### 6. Run feedback loops
-
-After implementing the phase, detect and run the project's checks — type check, tests, lint, format. Detect the toolchain from the manifest and prefer tasks the project already defines (see the detection table in [validate-code](../validate-code/SKILL.md)):
-
-| Ecosystem | Manifest | Checks (run what exists) |
-| --------- | -------- | ------------------------ |
-| Node      | `package.json` scripts | `typecheck`/`tsc`, `test`, `lint`, `format:check` |
-| Python    | `pyproject.toml`/`Makefile` | `mypy`, `pytest`, `ruff`, `black --check` |
-| Go        | `go.mod` | `go build ./...`, `go test ./...`, `go vet`, `gofmt -l` |
-| Rust      | `Cargo.toml` | `cargo check`, `cargo test`, `cargo clippy`, `cargo fmt --check` |
-
-Run each detected check. If any fails:
-
-1. Read the error output
-2. Fix the issue
-3. Re-run the failing script
-4. Repeat until all pass (max 3 attempts per script)
-
-If a script still fails after 3 attempts, treat it as a **blocker** — pause and ask the user for help:
-
-> **Blocker**: `<script>` fails after 3 attempts.
-> Last error: `<error summary>`
->
-> How to proceed?
->
-> 1. I'll fix it — pause and wait
-> 2. Skip this check and continue
-> 3. Abort this phase
-
-Wait for the user's response before continuing.
-
-### 7. Mark checkboxes
-
-After all feedback loops pass, for each completed item change `- [ ]` → `- [x]` in `.specs/plans/<slug>.md`.
-
-### 8. Offer commit
-
-Present the changes and ask:
-
-> Phase N complete — all checks pass. Commit?
->
-> 1. Yes, commit
-> 2. No, I'll review first
-
-If the user chooses to commit:
-
-1. Stage the implementation files (not `.specs/` artifacts unless the project commits its specs)
-2. Create a commit with a message following the project's commit conventions
-3. Confirm: "Committed. Run `/build <slug>` for Phase N+1, or `/test <slug>` to verify."
-
-If the user chooses to review:
-
-> Ready for review. Run `/build <slug>` again when ready to continue.
-
-### 9. Blockers during implementation
-
-If implementation requires something the agent cannot provide (API key, external service, manual setup, design decision):
-
-> **Blocker**: <description of what's needed>
->
-> How to proceed?
->
-> 1. I've resolved it — continue
-> 2. Skip this item for now
-> 3. Abort this phase
-
-Wait for the user's response. Never guess or work around a blocker silently.
-
-## Rules
-
-- **Never modify spec content** — the spec is read-only
-- **Never modify plan content** beyond marking checkboxes `[x]`
-- **Never impose conventions** — follow the project's existing setup
-- **Do not push to remote** — only commit locally
+"Phase N complete — all checks pass. Commit?" If yes: stage implementation files by name (not `.specs/` unless the project commits specs), commit in the project's convention, never push. Then: "Run `/build <slug>` for Phase N+1, or `/test <slug>` to verify."
