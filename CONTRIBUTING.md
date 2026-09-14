@@ -49,7 +49,6 @@ When in doubt, open an issue first to discuss scope.
 - **Skill names** are lowercase kebab-case: `code-review`, `safe-repo`
 - **Workflow skills** (`spec`, `plan`, `build`, `test`, `review`, `ship`) are invoked as `/hb:<name>`
 - **Toolbelt skills** auto-trigger from the `description` field — write that carefully
-- **Don't add** `compatibility:` or `allowed-tools:` to frontmatter (legacy `npx skills` CLI fields, not part of the plugin spec)
 
 ## Where to start
 
