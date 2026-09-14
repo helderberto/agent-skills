@@ -18,7 +18,7 @@ Read locale files to understand key structure (e.g. `src/locales/en.json`).
 ## Workflow
 
 1. Detect i18n library and locale file locations
-2. Search JSX/TSX/Vue files for hardcoded user-facing strings (see [patterns.md](references/patterns.md)):
+2. Search JSX/TSX/Vue files for hardcoded user-facing strings:
    - String literals in JSX: `<p>Hello world</p>`
    - String props: `placeholder="Search..."`, `label="Submit"`
    - `aria-label="Close menu"`

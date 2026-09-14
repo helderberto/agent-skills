@@ -110,7 +110,7 @@ Rules:
 
 ### 4. Refactor
 
-After all tests pass, look for [refactor candidates](references/refactoring.md):
+After all tests pass, look for refactor candidates:
 
 - [ ] Extract duplication
 - [ ] Deepen modules (move complexity behind simple interfaces)
