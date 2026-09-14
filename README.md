@@ -189,7 +189,7 @@ Focused capabilities the agent applies automatically based on the task (all call
 |-------|--------------|
 | [`commit`](skills/commit/SKILL.md) | Group unstaged changes into atomic commits by concern (repository style) |
 | [`create-adr`](skills/create-adr/SKILL.md) | Record a 1–3 sentence Architecture Decision Record |
-| [`create-pull-request`](skills/create-pull-request/SKILL.md) | Open a GitHub PR with structured body · **user-invoked** |
+| [`create-pull-request`](skills/create-pull-request/SKILL.md) | Open a GitHub PR with a concise templated body; `--diagram` adds a mermaid diagram of the change · **user-invoked** |
 
 </details>
 
