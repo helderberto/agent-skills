@@ -1,7 +1,7 @@
 ---
 name: test
 effort: high
-description: VERIFY phase — run validation (lint, types, tests) plus changed-line coverage, and when a plan exists verify its checkboxes against the codebase. Use after /build, when the user asks to verify or confirm work holds up, or to check plan progress. Don't use to implement phases (use /build) or write new tests (use /tdd).
+description: VERIFY phase — run validation (lint, types, tests) plus changed-line coverage, and when a plan exists verify its checkboxes against the codebase. Use after /build, when the user asks to verify, test, or confirm work holds up, or to check plan progress. Don't use to implement phases (/build) or write new tests (/tdd).
 argument-hint: '[slug]'
 ---
 
@@ -24,7 +24,7 @@ Collect all results — don't stop at the first failure:
 
 ### 2. Verify plan claims (if a plan exists)
 
-**Fast-path**: if the primary module file(s) from Phase 1 don't exist, report `0/N — not yet started` and skip the subagent.
+**Fast-path**: if the primary module file(s) from Phase 1 don't exist, report `0/N — not yet started`, list Phase 1 done-when items, and skip the subagent.
 
 Otherwise launch a **read-only general-purpose subagent** (no writes) that reads every plan section, checks every `- [ ]` / `- [x]` against the codebase, folds in the Step 1 results, and decides per checkbox whether it holds. Findings split into **BLOCKERS** (checked items that don't hold, failing tests, broken contracts) and **SUGGESTIONS**.
 

@@ -19,7 +19,9 @@ If the change is too large to review well (~1000+ lines), asking the author to s
 Review every changed file, not just the latest commit.
 
 - **Correctness**: logic bugs, off-by-ones, race conditions, unhandled states, missing error paths
+- **Readability**: functions > 50 lines, nesting > 2 levels, dead code, unused imports
 - **Security**: exposed secrets, unvalidated external data
+- **Type safety & immutability**: `any` or unjustified assertions; in-place mutation of shared data
 - **Patterns**: consistent with codebase conventions, no reinvented wheels
 - **Performance**: unnecessary re-renders, O(n²) where O(n) works
 - **Code smells**: match the diff against the baseline in [smells.md](references/smells.md) — always judgement calls; the repo's documented style overrides the baseline

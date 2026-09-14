@@ -24,4 +24,4 @@ Audit tool missing → say which to install and stop. Lockfile missing → insta
 2. Outdated packages: package / current / latest / major vs minor.
 3. Obviously unused deps (grep imports in the source dir).
 
-Prioritize: security > major updates > unused > minor updates.
+Action by severity: critical → fix now, blocks merge; high → before next release; moderate → this sprint; low → when convenient. Then major updates > unused > minor.
