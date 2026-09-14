@@ -9,8 +9,6 @@ argument-hint: "[slug]"
 
 Break a spec into phased vertical slices (tracer bullets).
 
-**Interactive prompts**: present options as a numbered list and wait for the user's choice.
-
 Output: `.specs/plans/<slug>.md`.
 
 ## Input
@@ -25,10 +23,7 @@ Use argument as `<slug>`. If empty, list specs as numbered options and wait for 
 
 Read `.specs/specs/<slug>.md`. If missing, list specs as numbered options and wait for the user's choice.
 
-If `.specs/plans/<slug>.md` exists, present options and wait:
-
-1. Overwrite existing (Recommended)
-2. Pick a new name
+If `.specs/plans/<slug>.md` exists, ask: overwrite (Recommended) or new name.
 
 ### 2. Explore the codebase
 
@@ -92,13 +87,7 @@ Assign an agent tag to tasks where appropriate:
 
 ### 5. Quiz the user
 
-Present breakdown (title, user stories covered, done-when per phase). Present options and wait:
-
-1. Looks good, proceed (Recommended)
-2. Merge some phases
-3. Split a phase
-
-Iterate until approved.
+Present the breakdown (title, user stories covered, done-when per phase) and ask: proceed (Recommended), merge phases, or split a phase. Iterate until approved.
 
 ### 6. Save plan
 
@@ -147,15 +136,7 @@ Carried forward from spec verbatim.
 Gaps found in the spec needing resolution. Blank if none.
 ```
 
-Print one line per phase: `Phase N — <title> (<condition summary>)`. Present options and wait:
-
-1. Run `/build <slug>` (Recommended)
-2. Run `/test <slug>`
-3. Done for now
-
-## Execution guidance
-
-To implement this plan phase by phase, run `/build <slug>`. It handles branch creation, implementation, feedback loops, checkbox marking, and commits — one phase per invocation.
+Print one line per phase: `Phase N — <title> (<condition summary>)`. Next: `/build <slug>` (Recommended — one phase per invocation), `/test <slug>`, or done for now.
 
 ## Rules
 
