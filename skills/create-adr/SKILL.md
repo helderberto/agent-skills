@@ -1,7 +1,7 @@
 ---
 name: create-adr
 effort: low
-description: Record an Architecture Decision Record (ADR) — a 1–3 sentence note capturing what was decided and why. Use when user says "create an ADR", "record this decision", "/create-adr", or just decided something architecturally significant. Don't use for forward-looking specs (use /spec) or general repo conventions (use CLAUDE.md).
+description: Record an Architecture Decision Record (ADR) — a 1–3 sentence note capturing what was decided and why. Use when user says "create an ADR", "record this decision", or just decided something architecturally significant. Don't use for forward-looking specs (/spec) or general repo conventions (CLAUDE.md).
 ---
 
 # Create ADR

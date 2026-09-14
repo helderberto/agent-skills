@@ -1,7 +1,7 @@
 ---
 name: domain-modeling
 effort: high
-description: Actively build and sharpen a project's domain model — challenge terms, pin down a ubiquitous language, and write the glossary and decisions down as they crystallize. Use when the user wants to define domain terminology, resolve ambiguous terms, or when another skill needs the shared vocabulary. Don't use for recording a single architectural decision (use /create-adr) or explaining existing code (use /explain-code).
+description: Build and sharpen a project's domain model — challenge terms, pin down a ubiquitous language, write glossary and decisions down as they crystallize. Use when the user wants to define domain terminology or resolve ambiguous terms, or another skill needs the shared vocabulary. Don't use for a single architectural decision (/create-adr) or explaining code (/explain-code).
 ---
 
 # Domain Modeling

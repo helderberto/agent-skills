@@ -1,6 +1,6 @@
 ---
 name: perf-audit
-description: Audit frontend bundle size and performance. Use when user asks to "audit performance", "/perf-audit", "analyze bundle", "check bundle size", or wants to find performance bottlenecks. Don't use for backend performance, database query optimization, projects without a frontend build step, accessibility (use /a11y-audit), or translation coverage (use /i18n).
+description: Audit frontend bundle size and performance. Use when user asks to "audit performance", "analyze bundle", "check bundle size", or find frontend bottlenecks. Don't use for backend performance, database queries, or projects without a frontend build step.
 ---
 
 # Performance Audit
