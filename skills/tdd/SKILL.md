@@ -110,22 +110,4 @@ Rules:
 
 ### 4. Refactor
 
-After all tests pass, look for refactor candidates:
-
-- [ ] Extract duplication
-- [ ] Deepen modules (move complexity behind simple interfaces)
-- [ ] Apply SOLID principles where natural
-- [ ] Consider what new code reveals about existing code
-- [ ] Run tests after each refactor step
-
-**Never refactor while RED.** Get to GREEN first.
-
-## Checklist Per Cycle
-
-```
-[ ] Test describes behavior, not implementation
-[ ] Test uses public interface only
-[ ] Test would survive internal refactor
-[ ] Code is minimal for this test
-[ ] No speculative features added
-```
+Only once GREEN — never while RED. Extract duplication, deepen modules (`/codebase-design` for the vocabulary), and ask what the new code reveals about existing code. Run tests after each step.
