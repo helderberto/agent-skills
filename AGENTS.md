@@ -65,7 +65,7 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Check for sensitive data in repo        | `safe-repo`                                    |
 | Run linter / formatter                  | `validate-code`                                |
 | Validate code (lint + types + tests)    | `validate-code`                                |
-| Write end-to-end tests (Cypress)        | `e2e`                                          |
+| Write end-to-end tests                  | `e2e`                                          |
 | Commit changes (atomic, grouped by concern) | `commit`                                    |
 | Commit and push                         | `ship`                                         |
 | Create a pull request                   | `create-pull-request`                          |
@@ -93,7 +93,7 @@ When the user has a non-trivial task, follow this flow even without explicit com
 - Every skill lives in `skills/<name>/SKILL.md` (or `<name>/SKILL.md` if flat at root — see structure section)
 - YAML frontmatter requires `name` and `description`
 - Description starts with what the skill does, followed by trigger conditions ("Use when...")
-- Optional `effort` frontmatter (`low`/`medium`/`high`/`xhigh`) overrides reasoning effort for the turn the skill fires — set it only when the task deviates from the `medium` default (`model:` is ignored for skills)
+- Optional `effort` frontmatter (`low`/`medium`/`high`/`xhigh`/`max`) overrides reasoning effort for the turn the skill fires — set it only when the task deviates from the `medium` default
 - Supporting files split into subfolders: `references/` (long-form docs loaded on demand), `scripts/` (deterministic helpers), `assets/` (templates/icons used in output). Split when `SKILL.md` exceeds ~150 lines
 - Bump `.claude-plugin/plugin.json` `version` (semver) on every user-visible change to a skill so plugin consumers can track updates
 - Create an annotated git tag `vX.Y.Z` matching the bumped version (`git tag -a vX.Y.Z -m "..."`) summarizing what changed since the previous tag, then `git push --tags`
