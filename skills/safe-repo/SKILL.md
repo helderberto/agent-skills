@@ -20,7 +20,6 @@ Security audit for sensitive data in repository. Check for credentials, API keys
 ### Default (full-scan)
 
 1. Run `bash scripts/scan-secrets.sh` to scan all tracked files for credential patterns
-   (see [references/patterns.md](references/patterns.md) for full pattern list)
 2. Check for sensitive tracked files (.env, secrets)
 3. Analyze git history for removed secrets
 4. Review `.gitignore` for proper patterns

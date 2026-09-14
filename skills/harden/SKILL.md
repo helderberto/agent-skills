@@ -42,8 +42,6 @@ Security as a constraint on every line that touches user data, auth, or external
 - Store sessions in client-accessible storage (e.g., localStorage for auth tokens)
 - Expose stack traces or internal errors to users
 
-See [OWASP Top 10 quick reference](references/owasp.md).
-
 ## Input Validation at Boundaries
 
 Always validate at the **system boundary** (route handler, message consumer), not in business logic:
