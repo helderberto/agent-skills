@@ -55,6 +55,11 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Architectural friction in codebase      | `architecture-audit`                           |
 | Prototype a design (terminal app or UI) | `prototype`                                    |
 | Explain code or codebase area           | `explain-code`                                 |
+| Build or refactor a UI component/page   | `frontend-ui-engineering`                      |
+| Code at a trust boundary (auth, input, external API) | `harden`                          |
+| Full pre-ship review (parallel reviewers) | `review`                                     |
+| Validate a UI change in a real browser  | `visual-validate`                              |
+| Learn a concept over multiple sessions  | `teach`                                        |
 | Code review on a PR                     | `code-review`                                  |
 | Visual/HTML PR review (annotated diff)  | `visual-review`                                |
 | Triage existing PR review comments (what to fix) | `triage-review`                        |
