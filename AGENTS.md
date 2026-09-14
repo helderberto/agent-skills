@@ -50,8 +50,7 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Implement using official docs           | `source-driven`                                |
 | Research a question against sources     | `research`                                     |
 | Bug, error, unexpected behavior         | `diagnose`                                     |
-| Backfill tests / split large functions  | `fortify`                                      |
-| Simplify code without changing behavior | `code-simplify`                                |
+| Backfill tests / split functions / simplify | `fortify`                                  |
 | Design or improve a module's interface  | `codebase-design`                              |
 | Architectural friction in codebase      | `architecture-audit`                           |
 | Prototype a design (terminal app or UI) | `prototype`                                    |
@@ -59,14 +58,12 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Code review on a PR                     | `code-review`                                  |
 | Visual/HTML PR review (annotated diff)  | `visual-review`                                |
 | Triage existing PR review comments (what to fix) | `triage-review`                        |
-| Reply to PR review comment              | `pr-reply`                                     |
 | Check accessibility                     | `a11y-audit`                                   |
 | Check i18n coverage                     | `i18n`                                         |
 | Audit bundle size / performance         | `perf-audit`                                   |
 | Audit dependencies for CVEs             | `deps-audit`                                   |
 | Check for sensitive data in repo        | `safe-repo`                                    |
-| Run linter / formatter                  | `lint`                                         |
-| Run the test suite                      | `testing`                                      |
+| Run linter / formatter                  | `validate-code`                                |
 | Validate code (lint + types + tests)    | `validate-code`                                |
 | Write end-to-end tests (Cypress)        | `e2e`                                          |
 | Commit changes (atomic, grouped by concern) | `commit`                                    |
@@ -74,7 +71,6 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Create a pull request                   | `create-pull-request`                          |
 | Record an architectural decision        | `create-adr`                                   |
 | Pin down domain terminology / glossary  | `domain-modeling`                              |
-| Set up pre-commit hooks                 | `setup-pre-commit`                             |
 | Stress-test a plan or design            | `grill-me`                                     |
 | Fix prose / typos in markdown           | `prose-fix`                                    |
 | Restructure an article draft            | `revise`                                       |
