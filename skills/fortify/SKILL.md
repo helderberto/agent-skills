@@ -1,7 +1,7 @@
 ---
 name: fortify
 effort: high
-description: Improve existing code without changing behavior — split large functions, backfill tests, add edge-case coverage, or simplify (flatten nesting, delete dead code, inline wrappers). Use when user asks to "fortify", "make robust", "bulletproof", "strengthen", "add missing tests", "split functions", "simplify", "clean up", or "reduce complexity". Don't use for new features (/tdd), security (/harden), or PR review.
+description: Improve existing code without changing behavior — split large functions, backfill tests, simplify. Use when asked to "fortify", "make robust", "bulletproof", "strengthen", "add missing tests", "split functions", "simplify", "clean up", or "reduce complexity". Don't use for new features (/tdd), security (/harden), or PR review.
 ---
 
 # Fortify

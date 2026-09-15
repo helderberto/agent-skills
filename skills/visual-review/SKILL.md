@@ -1,7 +1,7 @@
 ---
 name: visual-review
 effort: high
-description: Render a GitHub PR diff as a self-contained HTML page, each hunk annotated with a software-principle explanation and a suggested simplification. Use when the user wants a visual/HTML diff report or PR feedback linked to principles. Don't use for text-only feedback (/code-review), browser screenshots (/visual-validate), or multi-reviewer orchestration (/review).
+description: Render a GitHub PR diff as a self-contained HTML page, each hunk annotated with a principle and a suggested simplification. Use when the user wants a visual/HTML diff report or PR feedback linked to principles. Don't use for text-only feedback (/code-review), screenshots (/visual-validate), or multi-reviewer orchestration (/review).
 argument-hint: '[pr-url-or-number]'
 ---
 

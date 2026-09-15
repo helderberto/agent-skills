@@ -1,7 +1,7 @@
 ---
 name: test
 effort: high
-description: VERIFY phase — run validation (lint, types, tests) plus changed-line coverage, and when a plan exists verify its checkboxes against the codebase. Use after /build, when the user asks to verify, test, or confirm work holds up, or to check plan progress. Don't use to implement phases (/build) or write new tests (/tdd).
+description: VERIFY phase — run lint, types, tests plus changed-line coverage; with a plan, verify its checkboxes against the codebase. Use after /build, when asked to verify, test, or confirm work holds up, or to check plan progress. Don't use to implement phases (/build) or write new tests (/tdd).
 argument-hint: '[slug]'
 ---
 

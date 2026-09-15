@@ -1,6 +1,6 @@
 ---
 name: e2e
-description: Write end-to-end tests for user flows with the project's E2E framework (Playwright, Cypress, or other). Use when user asks to "write e2e tests", "add Playwright/Cypress tests", or wants a user flow tested end-to-end. Don't use for unit or component tests (/tdd) or browser-driven manual validation (/visual-validate).
+description: Write end-to-end tests for user flows with the project's E2E framework (Playwright, Cypress, other). Use when asked to "write e2e tests", "add Playwright/Cypress tests", or test a user flow end-to-end. Don't use for unit or component tests (/tdd) or manual browser checks (/visual-validate).
 ---
 
 # End-to-End Tests

@@ -1,6 +1,6 @@
 ---
 name: source-driven
-description: Implement features using official docs for the exact installed dependency versions instead of training data. Use when user asks to "check the docs", "use official docs", "source-driven", or when implementing with unfamiliar APIs/libraries. Don't use for well-known stdlib APIs or project-internal code.
+description: Implement features from official docs for the exact installed dependency versions, not training data. Use when asked to "check the docs", "use official docs", "source-driven", or with unfamiliar APIs/libraries. Don't use for well-known stdlib APIs or project-internal code.
 ---
 
 # Source-Driven Development

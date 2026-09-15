@@ -1,6 +1,6 @@
 ---
 name: deps-audit
-description: Check dependencies for known vulnerabilities and staleness. Use when user asks to "audit dependencies", "check for vulnerabilities", or wants to check dependency health. Don't use for reviewing code quality.
+description: Check dependencies for known vulnerabilities and staleness. Use when asked to "audit dependencies", "check for vulnerabilities", or check dependency health. Don't use for code quality review.
 ---
 
 # Dependency Audit

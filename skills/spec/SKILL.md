@@ -1,7 +1,7 @@
 ---
 name: spec
 effort: high
-description: Create a spec (PRD) through user interview, codebase exploration, and module design. Use when starting a feature with unclear requirements, when the user asks to spec or define what to build, or says "write a spec" or "write a PRD". Don't use when requirements are crisp and a plan already exists (use /plan or /build).
+description: Create a spec (PRD) through user interview, codebase exploration, and module design. Use when starting a feature with unclear requirements, or asked to spec or define what to build, "write a spec", "write a PRD". Don't use when requirements are crisp and a plan exists (/plan, /build).
 argument-hint: <idea>
 ---
 

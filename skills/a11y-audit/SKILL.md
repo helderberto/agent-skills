@@ -1,6 +1,6 @@
 ---
 name: a11y-audit
-description: Audit accessibility compliance in frontend code. Use when user asks to "check accessibility", "audit a11y", "check WCAG", or find accessibility issues. Don't use for backend code, projects without HTML/JSX output, bundle size (/perf-audit), or translation coverage (/i18n).
+description: Audit accessibility (WCAG) in frontend code. Use when asked to "check accessibility", "audit a11y", "check WCAG", or find accessibility issues. Don't use for backend code, bundle size (/perf-audit), or translations (/i18n).
 ---
 
 # Accessibility Audit

@@ -1,7 +1,7 @@
 ---
 name: plan
 effort: high
-description: Turn a spec into a multi-phase implementation plan using tracer-bullet vertical slices. Use after /spec when a spec exists at `.specs/specs/<slug>.md`, or when the user asks to break work into phases or slices. Don't use without a spec, or for single-file changes with obvious scope.
+description: Turn a spec into a multi-phase implementation plan of tracer-bullet vertical slices. Use after /spec when `.specs/specs/<slug>.md` exists, or when asked to break work into phases or slices. Don't use without a spec, or for single-file changes with obvious scope.
 argument-hint: "[slug]"
 ---
 

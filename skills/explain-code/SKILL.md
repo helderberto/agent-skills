@@ -1,6 +1,6 @@
 ---
 name: explain-code
-description: Explains code with visual diagrams and analogies. Use when explaining how code works, walking through a codebase area, or when the user asks "how does this work?" Don't use for modifying code, fixing bugs, or multi-session concept learning (/teach).
+description: Explain code with visual diagrams and analogies. Use when explaining how code works, walking through a codebase area, or the user asks "how does this work?" Don't use for modifying code, fixing bugs, or multi-session learning (/teach).
 ---
 
 Read the code and anything it depends on before explaining. Then, always:

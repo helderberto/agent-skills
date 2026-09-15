@@ -1,6 +1,6 @@
 ---
 name: create-skill
-description: Create or restructure agent skills with proper frontmatter, description routing, and progressive disclosure. Use when user wants to create, write, or build a new skill, or asks "make a skill for X". Don't use for benchmarking or optimizing triggering with evals (skill-creator), or one-off prose edits to an existing skill.
+description: Create or restructure agent skills — frontmatter, description routing, progressive disclosure. Use when asked to create, write, or build a new skill, or "make a skill for X". Don't use for eval-driven trigger optimization (skill-creator) or one-off prose edits to a skill.
 ---
 
 # Creating Skills

@@ -1,6 +1,6 @@
 ---
 name: revise
-description: Structurally edit and improve article drafts — reorder sections, tighten arguments, improve clarity. Use when user asks to "revise", "improve my article", or "edit my draft". Don't use for typo fixes or formatting (/prose-fix), code documentation, or non-article content.
+description: Structurally edit article drafts — reorder sections, tighten arguments, improve clarity. Use when asked to "revise", "improve my article", or "edit my draft". Don't use for typos or formatting (/prose-fix), code docs, or non-article content.
 ---
 
 # Revise

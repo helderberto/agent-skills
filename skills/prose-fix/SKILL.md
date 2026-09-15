@@ -1,7 +1,7 @@
 ---
 name: prose-fix
 effort: low
-description: Fix prose formatting, typos, and clarity issues in markdown or text files. Use when user asks to "fix dashes", "fix typos", "clean up text", or "improve sentences". Don't use for code style, linting, or full rewrites (/revise).
+description: Fix prose formatting, typos, and clarity in markdown or text files. Use when asked to "fix dashes", "fix typos", "clean up text", or "improve sentences". Don't use for code style, linting, or full rewrites (/revise).
 ---
 
 # Prose Fix

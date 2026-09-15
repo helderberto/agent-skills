@@ -1,6 +1,6 @@
 ---
 name: handoff
-description: Compact the current conversation into a handoff document for another agent to pick up. Use when the user wants to hand off, transfer context to a fresh session, or says "write a handoff". Don't use to summarize for the current session (just answer) or to brief on plan progress (use /test).
+description: Compact the current conversation into a handoff document for another agent. Use when the user wants to hand off, move context to a fresh session, or says "write a handoff". Don't use to summarize for the current session or to brief on plan progress (/test).
 argument-hint: "What will the next session be used for?"
 ---
 

@@ -1,7 +1,7 @@
 ---
 name: commit
 effort: low
-description: Group unstaged changes into atomic commits by concern, following repository style. Use when user asks to "commit", "create a commit", or "commit changes". Don't use for pushing (/ship) or creating pull requests.
+description: Group unstaged changes into atomic commits by concern, matching repository style. Use when asked to "commit", "create a commit", or "commit changes". Don't use for pushing (/ship) or pull requests.
 ---
 
 # Git Commit

@@ -1,7 +1,7 @@
 ---
 name: build
 effort: high
-description: Implement one phase of a plan — finds the next unblocked incomplete phase, implements it with feedback loops, marks checkboxes, offers a commit. Use after /plan when a plan exists at `.specs/plans/<slug>.md`, or when the user asks to build the next phase. Don't use for ad-hoc changes with no plan (/tdd) or to check progress (/test).
+description: Implement the next unblocked phase of a plan with feedback loops, mark its checkboxes, offer a commit. Use after /plan when `.specs/plans/<slug>.md` exists, or when asked to build the next phase. Don't use for unplanned changes (/tdd) or to check progress (/test).
 argument-hint: '[slug]'
 ---
 

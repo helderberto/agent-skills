@@ -1,7 +1,7 @@
 ---
 name: code-review
 effort: high
-description: Review a GitHub Pull Request for bugs, security, performance, and code quality. Use when user asks to review a PR or wants pull request feedback. Don't use for reviewing local uncommitted changes, creating new PRs, or merging branches.
+description: Review a GitHub PR for bugs, security, performance, and code quality. Use when asked to review a PR or give pull request feedback. Don't use for local uncommitted changes, creating PRs, or merging.
 ---
 
 # Review Pull Request
