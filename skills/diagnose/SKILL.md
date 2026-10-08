@@ -132,4 +132,4 @@ Required before declaring done:
 - [ ] Throwaway prototypes deleted (or moved to a clearly-marked debug location)
 - [ ] The hypothesis that turned out correct is stated in the commit / PR message — so the next debugger learns
 
-**Then ask: what would have prevented this bug?** If the answer involves architectural change (no good test seam, tangled callers, hidden coupling) call the Skill tool with `architecture-audit`, passing the specifics. Make the recommendation **after** the fix is in, not before — you have more information now than when you started.
+Next: `/retro` in this session, before `/clear`, once the fix is in — you know more now than when you started. It asks what would have prevented this bug and routes a no-seam finding to `/architecture-audit`.

@@ -80,6 +80,7 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Fix prose / typos in markdown           | `prose-fix`                                    |
 | Restructure an article draft            | `revise`                                       |
 | Hand off mid-session work to a fresh agent | `handoff`                                   |
+| Retrospective on a session (improve the agent's environment) | `retro`                   |
 | Author a new skill                      | `create-skill`                                 |
 
 ### Lifecycle Mapping (Implicit Flow)

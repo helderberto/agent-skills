@@ -23,6 +23,8 @@ Arguments: $ARGUMENTS
    - Reference the ticket (`Resolves TICKET-123`).
 5. Uncommitted work → call the Skill tool with `commit` first (never open a PR on a dirty tree). Push with `-u` if needed, `gh pr create` with a HEREDOC body (`--draft` if requested). Return the URL.
 
+Next: `/retro` in this session, before `/clear`.
+
 ## Writing the body
 
 **Concise and readable by someone who didn't see the diff.** Each section 1–4 sentences or a short bullet list. Lead with the why, then the what; the diff already shows the how. Incorporate the user's answers — don't paraphrase the diff back at them. Cut a template section's boilerplate prose only if the template marks it optional; otherwise fill it in one line.
