@@ -1,7 +1,7 @@
 ---
 name: review
 effort: high
-description: Fan out parallel read-only reviewers over a diff and consolidate into one severity-ranked verdict. Use for a full pre-ship review, "review/validate this PR", or "spawn agents to review". Don't use for a single-lens PR review (/code-review), one audit, or triaging existing comments (/triage-review).
+description: Fan out parallel read-only reviewers over a diff and consolidate into one severity-ranked verdict. Use for a full pre-ship review, "review/validate this PR", or "spawn agents to review". Don't use for a single-lens PR review or a pasted diff (/code-review), one audit, or triaging existing comments (/triage-review).
 argument-hint: '[PR-number-or-branch] [agent-count]'
 ---
 
