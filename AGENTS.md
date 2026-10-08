@@ -83,6 +83,7 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Retrospective on a session (improve the agent's environment) | `retro`                   |
 | Last message didn't land — re-explain plainly | `wait-what`                             |
 | Author a new skill                      | `create-skill`                                 |
+| Which skill fits my situation?          | `ask`                                          |
 
 ### Lifecycle Mapping (Implicit Flow)
 

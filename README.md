@@ -119,7 +119,7 @@ For quick standalone tasks, you don't need the workflow — just describe what y
 
 ## Skills
 
-Skills come in two modes. **User-invoked** ones never auto-trigger (`disable-model-invocation: true`) — the outward-facing, irreversible actions you must pull the trigger on yourself (`ship`, `create-pull-request`), plus `teach`, `retro`, and `wait-what`, which only ever start by hand. Everything else is **model-invoked**: it auto-routes by description and stays callable explicitly as `/hb:<name>`. Model-invoked descriptions carry the trigger and anti-trigger clauses routing depends on; user-invoked ones keep a single what-it-does sentence, since trigger phrases are dead weight when nothing auto-routes.
+Skills come in two modes. **User-invoked** ones never auto-trigger (`disable-model-invocation: true`) — the outward-facing, irreversible actions you must pull the trigger on yourself (`ship`, `create-pull-request`), plus `teach`, `retro`, `wait-what`, and `ask`, which only ever start by hand. Everything else is **model-invoked**: it auto-routes by description and stays callable explicitly as `/hb:<name>`. Model-invoked descriptions carry the trigger and anti-trigger clauses routing depends on; user-invoked ones keep a single what-it-does sentence, since trigger phrases are dead weight when nothing auto-routes.
 
 Skills also carry an **effort** hint: mechanical ones (`commit`, `prose-fix`) run at low reasoning effort, heavy ones (`architecture-audit`, `harden`, `diagnose`) at high or xhigh, and the rest at the implicit medium default. The override lasts only for the turn the skill fires — so complexity matches the task without you touching `/effort`.
 
@@ -211,6 +211,7 @@ Focused capabilities the agent applies automatically based on the task (all call
 
 | Skill | What it does |
 |-------|--------------|
+| [`ask`](skills/ask/SKILL.md) | Router — maps your situation to the skill or flow that fits, plus when to continue, `/clear`, hand off, or `/compact` · **user-invoked** |
 | [`handoff`](skills/handoff/SKILL.md) | Compact the current conversation into a handoff doc for a fresh agent |
 | [`retro`](skills/retro/SKILL.md) | Retrospective on a session — suggests navigation pointers, checks, coding standards, steering fixes; mechanical mistakes become checks · **user-invoked** |
 | [`teach`](skills/teach/SKILL.md) | Stateful teaching workspace — lessons, references, learning records tied to a mission · **user-invoked** |
