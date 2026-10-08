@@ -10,7 +10,7 @@ A collection of skills that encode the workflows, quality gates, and engineering
   SPEC            PLAN            BUILD            TEST             REVIEW           SHIP
  ┌──────┐       ┌──────┐        ┌──────┐         ┌──────┐         ┌──────┐         ┌──────┐
  │ Idea │ ────▶ │ Spec │ ─────▶ │ Code │ ──────▶ │ Test │ ──────▶ │  QA  │ ──────▶ │  Go  │
- │Refine│       │Slices│        │ Impl │         │Verify│         │ Gate │         │ Live │
+ │Refine│       │Slices│        │ Impl │         │Verify│         │ Pass │         │ Live │
  └──────┘       └──────┘        └──────┘         └──────┘         └──────┘         └──────┘
  /hb:spec       /hb:plan        /hb:build        /hb:test         /hb:review       /hb:ship
 ```

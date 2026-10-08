@@ -31,4 +31,4 @@ Decide **how to structure a UI unit before writing it**, so the choices audits w
 
 ## 3. Build and hand off
 
-Apply the decisions; delegate non-trivial logic and its tests to `tdd`. Then `visual-validate` for before/after in a real browser, and `review` runs the audits as the final gate.
+Apply the decisions; delegate non-trivial logic and its tests to `tdd`. Then `visual-validate` for before/after in a real browser, and `/review` runs the audits as the QA pass before `/ship`.
