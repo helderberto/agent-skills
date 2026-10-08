@@ -2,11 +2,14 @@
 name: commit
 effort: low
 description: Group unstaged changes into atomic commits by concern, matching repository style. Use when asked to "commit", "create a commit", or "commit changes". Don't use for pushing (/ship) or pull requests.
+argument-hint: '[paths...]'
 ---
 
 # Git Commit
 
 Group all unstaged/untracked changes into **atomic commits** — one commit per logical concern. A single concern is just the degenerate case: one commit. **Never push** — pushing belongs to `/ship`.
+
+Paths in `$ARGUMENTS` scope the run: commit only those files and leave the rest of the tree as it is.
 
 ## Message style
 
@@ -17,7 +20,7 @@ Match the repo's existing commit patterns from `git log`. Extreme concision — 
 1. Review full diff and status; read recent log for style.
 2. Identify logical groups: feature/fix, its tests, config, formatting-only, docs, assets.
 3. Per group: stage those files explicitly by name, commit with a HEREDOC message, confirm `git status` before the next group.
-4. Finish with a clean working tree. Unsure how to group a file → ask.
+4. Finish with a clean working tree (scoped run: every listed file committed). Unsure how to group a file → ask.
 
 ## Grouping rules
 
