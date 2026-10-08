@@ -201,7 +201,7 @@ Focused capabilities the agent applies automatically based on the task (all call
 | [`architecture-audit`](skills/architecture-audit/SKILL.md) | Surface architectural friction, propose refactors toward deep modules as RFCs |
 | [`domain-modeling`](skills/domain-modeling/SKILL.md) | Build and sharpen the project's ubiquitous language and glossary |
 | [`research`](skills/research/SKILL.md) | Investigate a question against primary sources; capture cited findings as Markdown |
-| [`prototype`](skills/prototype/SKILL.md) | Build a throwaway prototype — terminal app or toggleable UI variations — to flesh out a design |
+| [`prototype`](skills/prototype/SKILL.md) | Build a throwaway prototype — shareable HTML logic demo or toggleable UI variations — kept on a `prototype/<name>` branch |
 | [`grill-me`](skills/grill-me/SKILL.md) | Stress-test a plan or design — interview in rounds over the design-tree frontier, each question with a recommended answer |
 
 </details>

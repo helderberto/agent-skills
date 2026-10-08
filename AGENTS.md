@@ -53,7 +53,7 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Backfill tests / split functions / simplify | `fortify`                                  |
 | Design or improve a module's interface  | `codebase-design`                              |
 | Architectural friction in codebase      | `architecture-audit`                           |
-| Prototype a design (terminal app or UI) | `prototype`                                    |
+| Prototype a design (logic demo or UI)   | `prototype`                                    |
 | Explain code or codebase area           | `explain-code`                                 |
 | Build or refactor a UI component/page   | `frontend-ui-engineering`                      |
 | Code at a trust boundary (auth, input, external API) | `harden`                          |
