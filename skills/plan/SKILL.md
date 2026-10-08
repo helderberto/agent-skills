@@ -23,7 +23,7 @@ Use argument as `<slug>`. If empty, list specs as numbered options and wait for 
 
 Read `.specs/specs/<slug>.md`. If missing, list specs as numbered options and wait for the user's choice.
 
-If `.specs/plans/<slug>.md` exists, ask: overwrite (Recommended) or new name.
+If `.specs/plans/<slug>.md` exists, never overwrite it. Same work (revising or extending this plan) → update it in place, keeping checked boxes. Different work with unchecked boxes → stop and ask: it may be mid-build in another session.
 
 ### 2. Explore the codebase
 
@@ -61,7 +61,7 @@ Each phase: thin vertical slice through all layers (schema → service → API �
 
 **Phase naming:** use a goal phrase answering "what can we demo when this is done?" (e.g., "Phase 1 — Revenue visible end-to-end"), not a layer name. An "and" in a phase title is a sign it's two phases.
 
-**Blocking edges:** each phase declares which phases must complete before it can start. Default to a linear chain (each phase blocked by the previous); declare independent edges only when phases genuinely don't gate each other — two independent phases mean two `/build` invocations can work the frontier in parallel.
+**Blocking edges:** each phase declares which phases must complete before it can start. Default to a linear chain (each phase blocked by the previous); declare independent edges only when phases genuinely don't gate each other. Independent phases can run as parallel lanes: each `/build` in its own git worktree and branch, merged into one integration branch that owns the plan file.
 
 **Done when:** checkbox list of atomic, verifiable conditions. Each must name a test file/name, a shell command, or a file+content to verify. No prose-only conditions. Test: "Can an agent verify by reading files, running a command, or checking a test?"
 
@@ -78,12 +78,6 @@ Each phase: thin vertical slice through all layers (schema → service → API �
   2. Continue anyway
 
 Count "modules touched" by scanning the spec's New Modules and Schema Changes sections.
-
-Assign an agent tag to tasks where appropriate:
-
-- `[skill:diagnose]` — tracing a bug or unexpected runtime behavior
-- `[agent:test-auditor]` — writing or reviewing tests
-- `[skill:code-review]` — reviewing API surfaces, interfaces, or public contracts
 
 ### 5. Quiz the user
 
