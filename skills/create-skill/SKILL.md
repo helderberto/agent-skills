@@ -30,7 +30,7 @@ Every step ends on a **completion criterion** the agent can check ("every error 
 | `effort` | `low` / `medium` / `high` / `xhigh` / `max` for the turn the skill fires; set only when it deviates from the `medium` default |
 | `allowed-tools` | Tools pre-approved for the invoking turn — use sparingly |
 
-Effort routing: `low` for mechanical single-place edits (`prose-fix`, `commit`); `high` for multi-file features, unknown-cause debugging, review (`build`, `diagnose`); `xhigh` for architecture, migrations, security-sensitive work (`architecture-audit`, `harden`).
+Effort routing: `low` for mechanical single-place edits (`commit`, `create-adr`); `high` for multi-file features, unknown-cause debugging, review (`build`, `diagnose`); `xhigh` for architecture, migrations, security-sensitive work (`architecture-audit`, `harden`).
 
 ## Description
 

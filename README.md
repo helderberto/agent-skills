@@ -129,7 +129,7 @@ For quick standalone tasks, you don't need the workflow — just describe what y
 
 Skills come in two modes. **User-invoked** ones never auto-trigger (`disable-model-invocation: true`) — the outward-facing, irreversible actions you must pull the trigger on yourself (`ship`, `create-pull-request`), plus `teach`, `retro`, `wait-what`, and `ask`, which only ever start by hand. Everything else is **model-invoked**: it auto-routes by description and stays callable explicitly as `/hb:<name>`. Model-invoked descriptions carry the trigger and anti-trigger clauses routing depends on; user-invoked ones keep a single what-it-does sentence, since trigger phrases are dead weight when nothing auto-routes.
 
-Skills also carry an **effort** hint: mechanical ones (`commit`, `prose-fix`) run at low reasoning effort, heavy ones (`architecture-audit`, `harden`, `diagnose`) at high or xhigh, and the rest at the implicit medium default. The override lasts only for the turn the skill fires — so complexity matches the task without you touching `/effort`.
+Skills also carry an **effort** hint: mechanical ones (`commit`, `create-adr`) run at low reasoning effort, heavy ones (`architecture-audit`, `harden`, `diagnose`) at high or xhigh, and the rest at the implicit medium default. The override lasts only for the turn the skill fires — so complexity matches the task without you touching `/effort`.
 
 ### SDLC workflow
 
@@ -140,7 +140,7 @@ The six-phase spine. Type each to advance, or let one phase chain into the next:
 | [`spec`](skills/spec/SKILL.md) | SPEC | Interview + codebase scan → structured spec in `.specs/specs/<slug>.md` |
 | [`plan`](skills/plan/SKILL.md) | PLAN | Turn spec into multi-phase implementation plan (tracer-bullet vertical slices) |
 | [`build`](skills/build/SKILL.md) | BUILD | Implement next incomplete phase of a plan test-first via `tdd`, with feedback loops; `--all` runs every phase after one approval |
-| [`test`](skills/test/SKILL.md) | TEST | Validate (lint/types/tests) + coverage, and verify plan checkboxes against codebase |
+| [`test`](skills/test/SKILL.md) | TEST | Check-only validation (lint/types/tests, no auto-fix) + changed-line coverage, and verify plan checkboxes against codebase |
 | [`review`](skills/review/SKILL.md) | REVIEW | Fan out parallel reviewers (scope-detected audits + agent lenses incl. spec conformance, standards, and a quality-bar check), consolidate into one verdict — **optional QA pass**, not a ship gate |
 | [`ship`](skills/ship/SKILL.md) | SHIP | Pre-launch gate (validate-code + safe-repo + floor-guard) + atomic commits + push (`--fast` to skip gate) · **user-invoked** |
 
@@ -195,7 +195,7 @@ Focused capabilities the agent applies automatically based on the task (all call
 |-------|--------------|
 | [`commit`](skills/commit/SKILL.md) | Group unstaged changes into atomic commits by concern (repository style) |
 | [`create-adr`](skills/create-adr/SKILL.md) | Record a 1–3 sentence Architecture Decision Record |
-| [`create-pull-request`](skills/create-pull-request/SKILL.md) | Open a GitHub PR with a concise templated body; `--diagram` adds a mermaid diagram of the change · **user-invoked** |
+| [`create-pull-request`](skills/create-pull-request/SKILL.md) | Open a GitHub PR with a concise templated body: Before/After evidence, merge danger (one-way or two-way door, blast radius); `--diagram` adds a mermaid diagram of the change · **user-invoked** |
 
 </details>
 
@@ -226,8 +226,7 @@ Focused capabilities the agent applies automatically based on the task (all call
 | [`wait-what`](skills/wait-what/SKILL.md) | Last message didn't land — re-pitch it with context, in Simplified Technical English and glossary terms · **user-invoked** |
 | [`explain-code`](skills/explain-code/SKILL.md) | Explain code with visual diagrams and analogies |
 | [`create-skill`](skills/create-skill/SKILL.md) | Author a new skill with proper structure |
-| [`prose-fix`](skills/prose-fix/SKILL.md) | Fix typos, dashes, formatting in markdown |
-| [`revise`](skills/revise/SKILL.md) | Structurally edit and improve article drafts |
+| [`revise`](skills/revise/SKILL.md) | Restructure article drafts, or polish any markdown (typos, dashes, filler) |
 
 </details>
 
@@ -265,8 +264,11 @@ Workflow skills write structured artifacts to `.specs/`:
 
 - `.specs/specs/<slug>.md` — specs from `/hb:spec`
 - `.specs/plans/<slug>.md` — phased plans from `/hb:plan`
+- `.specs/research/<slug>.md` — cited findings from `/hb:research`, when the repo has no notes convention of its own
 
 The `.specs/` directory is local-first. Add it to `.gitignore` if you prefer specs as scratch space, or commit it if you want specs as versioned project documentation.
+
+Throwaway output stays out of the working tree, so `commit` never sweeps it up: `visual-review` and `architecture-audit --html` reports, `perf-audit` bundle reports, and `handoff` docs go to `$TMPDIR` (else `/tmp`), and the skill prints the path.
 
 ---
 

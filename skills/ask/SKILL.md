@@ -41,7 +41,7 @@ Small, crisp change that needs no spec → `/tdd`, then `/review`.
 - Build helpers: `/source-driven`, `/frontend-ui-engineering`
 - Git: `/commit`, `/create-adr`
 - Session: `/handoff`, `/wait-what`, `/research`, `/explain-code`, `/teach`
-- Writing: `/prose-fix`, `/revise`, `/create-skill`
+- Writing: `/revise`, `/create-skill`
 
 ## Phase boundaries
 
