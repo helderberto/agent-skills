@@ -27,13 +27,13 @@ Show the title and unchecked items. If on the default branch, offer to create `f
 
 ### 3. Implement
 
-For each unchecked item, in order: read the plan's architectural decisions and the item's context, explore the surrounding code, implement following the project's conventions (CLAUDE.md, linter, test setup), write tests alongside.
+For each unchecked item, in order: read the plan's architectural decisions and the item's context, explore the surrounding code, and follow the project's conventions (CLAUDE.md, linter, test setup). Call the Skill tool with `tdd` at the phase's seams — the ones its Done-when items name. Completion: every item's test went red before it went green.
 
 Stay inside the phase boundary — never implement items from other phases. Never impose conventions the project doesn't already use.
 
 ### 4. Feedback loops
 
-Detect and run the project's checks (types, tests, lint, format) — prefer tasks the project defines; detection table in [validate-code](../validate-code/SKILL.md). Fix and re-run until green. A check still failing after 3 attempts is a **blocker**: report the last error and ask whether to wait, skip the check, or abort the phase.
+Call the Skill tool with `validate-code` (auto-fix on). Fix and re-run until green. A check still failing after 3 attempts is a **blocker**: report the last error and ask whether to wait, skip the check, or abort the phase.
 
 Anything the agent cannot provide (API key, external service, manual setup, design decision) is also a blocker — ask, never work around it silently.
 
@@ -43,4 +43,4 @@ Flip completed items `- [ ]` → `- [x]` in the plan. This is the only plan edit
 
 ### 6. Offer commit
 
-"Phase N complete — all checks pass. Commit?" If yes: stage implementation files by name (not `.specs/` unless the project commits specs), commit in the project's convention, never push. Then: "Run `/build <slug>` for Phase N+1, or `/test <slug>` to verify."
+"Phase N complete — all checks pass. Commit?" If yes, call the Skill tool with `commit`, passing the phase's files (`.specs/` only when the project commits specs). Never push. Then: "Run `/build <slug>` for Phase N+1, or `/test <slug>` to verify."
