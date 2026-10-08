@@ -9,9 +9,9 @@ argument-hint: '[pr-url-or-number]'
 
 Turn a PR diff into an annotated HTML page you scan in a browser. Each finding sits next to its code and explains the **why** — the principle it touches and how to simplify — so you decide what to comment on the PR yourself. Read-only: this never posts to the PR or touches the branch.
 
-Sibling of [`code-review`](../code-review/SKILL.md) (text feedback) and [`visual-validate`](../visual-validate/SKILL.md) (browser UI). Its edge is the visual artifact and the teaching: findings link to [`references/principles.md`](references/principles.md).
+Sibling of `code-review` (text feedback) and `visual-validate` (browser UI). Its edge is the visual artifact and the teaching: findings link to [`references/principles.md`](references/principles.md).
 
-The lens covers design and simplification — readability and simplification, SOLID and design principles, testability, reusability, and maintainability: how to make each changed block clearer, more reusable, and easier to test. Bugs, security, and scope/claim mismatches (does the diff do what the PR description says?) stay out of scope — run [`code-review`](../code-review/SKILL.md) for those.
+The lens covers design and simplification — readability and simplification, SOLID and design principles, testability, reusability, and maintainability: how to make each changed block clearer, more reusable, and easier to test. Bugs, security, and scope/claim mismatches (does the diff do what the PR description says?) stay out of scope — `/code-review` covers those.
 
 ## Workflow
 

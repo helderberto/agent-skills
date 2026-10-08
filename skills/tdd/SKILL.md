@@ -75,7 +75,7 @@ Before writing any code:
 
 - [ ] Confirm the seams under test with the user
 - [ ] Confirm with user which behaviors to test (prioritize)
-- [ ] Identify opportunities for deep modules (small interface, deep implementation) — run the `/codebase-design` skill for the vocabulary and the testability checks
+- [ ] Identify opportunities for deep modules (small interface, deep implementation) — call the Skill tool with `codebase-design` for the vocabulary and the testability checks
 - [ ] List the behaviors to test (not implementation steps)
 - [ ] Get user approval on the plan
 
@@ -110,4 +110,4 @@ Rules:
 
 ### 4. Refactor
 
-Only once GREEN — never while RED. Extract duplication, deepen modules (`/codebase-design` for the vocabulary), and ask what the new code reveals about existing code. Run tests after each step.
+Only once GREEN — never while RED. Extract duplication, deepen modules (call the Skill tool with `codebase-design` for the vocabulary), and ask what the new code reveals about existing code. Run tests after each step.

@@ -4,7 +4,7 @@ The principles each hunk is checked against. Each has a **signal** (what to spot
 
 Severity: **must-fix** (breaks a hard rule below) · **consider** (better but not blocking) · **praise** (a pattern worth reinforcing).
 
-Scope: design and simplification — readability, simplification, SOLID and design principles, testability, reusability, maintainability. Correctness, security, and scope/claim mismatches belong to [`code-review`](../../code-review/SKILL.md) — don't grow this lens toward them.
+Scope: design and simplification — readability, simplification, SOLID and design principles, testability, reusability, maintainability. Correctness, security, and scope/claim mismatches belong to `code-review` — don't grow this lens toward them.
 
 ## Unnecessary memoization
 

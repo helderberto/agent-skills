@@ -31,4 +31,4 @@ Preserve code blocks, technical terms, and proper nouns exactly. Re-read the who
 
 ## 4. Polish pass
 
-Invoke `/prose-fix` on the file — it owns the formatting/typo/clarity rules. Report structural changes and what the polish pass changed.
+Call the Skill tool with `prose-fix` on the file — it owns the formatting/typo/clarity rules. Report structural changes and what the polish pass changed.
