@@ -19,13 +19,17 @@ Arguments: $ARGUMENTS
 3. Ask the user, all at once: **effort** in hours (required), **what was done** in their words (required), testing not visible in the diff, tricky parts, and any template field the diff can't answer (breaking change? type of change?).
 4. Draft title and body.
    - Title matches `^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\(.*\))?: .+$`.
-   - Template found → it is the body, verbatim structure: fill every section and placeholder, check applicable boxes, add nothing outside it except `## Diagram` when requested. No template → `## Summary` + `## Test plan`.
+   - Template found → it is the body, verbatim structure: fill every section and placeholder, check applicable boxes, add nothing outside it except `## Diagram` when requested. Its testing section carries the Evidence, its risk section the Merge Danger. No template → `## Summary` + `## Evidence` + `## Merge Danger`.
    - Reference the ticket (`Resolves TICKET-123`).
-5. Commit anything uncommitted first (never open a PR on a dirty tree), push with `-u` if needed, `gh pr create` with a HEREDOC body (`--draft` if requested). Return the URL.
+5. Uncommitted work → call the Skill tool with `commit` first (never open a PR on a dirty tree). Push with `-u` if needed, `gh pr create` with a HEREDOC body (`--draft` if requested). Return the URL.
 
 ## Writing the body
 
 **Concise and readable by someone who didn't see the diff.** Each section 1–4 sentences or a short bullet list. Lead with the why, then the what; the diff already shows the how. Incorporate the user's answers — don't paraphrase the diff back at them. Cut a template section's boilerplate prose only if the template marks it optional; otherwise fill it in one line.
+
+- **Summary**: when a picture beats a sentence, add the smallest text visual that makes the point: pseudocode, call tree, component tree, file tree, or a `diff` sketch of the shape. Mermaid stays behind `--diagram`. A one-function change needs none.
+- **Evidence**: **Before** / **After**. A screenshot for visual changes; otherwise the test run or output that failed before and passes now.
+- **Merge Danger**: **Door**: one-way (destructive migration, removed public API, deleted data) or two-way (a revert undoes it). **Blast Radius**: one word, then what could break for whom.
 
 ## Diagram (`--diagram`)
 
