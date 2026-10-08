@@ -40,12 +40,12 @@ The lens covers design and simplification — readability and simplification, SO
 ### Phase 4 — Render the HTML
 
 4. Clone [`assets/report-template.html`](assets/report-template.html). Fill the header (title, number, author, PR link), the summary counts, and one finding card per finding — grouped by file, ordered by severity within each file. Keep it self-contained: inline CSS/JS, no CDN, so it opens offline via `file://`.
-   Write to `visual-review-pr-<number>.html` at the repo root.
+   Write to `<tmpdir>/visual-review-pr-<number>.html`, where `<tmpdir>` is `$TMPDIR`, else `/tmp` (`%TEMP%` on Windows). Never the working tree: the next `commit` would sweep the report in.
    Completion: file written with every finding rendered.
 
-5. Open it and report the path:
+5. Open it and report the absolute path:
    ```bash
-   open visual-review-pr-<number>.html   # macOS; xdg-open on Linux
+   open <tmpdir>/visual-review-pr-<number>.html   # macOS; xdg-open on Linux
    ```
    Completion: path printed; browser opened.
 

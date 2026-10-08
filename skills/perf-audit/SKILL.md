@@ -11,9 +11,9 @@ description: Audit frontend bundle size and performance. Use when asked to "audi
 2. Run the production build via the project's task runner (auto-detect from package.json).
 3. Analyze the build output — non-interactive only. Never launch a browser or a long-running server in an audit; those hang an automated run. Prefer, in order:
    - **Measure the emitted files directly**: for each file in the output dir (e.g. `dist/assets/*.js`), report raw + gzipped size — `gzip -c <file> | wc -c`. This always works and needs no extra tooling.
-   - **Per-module breakdown, as a static artifact** (not a server):
+   - **Per-module breakdown, as a static artifact** (not a server), written under `$TMPDIR` (else `/tmp`) and never the working tree, where the next `commit` would sweep it in. Print the path:
      - Vite/Rollup: `npx source-map-explorer 'dist/assets/*.js'`, or add `rollup-plugin-visualizer` configured to emit JSON/HTML to a file
-     - webpack/Next.js: `npx webpack-bundle-analyzer -m static -r report.html <stats-file>` (writes a file; do **not** use the default server mode)
+     - webpack/Next.js: `npx webpack-bundle-analyzer -m static -r "${TMPDIR:-/tmp}/report.html" <stats-file>` (writes a file; do **not** use the default server mode)
    - `npx vite-bundle-visualizer` opens a browser and blocks — only suggest it to the user for manual exploration; do not run it here.
 
 4. Check `package.json` for known heavy packages
