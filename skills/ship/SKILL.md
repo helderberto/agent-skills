@@ -1,6 +1,6 @@
 ---
 name: ship
-description: Commit and push changes with a pre-launch gate (validate-code + safe-repo) by default. `--fast` skips the gate.
+description: Commit and push changes with a pre-launch gate (validate-code + safe-repo + floor-guard) by default. `--fast` skips the gate.
 argument-hint: '[--fast]'
 disable-model-invocation: true
 ---
@@ -15,13 +15,16 @@ Ship runs a **pre-launch gate** before committing so nothing broken or unsafe le
 
 ### 1. Pre-launch gate (skipped with `--fast`)
 
-1. Invoke the [validate-code](../validate-code/SKILL.md) skill. FAIL → report, stop.
-2. Invoke the [safe-repo](../safe-repo/SKILL.md) skill in `--diff` mode (staged + unstaged only). Findings → report, stop.
+1. Call the Skill tool with `validate-code`. FAIL → report, stop.
+2. Call the Skill tool with `safe-repo`, passing `--diff` (staged + unstaged only). Findings → report, stop.
+3. Run `bash ${CLAUDE_SKILL_DIR}/../review/scripts/floor-guard.sh` (diff-only, no installs). Exit 1 (bar lowered) or 2 (couldn't run) → report, stop.
 
 ### 2. Commit
 
-Invoke the [commit](../commit/SKILL.md) skill — atomic commits by concern, repo style, staged by name.
+Call the Skill tool with `commit` — atomic commits by concern, repo style, staged by name.
 
 ### 3. Push
 
 `git push` the current branch, then `git status` to verify. Rejected as non-fast-forward → `git pull --rebase`, retry once. **Never force push.**
+
+Next: `/create-pull-request`.

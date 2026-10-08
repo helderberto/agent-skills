@@ -10,7 +10,7 @@ The *active* discipline of shaping the model — challenging terms, inventing ed
 
 ## Artifact
 
-Maintain the project's glossary in its existing convention. If there is none, create `CONTEXT.md` at the repo root. Record decisions that settle a term via `/create-adr` so the *why* is preserved separately from the *what*.
+Maintain the project's glossary in its existing convention; a legacy `CONTEXT.md` counts. If there is none, create `GLOSSARY.md` at the repo root. A repo with several bounded contexts gets one glossary per context, plus a root `GLOSSARY-MAP.md` that points to each. Call the Skill tool with `create-adr` to record decisions that settle a term, so the *why* is preserved separately from the *what*.
 
 ## Ubiquitous language
 

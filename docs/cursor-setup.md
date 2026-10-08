@@ -52,7 +52,6 @@ cp /path/to/agent-skills/skills/spec/SKILL.md  .cursor/rules/spec.md
 cp /path/to/agent-skills/skills/plan/SKILL.md  .cursor/rules/plan.md
 cp /path/to/agent-skills/skills/build/SKILL.md .cursor/rules/build.md
 cp /path/to/agent-skills/skills/test/SKILL.md  .cursor/rules/test.md
-cp /path/to/agent-skills/skills/brief/SKILL.md .cursor/rules/brief.md
 ```
 
 Cursor will then route prompts like "plan the dark mode feature" or "build the next phase" through these rules automatically.

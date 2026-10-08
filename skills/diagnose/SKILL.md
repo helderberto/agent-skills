@@ -117,7 +117,7 @@ A correct seam is one where the test exercises the **real bug pattern** as it oc
 If a correct seam exists:
 
 1. Turn the minimised repro into a failing test at that seam.
-2. Watch it fail.
+2. Watch it fail. Forced the red by editing code or a fixture? `diff` against a clean copy to prove the edit landed.
 3. Apply the fix.
 4. Watch it pass.
 5. Re-run the Phase 1 feedback loop against the original (un-minimised) scenario.
@@ -132,4 +132,4 @@ Required before declaring done:
 - [ ] Throwaway prototypes deleted (or moved to a clearly-marked debug location)
 - [ ] The hypothesis that turned out correct is stated in the commit / PR message — so the next debugger learns
 
-**Then ask: what would have prevented this bug?** If the answer involves architectural change (no good test seam, tangled callers, hidden coupling) hand off to the `/architecture-audit` skill with the specifics. Make the recommendation **after** the fix is in, not before — you have more information now than when you started.
+Next: `/retro` in this session, before `/clear`, once the fix is in — you know more now than when you started. It asks what would have prevented this bug and routes a no-seam finding to `/architecture-audit`.

@@ -53,14 +53,14 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Backfill tests / split functions / simplify | `fortify`                                  |
 | Design or improve a module's interface  | `codebase-design`                              |
 | Architectural friction in codebase      | `architecture-audit`                           |
-| Prototype a design (terminal app or UI) | `prototype`                                    |
+| Prototype a design (logic demo or UI)   | `prototype`                                    |
 | Explain code or codebase area           | `explain-code`                                 |
 | Build or refactor a UI component/page   | `frontend-ui-engineering`                      |
 | Code at a trust boundary (auth, input, external API) | `harden`                          |
 | Full pre-ship review (parallel reviewers) | `review`                                     |
 | Validate a UI change in a real browser  | `visual-validate`                              |
 | Learn a concept over multiple sessions  | `teach`                                        |
-| Code review on a PR                     | `code-review`                                  |
+| Code review on a PR or pasted diff      | `code-review`                                  |
 | Visual/HTML PR review (annotated diff)  | `visual-review`                                |
 | Triage existing PR review comments (what to fix) | `triage-review`                        |
 | Check accessibility                     | `a11y-audit`                                   |
@@ -80,18 +80,22 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Fix prose / typos in markdown           | `prose-fix`                                    |
 | Restructure an article draft            | `revise`                                       |
 | Hand off mid-session work to a fresh agent | `handoff`                                   |
+| Retrospective on a session (improve the agent's environment) | `retro`                   |
+| Last message didn't land — re-explain plainly | `wait-what`                             |
 | Author a new skill                      | `create-skill`                                 |
+| Which skill fits my situation?          | `ask`                                          |
 
 ### Lifecycle Mapping (Implicit Flow)
 
 When the user has a non-trivial task, follow this flow even without explicit commands:
 
-- **SPEC** → `spec` (interview-driven), with `grill-me` to stress-test
+- **SPEC** → `spec` (interviews via `grill-me`; settled terms go to the glossary via `domain-modeling`)
 - **PLAN** → `plan` (spec to vertical-slice phases), with `architecture-audit` or `codebase-design` as needed
-- **BUILD** → `build` (one phase per invocation), driven by `tdd` and `source-driven`
-- **TEST** → `test` (validate-code + changed-line coverage + plan vs codebase), with `diagnose` on failure
-- **REVIEW** → `review` (orchestrates the audits below as parallel reviewers plus independent agent lenses; `code-review` for a single in-thread lens; `visual-review` for an annotated HTML diff report; `triage-review` to sort existing reviewer comments), covering `a11y-audit`, `i18n`, `perf-audit`, `deps-audit`, `safe-repo`, `harden`
-- **SHIP** → `validate-code` → `ship` → `create-pull-request`
+- **BUILD** → `build` (one phase per invocation, or `--all`), driven by `tdd` and `source-driven`
+- **TEST** → `test` (`validate-code --check` + changed-line coverage + plan vs codebase), with `diagnose` on failure
+- **REVIEW** → `review` (orchestrates the audits below as parallel reviewers plus independent agent lenses, including spec conformance, standards, and the floor-guard quality-bar check; `code-review` for a single in-thread lens; `visual-review` for an annotated HTML diff report; `triage-review` to sort existing reviewer comments), covering `a11y-audit`, `i18n`, `perf-audit`, `deps-audit`, `safe-repo`, `harden`
+- **SHIP** → `ship` (gate: `validate-code`, `safe-repo`, floor-guard) → `create-pull-request`
+- **RETRO** → `retro`, in the same session before `/clear`; `ask` routes any situation to its skill
 
 ## Conventions
 

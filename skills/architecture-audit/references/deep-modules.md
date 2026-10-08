@@ -1,6 +1,6 @@
 # Deep Modules
 
-Uses the deep-module vocabulary — see [codebase-design](../../codebase-design/SKILL.md) for canonical definitions. This file collects audit-specific examples, anti-patterns, and friction signals.
+Uses the deep-module vocabulary — the `codebase-design` skill holds the canonical definitions. This file collects audit-specific examples, anti-patterns, and friction signals.
 
 ---
 

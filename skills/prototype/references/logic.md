@@ -1,13 +1,15 @@
 # Logic Prototype
 
-A tiny interactive terminal app that lets the user drive a state model by hand. Use this when the question is about **business logic, state transitions, or data shape** — the kind of thing that looks reasonable on paper but only feels wrong once you push it through real cases.
+A single, self-contained HTML file — a **shareable demo** — that lets anyone drive a state model by clicking buttons. Use this when the question is about **business logic, state transitions, or data shape**: the kind of thing that looks reasonable on paper but only feels wrong once you push it through real cases.
+
+One file with nothing to install means a non-developer (designer, PM, domain expert) can feel the model for themselves. So it speaks their language, not the code's.
 
 ## When this is the right shape
 
 - "I'm not sure if this state machine handles the edge case where X then Y."
 - "Does this data model actually let me represent the case where..."
 - "I want to feel out what the API should look like before writing it."
-- Anything where the user wants to **press buttons and watch state change**.
+- Anything where someone wants to **press buttons and watch state change**.
 
 If the question is "what should this look like" — wrong branch. Use [ui.md](ui.md).
 
@@ -15,17 +17,11 @@ If the question is "what should this look like" — wrong branch. Use [ui.md](ui
 
 ### 1. State the question
 
-Before writing code, write down what state model and what question you're prototyping. One paragraph, in the prototype's README or a comment at the top of the file. A logic prototype that answers the wrong question is pure waste — make the question explicit so it can be checked later, whether the user is watching now or returning to it AFK.
+Before writing code, write down what state model and what question you're prototyping. One paragraph, in a visible intro at the top of the demo, not just a comment. A logic prototype that answers the wrong question is pure waste — make the question explicit so it can be checked later, whether the user is watching now or returning to it AFK.
 
-### 2. Pick the language
+### 2. Isolate the logic in a portable module
 
-Use whatever the host project uses. If the project has no obvious runtime (e.g. a docs repo), ask.
-
-Match the project's existing conventions for tooling — don't add a new package manager or runtime just for the prototype.
-
-### 3. Isolate the logic in a portable module
-
-Put the actual logic — the bit that's answering the question — behind a small, pure interface that could be lifted out and dropped into the real codebase later. The TUI around it is throwaway; the logic module shouldn't be.
+Put the actual logic — the bit that's answering the question — in one `<script>` block written as a small, pure module that could be lifted into the real codebase later. The page around it is throwaway; the module isn't.
 
 The right shape depends on the question:
 
@@ -34,46 +30,37 @@ The right shape depends on the question:
 - **A small set of pure functions** over a plain data type. Good when there's no implicit current state — just transformations.
 - **A class or module with a clear method surface** when the logic genuinely owns ongoing internal state.
 
-Pick whichever shape best fits the question being asked, _not_ whichever is easiest to wire to a TUI. Keep it pure: no I/O, no terminal code, no `console.log` for control flow. The TUI imports it and calls into it; nothing flows the other direction.
+Pick whichever shape best fits the question being asked, _not_ whichever is easiest to wire to a page. Keep it pure: no DOM, no `document`, no button handlers reaching inside. The page calls into it; nothing flows the other direction. Once the question's answered, the validated reducer / machine / function set lifts into the real module on its own.
 
-This is what makes the prototype useful past its own lifetime. When the question's been answered, the validated reducer / machine / function set can be lifted into the real module — the TUI shell gets deleted.
+### 3. Build the shareable HTML file
 
-### 4. Build the smallest TUI that exposes the state
+One file, plain HTML/CSS/JS: no framework, no bundler, no server, everything inline, so it opens by double-click and survives being emailed around.
 
-Build it as a **lightweight TUI** — on every tick, clear the screen (`console.clear()` / `print("\033[2J\033[H")` / equivalent) and re-render the whole frame. The user should always see one stable view, not an ever-growing scrollback.
+Write it for a non-developer. Every label is in **domain language** (the project's `GLOSSARY.md` terms when it has one): buttons and state read like the business, not the reducer.
 
-Each frame has two parts, in this order:
+Top to bottom:
 
-1. **Current state**, pretty-printed and diff-friendly (one field per line, or formatted JSON). Use **bold** for field names or section headers and **dim** for less important context (timestamps, IDs, derived values). Native ANSI escape codes are fine — `\x1b[1m` bold, `\x1b[2m` dim, `\x1b[0m` reset. No need to pull in a styling library unless one is already in the project.
-2. **Keyboard shortcuts**, listed at the bottom: `[a] add user  [d] delete user  [t] tick clock  [q] quit`. Bold the key, dim the description, or vice-versa — whatever reads cleanly.
+1. **Title and one-line explanation** — the question from step 1.
+2. **Current state** — a readable panel of labelled fields, not a raw JSON dump, re-rendered after every click. Call out what just changed.
+3. **Free-play buttons** — one per action, always available, so anyone can poke the model in any order.
+4. **Guided walkthroughs** — one **scenario** per tab: a short plain-language description (the situation and what to watch for), then the ordered buttons to press. Each step is a real button that performs its action and moves to the next step. Starting a walkthrough resets to a known initial state, so the scenario runs the same way every time.
 
-Behaviour:
+Pick scenarios that show the awkward cases: the happy path, a tricky edge case, an attempt at something that should be illegal.
 
-1. **Initialise state** — a single in-memory object/struct. Render the first frame on start.
-2. **Read one keystroke (or one line)** at a time, dispatch to a handler that mutates state.
-3. **Re-render** the full frame after every action — don't append, replace.
-4. **Loop until quit.**
+Clean typography, generous spacing, one accent colour. No animations: nothing competes with the state and the buttons.
 
-The whole frame should fit on one screen.
+### 4. Hand it over
 
-### 5. Make it runnable in one command
+Give the user the file path, or open it for them. The interesting moments are when someone says "wait, that shouldn't be possible" or "huh, I assumed X would be different" — those are the bugs in the _idea_, which is the whole point. If they want new actions or a new scenario, add them. Prototypes evolve.
 
-Add a script to the project's existing task runner (`package.json` scripts, `Makefile`, `justfile`, `pyproject.toml`). The user should run `pnpm run <prototype-name>` or equivalent — never need to remember a path.
+### 5. Capture the answer and the prototype
 
-If the host project has no task runner, just put the command at the top of the prototype's README.
-
-### 6. Hand it over
-
-Give the user the run command. They'll drive it themselves; the interesting moments are when they say "wait, that shouldn't be possible" or "huh, I assumed X would be different" — those are the bugs in the _idea_, which is the whole point. If they want new actions added, add them. Prototypes evolve.
-
-### 7. Capture the answer
-
-When the prototype has done its job, the answer to the question is the only thing worth keeping. If the user is around, ask what it taught them. If not, leave a `NOTES.md` next to the prototype so the answer can be filled in (or filled in by you, if you've watched the session) before the prototype gets deleted.
+Once the prototype has answered its question, capture both as the [SKILL](../SKILL.md) describes. The validated reducer / machine / function set lifts into the real module; the HTML file rides along to the `prototype/<name>` branch, where, being one self-contained file, it stays trivially re-runnable.
 
 ## Anti-patterns
 
 - **Don't add tests.** A prototype that needs tests is no longer a prototype.
-- **Don't wire it to the real database.** Use an in-memory store unless the question is specifically about persistence.
+- **Don't wire it to the real database.** Use in-memory state unless the question is specifically about persistence.
 - **Don't generalise.** No "what if we wanted to support X later." The prototype answers one question.
-- **Don't blur the logic and the TUI together.** If the reducer / state machine references `console.log`, prompts, or terminal escape codes, it's no longer portable. Keep the TUI as a thin shell over a pure module.
-- **Don't ship the TUI shell into production.** The shell is optimised for being driven by hand from a terminal. The logic module behind it is the bit worth keeping.
+- **Don't blur the logic and the page together.** If the pure module references the DOM, `document`, or button handlers, it's no longer liftable.
+- **Don't reach for a framework, bundler, or server.** One file the recipient double-clicks; a dev server defeats "shareable".

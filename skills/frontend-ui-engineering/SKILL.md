@@ -7,7 +7,7 @@ argument-hint: '[component or path]'
 
 # Frontend UI Engineering
 
-Decide **how to structure a UI unit before writing it**, so the choices audits would catch late (accessibility, i18n, bundle cost, missing states) are made up front. Frontend counterpart to [`codebase-design`](../codebase-design/SKILL.md): a component is a **deep module** — a lot of behaviour behind a small prop surface. This skill decides; `tdd`/`build` implement; the audit skills verify. Framework-agnostic.
+Decide **how to structure a UI unit before writing it**, so the choices audits would catch late (accessibility, i18n, bundle cost, missing states) are made up front. Frontend counterpart to `codebase-design`: a component is a **deep module** — a lot of behaviour behind a small prop surface. This skill decides; `tdd`/`build` implement; the audit skills verify. Framework-agnostic.
 
 ## 1. Classify the unit
 
@@ -26,9 +26,9 @@ Decide **how to structure a UI unit before writing it**, so the choices audits w
 4. **Required UI states.** Enumerate and design **loading, empty, error, disabled** (and partial/optimistic where relevant) now. Happy-path-only is unfinished.
 5. **Styling.** Design-system **tokens**, no magic colors/spacing. Variants through props, not one-off overrides.
 6. **Responsive.** Mobile-first; intentional breakpoints; no fixed widths that break small screens.
-7. **Accessibility by construction.** Semantic HTML first, ARIA last; keyboard + focus order; a label for every control; visible focus. Full WCAG pass belongs to [`a11y-audit`](../a11y-audit/SKILL.md).
-8. **User-facing strings.** Through the project's i18n path from the start. Coverage check belongs to [`i18n`](../i18n/SKILL.md).
+7. **Accessibility by construction.** Semantic HTML first, ARIA last; keyboard + focus order; a label for every control; visible focus. Full WCAG pass belongs to `a11y-audit`.
+8. **User-facing strings.** Through the project's i18n path from the start. Coverage check belongs to `i18n`.
 
 ## 3. Build and hand off
 
-Apply the decisions; delegate non-trivial logic and its tests to `tdd`. Then `visual-validate` for before/after in a real browser, and `review` runs the audits as the final gate.
+Apply the decisions. Call the Skill tool with `tdd` for non-trivial logic and its tests, then with `visual-validate` for before/after in a real browser. `/review` then runs the audits as the QA pass before `/ship`.

@@ -19,7 +19,7 @@ Tests are proof. Confirm the code works, then — if a plan exists — verify it
 
 Collect all results — don't stop at the first failure:
 
-1. `/validate-code` — auto-fix formatting/lint, verify types, full suite
+1. Call the Skill tool with `validate-code`, passing `--check` — lint, types, full suite, no auto-fix
 2. **Changed-line coverage** — if the project emits coverage, confirm the lines you changed (`git diff -U0`) are exercised, not just the global %. Skip without coverage tooling.
 
 ### 2. Verify plan claims (if a plan exists)

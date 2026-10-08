@@ -36,7 +36,7 @@ The agent should respond by invoking `tdd` from `skills/tdd/SKILL.md`.
 OpenCode reads `AGENTS.md` at the start of every session. That file contains:
 
 1. The full intent → skill table (see [`AGENTS.md`](../AGENTS.md))
-2. Lifecycle mapping (DEFINE → PLAN → BUILD → VERIFY → REVIEW → SHIP)
+2. Lifecycle mapping (SPEC → PLAN → BUILD → TEST → REVIEW → SHIP → RETRO)
 3. Core rules: if a task matches a skill, the agent MUST invoke it
 
 This means you don't need to type `/hb:tdd` or `/hb:commit`. Just describe what you want — the agent picks the skill.
@@ -57,7 +57,7 @@ cp /path/to/agent-skills/AGENTS.md ./AGENTS.md
 
 ## Tracer-bullet workflow
 
-For features beyond a few files, follow the DEFINE → PLAN → BUILD → VERIFY loop:
+For features beyond a few files, follow the SPEC → PLAN → BUILD → TEST loop:
 
 ```
 You: I want to add dark mode support.
@@ -85,7 +85,7 @@ If you want to constrain OpenCode further — for example, enforce TDD on every 
 ## Project-specific rules
 
 - Always use the tdd skill, even for one-line fixes
-- Never use the e2e skill — this project uses Playwright, not Cypress
+- Never use the visual-validate skill — this project has no UI
 ```
 
 ## Limitations

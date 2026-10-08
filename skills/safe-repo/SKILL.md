@@ -19,7 +19,7 @@ Security audit for sensitive data in repository. Check for credentials, API keys
 
 ### Default (full-scan)
 
-1. Run `bash scripts/scan-secrets.sh` to scan all tracked files for credential patterns
+1. Run `bash ${CLAUDE_SKILL_DIR}/scripts/scan-secrets.sh` to scan all tracked files for credential patterns
 2. Check for sensitive tracked files by name: `.env*` (except `.env.example`), `*.pem`, `*.key`, `*_rsa*`, `*secret*`, `*credential*`
 3. Analyze git history for removed secrets: `git log --all --full-history -- "*.env" "*.pem" "*.key" "*secret*" "*credential*"`
 4. Review `.gitignore` for proper patterns
@@ -28,7 +28,7 @@ Security audit for sensitive data in repository. Check for credentials, API keys
 ### `--diff` mode
 
 1. Compute changed files: `git diff --name-only HEAD` + `git diff --name-only --cached`
-2. Scan only those files with the regexes in `scripts/scan-secrets.sh` (grep them directly) plus the filename checks above
+2. Scan only those files with the regexes in `${CLAUDE_SKILL_DIR}/scripts/scan-secrets.sh` (grep them directly) plus the filename checks above
 3. Skip history analysis (not relevant for in-flight changes)
 4. Report findings scoped to changed files only
 

@@ -23,7 +23,7 @@ Distinct from siblings: `/code-review` and `/review` *generate* new findings; th
 
 4. **Output the triage table** — grouped Address-first (see Output). Completion: every fetched comment appears in the table with a verdict and rationale.
 
-5. **Offer to fix** — ask whether to implement the Address items. On yes, hand them to `/tdd` (test-first). Don't auto-implement; don't touch Skip/Optional/Discuss items.
+5. **Offer to fix** — ask whether to implement the Address items. On yes, call the Skill tool with `tdd` for them (test-first). Don't auto-implement; don't touch Skip/Optional/Discuss items.
 
 ## Rubric
 

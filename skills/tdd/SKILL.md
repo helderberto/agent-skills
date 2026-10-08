@@ -63,9 +63,9 @@ Never assume `npm test`.
 
 ### 1. Planning
 
-When exploring the codebase, read `CONTEXT.md` (if it exists) so that test names and interface vocabulary match the project's domain language, and respect ADRs in the area you're touching.
+When exploring the codebase, read `GLOSSARY.md` if it exists (else a legacy `CONTEXT.md`; `GLOSSARY-MAP.md` points to the right one in a multi-context repo) so that test names and interface vocabulary match the project's domain language, and respect ADRs in the area you're touching.
 
-A **seam** is the public boundary you test at: the interface where you observe behavior without reaching inside. Before writing any test, write down the seams under test and confirm them with the user:
+A **seam** is the public boundary you test at: the interface where you observe behavior without reaching inside. Before writing any test, write down the seams under test, one line each on what a test there catches and what it misses, and confirm them with the user:
 
 Ask: "What's the public interface, and which seams should we test?"
 
@@ -75,7 +75,7 @@ Before writing any code:
 
 - [ ] Confirm the seams under test with the user
 - [ ] Confirm with user which behaviors to test (prioritize)
-- [ ] Identify opportunities for deep modules (small interface, deep implementation) — run the `/codebase-design` skill for the vocabulary and the testability checks
+- [ ] Identify opportunities for deep modules (small interface, deep implementation) — call the Skill tool with `codebase-design` for the vocabulary and the testability checks
 - [ ] List the behaviors to test (not implementation steps)
 - [ ] Get user approval on the plan
 
@@ -110,4 +110,4 @@ Rules:
 
 ### 4. Refactor
 
-Only once GREEN — never while RED. Extract duplication, deepen modules (`/codebase-design` for the vocabulary), and ask what the new code reveals about existing code. Run tests after each step.
+Only once GREEN — never while RED. Extract duplication, deepen modules (call the Skill tool with `codebase-design` for the vocabulary), and ask what the new code reveals about existing code. Run tests after each step.

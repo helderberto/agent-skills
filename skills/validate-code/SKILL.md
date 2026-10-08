@@ -1,11 +1,12 @@
 ---
 name: validate-code
 description: Validate code quality — auto-fix formatting/lint, verify types, run tests. Use when asked to "validate code", "check code", or validate before committing; also lint-only asks ("run linter", "fix lint errors"). Don't use for committing, pushing, or writing new tests.
+argument-hint: '[--check]'
 ---
 
 # Validate Code
 
-Run the project's own quality gates — format/lint fix, type check, tests — whatever this project defines. Detect the toolchain; never assume npm. Lint-only ask → steps 1–3, skip tests; check-only wording ("check lint", "run the linter" without "fix") → also skip the fix step.
+Run the project's own quality gates — format/lint fix, type check, tests — whatever this project defines. Detect the toolchain; never assume npm. Lint-only ask → steps 1–3, skip tests. `--check` or check-only wording ("check lint", "run the linter" without "fix") → skip step 2, so no file is written.
 
 ## Workflow
 
@@ -23,7 +24,7 @@ Run the project's own quality gates — format/lint fix, type check, tests — w
 ## Rules
 
 - Detect the project's commands — never hardcode a package manager
-- Always auto-fix before reporting errors — but never modify files silently; always report which files auto-fix changed
+- Auto-fix before reporting errors, unless `--check` — but never modify files silently; always report which files auto-fix changed
 - Run fix → check → test sequentially
 - If the fix step fails, still run check + tests; report all failures at the end
 - Report errors as `file:line` references
