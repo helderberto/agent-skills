@@ -19,10 +19,5 @@
     "markdown",
     "plugin"
   ],
-  "skills": "./skills",
-  "agents": [
-    "./agents/learner.md",
-    "./agents/parity-check.md",
-    "./agents/test-auditor.md"
-  ]
+  "skills": "./skills"
 }
