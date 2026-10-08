@@ -67,3 +67,4 @@ Diagnose a misbehaving skill against these:
 - [ ] `SKILL.md` under ~150 lines
 - [ ] Calls to another skill say "Call the Skill tool with `<skill-name>`" (one skill per call); user-facing suggestions keep `/<skill-name>`; no `../` links across skill folders
 - [ ] Added to README and the `AGENTS.md` intent → skill mapping; no existing skill already covers it
+- [ ] `.claude-plugin/plugin.json` `version` bumped (semver)
