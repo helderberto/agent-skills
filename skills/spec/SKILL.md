@@ -9,7 +9,7 @@ argument-hint: <idea>
 
 Idea: $ARGUMENTS (if empty, ask for the problem and any solution ideas first).
 
-Derive a kebab-case `<slug>` from the text before the first `—`/`–` (≤4 meaningful words, no command verbs or filler). Output: `.specs/specs/<slug>.md`. If it exists, ask: overwrite (Recommended) or new name.
+Derive a kebab-case `<slug>` from the text before the first `—`/`–` (≤4 meaningful words, no command verbs or filler). Output: `.specs/specs/<slug>.md`. If it exists, update it in place (Recommended) or pick a new name.
 
 ## Workflow
 
@@ -19,7 +19,7 @@ Map current state: data models, services, API routes, frontend, tests. Note exis
 
 ### 2. Interview
 
-One question at a time, 2–4 options each, your recommended answer first and marked `(Recommended)`. Explore code instead of asking when possible.
+Call the Skill tool with `grill-me`, seeded with the branches below as the design tree. Skip branches the conversation already settled: synthesize those, don't re-ask. Explore code instead of asking when possible. When a domain term settles mid-grill, call the Skill tool with `domain-modeling` to write it into the glossary, so spec and glossary agree.
 
 | Branch           | Key questions                           | Skip when                        |
 | ---------------- | --------------------------------------- | -------------------------------- |
