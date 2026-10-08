@@ -15,7 +15,7 @@ A collection of skills that encode the workflows, quality gates, and engineering
  /hb:spec       /hb:plan        /hb:build        /hb:test         /hb:review       /hb:ship
 ```
 
-Each phase has a dedicated **workflow skill** that orchestrates the smaller toolbelt skills underneath it. Type the spine in order, or let it chain — every skill auto-routes by description. Only the outward-facing steps that push work out of your hands (`ship`, `create-pull-request`) are gated against auto-triggering, so you always pull that trigger yourself.
+Each phase has a dedicated **workflow skill** that orchestrates the smaller toolbelt skills underneath it. Type the spine in order, or let it chain — every skill auto-routes by description. Only the outward-facing steps that push work out of your hands (`ship`, `create-pull-request`) are gated against auto-triggering, so you always pull that trigger yourself. After the PR, `/hb:retro` closes the loop in the same session.
 
 ---
 
@@ -85,7 +85,7 @@ A non-trivial feature flows through all six phases. Each workflow skill is one i
 
 ```
 You: /hb:spec add dark mode support
-AI:  Interviews, scans the codebase, writes .specs/specs/dark-mode.md.
+AI:  Grills you in rounds, scans the codebase, writes .specs/specs/dark-mode.md.
      Run /hb:plan dark-mode next?
 
 You: /hb:plan dark-mode
@@ -93,22 +93,30 @@ AI:  Breaks the spec into phased vertical slices.
      Writes .specs/plans/dark-mode.md.
 
 You: /hb:build dark-mode
-AI:  Implements next incomplete phase. TDD loop, lint, type-check.
-     Marks checkboxes in the plan. Offers a commit.
+AI:  Implements next incomplete phase test-first via tdd, then lint and
+     type-check. Marks checkboxes, summarizes, offers a commit.
+     /hb:build dark-mode --all runs every phase after one approval.
 
 You: /hb:test dark-mode
-AI:  Runs validation (lint, types, tests) + coverage, then verifies
+AI:  Runs check-only validation (lint, types, tests) + coverage, verifies
      plan checkboxes against the codebase. Reports progress + blockers.
 
 You: /hb:review
-AI:  Detects what changed, runs relevant audits in order
-     (code-review, a11y-audit, safe-repo, perf-audit, deps-audit, ...).
-     Consolidates findings into Critical / Important / Suggestion.
+AI:  Detects what changed, fans out reviewers in parallel (correctness,
+     standards, spec, quality bar, a11y-audit, safe-repo, ...).
+     Consolidates findings into Critical / Important / Suggestion;
+     Standards and Spec keep their own headings. Names the next step.
 
 You: /hb:ship
-AI:  Pre-launch gate (validate-code + safe-repo --diff).
+AI:  Pre-launch gate (validate-code + safe-repo --diff + floor-guard).
      Atomic commits, push current branch.
      /hb:ship --fast skips the gate (hotfix only).
+
+You: /hb:create-pull-request
+AI:  PR body with Before/After evidence and merge danger (door, blast radius).
+
+You: /hb:retro
+AI:  Suggests environment fixes from this session: pointers, checks, standards.
 ```
 
 For quick standalone tasks, you don't need the workflow — just describe what you want and the relevant skill triggers ("write tests for X", "audit deps", "create an ADR for Y").
@@ -131,10 +139,10 @@ The six-phase spine. Type each to advance, or let one phase chain into the next:
 |-------|-------|--------------|
 | [`spec`](skills/spec/SKILL.md) | SPEC | Interview + codebase scan → structured spec in `.specs/specs/<slug>.md` |
 | [`plan`](skills/plan/SKILL.md) | PLAN | Turn spec into multi-phase implementation plan (tracer-bullet vertical slices) |
-| [`build`](skills/build/SKILL.md) | BUILD | Implement next incomplete phase of a plan with feedback loops |
+| [`build`](skills/build/SKILL.md) | BUILD | Implement next incomplete phase of a plan test-first via `tdd`, with feedback loops; `--all` runs every phase after one approval |
 | [`test`](skills/test/SKILL.md) | TEST | Validate (lint/types/tests) + coverage, and verify plan checkboxes against codebase |
-| [`review`](skills/review/SKILL.md) | REVIEW | Fan out parallel reviewers (scope-detected audits + independent agent lenses), consolidate into one verdict — **optional QA pass**, not a ship gate |
-| [`ship`](skills/ship/SKILL.md) | SHIP | Pre-launch gate (validate-code + safe-repo) + atomic commits + push (`--fast` to skip gate) · **user-invoked** |
+| [`review`](skills/review/SKILL.md) | REVIEW | Fan out parallel reviewers (scope-detected audits + agent lenses incl. spec conformance, standards, and a quality-bar check), consolidate into one verdict — **optional QA pass**, not a ship gate |
+| [`ship`](skills/ship/SKILL.md) | SHIP | Pre-launch gate (validate-code + safe-repo + floor-guard) + atomic commits + push (`--fast` to skip gate) · **user-invoked** |
 
 ### On-demand tools
 
@@ -157,7 +165,7 @@ Focused capabilities the agent applies automatically based on the task (all call
 
 | Skill | What it does |
 |-------|--------------|
-| [`validate-code`](skills/validate-code/SKILL.md) | Auto-fix lint, verify types, run tests |
+| [`validate-code`](skills/validate-code/SKILL.md) | Auto-fix lint, verify types, run tests; `--check` writes nothing |
 | [`diagnose`](skills/diagnose/SKILL.md) | Disciplined diagnosis loop for hard bugs and perf regressions |
 | [`visual-validate`](skills/visual-validate/SKILL.md) | Browser-driven UI validation via Chrome DevTools or Playwright MCP |
 
@@ -168,7 +176,7 @@ Focused capabilities the agent applies automatically based on the task (all call
 
 | Skill | What it does |
 |-------|--------------|
-| [`code-review`](skills/code-review/SKILL.md) | PR review against an approval standard — correctness, security, performance, a Fowler smell baseline; Critical→Nit severities |
+| [`code-review`](skills/code-review/SKILL.md) | PR or pasted-diff review against an approval standard — correctness, security, performance, a Fowler smell baseline; Critical→Nit severities |
 | [`visual-review`](skills/visual-review/SKILL.md) | Render a PR diff as an annotated HTML page — each hunk linked to a design/simplification principle with a suggested rewrite |
 | [`triage-review`](skills/triage-review/SKILL.md) | Triage existing PR review comments (Copilot + human), verify against code, classify Address/Skip/Optional/Discuss |
 | [`a11y-audit`](skills/a11y-audit/SKILL.md) | Accessibility compliance audit (WCAG) |
@@ -198,7 +206,7 @@ Focused capabilities the agent applies automatically based on the task (all call
 |-------|--------------|
 | [`codebase-design`](skills/codebase-design/SKILL.md) | Shared deep-module vocabulary for designing or improving an interface |
 | [`frontend-ui-engineering`](skills/frontend-ui-engineering/SKILL.md) | Front-load UI construction decisions — prop API, state placement, required states, a11y by construction |
-| [`architecture-audit`](skills/architecture-audit/SKILL.md) | Surface architectural friction, propose refactors toward deep modules as RFCs |
+| [`architecture-audit`](skills/architecture-audit/SKILL.md) | Surface architectural friction in git hot spots, propose refactors toward deep modules as RFCs; `--html` for a before/after report |
 | [`domain-modeling`](skills/domain-modeling/SKILL.md) | Build and sharpen the project's ubiquitous language and glossary |
 | [`research`](skills/research/SKILL.md) | Investigate a question against primary sources; capture cited findings as Markdown |
 | [`prototype`](skills/prototype/SKILL.md) | Build a throwaway prototype — shareable HTML logic demo or toggleable UI variations — kept on a `prototype/<name>` branch |
