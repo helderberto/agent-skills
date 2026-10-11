@@ -39,7 +39,7 @@ Next: `/hb:retro` in this session, before `/clear`.
 
 **Concise and readable by someone who didn't see the diff.** Each section 1–4 sentences or a short bullet list. Lead with the why, then the what; the diff already shows the how. Use what the user said in the conversation — don't paraphrase the diff back at them. Cut a template section's boilerplate prose only if the template marks it optional; otherwise fill it in one line.
 
-- **Summary**: the why in a sentence or two, then the smallest visual that makes the point ([Visuals](#visuals)). A typo, config, or version-bump-only change needs none.
+- **Summary**: the why in a sentence or two, then the smallest visual that makes the point ([Visuals](#visuals)). A typo, config, or version-bump-only change needs none, unless `--diagram`.
 - **Evidence**: **Before** / **After**. A screenshot for visual changes; otherwise the test run or output that failed before and passes now.
 - **Merge Danger**: **Door**: one-way (destructive migration, removed public API, deleted data) or two-way (a revert undoes it). **Blast Radius**: one word. Fill an optional line only when it adds something: why the door is one-way, what could break for whom.
 
