@@ -1,7 +1,7 @@
 ---
 name: to-pr
 description: Gate, push, and open a GitHub pull request on the repo's PR template, then watch CI.
-argument-hint: '[--fast] [--safe] [--draft] [--diagram[=flow|sequence|class|state]]'
+argument-hint: '[--fast] [--safe] [--draft] [--diagram=flow|sequence|class|state]'
 disable-model-invocation: true
 ---
 
@@ -12,7 +12,7 @@ Arguments: $ARGUMENTS
 - `--fast` — skip the gate. Only for hotfixes, disposable branches (spike/prototype/CI), or when the gate already passed this session. Never on main/release. Say why in the PR body.
 - `--safe` — scan the branch for secrets and sensitive data before pushing (step 6).
 - `--draft` — create as draft.
-- `--diagram` — append a `## Diagram` section with a mermaid diagram of the change (GitHub renders it natively). Optional `=flow|sequence|class|state` forces the type; otherwise pick by the shape of the change (below).
+- `--diagram=flow|sequence|class|state` — force the diagram's type; otherwise pick by the shape of the change ([below](#diagram)).
 
 ## Workflow
 
@@ -27,7 +27,8 @@ Arguments: $ARGUMENTS
 7. Push with `-u`. On the default branch → confirm first. Rejected as non-fast-forward → `git pull --rebase`, retry once. **Never force push.**
 8. Draft the title and a concise body from the diff, the commits, and the conversation, then open the PR straight away.
    - Title matches `^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\(.*\))?: .+$`.
-   - Template found → it is the body, verbatim structure: fill every section and placeholder, check applicable boxes, add nothing outside it except `## Diagram` when requested. Its testing section carries the Evidence, its risk section the Merge Danger. No template → [assets/pr-template.md](assets/pr-template.md), filled the same way.
+   - Template found → it is the body, verbatim structure: fill every section and placeholder, check applicable boxes, add nothing outside it except `## Diagram`. Its testing section carries the Evidence, its risk section the Merge Danger. No template → [assets/pr-template.md](assets/pr-template.md), filled the same way.
+   - End with a `## Diagram` section: a mermaid diagram of the change, which GitHub renders natively ([Diagram](#diagram)).
    - Reference the ticket (`Resolves TICKET-123`).
 9. `gh pr create` with a HEREDOC body (`--draft` if requested). Return the URL.
 10. `gh pr checks --watch`. Red → call the Skill tool with `debug` on the failing check, fix, commit, push. At most 2 rounds; still red → stop and report the failing checks.
@@ -38,11 +39,11 @@ Next: `/hb:retro` in this session, before `/clear`.
 
 **Concise and readable by someone who didn't see the diff.** Each section 1–4 sentences or a short bullet list. Lead with the why, then the what; the diff already shows the how. Use what the user said in the conversation — don't paraphrase the diff back at them. Cut a template section's boilerplate prose only if the template marks it optional; otherwise fill it in one line.
 
-- **Summary**: when a picture beats a sentence, add the smallest text visual that makes the point: pseudocode, call tree, component tree, file tree, or a `diff` sketch of the shape. Mermaid stays behind `--diagram`. A one-function change needs none.
+- **Summary**: when a picture beats a sentence, add the smallest text visual that makes the point: pseudocode, call tree, component tree, file tree, or a `diff` sketch of the shape. Mermaid goes in `## Diagram`. A one-function change needs none.
 - **Evidence**: **Before** / **After**. A screenshot for visual changes; otherwise the test run or output that failed before and passes now.
 - **Merge Danger**: **Door**: one-way (destructive migration, removed public API, deleted data) or two-way (a revert undoes it). **Blast Radius**: one word, then what could break for whom.
 
-## Diagram (`--diagram`)
+## Diagram
 
 Pick the type by what changed:
 

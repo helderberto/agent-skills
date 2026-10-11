@@ -153,7 +153,7 @@ The flow, one typed command per step:
 | [`to-tickets`](skills/to-tickets/SKILL.md) | TICKETS | Slice a spec into tracer-bullet vertical slices with blocking edges |
 | [`build`](skills/build/SKILL.md) | BUILD | Implement the next unblocked slice test-first via `tdd`, with feedback loops; `--all` fans every ticket out to parallel implementer subagents after one approval |
 | [`review`](skills/review/SKILL.md) | REVIEW | Fan out parallel reviewers (scope-detected audits + agent lenses incl. spec conformance, standards, coverage, and a quality-bar check), consolidate into one verdict |
-| [`to-pr`](skills/to-pr/SKILL.md) | SHIP | Gate (check, ADR check), push, open a GitHub PR with a concise templated body: Before/After evidence, merge danger (one-way or two-way door, blast radius); watch CI, `debug` on red (max 2); `--safe` runs `safe-repo` before the push, `--fast` skips the gate, `--diagram` adds a mermaid diagram of the change |
+| [`to-pr`](skills/to-pr/SKILL.md) | SHIP | Gate (check, ADR check), push, open a GitHub PR with a concise templated body: Before/After evidence, merge danger (one-way or two-way door, blast radius); watch CI, `debug` on red (max 2); `--safe` runs `safe-repo` before the push, `--fast` skips the gate, every body ends with a mermaid diagram of the change (`--diagram=<type>` forces its type) |
 | [`retro`](skills/retro/SKILL.md) | RETRO | Retrospective on a session — suggests navigation pointers, checks, coding standards, steering fixes; mechanical mistakes become checks |
 
 ### On-demand tools
