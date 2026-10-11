@@ -293,31 +293,6 @@ Throwaway output stays out of the working tree, so `commit` never sweeps it up: 
 
 ---
 
-## Migrating from v3
-
-v4.0.0 is a hard break: no aliases for v3 names.
-
-| v3 | v4 |
-|---|---|
-| `ask` | `triage` (routes any input; no args → where you are) |
-| `grill-me` | `grill` |
-| `spec` | `to-spec` (interview moved to `grill`) |
-| `plan` | `to-tickets`, writing `.specs/tickets/` (was `.specs/plans/`) |
-| `create-pull-request` | `to-pr` (absorbs `ship`: gate, push, CI watch) |
-| `ship` | removed, folded into `to-pr`; scan for secrets with `/hb:to-pr --safe` or `/hb:safe-repo` |
-| `create-adr` | `to-adr` |
-| `diagnose` | `debug` |
-| `explain-code` | `zoom-out` |
-| `fortify` | `refactor` |
-| `triage-review` | `feedback` |
-| `validate-code` | `check` |
-| `test` | removed: validation in `build`, checkbox and coverage checks in `review` lenses |
-| `e2e` | removed: a UI-tests reference in `tdd` |
-| `visual-validate` | `visual-review --ui` |
-| — | `guide` (new: which skill fits?) |
-
----
-
 ## Contributing
 
 PRs welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for workflow, conventions, and where to start.
