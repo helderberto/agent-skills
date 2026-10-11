@@ -17,7 +17,7 @@ Arguments: $ARGUMENTS
 ## Workflow
 
 1. `gh auth status`. Not logged in → stop: "Run `! gh auth login`, then `/hb:to-pr` again."
-2. In parallel: base branch (`git remote show origin | grep 'HEAD branch'`), ticket id from the branch name (`[A-Z]+-[0-9]+`), PR template (`.github/pull_request_template.md`, `.github/PULL_REQUEST_TEMPLATE.md`, `.github/PULL_REQUEST_TEMPLATE/`, `docs/pull_request_template.md`, `pull_request_template.md`).
+2. In parallel: base branch (`git remote show origin | grep 'HEAD branch'`), ticket id from the branch name (`[A-Z]+-[0-9]+`) or the matching spec's `ticket:` frontmatter, PR template (`.github/pull_request_template.md`, `.github/PULL_REQUEST_TEMPLATE.md`, `.github/PULL_REQUEST_TEMPLATE/`, `docs/pull_request_template.md`, `pull_request_template.md`).
 3. In parallel: `git diff <base>...HEAD` and the full commit list — review every commit, not just the latest.
 4. **Gate** (skipped with `--fast`):
    - Call the Skill tool with `check`. FAIL → report, stop.
