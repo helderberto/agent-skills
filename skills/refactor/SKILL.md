@@ -15,7 +15,7 @@ Behavior is frozen — the test suite is the contract. Green before and after; i
 ### 1. Scope
 
 - Identify target files (blank → unstaged changes)
-- Locate each file's tests using the project's convention (co-located, `__tests__/`, `tests/`, `to-spec/`). A file with no tests gets **Test gaps** items first — Split/Simplify on untested code is unverifiable, so backfill or skip. No test runner at all → ask which to use. UI flows → backfill end-to-end tests per [ui-tests.md](../tdd/references/ui-tests.md). Entrypoint scripts without exports → audit only.
+- Locate each file's tests using the project's convention (co-located, `__tests__/`, `tests/`, `spec/`). A file with no tests gets **Test gaps** items first — Split/Simplify on untested code is unverifiable, so backfill or skip. No test runner at all → ask which to use. UI flows → backfill end-to-end tests per [ui-tests.md](../tdd/references/ui-tests.md). Entrypoint scripts without exports → audit only.
 - Run the suite. If red, stop — don't fortify broken code
 
 ### 2. Audit
