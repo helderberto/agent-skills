@@ -53,6 +53,18 @@ claude --plugin-dir /path/to/agent-skills
 </details>
 
 <details>
+<summary><b>Cursor</b></summary>
+
+Sync the skills into `.cursor/skills/`, which Cursor reads natively; keep `.cursor/rules/*.mdc` for short policies, not whole skills. See [docs/cursor-setup.md](docs/cursor-setup.md) for the starter set.
+
+```bash
+git clone https://github.com/helderberto/agent-skills.git
+mkdir -p .cursor/skills && rsync -a agent-skills/skills/ .cursor/skills/
+```
+
+</details>
+
+<details>
 <summary><b>Gemini CLI</b></summary>
 
 Install as native skills, activated on demand, or list them in `GEMINI.md` for persistent context. See [docs/gemini-cli-setup.md](docs/gemini-cli-setup.md).
@@ -79,18 +91,6 @@ Copy the skill folders to `.opencode/skills/` (or `~/.config/opencode/skills/`),
 ```bash
 git clone https://github.com/helderberto/agent-skills.git
 mkdir -p .opencode/skills && cp -R agent-skills/skills/* .opencode/skills/
-```
-
-</details>
-
-<details>
-<summary><b>Cursor</b></summary>
-
-Sync the skills into `.cursor/skills/`, which Cursor reads natively; keep `.cursor/rules/*.mdc` for short policies, not whole skills. See [docs/cursor-setup.md](docs/cursor-setup.md) for the starter set.
-
-```bash
-git clone https://github.com/helderberto/agent-skills.git
-mkdir -p .cursor/skills && rsync -a agent-skills/skills/ .cursor/skills/
 ```
 
 </details>
