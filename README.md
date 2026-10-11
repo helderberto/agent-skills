@@ -136,6 +136,13 @@ See [docs/codex-setup.md](docs/codex-setup.md).
 
 </details>
 
+<details>
+<summary><b>Other agents</b></summary>
+
+Skills are plain Markdown: any agent that reads instruction files can use `skills/<name>/SKILL.md`. The skills CLI above covers 70+ of them.
+
+</details>
+
 ---
 
 <details>
