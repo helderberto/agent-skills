@@ -2,7 +2,9 @@
 # Scan git-tracked files for common secret patterns.
 #
 # Usage:
-#   bash scripts/scan-secrets.sh
+#   bash scripts/scan-secrets.sh [--outgoing]
+#
+# --outgoing scans only lines added by commits not on any remote.
 #
 # Output (stdout):
 #   file:line: <matched pattern description>
@@ -23,11 +25,32 @@ if ! git rev-parse --git-dir > /dev/null 2>&1; then
   exit 2
 fi
 
-files=$(git ls-files 2>/dev/null)
+outgoing=false
+[ "${1:-}" = "--outgoing" ] && outgoing=true
 
-if [ -z "$files" ]; then
-  echo "ERROR: no tracked files found" >&2
-  exit 2
+if $outgoing; then
+  scope="outgoing commits"
+  # file:line<TAB>text for each added line. Header state keeps an added
+  # "++ x" line from reading as a file header.
+  added=$(git log -p --unified=0 --no-color --no-ext-diff --format='commit %h' HEAD --not --remotes 2>/dev/null | awk '
+    /^diff / { header = 1; next }
+    header && /^\+\+\+ / {
+      file = substr($0, 5); sub(/^b\//, "", file)
+      skip = file ~ /\.min\.(js|css)$|^node_modules\/|\.(lock|sum)$/
+      next
+    }
+    /^@@/ { header = 0; match($0, /\+[0-9]+/); line = substr($0, RSTART + 1, RLENGTH - 1); next }
+    header { next }
+    /^\+/ { if (!skip) print file ":" line "\t" substr($0, 2); line++ }
+  ') || { echo "ERROR: cannot read outgoing commits" >&2; exit 2; }
+else
+  scope="tracked files"
+  files=$(git ls-files 2>/dev/null)
+
+  if [ -z "$files" ]; then
+    echo "ERROR: no tracked files found" >&2
+    exit 2
+  fi
 fi
 
 found=0
@@ -35,6 +58,14 @@ found=0
 scan() {
   local pattern="$1"
   local label="$2"
+  if $outgoing; then
+    while IFS= read -r match; do
+      [ -n "$match" ] || continue
+      echo "${match%%$'\t'*}: $label"
+      found=1
+    done < <(printf '%s\n' "$added" | grep -iE $'\t'".*($pattern)" || true)
+    return
+  fi
   while IFS= read -r file; do
     # Skip binary files, minified JS, and node_modules
     case "$file" in
@@ -64,7 +95,7 @@ scan '-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----' "Private key"
 scan 'Authorization:[[:space:]]*Bearer[[:space:]]+[A-Za-z0-9._-]{20,}' "Bearer token in code"
 
 if [ "$found" -eq 0 ]; then
-  echo "No secret patterns found in tracked files." >&2
+  echo "No secret patterns found in $scope." >&2
   exit 0
 else
   exit 1
