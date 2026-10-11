@@ -17,10 +17,22 @@ Type `/hb:<command>` for each step; `/hb:triage` tells you where to enter. The S
 
 ## Quick Start
 
+**Fastest path — any agent, one command.** The [skills CLI](https://github.com/vercel-labs/skills) installs into 70+ agents (Claude Code, Cursor, Codex, Copilot, OpenCode, and more):
+
+```bash
+npx skills add helderberto/agent-skills             # install all skills
+npx skills add helderberto/agent-skills --list      # browse before installing
+npx skills add helderberto/agent-skills --skill tdd # one skill
+```
+
+It installs skills only; the Claude Code plugin also ships the `agents/` subagents. Pick one install per agent, or every skill shows up twice.
+
+Prefer a native integration? Pick your tool below.
+
 <details open>
 <summary><b>Claude Code (recommended)</b></summary>
 
-Install via the marketplace:
+**Marketplace install:**
 
 ```
 /plugin marketplace add helderberto/agent-skills
@@ -28,6 +40,15 @@ Install via the marketplace:
 ```
 
 After install, skills are available as `/hb:<skill-name>` — e.g. `/hb:triage`, `/hb:to-spec`, `/hb:to-pr`. Both-tier and model-only skills also trigger from natural language ("review this PR", "check accessibility", etc.) based on their description.
+
+Third-party marketplaces don't auto-update: turn it on in `/plugin` → **Marketplaces**. SSH errors on install → `git config --global url."https://github.com/".insteadOf git@github.com:`.
+
+**Local / development:**
+
+```bash
+git clone https://github.com/helderberto/agent-skills.git
+claude --plugin-dir /path/to/agent-skills
+```
 
 </details>
 
@@ -263,7 +284,7 @@ agent-skills/
 ├── .opencode/skills →   Symlink to skills/ for OpenCode discovery
 ├── skills/              one folder per skill, each with SKILL.md
 ├── agents/              subagent definitions (Claude Code only)
-├── docs/                Skill anatomy + per-agent setup guides
+├── docs/                per-agent setup guides
 ├── AGENTS.md            Intent → skill mapping (drives OpenCode auto-routing)
 ├── CONTRIBUTING.md      How to contribute new skills or improvements
 ├── LICENSE              MIT
