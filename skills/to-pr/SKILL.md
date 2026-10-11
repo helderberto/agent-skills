@@ -1,7 +1,7 @@
 ---
 name: to-pr
 description: Gate, push, and open a GitHub pull request on the repo's PR template, then watch CI.
-argument-hint: '[--safe] [--skip-ci] [--diagram=flow|sequence|class|state]'
+argument-hint: '[--safe] [--skip-ci] [--diagram[=flow|sequence|class|state]]'
 disable-model-invocation: true
 ---
 
@@ -11,7 +11,7 @@ Arguments: $ARGUMENTS
 
 - `--safe` — scan the branch for secrets and sensitive data before pushing (step 6).
 - `--skip-ci` — mark the pushed HEAD commit `[skip ci]` so CI doesn't run, and skip the CI watch. Only when CI has nothing to check (docs, prose). Required checks then stay pending and block the merge, and a squash merge can carry the marker to the base branch. Say why in the PR body.
-- `--diagram=flow|sequence|class|state` — make the Summary visual a mermaid diagram of that type ([Visuals](#visuals)).
+- `--diagram[=flow|sequence|class|state]` — make the Summary visual a mermaid diagram. No type → the [Visuals](#visuals) row for the change, else `flow`.
 
 ## Workflow
 
