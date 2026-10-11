@@ -49,7 +49,7 @@ For the chosen candidate, run the Design-It-Twice procedure from the DESIGN-IT-T
 
 ### 4. Write improvement PRD
 
-Save a markdown file named `architecture-<cluster-name>.md` using the template in [references/improvement-template.md](references/improvement-template.md). If `.specs/specs/` exists, save there; otherwise, save in `specs/`.
+Save a markdown file named `architecture-<cluster-name>.md` using the template in [references/improvement-template.md](references/improvement-template.md). Save it in `.specs/specs/`, creating the directory if missing.
 
 Fill with concrete details: file paths, function names, migration steps. Share the file path with the user when done.
 
