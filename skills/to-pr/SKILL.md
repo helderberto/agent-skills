@@ -23,7 +23,7 @@ Arguments: $ARGUMENTS
    - Reference the ticket (`Resolves TICKET-123`).
 5. Uncommitted work → call the Skill tool with `commit` first (never open a PR on a dirty tree). Push with `-u` if needed, `gh pr create` with a HEREDOC body (`--draft` if requested). Return the URL.
 
-Next: `/retro` in this session, before `/clear`.
+Next: `/hb:retro` in this session, before `/clear`.
 
 ## Writing the body
 

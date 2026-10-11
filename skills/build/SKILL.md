@@ -14,6 +14,8 @@ Implement the next incomplete phase of a plan — one phase per invocation. `--a
 
 `$ARGUMENTS` is a `<slug>` or an `@path` (read that file directly as the plan). If empty or the plan is missing, list `.specs/plans/*.md` as numbered options and wait.
 
+Free text from `triage` (an S change: one commit, no plan) → call the Skill tool with `tdd` for it, regression test first for a bug. Then run steps 4, 6, and 7 as one phase with one commit, and end with `Next: /hb:review`.
+
 ## Workflow
 
 ### 1. Find the next incomplete phase

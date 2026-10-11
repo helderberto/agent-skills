@@ -58,4 +58,4 @@ Save to `.specs/specs/<slug>.md`. Omit empty sections. No file paths or code sni
 ## Out of Scope (be specific)
 ```
 
-Next: `/to-tickets <slug>` (Recommended) or done for now.
+Next: `/hb:to-tickets <slug>` (Recommended) or done for now.

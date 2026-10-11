@@ -58,3 +58,5 @@ Fill with concrete details: file paths, function names, migration steps. Share t
 - Old unit tests on shallow modules are waste once seam tests exist — note them for deletion
 - Don't introduce a new seam unless something actually varies across it (one adapter = hypothetical, two = real)
 - Candidate scope turns out much larger than expected → surface it and re-scope before designing
+
+Next: `/hb:to-tickets architecture-<cluster-name>` to slice the improvement PRD.

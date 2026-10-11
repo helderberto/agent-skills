@@ -27,4 +27,4 @@ Call the Skill tool with `commit` — atomic commits by concern, repo style, sta
 
 `git push` the current branch, then `git status` to verify. Rejected as non-fast-forward → `git pull --rebase`, retry once. **Never force push.**
 
-Next: `/to-pr`.
+Next: `/hb:to-pr`.

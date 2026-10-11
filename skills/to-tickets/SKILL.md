@@ -131,7 +131,9 @@ Carried forward from spec verbatim.
 Gaps found in the spec needing resolution. Blank if none.
 ```
 
-Print one line per phase: `Phase N — <title> (<condition summary>)`. Next: `/build <slug>` (Recommended — one phase per invocation) or done for now.
+Print one line per phase: `Phase N — <title> (<condition summary>)`.
+
+Next: `/hb:build <slug>` (Recommended — one phase per invocation) or done for now.
 
 ## Rules
 
