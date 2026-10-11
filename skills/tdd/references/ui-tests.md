@@ -1,6 +1,6 @@
 # UI Tests
 
-End-to-end tests drive user flows through the real UI. Shared by `tdd`, `refactor`, and `visual-review`.
+End-to-end tests drive user flows through the real UI. `refactor` and `visual-review` reach it through `tdd`.
 
 ## Detect the framework
 

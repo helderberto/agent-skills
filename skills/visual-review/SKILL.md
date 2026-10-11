@@ -95,4 +95,4 @@ Accessibility: score / critical issues (if run)
 Verdict: PASS (works as intended, no new console errors, no a11y regression) or FAIL (each issue with screenshot reference)
 ```
 
-Report console output even on PASS — silent regressions surface there first. A flow worth re-checking on every change → an end-to-end test, per [ui-tests.md](../tdd/references/ui-tests.md).
+Report console output even on PASS — silent regressions surface there first. A flow worth re-checking on every change → an end-to-end test: call the Skill tool with `tdd`.
