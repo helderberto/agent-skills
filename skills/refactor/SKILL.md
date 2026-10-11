@@ -16,7 +16,7 @@ Behavior is frozen — the test suite is the contract. Green before and after; i
 
 - Identify target files (blank → unstaged changes)
 - Locate each file's tests using the project's convention (co-located, `__tests__/`, `tests/`, `spec/`). A file with no tests gets **Test gaps** items first — Split/Simplify on untested code is unverifiable, so backfill or skip. No test runner at all → ask which to use. UI flows → backfill end-to-end tests: call the Skill tool with `tdd`, which holds the UI-tests reference. Entrypoint scripts without exports → audit only.
-- Run the suite. If red, stop — don't fortify broken code
+- Run the suite. If red, stop — don't refactor broken code
 
 ### 2. Audit
 

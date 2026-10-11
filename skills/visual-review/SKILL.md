@@ -1,7 +1,7 @@
 ---
 name: visual-review
 effort: high
-description: Two visual modes — render a PR diff as an HTML page with each hunk annotated by principle, or check a UI change in a real browser (screenshots, console, network). Use for a visual/HTML diff report, "check the UI", or "screenshot before/after". Don't use for text-only feedback (/code-review), unit tests (/tdd), or multi-reviewer review (/review).
+description: Two visual modes — render a PR diff as an HTML page with each hunk annotated by principle, or check a UI change in a real browser (screenshots, console, network). Use for a visual/HTML diff report, "check the UI", or "screenshot before/after". Don't use for text-only feedback (/code-review), unit tests (/tdd), or full reviews (/review).
 user-invocable: false
 argument-hint: '[pr-url-or-number] | --ui [url]'
 ---
