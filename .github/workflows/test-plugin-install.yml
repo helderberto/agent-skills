@@ -18,6 +18,11 @@ jobs:
       - name: Validate marketplace and plugin manifests
         run: claude plugin validate .
 
+      - name: Plugin manifests in sync
+        run: |
+          cmp .claude-plugin/plugin.json .plugin/plugin.json
+          jq -e --slurpfile c .claude-plugin/plugin.json '.name == $c[0].name and .description == $c[0].description' plugin.json
+
   test-install:
     name: Test plugin installation
     runs-on: ubuntu-latest
