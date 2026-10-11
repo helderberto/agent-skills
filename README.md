@@ -227,7 +227,7 @@ Focused capabilities the agent applies based on the task; both-tier ones are als
 
 | Skill | What it does |
 |-------|--------------|
-| [`guide`](skills/guide/SKILL.md) | Which skill fits? A map of the flow, on-ramps, and standalone skills, plus when to continue, `/clear`, hand off, or `/compact` |
+| [`guide`](skills/guide/SKILL.md) | Which skill fits? A map of the flow, on-ramps, and standalone skills, plus when to continue, `/clear`, `/hb:handoff`, or `/compact` |
 | [`handoff`](skills/handoff/SKILL.md) | Compact the current conversation into a handoff doc for a fresh agent |
 | [`teach`](skills/teach/SKILL.md) | Stateful teaching workspace — lessons, references, learning records tied to a mission |
 | [`wait-what`](skills/wait-what/SKILL.md) | Last message didn't land — re-pitch it with context, in Simplified Technical English and glossary terms |
