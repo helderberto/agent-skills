@@ -13,7 +13,7 @@ Security audit for sensitive data in repository. Check for credentials, API keys
 ## Modes
 
 - **Default (full-scan)**: scans all git-tracked files plus history. Use for periodic audits or first-time repo review.
-- **`--diff [<base>]`**: scans only what changed: the branch's commits since `<base>`, plus staged + unstaged changes. No `<base>` → staged + unstaged only. Use before a commit or from `review`. Fast, no false positives from pre-existing files.
+- **`--diff [<base>]`**: scans only what changed: the branch's commits since `<base>`, plus staged + unstaged changes. No `<base>` → staged + unstaged only. Use before a commit, from `review`, or from `to-pr --safe`. Fast, no false positives from pre-existing files.
 
 ## Workflow
 

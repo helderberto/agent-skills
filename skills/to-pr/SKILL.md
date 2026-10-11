@@ -1,7 +1,7 @@
 ---
 name: to-pr
 description: Gate, push, and open a GitHub pull request on the repo's PR template, then watch CI.
-argument-hint: '[--fast] [--draft] [--diagram[=flow|sequence|class|state]]'
+argument-hint: '[--fast] [--safe] [--draft] [--diagram[=flow|sequence|class|state]]'
 disable-model-invocation: true
 ---
 
@@ -10,6 +10,7 @@ disable-model-invocation: true
 Arguments: $ARGUMENTS
 
 - `--fast` — skip the gate. Only for hotfixes, disposable branches (spike/prototype/CI), or when the gate already passed this session. Never on main/release. Say why in the PR body.
+- `--safe` — scan the branch for secrets and sensitive data before pushing (step 6).
 - `--draft` — create as draft.
 - `--diagram` — append a `## Diagram` section with a mermaid diagram of the change (GitHub renders it natively). Optional `=flow|sequence|class|state` forces the type; otherwise pick by the shape of the change (below).
 
@@ -22,14 +23,15 @@ Arguments: $ARGUMENTS
    - Call the Skill tool with `check`. FAIL → report, stop.
    - ADR check: the diff adds a dependency or a module, changes a public API, or adds a migration, and nothing in `docs/adr/` covers it → offer to call the Skill tool with `to-adr` before pushing.
 5. Uncommitted work → call the Skill tool with `commit` (never open a PR on a dirty tree).
-6. Push with `-u`. On the default branch → confirm first. Rejected as non-fast-forward → `git pull --rebase`, retry once. **Never force push.**
-7. Ask the user, all at once: **effort** in hours (required), **what was done** in their words (required), testing not visible in the diff, tricky parts, and any template field the diff can't answer (breaking change? type of change?).
-8. Draft title and body.
+6. `--safe` → call the Skill tool with `safe-repo`, passing `--diff <base>`. Findings → report each `file:line`, then ask: fix first (Recommended) or push anyway.
+7. Push with `-u`. On the default branch → confirm first. Rejected as non-fast-forward → `git pull --rebase`, retry once. **Never force push.**
+8. Ask the user, all at once: **effort** in hours (required), **what was done** in their words (required), testing not visible in the diff, tricky parts, and any template field the diff can't answer (breaking change? type of change?).
+9. Draft title and body.
    - Title matches `^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\(.*\))?: .+$`.
    - Template found → it is the body, verbatim structure: fill every section and placeholder, check applicable boxes, add nothing outside it except `## Diagram` when requested. Its testing section carries the Evidence, its risk section the Merge Danger. No template → [assets/pr-template.md](assets/pr-template.md), filled the same way.
    - Reference the ticket (`Resolves TICKET-123`).
-9. `gh pr create` with a HEREDOC body (`--draft` if requested). Return the URL.
-10. `gh pr checks --watch`. Red → call the Skill tool with `debug` on the failing check, fix, commit, push. At most 2 rounds; still red → stop and report the failing checks.
+10. `gh pr create` with a HEREDOC body (`--draft` if requested). Return the URL.
+11. `gh pr checks --watch`. Red → call the Skill tool with `debug` on the failing check, fix, commit, push. At most 2 rounds; still red → stop and report the failing checks.
 
 Next: `/hb:retro` in this session, before `/clear`.
 

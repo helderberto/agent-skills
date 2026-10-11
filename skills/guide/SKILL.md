@@ -22,7 +22,7 @@ A **flow** is a path through the skills. Most work runs along the **main flow**;
 4. **`/hb:to-tickets`** slices the spec into tracer-bullet tickets in `.specs/tickets/<slug>.md`, each with **blocking edges**. Only exceptions get a `hitl` label.
 5. **`/hb:build`** implements the next unblocked ticket test-first through `tdd`, runs `check`, and commits. `--all` fans the tickets out to parallel implementer subagents, frontier by frontier, after one approval, and stops before each `hitl` one.
 6. **`/hb:review`** fans out parallel reviewers: correctness, standards, spec conformance with ticket checkboxes, test effectiveness with changed-line coverage, the quality bar, and the audits the diff calls for.
-7. **`/hb:to-pr`** is the only command that publishes: gate, push, PR body with evidence and merge danger, `gh pr create`, CI watch.
+7. **`/hb:to-pr`** is the only command that publishes: gate, an optional `--safe` secret scan, push, PR body with evidence and merge danger, `gh pr create`, CI watch.
 8. **`/hb:retro`** closes the loop. It suggests changes to the agent's **environment**, not the code: navigation pointers, checks, coding standards, steering files. Mechanical mistakes become checks; judgement calls become standards.
 
 #### Context hygiene
