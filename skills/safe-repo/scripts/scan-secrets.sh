@@ -71,7 +71,7 @@ scan() {
     case "$file" in
       *.min.js|*.min.css|node_modules/*|*.lock|*.sum) continue ;;
     esac
-    if ! file "$file" 2>/dev/null | grep -q "text"; then
+    if file --mime "$file" 2>/dev/null | grep -q "charset=binary"; then
       continue
     fi
     # Process substitution (not a pipe) so `found` updates in this shell, and
@@ -81,7 +81,7 @@ scan() {
       lineno=${match%%:*}
       echo "$file:$lineno: $label"
       found=1
-    done < <(grep -inE "$pattern" "$file" 2>/dev/null || true)
+    done < <(grep -inE -e "$pattern" "$file" 2>/dev/null || true)
   done <<< "$files"
 }
 
