@@ -105,6 +105,7 @@ When the user has a non-trivial task, suggest the flow commands in order. They a
 - YAML frontmatter requires `name` and `description`
 - Description starts with what the skill does. Model-visible skills follow with trigger conditions ("Use when..."); typed-only skills stop at one sentence
 - Optional `effort` frontmatter (`low`/`medium`/`high`/`xhigh`/`max`) overrides reasoning effort for the turn the skill fires — set it only when the task deviates from the `medium` default
+- No Claude Code hooks: they would block the user's own sessions. Safety checks run when the user asks (`/hb:safe-repo`, `/hb:to-pr --safe`)
 - Supporting files split into subfolders: `references/` (long-form docs loaded on demand), `scripts/` (deterministic helpers), `assets/` (templates/icons used in output). Split when `SKILL.md` exceeds ~150 lines
 - Bump `.claude-plugin/plugin.json` `version` (semver) on every user-visible change to a skill so plugin consumers can track updates
 - Create an annotated git tag `vX.Y.Z` matching the bumped version (`git tag -a vX.Y.Z -m "..."`) summarizing what changed since the previous tag, then `git push --tags`
