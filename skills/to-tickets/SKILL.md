@@ -1,7 +1,8 @@
 ---
 name: to-tickets
 effort: high
-description: Turn a spec into a multi-phase implementation plan of tracer-bullet vertical slices. Use after /to-spec when `.specs/specs/<slug>.md` exists, or when asked to break work into phases or slices. Don't use without a spec, or for single-file changes with obvious scope.
+description: Slice a spec into tracer-bullet vertical slices with blocking edges.
+disable-model-invocation: true
 argument-hint: "[slug]"
 ---
 

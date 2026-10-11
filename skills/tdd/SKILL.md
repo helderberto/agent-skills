@@ -2,6 +2,7 @@
 name: tdd
 effort: high
 description: Test-driven development, from unit to end-to-end tests. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration or end-to-end tests (Playwright, Cypress). Don't use to backfill tests on existing code (/refactor) or diagnose an unknown bug (/debug).
+user-invocable: false
 ---
 
 # Test-Driven Development

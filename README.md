@@ -2,20 +2,16 @@
 
 [![Test Plugin Installation](https://github.com/helderberto/agent-skills/actions/workflows/test-plugin-install.yml/badge.svg)](https://github.com/helderberto/agent-skills/actions/workflows/test-plugin-install.yml)
 
-**Personal SDLC toolbelt for AI coding agents — from spec to ship.**
+**Personal SDLC toolbelt for AI coding agents — from idea to PR.**
 
 A collection of skills that encode the workflows, quality gates, and engineering practices I use day-to-day. Pure Markdown, zero runtime deps, installable as a [Claude Code](https://claude.com/claude-code) plugin or copied into any agent that reads instruction files.
 
 ```
-  SPEC            PLAN            BUILD            REVIEW           SHIP
- ┌──────┐       ┌──────┐        ┌──────┐         ┌──────┐         ┌──────┐
- │ Idea │ ────▶ │ Spec │ ─────▶ │ Code │ ──────▶ │  QA  │ ──────▶ │  Go  │
- │Refine│       │Slices│        │ Impl │         │ Pass │         │ Live │
- └──────┘       └──────┘        └──────┘         └──────┘         └──────┘
- /hb:to-spec    /hb:to-tickets  /hb:build        /hb:review       /hb:ship
+TRIAGE    GRILL    SPEC       TICKETS       BUILD    REVIEW    SHIP     RETRO
+triage ─▶ grill ─▶ to-spec ─▶ to-tickets ─▶ build ─▶ review ─▶ to-pr ─▶ retro
 ```
 
-Each phase has a dedicated **workflow skill** that orchestrates the smaller toolbelt skills underneath it. Type the spine in order, or let it chain — every skill auto-routes by description. Only the outward-facing steps that push work out of your hands (`ship`, `to-pr`) are gated against auto-triggering, so you always pull that trigger yourself. After the PR, `/hb:retro` closes the loop in the same session.
+Type `/hb:<command>` for each step; `/hb:triage` tells you where to enter. The SHIP phase is `/hb:to-pr`: gate, push, PR, CI watch. Flow commands never chain on their own and never call each other. Each ends with a filled-in `Next: /hb:<cmd> <args>` line, so you always pull the trigger yourself.
 
 ---
 
@@ -31,7 +27,7 @@ Install via the marketplace:
 /plugin install hb@helderberto-skills
 ```
 
-After install, skills are available as `/hb:<skill-name>` — e.g. `/hb:to-spec`, `/hb:tdd`, `/hb:ship`. Most skills also auto-trigger from natural language ("review this PR", "check accessibility", etc.) based on their description.
+After install, skills are available as `/hb:<skill-name>` — e.g. `/hb:triage`, `/hb:to-spec`, `/hb:to-pr`. Both-tier and model-only skills also trigger from natural language ("review this PR", "check accessibility", etc.) based on their description.
 
 </details>
 
@@ -81,42 +77,42 @@ See [docs/cursor-setup.md](docs/cursor-setup.md) for the recommended starter set
 <details>
 <summary><b>Workflow example</b> — full SDLC walkthrough</summary>
 
-A non-trivial feature flows through all five phases. Each workflow skill is one invocation:
+A non-trivial feature flows through every step. Each command is one invocation:
 
 ```
-You: /hb:to-spec add dark mode support
-AI:  Grills you in rounds, scans the codebase, writes .specs/specs/dark-mode.md.
-     Run /hb:to-tickets dark-mode next?
+You: /hb:triage add dark mode support
+AI:  L, fuzzy feature → /hb:grill dark mode
+
+You: /hb:grill dark mode
+AI:  Interviews you in rounds; writes settled terms to the glossary and ADRs inline.
+     Next: /hb:to-spec dark-mode
+
+You: /hb:to-spec dark-mode
+AI:  Writes .specs/specs/dark-mode.md from the conversation, no re-interview.
+     Next: /hb:to-tickets dark-mode
 
 You: /hb:to-tickets dark-mode
-AI:  Breaks the spec into phased vertical slices.
-     Writes .specs/plans/dark-mode.md.
+AI:  Slices the spec into tracer-bullet tickets with blocking edges.
 
 You: /hb:build dark-mode
-AI:  Implements next incomplete phase test-first via tdd, then lint and
-     type-check. Marks checkboxes, summarizes, offers a commit.
-     /hb:build dark-mode --all runs every phase after one approval.
+AI:  Implements the next unblocked ticket test-first via tdd, then lint and
+     type-check. Marks checkboxes, commits.
+     /hb:build dark-mode --all runs every ticket after one approval.
 
 You: /hb:review
-AI:  Detects what changed, fans out reviewers in parallel (correctness,
-     standards, spec + checkboxes, tests + coverage, quality bar, a11y-audit,
-     safe-repo, ...).
-     Consolidates findings into Critical / Important / Suggestion;
-     Standards and Spec keep their own headings. Names the next step.
-
-You: /hb:ship
-AI:  Pre-launch gate (check + safe-repo --diff + floor-guard).
-     Atomic commits, push current branch.
-     /hb:ship --fast skips the gate (hotfix only).
+AI:  Fans out reviewers in parallel (correctness, standards, spec + checkboxes,
+     tests + coverage, quality bar, a11y-audit, safe-repo, ...).
+     Consolidates findings into Critical / Important / Suggestion.
 
 You: /hb:to-pr
-AI:  PR body with Before/After evidence and merge danger (door, blast radius).
+AI:  Gate (check, ADR check), push, PR body with Before/After evidence and
+     merge danger, gh pr create, then watches CI.
 
 You: /hb:retro
 AI:  Suggests environment fixes from this session: pointers, checks, standards.
 ```
 
-For quick standalone tasks, you don't need the workflow — just describe what you want and the relevant skill triggers ("write tests for X", "audit deps", "create an ADR for Y").
+For quick standalone tasks, you don't need the flow — describe what you want and the relevant skill triggers ("write tests for X", "audit deps", "create an ADR for Y").
 
 </details>
 
@@ -124,25 +120,45 @@ For quick standalone tasks, you don't need the workflow — just describe what y
 
 ## Skills
 
-Skills come in two modes. **User-invoked** ones never auto-trigger (`disable-model-invocation: true`) — the outward-facing, irreversible actions you must pull the trigger on yourself (`ship`, `to-pr`), plus `teach`, `retro`, `wait-what`, and `triage`, which only ever start by hand. Everything else is **model-invoked**: it auto-routes by description and stays callable explicitly as `/hb:<name>`. Model-invoked descriptions carry the trigger and anti-trigger clauses routing depends on; user-invoked ones keep a single what-it-does sentence, since trigger phrases are dead weight when nothing auto-routes.
+### Naming
+
+- **Verb** — does work, asks you something or changes code: `triage`, `grill`, `build`, `review`, `retro`, `debug`, `refactor`.
+- **`to-X`** — turns what's in context into artifact X, at most one question round, never an interview: `to-spec`, `to-tickets`, `to-pr`, `to-adr`.
+- **`*-audit`** — read-only report: `a11y-audit`, `perf-audit`, `deps-audit`, `architecture-audit`.
+
+### Invocation tiers
+
+Rule: on the flow, outward-facing, expensive, or session control → **typed-only**. Reached only by other skills or plain phrasing → **model only**. Otherwise → **both**.
+
+| Tier | Frontmatter | Skills |
+|---|---|---|
+| Typed-only (12) | `disable-model-invocation: true` | triage · grill · to-spec · to-tickets · build · review · to-pr · retro · architecture-audit · handoff · wait-what · teach |
+| Both (11) | default | debug · to-adr · zoom-out · commit · check · feedback · refactor · prototype · research · revise · create-skill |
+| Model only (13) | `user-invocable: false` | tdd · code-review · codebase-design · domain-modeling · harden · source-driven · frontend-ui-engineering · visual-review · a11y-audit · i18n · perf-audit · deps-audit · safe-repo |
+
+The `/hb:` menu shows typed-only and both (23 entries); the model sees both and model-only descriptions (24). Typed-only skills call model skills through the Skill tool and mention other typed-only skills only in `Next:` lines. Typed-only descriptions keep one what-it-does sentence; trigger phrases live only on model-visible skills. `ship` stays typed-only until `to-pr` absorbs it.
 
 Skills also carry an **effort** hint: mechanical ones (`commit`, `to-adr`) run at low reasoning effort, heavy ones (`architecture-audit`, `harden`, `debug`) at high or xhigh, and the rest at the implicit medium default. The override lasts only for the turn the skill fires — so complexity matches the task without you touching `/effort`.
 
 ### SDLC workflow
 
-The five-phase spine. Type each to advance, or let one phase chain into the next:
+The flow, one typed command per step:
 
 | Skill | Phase | What it does |
 |-------|-------|--------------|
-| [`to-spec`](skills/to-spec/SKILL.md) | SPEC | Interview + codebase scan → structured spec in `.specs/specs/<slug>.md` |
-| [`to-tickets`](skills/to-tickets/SKILL.md) | PLAN | Turn spec into multi-phase implementation plan (tracer-bullet vertical slices) |
-| [`build`](skills/build/SKILL.md) | BUILD | Implement next incomplete phase of a plan test-first via `tdd`, with feedback loops; `--all` runs every phase after one approval |
-| [`review`](skills/review/SKILL.md) | REVIEW | Fan out parallel reviewers (scope-detected audits + agent lenses incl. spec conformance, standards, and a quality-bar check), consolidate into one verdict — **optional QA pass**, not a ship gate |
-| [`ship`](skills/ship/SKILL.md) | SHIP | Pre-launch gate (check + safe-repo + floor-guard) + atomic commits + push (`--fast` to skip gate) · **user-invoked** |
+| [`triage`](skills/triage/SKILL.md) | TRIAGE | Router — maps your situation to the command to type next, plus when to continue, `/clear`, hand off, or `/compact` |
+| [`grill`](skills/grill/SKILL.md) | GRILL | Interview in rounds over the design-tree frontier, each question with a recommended answer |
+| [`to-spec`](skills/to-spec/SKILL.md) | SPEC | Settled conversation + codebase scan → structured spec in `.specs/specs/<slug>.md` |
+| [`to-tickets`](skills/to-tickets/SKILL.md) | TICKETS | Slice a spec into tracer-bullet vertical slices with blocking edges |
+| [`build`](skills/build/SKILL.md) | BUILD | Implement the next unblocked slice test-first via `tdd`, with feedback loops; `--all` runs every slice after one approval |
+| [`review`](skills/review/SKILL.md) | REVIEW | Fan out parallel reviewers (scope-detected audits + agent lenses incl. spec conformance, standards, coverage, and a quality-bar check), consolidate into one verdict |
+| [`ship`](skills/ship/SKILL.md) | SHIP | Pre-launch gate (check + safe-repo + floor-guard) + atomic commits + push (`--fast` to skip gate); folds into `to-pr` |
+| [`to-pr`](skills/to-pr/SKILL.md) | SHIP | Open a GitHub PR with a concise templated body: Before/After evidence, merge danger (one-way or two-way door, blast radius); `--diagram` adds a mermaid diagram of the change |
+| [`retro`](skills/retro/SKILL.md) | RETRO | Retrospective on a session — suggests navigation pointers, checks, coding standards, steering fixes; mechanical mistakes become checks |
 
 ### On-demand tools
 
-Focused capabilities the agent applies automatically based on the task (all callable explicitly too). Expand a group to browse.
+Focused capabilities the agent applies based on the task; both-tier ones are also typed as `/hb:<name>`. Expand a group to browse.
 
 <details>
 <summary><b>Build &amp; test</b></summary>
@@ -189,7 +205,6 @@ Focused capabilities the agent applies automatically based on the task (all call
 |-------|--------------|
 | [`commit`](skills/commit/SKILL.md) | Group unstaged changes into atomic commits by concern (repository style) |
 | [`to-adr`](skills/to-adr/SKILL.md) | Record a 1–3 sentence Architecture Decision Record |
-| [`to-pr`](skills/to-pr/SKILL.md) | Open a GitHub PR with a concise templated body: Before/After evidence, merge danger (one-way or two-way door, blast radius); `--diagram` adds a mermaid diagram of the change · **user-invoked** |
 
 </details>
 
@@ -204,7 +219,6 @@ Focused capabilities the agent applies automatically based on the task (all call
 | [`domain-modeling`](skills/domain-modeling/SKILL.md) | Build and sharpen the project's ubiquitous language and glossary |
 | [`research`](skills/research/SKILL.md) | Investigate a question against primary sources; capture cited findings as Markdown |
 | [`prototype`](skills/prototype/SKILL.md) | Build a throwaway prototype — shareable HTML logic demo or toggleable UI variations — kept on a `prototype/<name>` branch |
-| [`grill`](skills/grill/SKILL.md) | Stress-test a plan or design — interview in rounds over the design-tree frontier, each question with a recommended answer |
 
 </details>
 
@@ -213,11 +227,9 @@ Focused capabilities the agent applies automatically based on the task (all call
 
 | Skill | What it does |
 |-------|--------------|
-| [`triage`](skills/triage/SKILL.md) | Router — maps your situation to the skill or flow that fits, plus when to continue, `/clear`, hand off, or `/compact` · **user-invoked** |
 | [`handoff`](skills/handoff/SKILL.md) | Compact the current conversation into a handoff doc for a fresh agent |
-| [`retro`](skills/retro/SKILL.md) | Retrospective on a session — suggests navigation pointers, checks, coding standards, steering fixes; mechanical mistakes become checks · **user-invoked** |
-| [`teach`](skills/teach/SKILL.md) | Stateful teaching workspace — lessons, references, learning records tied to a mission · **user-invoked** |
-| [`wait-what`](skills/wait-what/SKILL.md) | Last message didn't land — re-pitch it with context, in Simplified Technical English and glossary terms · **user-invoked** |
+| [`teach`](skills/teach/SKILL.md) | Stateful teaching workspace — lessons, references, learning records tied to a mission |
+| [`wait-what`](skills/wait-what/SKILL.md) | Last message didn't land — re-pitch it with context, in Simplified Technical English and glossary terms |
 | [`zoom-out`](skills/zoom-out/SKILL.md) | Explain code with visual diagrams and analogies |
 | [`create-skill`](skills/create-skill/SKILL.md) | Author a new skill with proper structure |
 | [`revise`](skills/revise/SKILL.md) | Restructure article drafts, or polish any markdown (typos, dashes, filler) |

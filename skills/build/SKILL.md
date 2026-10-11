@@ -1,7 +1,8 @@
 ---
 name: build
 effort: high
-description: Implement the next unblocked phase of a plan with feedback loops, mark its checkboxes, offer a commit. Use after /to-tickets when `.specs/plans/<slug>.md` exists, or when asked to build the next phase. Don't use for unplanned changes (/tdd) or to review finished work (/review).
+description: Implement the next unblocked phase of a plan test-first, mark its checkboxes, and commit.
+disable-model-invocation: true
 argument-hint: '[slug] [--all]'
 ---
 
@@ -19,7 +20,7 @@ Implement the next incomplete phase of a plan — one phase per invocation. `--a
 
 Scan `## Phase N` headings and count `- [ ]` / `- [x]`. The next incomplete phase is the first with an unchecked item **and** whose `**Blocked by**` phases (if declared) are all complete. If the first incomplete phase is blocked, pick the next unblocked one and say why.
 
-All phases complete → "All phases complete. Run `/review` to verify." Stop.
+All phases complete → "All phases complete." Stop with `Next: /hb:review`.
 
 ### 2. Present the phase
 
@@ -54,13 +55,15 @@ POTENTIAL CONCERNS:
 
 ### 7. Offer commit
 
-"Phase N complete — all checks pass. Commit?" If yes, call the Skill tool with `commit`, passing the phase's files (`.specs/` only when the project commits specs). Never push. Then: "Run `/build <slug>` for Phase N+1, or `/review` to verify."
+"Phase N complete — all checks pass. Commit?" If yes, call the Skill tool with `commit`, passing the phase's files (`.specs/` only when the project commits specs). Never push.
+
+Next: `/hb:build <slug>` for Phase N+1, or `/hb:review` once every phase is done.
 
 ## `--all`
 
 Steps 1–7 for every remaining phase, with one human gate up front:
 
-1. A plan must exist. No plan → point at `/to-tickets <slug>` and stop.
+1. A plan must exist. No plan → stop with `Next: /hb:to-tickets <slug>`.
 2. `git status --porcelain` must be clean apart from `.specs/`. Anything else → ask the user to commit, stash, or confirm. Per-phase commits never absorb unrelated work.
 3. Present every remaining phase and wait for an unambiguous yes ("go", "approve", "yes"). Hedged answers ("looks reasonable", "I guess") are not approval. This approval also covers `tdd`'s seam confirmation for each phase.
 4. Run the phases in blocking order. Commit each phase without asking, scoped to that phase's files — never `git add -A`.

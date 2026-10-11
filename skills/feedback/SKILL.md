@@ -11,7 +11,7 @@ Consume the review comments **already on a PR** — Copilot and human reviewers 
 
 **Read-only.** Never reply to threads, resolve conversations, or post anything. The output is a decision aid for the user.
 
-Distinct from siblings: `/code-review` and `/review` *generate* new findings; this skill *evaluates existing* reviewer comments.
+Distinct from `code-review`, which *generates* new findings: this skill *evaluates existing* reviewer comments.
 
 ## Workflow
 

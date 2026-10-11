@@ -1,7 +1,8 @@
 ---
 name: code-review
 effort: high
-description: Review a GitHub PR or a diff for bugs, security, performance, and code quality. Use when asked to review a PR or give pull request feedback, even when the diff is pasted inline. Don't use for local uncommitted changes, creating PRs, or merging.
+description: Correctness lens for a PR or diff, used by review — bugs, security, performance, and code quality. Use when asked to review a PR or give pull request feedback, even when the diff is pasted inline. Don't use for local uncommitted changes, creating PRs, or merging.
+user-invocable: false
 argument-hint: '[PR] [BUGS|SECURITY|PERFORMANCE]'
 ---
 

@@ -2,6 +2,7 @@
 name: frontend-ui-engineering
 effort: high
 description: Front-load UI construction decisions — component boundary and prop API, state placement, required states, responsiveness, accessibility. Use when creating or refactoring a component, page, or design-system primitive. Don't use for pure logic (/tdd), throwaway exploration (/prototype), or auditing finished UI (/a11y-audit).
+user-invocable: false
 argument-hint: '[component or path]'
 ---
 

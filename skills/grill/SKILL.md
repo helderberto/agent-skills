@@ -1,6 +1,7 @@
 ---
 name: grill
-description: Relentless interview to sharpen a plan or design. Use when the user wants to stress-test a plan, pressure-test assumptions, or says "grill me" or "poke holes in this". Don't use for code review (/code-review) or gathering initial requirements (/to-spec).
+description: Interview in rounds until a plan or idea has no open decisions.
+disable-model-invocation: true
 ---
 
 # Grill

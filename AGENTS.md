@@ -38,27 +38,28 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 - Skills live at `skills/<skill-name>/SKILL.md`
 - Never implement directly when a skill applies
 - Always follow the skill instructions exactly — do not partially apply them
+- Typed-only skills (`disable-model-invocation: true`) are rows that say *suggest*: name the command for the user to type, don't run it
 
 ### Intent → Skill Mapping
 
 | User intent                             | Skill to invoke                                |
 | --------------------------------------- | ---------------------------------------------- |
-| New feature with unclear requirements   | `to-spec` → `to-tickets` → `build`             |
-| Implement next phase of a plan          | `build`                                        |
+| New feature with unclear requirements   | suggest `/hb:triage` → `/hb:grill` → `/hb:to-spec` |
+| Implement next phase of a plan          | suggest `/hb:build`                            |
 | Test-first development                  | `tdd`                                          |
 | Implement using official docs           | `source-driven`                                |
 | Research a question against sources     | `research`                                     |
 | Bug, error, unexpected behavior         | `debug`                                        |
 | Backfill tests / split functions / simplify | `refactor`                                 |
 | Design or improve a module's interface  | `codebase-design`                              |
-| Architectural friction in codebase      | `architecture-audit`                           |
+| Architectural friction in codebase      | suggest `/hb:architecture-audit`               |
 | Prototype a design (logic demo or UI)   | `prototype`                                    |
 | Explain code or codebase area           | `zoom-out`                                     |
 | Build or refactor a UI component/page   | `frontend-ui-engineering`                      |
 | Code at a trust boundary (auth, input, external API) | `harden`                          |
-| Full pre-ship review (parallel reviewers) | `review`                                     |
+| Full pre-ship review (parallel reviewers) | suggest `/hb:review`                         |
 | Validate a UI change in a real browser  | `visual-review --ui`                           |
-| Learn a concept over multiple sessions  | `teach`                                        |
+| Learn a concept over multiple sessions  | suggest `/hb:teach`                            |
 | Code review on a PR or pasted diff      | `code-review`                                  |
 | Visual/HTML PR review (annotated diff)  | `visual-review`                                |
 | Triage existing PR review comments (what to fix) | `feedback`                            |
@@ -71,29 +72,31 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Validate code (lint + types + tests)    | `check`                                        |
 | Write end-to-end tests                  | `tdd`                                          |
 | Commit changes (atomic, grouped by concern) | `commit`                                   |
-| Commit and push                         | `ship`                                         |
-| Create a pull request                   | `to-pr`                                        |
+| Commit and push                         | suggest `/hb:ship`                             |
+| Create a pull request                   | suggest `/hb:to-pr`                            |
 | Record an architectural decision        | `to-adr`                                       |
 | Pin down domain terminology / glossary  | `domain-modeling`                              |
-| Stress-test a plan or design            | `grill`                                        |
+| Stress-test a plan or design            | suggest `/hb:grill`                            |
 | Fix prose / typos in markdown           | `revise`                                       |
 | Restructure an article draft            | `revise`                                       |
-| Hand off mid-session work to a fresh agent | `handoff`                                   |
-| Retrospective on a session (improve the agent's environment) | `retro`                   |
-| Last message didn't land — re-explain plainly | `wait-what`                              |
+| Hand off mid-session work to a fresh agent | suggest `/hb:handoff`                       |
+| Retrospective on a session (improve the agent's environment) | suggest `/hb:retro`       |
+| Last message didn't land — re-explain plainly | suggest `/hb:wait-what`                  |
 | Author a new skill                      | `create-skill`                                 |
-| Which skill fits my situation?          | `triage`                                       |
+| Which skill fits my situation?          | suggest `/hb:triage`                           |
 
 ### Lifecycle Mapping (Implicit Flow)
 
-When the user has a non-trivial task, follow this flow even without explicit commands:
+When the user has a non-trivial task, suggest the flow commands in order. They are typed-only, so the user runs each one:
 
-- **SPEC** → `to-spec` (interviews via `grill`; settled terms go to the glossary via `domain-modeling`)
-- **PLAN** → `to-tickets` (spec to vertical-slice phases), with `architecture-audit` or `codebase-design` as needed
-- **BUILD** → `build` (one phase per invocation, or `--all`), driven by `tdd` and `source-driven`
-- **REVIEW** → `review` (orchestrates the audits below as parallel reviewers plus independent agent lenses, including spec conformance with ticket checkboxes, standards, test effectiveness with changed-line coverage, and the floor-guard quality-bar check; `code-review` for a single in-thread lens; `visual-review` for an annotated HTML diff report or `--ui` browser check; `feedback` to sort existing reviewer comments), covering `a11y-audit`, `i18n`, `perf-audit`, `deps-audit`, `safe-repo`, `harden`
-- **SHIP** → `ship` (gate: `check`, `safe-repo`, floor-guard) → `to-pr`
-- **RETRO** → `retro`, in the same session before `/clear`; `triage` routes any situation to its skill
+- **TRIAGE** → `triage` classifies the input, sizes it, and names the entry command; with no args it reports the current phase
+- **GRILL** → `grill` interviews; settled terms go to the glossary via `domain-modeling`, decisions to `to-adr`
+- **SPEC** → `to-spec` writes the spec from the conversation, no interview
+- **TICKETS** → `to-tickets` slices the spec into tracer-bullet tickets, with `architecture-audit` or `codebase-design` as needed
+- **BUILD** → `build` (one ticket per invocation, or `--all`), driven by `tdd`, `source-driven`, and `check`
+- **REVIEW** → `review` (audits as parallel reviewers plus agent lenses: spec conformance with ticket checkboxes, standards, test effectiveness with changed-line coverage, floor-guard), covering `a11y-audit`, `i18n`, `perf-audit`, `deps-audit`, `safe-repo`, `harden`; `feedback` sorts existing reviewer comments
+- **SHIP** → `to-pr` (gate, push, PR, CI watch); `ship` gates and pushes until `to-pr` absorbs it
+- **RETRO** → `retro`, in the same session before `/clear`
 
 ## Conventions
 

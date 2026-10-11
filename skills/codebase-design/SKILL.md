@@ -2,6 +2,7 @@
 name: codebase-design
 effort: high
 description: Shared vocabulary for designing deep modules. Use when designing or improving a module's interface, placing a seam, making code more testable, or when another skill needs it. Don't use for codebase-wide audits (/architecture-audit) or UI components (/frontend-ui-engineering).
+user-invocable: false
 ---
 
 # Codebase Design

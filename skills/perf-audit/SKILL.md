@@ -1,6 +1,7 @@
 ---
 name: perf-audit
 description: Audit frontend bundle size and performance. Use when asked to "audit performance", "analyze bundle", "check bundle size", or find frontend bottlenecks. Don't use for backend performance, database queries, or projects without a frontend build step.
+user-invocable: false
 ---
 
 # Performance Audit

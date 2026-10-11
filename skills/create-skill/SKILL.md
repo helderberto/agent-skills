@@ -27,6 +27,7 @@ Every step ends on a **completion criterion** the agent can check ("every error 
 | `description` | The only routing signal for a model-invoked skill (see below) |
 | `argument-hint` | Shown next to the name, e.g. `'[slug]'`, `'<idea>'` |
 | `disable-model-invocation` | `true` = user-invoked only; the description becomes a one-sentence human summary |
+| `user-invocable` | `false` = model only; hidden from the `/` menu, reached by other skills or plain phrasing |
 | `effort` | `low` / `medium` / `high` / `xhigh` / `max` for the turn the skill fires; set only when it deviates from the `medium` default |
 | `allowed-tools` | Tools pre-approved for the invoking turn — use sparingly |
 
