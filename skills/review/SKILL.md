@@ -32,7 +32,7 @@ Always: correctness (`code-review`), standards, sensitive data (`safe-repo --dif
 | Test effectiveness + changed-line coverage | always | `test-auditor` |
 | Accessibility (`a11y-audit`) | JSX/TSX/HTML/CSS changed | `general-purpose` |
 | User-facing strings (`i18n`) | new JSX text / template literals | `general-purpose` |
-| Bundle / perf (`perf-audit`) | `package.json`, bundler config changed | `general-purpose` |
+| Bundle / perf (`perf-audit`) | `package.json`, bundler config changed; JSX/TSX/HTML/CSS alone → source checks only | `perf-auditor` |
 | Dependencies (`deps-audit`) | manifest / lockfile changed | `general-purpose` |
 | Trust boundaries (`harden`) | routes, controllers, models, SQL, auth/input/external or LLM calls | `security-auditor` |
 | Type safety | heavy type-level changes | `general-purpose` |

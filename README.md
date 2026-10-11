@@ -126,7 +126,7 @@ For quick standalone tasks, you don't need the flow — describe what you want a
 - **Verb** — does work, asks you something or changes code: `triage`, `grill`, `build`, `review`, `retro`, `debug`, `refactor`.
 - **`to-X`** — turns what's in context into artifact X, at most one question round, never an interview: `to-spec`, `to-tickets`, `to-pr`, `to-adr`.
 - **`*-audit`** — read-only report: `a11y-audit`, `perf-audit`, `deps-audit`, `architecture-audit`.
-- **`*-auditor`** — Claude Code agent: a read-only reviewer that skills fan out to, preloading the skill that holds its checklist when one exists: `test-auditor`, `security-auditor`, `parity-auditor`.
+- **`*-auditor`** — Claude Code agent: a read-only reviewer that skills fan out to, preloading the skill that holds its checklist when one exists: `test-auditor`, `security-auditor`, `perf-auditor`, `parity-auditor`.
 
 ### Invocation tiers
 
@@ -192,7 +192,7 @@ Focused capabilities the agent applies based on the task; both-tier ones are als
 | [`feedback`](skills/feedback/SKILL.md) | Triage existing PR review comments (Copilot + human), verify against code, classify Address/Skip/Optional/Discuss |
 | [`a11y-audit`](skills/a11y-audit/SKILL.md) | Accessibility compliance audit (WCAG) |
 | [`i18n`](skills/i18n/SKILL.md) | Find hardcoded strings, check translation coverage |
-| [`perf-audit`](skills/perf-audit/SKILL.md) | Frontend bundle size and performance audit |
+| [`perf-audit`](skills/perf-audit/SKILL.md) | Frontend bundle size and Core Web Vitals risks; no metric without a measurement |
 | [`deps-audit`](skills/deps-audit/SKILL.md) | Check dependencies for vulnerabilities (npm/pnpm/yarn/pip/go/cargo) |
 | [`safe-repo`](skills/safe-repo/SKILL.md) | Sensitive data scan; `--diff [<base>]` scopes to a branch's changes |
 | [`harden`](skills/harden/SKILL.md) | Proactive security hardening at trust boundaries (OWASP-style), including LLM features |
@@ -248,6 +248,7 @@ Subagents the skills fan out to for independent, read-only perspectives (e.g. `/
 |-------|---------|
 | [`test-auditor`](agents/test-auditor.md) | Test effectiveness beyond coverage |
 | [`security-auditor`](agents/security-auditor.md) | Exploitable flaws at trust boundaries, STRIDE per boundary; preloads `harden` |
+| [`perf-auditor`](agents/perf-auditor.md) | Bundle size and Core Web Vitals risks, graded for review; preloads `perf-audit` |
 | [`parity-auditor`](agents/parity-auditor.md) | Audit code migrations for missing functionality |
 
 ---
