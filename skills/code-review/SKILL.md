@@ -22,7 +22,7 @@ If the change is too large to review well (~1000+ lines), asking the author to s
 
 ## Review criteria
 
-Review every changed file, not just the latest commit. Review the tests first: do they test behavior, cover the edge cases, and would they catch a regression? With the branch checked out locally, answer the last one by experiment: invert one condition the change adds, run the suite, restore the file. Still green → a missing test; name it.
+Review every changed file, not just the latest commit. Review the tests first: do they test behavior, cover the edge cases, and would they catch a regression? With the branch checked out locally, answer the last one by experiment: invert one condition the change adds, run the suite, restore the file. Still green → a missing test; name it. Reviewing alongside other agents → skip the experiment: `test-auditor` runs mutants in a scratch copy, and an in-place edit would race it.
 
 - **Correctness**: logic bugs, off-by-ones, race conditions, unhandled states, missing error paths
 - **Readability**: functions > 50 lines, nesting > 2 levels, dead code, unused imports
