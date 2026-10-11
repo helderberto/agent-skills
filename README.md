@@ -17,10 +17,22 @@ Type `/hb:<command>` for each step; `/hb:triage` tells you where to enter. The S
 
 ## Quick Start
 
+**Fastest path — any agent, one command.** The [skills CLI](https://github.com/vercel-labs/skills) installs into 70+ agents (Claude Code, Cursor, Codex, Copilot, OpenCode, and more):
+
+```bash
+npx skills add helderberto/agent-skills             # install all skills
+npx skills add helderberto/agent-skills --list      # browse before installing
+npx skills add helderberto/agent-skills --skill tdd # one skill
+```
+
+It installs skills only; the Claude Code plugin also ships the `agents/` subagents. Pick one install per agent, or every skill shows up twice.
+
+Prefer a native integration? Pick your tool below.
+
 <details open>
 <summary><b>Claude Code (recommended)</b></summary>
 
-Install via the marketplace:
+**Marketplace install:**
 
 ```
 /plugin marketplace add helderberto/agent-skills
@@ -29,46 +41,105 @@ Install via the marketplace:
 
 After install, skills are available as `/hb:<skill-name>` — e.g. `/hb:triage`, `/hb:to-spec`, `/hb:to-pr`. Both-tier and model-only skills also trigger from natural language ("review this PR", "check accessibility", etc.) based on their description.
 
-</details>
+Third-party marketplaces don't auto-update: turn it on in `/plugin` → **Marketplaces**. SSH errors on install → `git config --global url."https://github.com/".insteadOf git@github.com:`.
 
-<details>
-<summary><b>Gemini CLI</b></summary>
-
-Install as native skills:
-
-```bash
-gemini skills install https://github.com/helderberto/agent-skills.git --path skills
-```
-
-Skills are auto-discovered and routed by description. See [docs/gemini-cli-setup.md](docs/gemini-cli-setup.md).
-
-</details>
-
-<details>
-<summary><b>OpenCode</b></summary>
-
-Clone and point OpenCode at the workspace — `AGENTS.md` plus the `skills/` directory drive auto-routing:
+**Local / development:**
 
 ```bash
 git clone https://github.com/helderberto/agent-skills.git
+claude --plugin-dir /path/to/agent-skills
 ```
-
-Open the project in OpenCode. The `.opencode/skills` symlink and root `AGENTS.md` are already wired. See [docs/opencode-setup.md](docs/opencode-setup.md).
 
 </details>
 
 <details>
 <summary><b>Cursor</b></summary>
 
-Clone the repo, then copy individual skills into `.cursor/rules/`:
+Sync the skills into `.cursor/skills/`, which Cursor reads natively; keep `.cursor/rules/*.mdc` for short policies, not whole skills. See [docs/cursor-setup.md](docs/cursor-setup.md) for the starter set.
 
 ```bash
 git clone https://github.com/helderberto/agent-skills.git
-cp agent-skills/skills/tdd/SKILL.md .cursor/rules/tdd.md
-cp agent-skills/skills/code-review/SKILL.md .cursor/rules/code-review.md
+mkdir -p .cursor/skills && rsync -a agent-skills/skills/ .cursor/skills/
 ```
 
-See [docs/cursor-setup.md](docs/cursor-setup.md) for the recommended starter set.
+</details>
+
+<details>
+<summary><b>Antigravity CLI</b></summary>
+
+Install as a native plugin: skills activate on demand or run as `/hb:<skill>`.
+
+```bash
+agy plugin install https://github.com/helderberto/agent-skills
+```
+
+See [docs/antigravity-setup.md](docs/antigravity-setup.md).
+
+</details>
+
+<details>
+<summary><b>Gemini CLI</b></summary>
+
+Install as native skills, activated on demand, or list them in `GEMINI.md` for persistent context. See [docs/gemini-cli-setup.md](docs/gemini-cli-setup.md).
+
+**Install from the repo:**
+
+```bash
+gemini skills install https://github.com/helderberto/agent-skills.git --path skills
+```
+
+**Install from a local clone:**
+
+```bash
+gemini skills install ./agent-skills/skills/
+```
+
+</details>
+
+<details>
+<summary><b>OpenCode</b></summary>
+
+Copy the skill folders to `.opencode/skills/` (or `~/.config/opencode/skills/`), then paste the OpenCode section of this repo's `AGENTS.md` into your project's `AGENTS.md`; the built-in `skill` tool routes from there. See [docs/opencode-setup.md](docs/opencode-setup.md).
+
+```bash
+git clone https://github.com/helderberto/agent-skills.git
+mkdir -p .opencode/skills && cp -R agent-skills/skills/* .opencode/skills/
+```
+
+</details>
+
+<details>
+<summary><b>GitHub Copilot</b></summary>
+
+Install as a native plugin with the Copilot CLI. VS Code picks it up too, or run **Chat: Install Plugin From Source** with `https://github.com/helderberto/agent-skills`.
+
+```bash
+copilot plugin marketplace add helderberto/agent-skills
+copilot plugin install hb@helderberto-skills
+```
+
+See [docs/copilot-setup.md](docs/copilot-setup.md).
+
+</details>
+
+<details>
+<summary><b>Codex</b></summary>
+
+Install as a native Codex plugin (Codex CLI 0.131+). Skills load from `skills/` and are invoked as `$hb:<skill-name>`.
+
+```bash
+codex plugin marketplace add helderberto/agent-skills
+codex plugin add hb@helderberto-skills
+```
+
+See [docs/codex-setup.md](docs/codex-setup.md).
+
+</details>
+
+<details>
+<summary><b>Other agents</b></summary>
+
+Skills are plain Markdown: any agent that reads instruction files can use `skills/<name>/SKILL.md`. The skills CLI above covers 70+ of them.
 
 </details>
 
@@ -106,8 +177,8 @@ AI:  Fans out reviewers in parallel (correctness, standards, spec + checkboxes,
      Consolidates findings into Critical / Important / Suggestion.
 
 You: /hb:to-pr
-AI:  Gate (check, ADR check), push, PR body with Before/After evidence and
-     merge danger, gh pr create, then watches CI.
+AI:  Gate (check, ADR check), push, writes the PR body itself (Summary visual,
+     Before/After evidence, merge danger), gh pr create, then watches CI.
 
 You: /hb:retro
 AI:  Suggests environment fixes from this session: pointers, checks, standards.
@@ -126,6 +197,7 @@ For quick standalone tasks, you don't need the flow — describe what you want a
 - **Verb** — does work, asks you something or changes code: `triage`, `grill`, `build`, `review`, `retro`, `debug`, `refactor`.
 - **`to-X`** — turns what's in context into artifact X, at most one question round, never an interview: `to-spec`, `to-tickets`, `to-pr`, `to-adr`.
 - **`*-audit`** — read-only report: `a11y-audit`, `perf-audit`, `deps-audit`, `architecture-audit`.
+- **`*-auditor`** — Claude Code agent: a read-only reviewer that skills fan out to, preloading the skill that holds its checklist when one exists: `test-auditor`, `security-auditor`, `perf-auditor`, `parity-auditor`.
 
 ### Invocation tiers
 
@@ -153,7 +225,7 @@ The flow, one typed command per step:
 | [`to-tickets`](skills/to-tickets/SKILL.md) | TICKETS | Slice a spec into tracer-bullet vertical slices with blocking edges |
 | [`build`](skills/build/SKILL.md) | BUILD | Implement the next unblocked slice test-first via `tdd`, with feedback loops; `--all` fans every ticket out to parallel implementer subagents after one approval |
 | [`review`](skills/review/SKILL.md) | REVIEW | Fan out parallel reviewers (scope-detected audits + agent lenses incl. spec conformance, standards, coverage, and a quality-bar check), consolidate into one verdict |
-| [`to-pr`](skills/to-pr/SKILL.md) | SHIP | Gate (check, ADR check), push, open a GitHub PR with a concise templated body: Before/After evidence, merge danger (one-way or two-way door, blast radius); watch CI, `debug` on red (max 2); `--safe` runs `safe-repo` before the push, `--fast` skips the gate, every body ends with a mermaid diagram of the change (`--diagram=<type>` forces its type, `--no-diagram` skips it) |
+| [`to-pr`](skills/to-pr/SKILL.md) | SHIP | Gate (check, ADR check), push, open a GitHub PR on the repo's template or the default, every field written by the model with no questions: Summary with a visual (diagram, diff sketch, or tree), Before/After evidence, merge danger (one-way or two-way door, blast radius); watch CI, `debug` on red (max 2); `--safe` runs `safe-repo` before the push, `--skip-ci` marks the HEAD commit `[skip ci]` and skips the watch, `--diagram[=<type>]` makes the visual a mermaid diagram, typed by the change unless given |
 | [`retro`](skills/retro/SKILL.md) | RETRO | Retrospective on a session — suggests navigation pointers, checks, coding standards, steering fixes; mechanical mistakes become checks |
 
 ### On-demand tools
@@ -191,10 +263,10 @@ Focused capabilities the agent applies based on the task; both-tier ones are als
 | [`feedback`](skills/feedback/SKILL.md) | Triage existing PR review comments (Copilot + human), verify against code, classify Address/Skip/Optional/Discuss |
 | [`a11y-audit`](skills/a11y-audit/SKILL.md) | Accessibility compliance audit (WCAG) |
 | [`i18n`](skills/i18n/SKILL.md) | Find hardcoded strings, check translation coverage |
-| [`perf-audit`](skills/perf-audit/SKILL.md) | Frontend bundle size and performance audit |
+| [`perf-audit`](skills/perf-audit/SKILL.md) | Frontend bundle size and Core Web Vitals risks; no metric without a measurement |
 | [`deps-audit`](skills/deps-audit/SKILL.md) | Check dependencies for vulnerabilities (npm/pnpm/yarn/pip/go/cargo) |
 | [`safe-repo`](skills/safe-repo/SKILL.md) | Sensitive data scan; `--diff [<base>]` scopes to a branch's changes |
-| [`harden`](skills/harden/SKILL.md) | Proactive security hardening at trust boundaries (OWASP-style) |
+| [`harden`](skills/harden/SKILL.md) | Proactive security hardening at trust boundaries (OWASP-style), including LLM features |
 
 </details>
 
@@ -245,8 +317,10 @@ Subagents the skills fan out to for independent, read-only perspectives (e.g. `/
 
 | Agent | Purpose |
 |-------|---------|
-| [`test-auditor`](agents/test-auditor.md) | Test effectiveness beyond coverage |
-| [`parity-check`](agents/parity-check.md) | Audit code migrations for missing functionality |
+| [`test-auditor`](agents/test-auditor.md) | Test effectiveness beyond coverage: weak assertions, missing edge scenarios, surviving mutants |
+| [`security-auditor`](agents/security-auditor.md) | Exploitable flaws at trust boundaries, STRIDE per boundary; preloads `harden` |
+| [`perf-auditor`](agents/perf-auditor.md) | Bundle size and Core Web Vitals risks, graded for review; preloads `perf-audit` |
+| [`parity-auditor`](agents/parity-auditor.md) | Audit code migrations for missing functionality |
 
 ---
 
@@ -255,10 +329,13 @@ Subagents the skills fan out to for independent, read-only perspectives (e.g. `/
 ```
 agent-skills/
 ├── .claude-plugin/      Plugin manifest + marketplace entry (Claude Code)
+├── plugin.json          Plugin manifest (Antigravity CLI)
+├── .agents/plugins/     Marketplace entry (Codex)
+├── .plugin/             Copy of .claude-plugin/plugin.json (Copilot CLI reads it first)
 ├── .opencode/skills →   Symlink to skills/ for OpenCode discovery
 ├── skills/              one folder per skill, each with SKILL.md
 ├── agents/              subagent definitions (Claude Code only)
-├── docs/                Skill anatomy + per-agent setup guides
+├── docs/                per-agent setup guides
 ├── AGENTS.md            Intent → skill mapping (drives OpenCode auto-routing)
 ├── CONTRIBUTING.md      How to contribute new skills or improvements
 ├── LICENSE              MIT
@@ -276,31 +353,6 @@ Workflow skills write structured artifacts to `.specs/`:
 The `.specs/` directory is local-first. Add it to `.gitignore` if you prefer specs as scratch space, or commit it if you want specs as versioned project documentation.
 
 Throwaway output stays out of the working tree, so `commit` never sweeps it up: `visual-review` and `architecture-audit --html` reports, `perf-audit` bundle reports, and `handoff` docs go to `$TMPDIR` (else `/tmp`), and the skill prints the path.
-
----
-
-## Migrating from v3
-
-v4.0.0 is a hard break: no aliases for v3 names.
-
-| v3 | v4 |
-|---|---|
-| `ask` | `triage` (routes any input; no args → where you are) |
-| `grill-me` | `grill` |
-| `spec` | `to-spec` (interview moved to `grill`) |
-| `plan` | `to-tickets`, writing `.specs/tickets/` (was `.specs/plans/`) |
-| `create-pull-request` | `to-pr` (absorbs `ship`: gate, push, CI watch) |
-| `ship` | removed, folded into `to-pr`; scan for secrets with `/hb:to-pr --safe` or `/hb:safe-repo` |
-| `create-adr` | `to-adr` |
-| `diagnose` | `debug` |
-| `explain-code` | `zoom-out` |
-| `fortify` | `refactor` |
-| `triage-review` | `feedback` |
-| `validate-code` | `check` |
-| `test` | removed: validation in `build`, checkbox and coverage checks in `review` lenses |
-| `e2e` | removed: a UI-tests reference in `tdd` |
-| `visual-validate` | `visual-review --ui` |
-| — | `guide` (new: which skill fits?) |
 
 ---
 

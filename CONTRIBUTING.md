@@ -7,7 +7,7 @@ Thanks for considering a contribution. This plugin is a personal toolbelt, but P
 - **New skills** that fill a real gap in the SDLC coverage
 - **Improvements** to existing skills (tighter descriptions, clearer workflows, missing error cases)
 - **Fixes** for broken links, typos, or factual errors in skill content
-- **Multi-agent setup docs** beyond the four already covered (Claude Code, Gemini CLI, OpenCode, Cursor)
+- **Multi-agent setup docs** beyond the seven already covered (Claude Code, Cursor, Antigravity CLI, Gemini CLI, OpenCode, GitHub Copilot, Codex)
 
 ## What does NOT fit
 
@@ -57,7 +57,7 @@ When in doubt, open an issue first to discuss scope.
 | Understand the plugin structure | [README.md](README.md) |
 | Write a new skill from scratch | [skills/create-skill/SKILL.md](skills/create-skill/SKILL.md) |
 | Scaffold a skill interactively | Invoke `/hb:create-skill` |
-| Configure another agent | [`docs/cursor-setup.md`](docs/cursor-setup.md), [`docs/gemini-cli-setup.md`](docs/gemini-cli-setup.md), [`docs/opencode-setup.md`](docs/opencode-setup.md) |
+| Configure another agent | [`docs/`](docs/): one setup guide per tool |
 | Question scope before coding | Open an issue |
 
 ## License

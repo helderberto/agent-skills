@@ -33,32 +33,32 @@ For project-specific defaults, add the skills you always want loaded into `GEMIN
 Always apply these skills when relevant:
 
 - tdd — red-green-refactor for any new feature or bug
-- code-review — five-axis review before merge
+- code-review — correctness review before merge
 - commit — conventional commit messages
 - debug — disciplined debugging loop
 ```
 
 Gemini reads `GEMINI.md` automatically at session start.
 
-## Verifying installation
+## Or with the skills CLI
 
 ```bash
-gemini skills list
+npx skills add helderberto/agent-skills -a gemini-cli
 ```
 
-You should see every skill from this repo plus any others you've installed.
+## Verifying installation
+
+Inside a Gemini session:
+
+```
+/skills list
+```
+
+You should see every skill from this repo plus any others you've installed. Gemini asks before activating a skill that matches your task.
 
 ## Updating
 
-```bash
-gemini skills update
-```
-
-Or for a single skill:
-
-```bash
-gemini skills update <skill-name>
-```
+Re-run the install command.
 
 ## Tracer-bullet workflow
 

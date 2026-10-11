@@ -1,11 +1,18 @@
 ## Summary
 
-<!-- Why first, then what. The diff already shows how. Keep it to a few sentences or a short list. -->
+<diagram, diff-sketch, or tree>
 
 ## Evidence
 
-<!-- Before and after. Paste the test run or output that changed, or a screenshot. -->
+- **Before:** <screenshot/output/failing test run>
+  **After:** <screenshot/output/passing test run>
 
 ## Merge Danger
 
-<!-- Door: one-way if a revert can't undo it, two-way if it can. Blast radius: one word, then what could break for whom. -->
+**Door:** <one-way or two-way>
+
+<optional: description>
+
+**Blast Radius:** <one-word description>
+
+<optional: potential ramifications of merge>

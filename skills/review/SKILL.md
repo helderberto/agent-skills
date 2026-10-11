@@ -32,9 +32,9 @@ Always: correctness (`code-review`), standards, sensitive data (`safe-repo --dif
 | Test effectiveness + changed-line coverage | always | `test-auditor` |
 | Accessibility (`a11y-audit`) | JSX/TSX/HTML/CSS changed | `general-purpose` |
 | User-facing strings (`i18n`) | new JSX text / template literals | `general-purpose` |
-| Bundle / perf (`perf-audit`) | `package.json`, bundler config changed | `general-purpose` |
+| Bundle / perf (`perf-audit`) | `package.json`, bundler config changed; JSX/TSX/HTML/CSS alone → source checks only | `perf-auditor` |
 | Dependencies (`deps-audit`) | manifest / lockfile changed | `general-purpose` |
-| Trust boundaries (`harden`) | routes, controllers, models, SQL, auth/input/external calls | `general-purpose` |
+| Trust boundaries (`harden`) | routes, controllers, models, SQL, auth/input/external or LLM calls | `security-auditor` |
 | Type safety | heavy type-level changes | `general-purpose` |
 | Architecture friction | cross-module changes | `general-purpose` (uses `codebase-design` vocabulary) |
 
@@ -47,7 +47,7 @@ Match each reviewer to an agent type **available in the harness**; never invent 
 
 ### 3. Fan out
 
-Spawn all reviewers in **one message** so they run concurrently. Each gets: repo path (note if it's a worktree), the exact diff command and its subset of files, one paragraph of context, its instruction (run the audit skill via the Skill tool — fall back to the skill's checklist if subagents can't load skills — or apply the lens), a pointer to `.specs/tickets/*.md` if present, and the output contract — findings with `file:line`, severity (`critical` / `important` / `suggestion`), one-line rationale. **Read-only**: no edits, staging, commits, or pushes. Brief with the artifact and the requirements, never your own conclusion: a reviewer told what to find finds it.
+Spawn all reviewers in **one message** so they run concurrently. Each gets: repo path (note if it's a worktree), the exact diff command and its subset of files, one paragraph of context, its instruction (run the audit skill via the Skill tool; `*-auditor` agents have it preloaded — fall back to the skill's checklist if subagents can't load skills — or apply the lens), a pointer to `.specs/tickets/*.md` if present, and the output contract — findings with `file:line`, severity (`critical` / `important` / `suggestion`), one-line rationale. **Read-only**: no edits, staging, commits, or pushes. Brief with the artifact and the requirements, never your own conclusion: a reviewer told what to find finds it.
 
 **Build/install collisions**: `perf-audit` builds and `deps-audit` may touch `node_modules` — give those worktree isolation or run them serially after the read-only reviewers.
 

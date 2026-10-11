@@ -11,8 +11,11 @@ Guidance for AI coding agents (Claude Code, Cursor, Gemini CLI, OpenCode, Copilo
 ```
 skills/         → Core skills (one folder per skill, each with SKILL.md)
 agents/         → Subagent definitions the skills fan out to (Claude Code only)
-docs/           → Setup guides per agent (Cursor, Gemini CLI, OpenCode, Copilot)
+docs/           → Setup guides per agent (Cursor, Antigravity CLI, Gemini CLI, OpenCode, GitHub Copilot, Codex)
 .claude-plugin/ → Plugin manifest + marketplace entry (Claude Code)
+plugin.json     → Plugin manifest (Antigravity CLI)
+.agents/plugins/ → Marketplace entry (Codex)
+.plugin/        → Copy of .claude-plugin/plugin.json (Copilot CLI reads it first)
 ```
 
 ## Integration Model
@@ -24,7 +27,10 @@ Different agents discover skills through different mechanisms. This repo support
 | Claude Code | Plugin marketplace (`/plugin install hb@helderberto-skills`)  |
 | Gemini CLI  | `gemini skills install` from this repo                        |
 | OpenCode    | Auto-routes via this `AGENTS.md` + the `skill` tool           |
-| Cursor      | Copy skills into `.cursor/rules/` or reference via `.cursorrules` |
+| Cursor      | Sync `skills/` into `.cursor/skills/` (native skills)            |
+| Antigravity CLI | Native plugin via root `plugin.json` (`agy plugin install`)  |
+| GitHub Copilot | Native plugin from `.claude-plugin/marketplace.json` (`copilot plugin install hb@helderberto-skills`) |
+| Codex       | Native plugin via `.agents/plugins/marketplace.json` (`codex plugin add hb@helderberto-skills`) |
 
 See [docs/](./docs/) for per-agent setup instructions.
 
@@ -103,11 +109,13 @@ When the user has a non-trivial task, suggest the flow commands in order. They a
 
 - Every skill lives in `skills/<name>/SKILL.md` (or `<name>/SKILL.md` if flat at root — see structure section)
 - YAML frontmatter requires `name` and `description`
+- Agents in `agents/` are named `*-auditor`: read-only reviewers that preload, through `skills:` frontmatter, the skill holding their checklist when one exists
 - Description starts with what the skill does. Model-visible skills follow with trigger conditions ("Use when..."); typed-only skills stop at one sentence
 - Optional `effort` frontmatter (`low`/`medium`/`high`/`xhigh`/`max`) overrides reasoning effort for the turn the skill fires — set it only when the task deviates from the `medium` default
 - No Claude Code hooks: they would block the user's own sessions. Safety checks run when the user asks (`/hb:safe-repo`, `/hb:to-pr --safe`)
 - Supporting files split into subfolders: `references/` (long-form docs loaded on demand), `scripts/` (deterministic helpers), `assets/` (templates/icons used in output). Split when `SKILL.md` exceeds ~150 lines
-- Bump `.claude-plugin/plugin.json` `version` (semver) once per PR that changes a skill users see, so plugin consumers can track updates
+- `.plugin/plugin.json` is a byte copy of `.claude-plugin/plugin.json`: Copilot CLI checks it before the root `plugin.json`. The root `plugin.json` (Antigravity) allows only `name` and `description`, which must match. CI checks both
+- Bump `.claude-plugin/plugin.json` `version` (semver) once per PR that changes a skill users see, so plugin consumers can track updates; then copy the file to `.plugin/plugin.json`
 - After the PR merges: annotated tag `vX.Y.Z` on the merge commit, summarizing changes since the previous tag; `git push origin vX.Y.Z`; then `gh release create vX.Y.Z` with notes shaped like the previous release (`gh release view`)
 
 ## Boundaries

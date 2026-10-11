@@ -2,7 +2,8 @@
 .specs/
 
 # Agent directories (skills CLI)
-.agents/
+.agents/*
+!.agents/plugins/
 .adal/
 .agent/
 .augment/
