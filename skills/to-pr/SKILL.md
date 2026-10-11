@@ -51,8 +51,8 @@ Pick by what changed:
 |---|---|
 | logic or an algorithm | pseudocode |
 | runtime control flow | call tree |
-| UI structure | component tree |
-| file layout | file tree |
+| UI structure | component tree, nodes labelled with their owning file or package when that matters |
+| file layout | shallow file tree, a `#` comment on what each entry owns |
 | a change inside an existing shape | `diff` sketch of that tree |
 | request/response, handlers, integrations | `sequenceDiagram` |
 | pipeline, branching logic, data migration | `flowchart` |
@@ -60,7 +60,17 @@ Pick by what changed:
 | UI or process states | `stateDiagram-v2` |
 | module refactor | `flowchart` before → after, or a dependency graph |
 
-Rules: one visual, two at most; ≤ ~12 nodes; only the path the PR touches, not the whole system; mark what changed (`+`/`-` in a sketch, a `classDef changed` style in mermaid) so unchanged context reads as context.
+Rules: one visual, two at most, each right after the sentence it supports; ≤ ~12 nodes; only the path the PR touches, not the whole system; mark what changed (`+`/`-` in a sketch, a `classDef changed` style in mermaid) so unchanged context reads as context.
+
+```diff
+ review
+   fan out
+     code-review
+-    general-purpose + harden
++    security-auditor
+     test-auditor
+   consolidate
+```
 
 ```mermaid
 flowchart LR
