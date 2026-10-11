@@ -25,19 +25,18 @@ Arguments: $ARGUMENTS
 5. Uncommitted work → call the Skill tool with `commit` (never open a PR on a dirty tree).
 6. `--safe` → call the Skill tool with `safe-repo`, passing `--diff <base>`. Findings → report each `file:line`, then ask: fix first (Recommended) or push anyway.
 7. Push with `-u`. On the default branch → confirm first. Rejected as non-fast-forward → `git pull --rebase`, retry once. **Never force push.**
-8. Ask the user, all at once: **effort** in hours (required), **what was done** in their words (required), testing not visible in the diff, tricky parts, and any template field the diff can't answer (breaking change? type of change?).
-9. Draft title and body.
+8. Draft the title and a concise body from the diff, the commits, and the conversation, then open the PR straight away.
    - Title matches `^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\(.*\))?: .+$`.
    - Template found → it is the body, verbatim structure: fill every section and placeholder, check applicable boxes, add nothing outside it except `## Diagram` when requested. Its testing section carries the Evidence, its risk section the Merge Danger. No template → [assets/pr-template.md](assets/pr-template.md), filled the same way.
    - Reference the ticket (`Resolves TICKET-123`).
-10. `gh pr create` with a HEREDOC body (`--draft` if requested). Return the URL.
-11. `gh pr checks --watch`. Red → call the Skill tool with `debug` on the failing check, fix, commit, push. At most 2 rounds; still red → stop and report the failing checks.
+9. `gh pr create` with a HEREDOC body (`--draft` if requested). Return the URL.
+10. `gh pr checks --watch`. Red → call the Skill tool with `debug` on the failing check, fix, commit, push. At most 2 rounds; still red → stop and report the failing checks.
 
 Next: `/hb:retro` in this session, before `/clear`.
 
 ## Writing the body
 
-**Concise and readable by someone who didn't see the diff.** Each section 1–4 sentences or a short bullet list. Lead with the why, then the what; the diff already shows the how. Incorporate the user's answers — don't paraphrase the diff back at them. Cut a template section's boilerplate prose only if the template marks it optional; otherwise fill it in one line.
+**Concise and readable by someone who didn't see the diff.** Each section 1–4 sentences or a short bullet list. Lead with the why, then the what; the diff already shows the how. Use what the user said in the conversation — don't paraphrase the diff back at them. Cut a template section's boilerplate prose only if the template marks it optional; otherwise fill it in one line.
 
 - **Summary**: when a picture beats a sentence, add the smallest text visual that makes the point: pseudocode, call tree, component tree, file tree, or a `diff` sketch of the shape. Mermaid stays behind `--diagram`. A one-function change needs none.
 - **Evidence**: **Before** / **After**. A screenshot for visual changes; otherwise the test run or output that failed before and passes now.
