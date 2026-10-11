@@ -106,8 +106,8 @@ AI:  Fans out reviewers in parallel (correctness, standards, spec + checkboxes,
      Consolidates findings into Critical / Important / Suggestion.
 
 You: /hb:to-pr
-AI:  Gate (check, ADR check), push, PR body with Before/After evidence and
-     merge danger, gh pr create, then watches CI.
+AI:  Gate (check, ADR check), push, writes the PR body itself (Summary visual,
+     Before/After evidence, merge danger), gh pr create, then watches CI.
 
 You: /hb:retro
 AI:  Suggests environment fixes from this session: pointers, checks, standards.
@@ -246,7 +246,7 @@ Subagents the skills fan out to for independent, read-only perspectives (e.g. `/
 
 | Agent | Purpose |
 |-------|---------|
-| [`test-auditor`](agents/test-auditor.md) | Test effectiveness beyond coverage |
+| [`test-auditor`](agents/test-auditor.md) | Test effectiveness beyond coverage: weak assertions, missing edge scenarios, surviving mutants |
 | [`security-auditor`](agents/security-auditor.md) | Exploitable flaws at trust boundaries, STRIDE per boundary; preloads `harden` |
 | [`perf-auditor`](agents/perf-auditor.md) | Bundle size and Core Web Vitals risks, graded for review; preloads `perf-audit` |
 | [`parity-auditor`](agents/parity-auditor.md) | Audit code migrations for missing functionality |
@@ -279,6 +279,17 @@ Workflow skills write structured artifacts to `.specs/`:
 The `.specs/` directory is local-first. Add it to `.gitignore` if you prefer specs as scratch space, or commit it if you want specs as versioned project documentation.
 
 Throwaway output stays out of the working tree, so `commit` never sweeps it up: `visual-review` and `architecture-audit --html` reports, `perf-audit` bundle reports, and `handoff` docs go to `$TMPDIR` (else `/tmp`), and the skill prints the path.
+
+---
+
+## Migrating to v4.2
+
+| v4.1 | v4.2 |
+|---|---|
+| `/hb:to-pr --fast` | removed: the gate always runs; `--skip-ci` skips remote CI instead |
+| `/hb:to-pr --draft` | removed: PRs open ready for review |
+| `/hb:to-pr --no-diagram` | removed: the model picks the Summary visual; `--diagram[=<type>]` forces mermaid |
+| `parity-check` agent | `parity-auditor` |
 
 ---
 
