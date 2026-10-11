@@ -193,7 +193,7 @@ Focused capabilities the agent applies based on the task; both-tier ones are als
 | [`i18n`](skills/i18n/SKILL.md) | Find hardcoded strings, check translation coverage |
 | [`perf-audit`](skills/perf-audit/SKILL.md) | Frontend bundle size and performance audit |
 | [`deps-audit`](skills/deps-audit/SKILL.md) | Check dependencies for vulnerabilities (npm/pnpm/yarn/pip/go/cargo) |
-| [`safe-repo`](skills/safe-repo/SKILL.md) | Sensitive data scan; `--diff` mode for in-flight changes |
+| [`safe-repo`](skills/safe-repo/SKILL.md) | Sensitive data scan; `--diff [<base>]` scopes to a branch's changes |
 | [`harden`](skills/harden/SKILL.md) | Proactive security hardening at trust boundaries (OWASP-style) |
 
 </details>

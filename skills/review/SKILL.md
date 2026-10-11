@@ -20,7 +20,7 @@ PR number → `gh pr view` + `gh pr diff` (fails → current-branch diff, warn).
 
 ### 2. Select reviewers
 
-Always: correctness (`code-review`), standards, sensitive data (`safe-repo` diff-only), test effectiveness, quality bar. Spec whenever `.specs/specs/` holds this work's spec. Add the rest from the diff. An explicit count in `$ARGUMENTS` (2–8) caps the subagents; drop diff-selected ones first. Never spawn `visual-review` in UI mode: it needs a dev server the user owns.
+Always: correctness (`code-review`), standards, sensitive data (`safe-repo --diff <base>`), test effectiveness, quality bar. Spec whenever `.specs/specs/` holds this work's spec. Add the rest from the diff. An explicit count in `$ARGUMENTS` (2–8) caps the subagents; drop diff-selected ones first. Never spawn `visual-review` in UI mode: it needs a dev server the user owns.
 
 | Reviewer | When | Agent type |
 |----------|------|------------|
@@ -28,7 +28,7 @@ Always: correctness (`code-review`), standards, sensitive data (`safe-repo` diff
 | Standards | always | `general-purpose` |
 | Spec conformance + ticket checkboxes | `.specs/specs/<slug>.md` matches the branch or tickets | `general-purpose` |
 | Quality bar (floor-guard) | always | none: run inline |
-| Sensitive data (`safe-repo` diff-only) | always | `general-purpose` |
+| Sensitive data (`safe-repo --diff <base>`) | always | `general-purpose` |
 | Test effectiveness + changed-line coverage | always | `test-auditor` |
 | Accessibility (`a11y-audit`) | JSX/TSX/HTML/CSS changed | `general-purpose` |
 | User-facing strings (`i18n`) | new JSX text / template literals | `general-purpose` |
