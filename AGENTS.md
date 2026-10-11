@@ -14,6 +14,7 @@ agents/         → Subagent definitions the skills fan out to (Claude Code only
 docs/           → Setup guides per agent (Cursor, Gemini CLI, OpenCode, Copilot)
 .claude-plugin/ → Plugin manifest + marketplace entry (Claude Code)
 plugin.json     → Plugin manifest (Antigravity CLI)
+.agents/plugins/ → Marketplace entry (Codex)
 ```
 
 ## Integration Model
@@ -27,6 +28,7 @@ Different agents discover skills through different mechanisms. This repo support
 | OpenCode    | Auto-routes via this `AGENTS.md` + the `skill` tool           |
 | Cursor      | Sync `skills/` into `.cursor/skills/` (native skills)            |
 | Antigravity CLI | Native plugin via root `plugin.json` (`agy plugin install`)  |
+| Codex       | Native plugin via `.agents/plugins/marketplace.json` (`codex plugin add hb@helderberto-skills`) |
 
 See [docs/](./docs/) for per-agent setup instructions.
 

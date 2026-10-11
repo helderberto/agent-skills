@@ -108,6 +108,20 @@ mkdir -p .opencode/skills && cp -R agent-skills/skills/* .opencode/skills/
 
 </details>
 
+<details>
+<summary><b>Codex</b></summary>
+
+Install as a native Codex plugin (Codex CLI 0.131+). Skills load from `skills/` and are invoked as `$hb:<skill-name>`.
+
+```bash
+codex plugin marketplace add helderberto/agent-skills
+codex plugin add hb@helderberto-skills
+```
+
+See [docs/codex-setup.md](docs/codex-setup.md).
+
+</details>
+
 ---
 
 <details>
@@ -295,6 +309,7 @@ Subagents the skills fan out to for independent, read-only perspectives (e.g. `/
 agent-skills/
 ├── .claude-plugin/      Plugin manifest + marketplace entry (Claude Code)
 ├── plugin.json          Plugin manifest (Antigravity CLI)
+├── .agents/plugins/     Marketplace entry (Codex)
 ├── .opencode/skills →   Symlink to skills/ for OpenCode discovery
 ├── skills/              one folder per skill, each with SKILL.md
 ├── agents/              subagent definitions (Claude Code only)
