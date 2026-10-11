@@ -22,7 +22,7 @@ Arguments: $ARGUMENTS
    - Call the Skill tool with `check`. FAIL → report, stop.
    - ADR check: the diff adds a dependency or a module, changes a public API, or adds a migration, and nothing in `docs/adr/` covers it → offer to call the Skill tool with `to-adr` before pushing.
 5. Uncommitted work → call the Skill tool with `commit` (never open a PR on a dirty tree).
-6. Push with `-u`. On the default branch → confirm first. Rejected as non-fast-forward → `git pull --rebase`, retry once. **Never force push.** The plugin's guard hook runs the secret scan and floor-guard on every push; blocked → report its `file:line` findings, stop.
+6. Push with `-u`. On the default branch → confirm first. Rejected as non-fast-forward → `git pull --rebase`, retry once. **Never force push.**
 7. Ask the user, all at once: **effort** in hours (required), **what was done** in their words (required), testing not visible in the diff, tricky parts, and any template field the diff can't answer (breaking change? type of change?).
 8. Draft title and body.
    - Title matches `^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\(.*\))?: .+$`.

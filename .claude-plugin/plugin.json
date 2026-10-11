@@ -1,6 +1,6 @@
 {
   "name": "hb",
-  "description": "Helder's personal SDLC toolbelt for AI coding agents — from idea to PR. A typed flow (triage, grill, to-spec, to-tickets, build, review, to-pr, retro) alongside TDD, code review, audits, and a guard hook on agent git commands.",
+  "description": "Helder's personal SDLC toolbelt for AI coding agents — from idea to PR. A typed flow (triage, grill, to-spec, to-tickets, build, review, to-pr, retro) alongside TDD, code review, and audits.",
   "version": "4.0.0",
   "author": {
     "name": "Helder Burato Berto",

@@ -55,13 +55,14 @@ Model skills that other skills pull in. Reach for them directly in plain words w
 - **`/hb:research`** — a background agent reads primary sources and leaves a cited file in `.specs/research/`. Feed it into `/hb:grill`.
 - **`/hb:check`** — lint, types, tests; `--check` writes nothing.
 - **`/hb:commit`** — atomic commits by concern, never a push.
+- **`/hb:safe-repo`** — check a repo for secrets and sensitive data.
 - **`/hb:to-adr`** — record one architectural decision.
 - **`/hb:revise`** — restructure a draft or polish prose.
 - **`/hb:create-skill`** — author a new skill.
 - **`/hb:handoff`** — a portable doc for a new harness, directory, or colleague.
 - **`/hb:wait-what`** — the last message didn't land; re-pitch it plainly in glossary terms.
 - **`/hb:teach`** — learn a concept over multiple sessions in a stateful workspace.
-- Audits and lenses route themselves from plain words: accessibility, i18n, bundle size, dependency CVEs, sensitive data, trust boundaries, a visual diff report, a browser check.
+- Audits and lenses route themselves from plain words: accessibility, i18n, bundle size, dependency CVEs, trust boundaries, a visual diff report, a browser check.
 
 ## Phase boundaries
 

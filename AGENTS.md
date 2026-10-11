@@ -95,7 +95,7 @@ When the user has a non-trivial task, suggest the flow commands in order. They a
 - **TICKETS** → `to-tickets` slices the spec into tracer-bullet tickets, with `architecture-audit` or `codebase-design` as needed
 - **BUILD** → `build` (one ticket per invocation, or `--all`), driven by `tdd`, `source-driven`, and `check`
 - **REVIEW** → `review` (audits as parallel reviewers plus agent lenses: spec conformance with ticket checkboxes, standards, test effectiveness with changed-line coverage, floor-guard), covering `a11y-audit`, `i18n`, `perf-audit`, `deps-audit`, `safe-repo`, `harden`; `feedback` sorts existing reviewer comments
-- **SHIP** → `to-pr` (gate, push, PR, CI watch); the guard hook scans every agent push
+- **SHIP** → `to-pr` (gate, push, PR, CI watch); `safe-repo` scans for secrets when you ask
 - **RETRO** → `retro`, in the same session before `/clear`
 
 ## Conventions

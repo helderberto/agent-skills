@@ -14,7 +14,7 @@
         "source": "github",
         "repo": "helderberto/agent-skills"
       },
-      "description": "Personal SDLC toolbelt: typed flow (triage, grill, to-spec, to-tickets, build, review, to-pr, retro) plus TDD, code review, audits, and a guard hook that gates agent pushes."
+      "description": "Personal SDLC toolbelt: typed flow (triage, grill, to-spec, to-tickets, build, review, to-pr, retro) plus TDD, code review, and audits."
     }
   ]
 }

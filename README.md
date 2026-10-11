@@ -134,10 +134,10 @@ Rule: on the flow, outward-facing, expensive, or session control → **typed-onl
 | Tier | Frontmatter | Skills |
 |---|---|---|
 | Typed-only (13) | `disable-model-invocation: true` | triage · grill · to-spec · to-tickets · build · review · to-pr · retro · architecture-audit · guide · handoff · wait-what · teach |
-| Both (11) | default | debug · to-adr · zoom-out · commit · check · feedback · refactor · prototype · research · revise · create-skill |
-| Model only (13) | `user-invocable: false` | tdd · code-review · codebase-design · domain-modeling · harden · source-driven · frontend-ui-engineering · visual-review · a11y-audit · i18n · perf-audit · deps-audit · safe-repo |
+| Both (12) | default | debug · to-adr · zoom-out · commit · check · feedback · refactor · prototype · research · revise · create-skill · safe-repo |
+| Model only (12) | `user-invocable: false` | tdd · code-review · codebase-design · domain-modeling · harden · source-driven · frontend-ui-engineering · visual-review · a11y-audit · i18n · perf-audit · deps-audit |
 
-The `/hb:` menu shows typed-only and both (24 entries); the model sees both and model-only descriptions (24). Typed-only skills call model skills through the Skill tool and mention other typed-only skills only in `Next:` lines. Typed-only descriptions keep one what-it-does sentence; trigger phrases live only on model-visible skills.
+The `/hb:` menu shows typed-only and both (25 entries); the model sees both and model-only descriptions (24). Typed-only skills call model skills through the Skill tool and mention other typed-only skills only in `Next:` lines. Typed-only descriptions keep one what-it-does sentence; trigger phrases live only on model-visible skills.
 
 Skills also carry an **effort** hint: mechanical ones (`commit`, `to-adr`) run at low reasoning effort, heavy ones (`architecture-audit`, `harden`, `debug`) at high or xhigh, and the rest at the implicit medium default. The override lasts only for the turn the skill fires — so complexity matches the task without you touching `/effort`.
 
@@ -250,17 +250,6 @@ Subagents the skills fan out to for independent, read-only perspectives (e.g. `/
 
 ---
 
-## Guard hook
-
-A PreToolUse hook on the agent's shell commands, bundled with the plugin. **Claude Code only**, no configuration. Your own terminal is untouched.
-
-- Blocks `git push --force` (`-f`, `--force-with-lease`, `+refspec`), `reset --hard`, `clean -f`, `branch -D`, and `--no-verify` on any git command.
-- On `git push`, runs the secret scan on outgoing commits and `floor-guard` (base `@{u}` when set). Any finding blocks the push and names `file:line`.
-- Quoted strings don't count, so a commit message can mention `--no-verify`.
-- Needs `jq`. Without it the hook allows every command.
-
----
-
 ## Structure
 
 ```
@@ -269,7 +258,6 @@ agent-skills/
 ├── .opencode/skills →   Symlink to skills/ for OpenCode discovery
 ├── skills/              one folder per skill, each with SKILL.md
 ├── agents/              subagent definitions (Claude Code only)
-├── hooks/               guard hook on agent git commands (Claude Code only)
 ├── docs/                Skill anatomy + per-agent setup guides
 ├── AGENTS.md            Intent → skill mapping (drives OpenCode auto-routing)
 ├── CONTRIBUTING.md      How to contribute new skills or improvements
@@ -302,7 +290,7 @@ v4.0.0 is a hard break: no aliases for v3 names.
 | `spec` | `to-spec` (interview moved to `grill`) |
 | `plan` | `to-tickets`, writing `.specs/tickets/` (was `.specs/plans/`) |
 | `create-pull-request` | `to-pr` (absorbs `ship`: gate, push, CI watch) |
-| `ship` | removed, folded into `to-pr`; secret scan and floor-guard moved to the guard hook |
+| `ship` | removed, folded into `to-pr`; scan for secrets on demand with `/hb:safe-repo` |
 | `create-adr` | `to-adr` |
 | `diagnose` | `debug` |
 | `explain-code` | `zoom-out` |
