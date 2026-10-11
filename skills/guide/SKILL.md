@@ -20,7 +20,7 @@ A **flow** is a path through the skills. Most work runs along the **main flow**;
    - **A question needs a runnable answer?** A state model, business logic, a UI you have to see → detour through **`/hb:prototype`**, kept on a `prototype/<name>` branch, then back to the grill with what you learned.
 3. **`/hb:to-spec`** turns the settled conversation into `.specs/specs/<slug>.md`. No interview: an open branch sends you back to `/hb:grill`.
 4. **`/hb:to-tickets`** slices the spec into tracer-bullet tickets in `.specs/tickets/<slug>.md`, each with **blocking edges**. Only exceptions get a `hitl` label.
-5. **`/hb:build`** implements the next unblocked ticket test-first through `tdd`, runs `check`, and commits. `--all` runs every ticket after one approval and stops before each `hitl` one.
+5. **`/hb:build`** implements the next unblocked ticket test-first through `tdd`, runs `check`, and commits. `--all` fans the tickets out to parallel implementer subagents, frontier by frontier, after one approval, and stops before each `hitl` one.
 6. **`/hb:review`** fans out parallel reviewers: correctness, standards, spec conformance with ticket checkboxes, test effectiveness with changed-line coverage, the quality bar, and the audits the diff calls for.
 7. **`/hb:to-pr`** is the only command that publishes: gate, push, PR body with evidence and merge danger, `gh pr create`, CI watch.
 8. **`/hb:retro`** closes the loop. It suggests changes to the agent's **environment**, not the code: navigation pointers, checks, coding standards, steering files. Mechanical mistakes become checks; judgement calls become standards.

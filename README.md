@@ -97,7 +97,8 @@ AI:  Slices the spec into tracer-bullet tickets with blocking edges.
 You: /hb:build dark-mode
 AI:  Implements the next unblocked ticket test-first via tdd, then lint and
      type-check. Marks checkboxes, commits.
-     /hb:build dark-mode --all runs every ticket after one approval.
+     /hb:build dark-mode --all fans the tickets out to parallel subagents,
+     frontier by frontier, after one approval.
 
 You: /hb:review
 AI:  Fans out reviewers in parallel (correctness, standards, spec + checkboxes,
@@ -150,7 +151,7 @@ The flow, one typed command per step:
 | [`grill`](skills/grill/SKILL.md) | GRILL | Interview in rounds over the design-tree frontier, each question with a recommended answer |
 | [`to-spec`](skills/to-spec/SKILL.md) | SPEC | Settled conversation + codebase scan → structured spec in `.specs/specs/<slug>.md` |
 | [`to-tickets`](skills/to-tickets/SKILL.md) | TICKETS | Slice a spec into tracer-bullet vertical slices with blocking edges |
-| [`build`](skills/build/SKILL.md) | BUILD | Implement the next unblocked slice test-first via `tdd`, with feedback loops; `--all` runs every slice after one approval |
+| [`build`](skills/build/SKILL.md) | BUILD | Implement the next unblocked slice test-first via `tdd`, with feedback loops; `--all` fans every ticket out to parallel implementer subagents after one approval |
 | [`review`](skills/review/SKILL.md) | REVIEW | Fan out parallel reviewers (scope-detected audits + agent lenses incl. spec conformance, standards, coverage, and a quality-bar check), consolidate into one verdict |
 | [`ship`](skills/ship/SKILL.md) | SHIP | Pre-launch gate (check + safe-repo + floor-guard) + atomic commits + push (`--fast` to skip gate); folds into `to-pr` |
 | [`to-pr`](skills/to-pr/SKILL.md) | SHIP | Open a GitHub PR with a concise templated body: Before/After evidence, merge danger (one-way or two-way door, blast radius); `--diagram` adds a mermaid diagram of the change |
