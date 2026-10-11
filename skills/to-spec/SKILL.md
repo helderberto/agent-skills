@@ -32,11 +32,11 @@ Never interview here. Check each branch below against the conversation and the c
 | Boundaries       | Out of scope, deferred features         | Never skip                       |
 | Integration      | Schema, services, external deps         | Self-contained change            |
 
-Then surface **gray areas** — ambiguities, contradictions, unstated assumptions — each with proposed resolutions. Resolve all before continuing.
+**Gray areas** — ambiguities, contradictions, unstated assumptions — join that same round, each with a proposed resolution.
 
 ### 3. Design modules
 
-Sketch modules. Favor **deep modules** — simple interface (1–3 entry points) hiding large implementation. Shallow signals: many 1:1 functions, callers compose multiple calls, feature changes require interface changes. Confirm which modules need tests.
+Sketch modules. Favor **deep modules** — simple interface (1–3 entry points) hiding large implementation. Shallow signals: many 1:1 functions, callers compose multiple calls, feature changes require interface changes. Mark which modules need tests.
 
 ### 4. Write spec
 
