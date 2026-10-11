@@ -132,4 +132,4 @@ Required before declaring done:
 - [ ] Throwaway prototypes deleted (or moved to a clearly-marked debug location)
 - [ ] The hypothesis that turned out correct is stated in the commit / PR message — so the next debugger learns
 
-Next: `/retro` in this session, before `/clear`, once the fix is in — you know more now than when you started. It asks what would have prevented this bug and routes a no-seam finding to `/architecture-audit`.
+Next: `/hb:retro` in this session, before `/clear`, once the fix is in — you know more now than when you started. It asks what would have prevented this bug and routes a no-seam finding to `/hb:architecture-audit`.

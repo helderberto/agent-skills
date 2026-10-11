@@ -1,7 +1,7 @@
 ---
 name: commit
 effort: low
-description: Group unstaged changes into atomic commits by concern, matching repository style. Use when asked to "commit", "create a commit", or "commit changes". Don't use for pushing or pull requests (/hb:to-pr).
+description: Group unstaged changes into atomic commits by concern, matching repository style. Use when asked to "commit", "create a commit", or "commit changes". Don't use for pushing or pull requests (/to-pr).
 argument-hint: '[paths...]'
 ---
 

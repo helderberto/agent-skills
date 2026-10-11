@@ -65,7 +65,8 @@ Diagnose a misbehaving skill against these:
 - [ ] Description: model-invoked → what / use when / don't use; user-invoked → one sentence
 - [ ] Body shape fits the content; every step has a checkable completion criterion
 - [ ] `effort` set only when it deviates from `medium`
+- [ ] Tier frontmatter follows README's tier rule; a typed-only skill ends on a filled-in `Next: /hb:<cmd> <args>` line, the only place it names another typed-only skill
 - [ ] `SKILL.md` under ~150 lines
-- [ ] Calls to another skill say "Call the Skill tool with `<skill-name>`" (one skill per call); user-facing suggestions keep `/<skill-name>`; no `../` links across skill folders
+- [ ] Calls to another skill say "Call the Skill tool with `<skill-name>`" (one skill per call); user-facing suggestions say `/hb:<cmd>`, description hints keep `/<skill-name>`; no `../` links across skill folders
 - [ ] Added to README, the `AGENTS.md` intent → skill mapping, and `guide`'s map; no existing skill already covers it
 - [ ] `.claude-plugin/plugin.json` `version` bumped (semver)
