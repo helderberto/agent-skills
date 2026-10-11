@@ -109,6 +109,20 @@ mkdir -p .opencode/skills && cp -R agent-skills/skills/* .opencode/skills/
 </details>
 
 <details>
+<summary><b>GitHub Copilot</b></summary>
+
+Install as a native plugin with the Copilot CLI. VS Code picks it up too, or run **Chat: Install Plugin From Source** with `https://github.com/helderberto/agent-skills`.
+
+```bash
+copilot plugin marketplace add helderberto/agent-skills
+copilot plugin install hb@helderberto-skills
+```
+
+See [docs/copilot-setup.md](docs/copilot-setup.md).
+
+</details>
+
+<details>
 <summary><b>Codex</b></summary>
 
 Install as a native Codex plugin (Codex CLI 0.131+). Skills load from `skills/` and are invoked as `$hb:<skill-name>`.
@@ -310,6 +324,7 @@ agent-skills/
 ├── .claude-plugin/      Plugin manifest + marketplace entry (Claude Code)
 ├── plugin.json          Plugin manifest (Antigravity CLI)
 ├── .agents/plugins/     Marketplace entry (Codex)
+├── .plugin/             Copy of .claude-plugin/plugin.json (Copilot CLI reads it first)
 ├── .opencode/skills →   Symlink to skills/ for OpenCode discovery
 ├── skills/              one folder per skill, each with SKILL.md
 ├── agents/              subagent definitions (Claude Code only)

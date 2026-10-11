@@ -1,0 +1,23 @@
+{
+  "name": "hb",
+  "description": "Helder Berto's 🛠️ Battle-tested software engineering skills for AI coding agents 🤖, from idea to PR.",
+  "version": "4.2.0",
+  "author": {
+    "name": "Helder Burato Berto",
+    "email": "helder@helderberto.com"
+  },
+  "homepage": "https://github.com/helderberto/agent-skills",
+  "repository": "https://github.com/helderberto/agent-skills",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "ai-workflow",
+    "agent-skills",
+    "sdlc",
+    "tracer-bullet",
+    "developer-tools",
+    "markdown",
+    "plugin"
+  ],
+  "skills": "./skills"
+}
