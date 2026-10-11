@@ -6,6 +6,18 @@ on:
   workflow_dispatch:
 
 jobs:
+  lint-skills:
+    name: Lint skills
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Test the skill lint
+        run: bash scripts/lint-skills.test.sh
+
+      - name: Lint skills
+        run: bash scripts/lint-skills.sh
+
   validate:
     name: Validate plugin structure
     runs-on: ubuntu-latest
