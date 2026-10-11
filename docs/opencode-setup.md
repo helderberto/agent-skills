@@ -36,10 +36,10 @@ The agent should respond by invoking `tdd` from `skills/tdd/SKILL.md`.
 OpenCode reads `AGENTS.md` at the start of every session. That file contains:
 
 1. The full intent → skill table (see [`AGENTS.md`](../AGENTS.md))
-2. Lifecycle mapping (SPEC → PLAN → BUILD → TEST → REVIEW → SHIP → RETRO)
-3. Core rules: if a task matches a skill, the agent MUST invoke it
+2. Lifecycle mapping (TRIAGE → GRILL → SPEC → TICKETS → BUILD → REVIEW → SHIP → RETRO)
+3. Core rules: if a task matches a skill, the agent MUST invoke it; typed-only flow skills are suggested, and run only when you ask for them
 
-This means you don't need to type `/hb:tdd` or `/hb:commit`. Just describe what you want — the agent picks the skill.
+This means you don't need to name skills like `tdd` or `commit`. Just describe what you want — the agent picks the skill.
 
 ## Using skills in another project
 
@@ -57,20 +57,26 @@ cp /path/to/agent-skills/AGENTS.md ./AGENTS.md
 
 ## Tracer-bullet workflow
 
-For features beyond a few files, follow the SPEC → PLAN → BUILD → REVIEW loop:
+For features beyond a few files, follow the GRILL → SPEC → TICKETS → BUILD → REVIEW loop. Flow skills run only when you ask for them by name:
 
 ```
 You: I want to add dark mode support.
-OpenCode: [invokes to-spec skill, interviews, writes .specs/specs/dark-mode.md]
+OpenCode: [suggests triage, then grill; runs neither on its own]
 
-You: Plan it.
-OpenCode: [invokes to-tickets skill, writes tickets into .specs/tickets/dark-mode.md]
+You: Run grill on dark mode.
+OpenCode: [interviews you, writes settled terms to the glossary]
 
-You: Build the next phase.
-OpenCode: [invokes build skill, implements, runs feedback loops, marks checkboxes]
+You: Run to-spec for dark-mode.
+OpenCode: [writes .specs/specs/dark-mode.md from the conversation]
+
+You: Run to-tickets on dark-mode.
+OpenCode: [writes tickets into .specs/tickets/dark-mode.md]
+
+You: Build the next ticket.
+OpenCode: [runs the build skill, implements, runs feedback loops, marks checkboxes]
 
 You: Review it.
-OpenCode: [invokes review skill, checks the diff and ticket checkboxes]
+OpenCode: [runs the review skill, checks the diff and ticket checkboxes]
 ```
 
 ## Customizing the agent persona
