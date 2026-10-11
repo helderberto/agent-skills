@@ -34,13 +34,19 @@ After install, skills are available as `/hb:<skill-name>` — e.g. `/hb:triage`,
 <details>
 <summary><b>Gemini CLI</b></summary>
 
-Install as native skills:
+Install as native skills, activated on demand, or list them in `GEMINI.md` for persistent context. See [docs/gemini-cli-setup.md](docs/gemini-cli-setup.md).
+
+**Install from the repo:**
 
 ```bash
 gemini skills install https://github.com/helderberto/agent-skills.git --path skills
 ```
 
-Skills are auto-discovered and routed by description. See [docs/gemini-cli-setup.md](docs/gemini-cli-setup.md).
+**Install from a local clone:**
+
+```bash
+gemini skills install ./agent-skills/skills/
+```
 
 </details>
 
