@@ -1,7 +1,7 @@
 ---
 name: to-pr
 description: Gate, push, and open a GitHub pull request on the repo's PR template, then watch CI.
-argument-hint: '[--fast] [--safe] [--draft] [--diagram=flow|sequence|class|state]'
+argument-hint: '[--fast] [--safe] [--draft] [--diagram=flow|sequence|class|state] [--no-diagram]'
 disable-model-invocation: true
 ---
 
@@ -13,6 +13,7 @@ Arguments: $ARGUMENTS
 - `--safe` — scan the branch for secrets and sensitive data before pushing (step 6).
 - `--draft` — create as draft.
 - `--diagram=flow|sequence|class|state` — force the diagram's type; otherwise pick by the shape of the change ([below](#diagram)).
+- `--no-diagram` — skip the `## Diagram` section.
 
 ## Workflow
 
@@ -28,7 +29,7 @@ Arguments: $ARGUMENTS
 8. Draft the title and a concise body from the diff, the commits, and the conversation, then open the PR straight away.
    - Title matches `^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\(.*\))?: .+$`.
    - Template found → it is the body, verbatim structure: fill every section and placeholder, check applicable boxes, add nothing outside it except `## Diagram`. Its testing section carries the Evidence, its risk section the Merge Danger. No template → [assets/pr-template.md](assets/pr-template.md), filled the same way.
-   - End with a `## Diagram` section: a mermaid diagram of the change, which GitHub renders natively ([Diagram](#diagram)).
+   - End with a `## Diagram` section, unless `--no-diagram`: a mermaid diagram of the change, which GitHub renders natively ([Diagram](#diagram)).
    - Reference the ticket (`Resolves TICKET-123`).
 9. `gh pr create` with a HEREDOC body (`--draft` if requested). Return the URL.
 10. `gh pr checks --watch`. Red → call the Skill tool with `debug` on the failing check, fix, commit, push. At most 2 rounds; still red → stop and report the failing checks.
