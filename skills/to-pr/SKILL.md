@@ -1,7 +1,7 @@
 ---
 name: to-pr
 description: Gate, push, and open a GitHub pull request on the repo's PR template, then watch CI.
-argument-hint: '[--fast] [--safe] [--draft] [--diagram=flow|sequence|class|state]'
+argument-hint: '[--safe] [--skip-ci] [--diagram=flow|sequence|class|state]'
 disable-model-invocation: true
 ---
 
@@ -9,9 +9,8 @@ disable-model-invocation: true
 
 Arguments: $ARGUMENTS
 
-- `--fast` — skip the gate. Only for hotfixes, disposable branches (spike/prototype/CI), or when the gate already passed this session. Never on main/release. Say why in the PR body.
 - `--safe` — scan the branch for secrets and sensitive data before pushing (step 6).
-- `--draft` — create as draft.
+- `--skip-ci` — mark the pushed HEAD commit `[skip ci]` so CI doesn't run, and skip the CI watch. Only when CI has nothing to check (docs, prose). Required checks then stay pending and block the merge, and a squash merge can carry the marker to the base branch. Say why in the PR body.
 - `--diagram=flow|sequence|class|state` — make the Summary visual a mermaid diagram of that type ([Visuals](#visuals)).
 
 ## Workflow
@@ -19,19 +18,20 @@ Arguments: $ARGUMENTS
 1. `gh auth status`. Not logged in → stop: "Run `! gh auth login`, then `/hb:to-pr` again."
 2. In parallel: base branch (`git remote show origin | grep 'HEAD branch'`), ticket id from the branch name (`[A-Z]+-[0-9]+`) or the matching spec's `ticket:` frontmatter, PR template (`.github/pull_request_template.md`, `.github/PULL_REQUEST_TEMPLATE.md`, `.github/PULL_REQUEST_TEMPLATE/`, `docs/pull_request_template.md`, `pull_request_template.md`).
 3. In parallel: `git diff <base>...HEAD` and the full commit list — review every commit, not just the latest.
-4. **Gate** (skipped with `--fast`):
+4. **Gate**:
    - Call the Skill tool with `check`. FAIL → report, stop.
    - ADR check: the diff adds a dependency or a module, changes a public API, or adds a migration, and nothing in `docs/adr/` covers it → offer to call the Skill tool with `to-adr` before pushing.
 5. Uncommitted work → call the Skill tool with `commit` (never open a PR on a dirty tree).
 6. `--safe` → call the Skill tool with `safe-repo`, passing `--diff <base>`. Findings → report each `file:line`, then ask: fix first (Recommended) or push anyway.
 7. Push with `-u`. On the default branch → confirm first. Rejected as non-fast-forward → `git pull --rebase`, retry once. **Never force push.**
+   - `--skip-ci` → first `git commit --allow-empty -m "chore: [skip ci]"`, so HEAD carries the marker.
 8. Draft the title and a concise body from the diff, the commits, and the conversation. Answer every field yourself; never ask the user.
    - Title matches `^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\(.*\))?: .+$`.
    - Template found → it is the body, verbatim structure: fill every section and placeholder, check applicable boxes, add nothing outside it. Its summary section carries the visual, its testing section the Evidence, its risk section the Merge Danger. No template → [assets/pr-template.md](assets/pr-template.md), filled the same way.
    - Evidence you can't show → say what wasn't verified. Never invent it.
    - Reference the ticket in the summary (`Resolves TICKET-123`).
-9. `gh pr create` with a HEREDOC body (`--draft` if requested). Return the URL.
-10. `gh pr checks --watch`. Red → call the Skill tool with `debug` on the failing check, fix, commit, push. At most 2 rounds; still red → stop and report the failing checks.
+9. `gh pr create` with a HEREDOC body. Return the URL.
+10. `gh pr checks --watch` (skipped with `--skip-ci`). Red → call the Skill tool with `debug` on the failing check, fix, commit, push. At most 2 rounds; still red → stop and report the failing checks.
 
 Next: `/hb:retro` in this session, before `/clear`.
 
