@@ -47,13 +47,12 @@ Skills are auto-discovered and routed by description. See [docs/gemini-cli-setup
 <details>
 <summary><b>OpenCode</b></summary>
 
-Clone and point OpenCode at the workspace — `AGENTS.md` plus the `skills/` directory drive auto-routing:
+Copy the skill folders to `.opencode/skills/` (or `~/.config/opencode/skills/`), then paste the OpenCode section of this repo's `AGENTS.md` into your project's `AGENTS.md`; the built-in `skill` tool routes from there. See [docs/opencode-setup.md](docs/opencode-setup.md).
 
 ```bash
 git clone https://github.com/helderberto/agent-skills.git
+mkdir -p .opencode/skills && cp -R agent-skills/skills/* .opencode/skills/
 ```
-
-Open the project in OpenCode. The `.opencode/skills` symlink and root `AGENTS.md` are already wired. See [docs/opencode-setup.md](docs/opencode-setup.md).
 
 </details>
 

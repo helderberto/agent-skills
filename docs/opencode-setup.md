@@ -1,6 +1,6 @@
 # Using helderberto/agent-skills with OpenCode
 
-OpenCode supports custom commands but does not have a native plugin system or auto-routing like Claude Code. This repo achieves parity through three pieces:
+OpenCode discovers skills natively and runs them through its built-in `skill` tool. This repo makes the routing explicit with three pieces:
 
 - A strong system prompt (`AGENTS.md` at repo root)
 - OpenCode's built-in `skill` tool
@@ -43,17 +43,20 @@ This means you don't need to name skills like `tdd` or `commit`. Just describe w
 
 ## Using skills in another project
 
-Copy or symlink this repo's `skills/` and `AGENTS.md` into the target project:
+Put the skill folders where OpenCode scans: `.opencode/skills/` for one project, `~/.config/opencode/skills/` for all.
 
 ```bash
 # Option A: symlink (changes here propagate)
-ln -s /path/to/agent-skills/skills ./skills
-cp /path/to/agent-skills/AGENTS.md ./AGENTS.md
+mkdir -p .opencode && ln -s /path/to/agent-skills/skills .opencode/skills
 
 # Option B: copy (project owns its own version)
-cp -r /path/to/agent-skills/skills ./skills
-cp /path/to/agent-skills/AGENTS.md ./AGENTS.md
+mkdir -p .opencode/skills && cp -R /path/to/agent-skills/skills/* .opencode/skills/
+
+# Option C: skills CLI (installs to .agents/skills/)
+npx skills add helderberto/agent-skills -a opencode
 ```
+
+Don't copy this repo's root `AGENTS.md`: most of it configures work on this repo. Paste its `## OpenCode Integration` section into your project's `AGENTS.md` instead.
 
 ## Tracer-bullet workflow
 
@@ -86,7 +89,7 @@ If you want to constrain OpenCode further — for example, enforce TDD on every 
 ```markdown
 # Project AGENTS.md
 
-@import /path/to/agent-skills/AGENTS.md
+<!-- the OpenCode Integration section of agent-skills/AGENTS.md -->
 
 ## Project-specific rules
 
