@@ -1,6 +1,6 @@
 ---
 name: to-pr
-description: Gate, push, and open a GitHub pull request, then watch CI — concise body on the repo's PR template, conventional-commit title, ticket refs. `--fast` skips the gate, `--draft` for a draft PR, `--diagram[=type]` to add a mermaid diagram of the change.
+description: Gate, push, and open a GitHub pull request on the repo's PR template, then watch CI.
 argument-hint: '[--fast] [--draft] [--diagram[=flow|sequence|class|state]]'
 disable-model-invocation: true
 ---
