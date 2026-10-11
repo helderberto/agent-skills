@@ -79,7 +79,7 @@ You are the orchestrator. You own the **integration branch** and the tickets fil
 5. **Explore** (optional): tickets that need codebase or docs exploration → one Explore subagent saves notes to `<tmpdir>/build-<slug>/notes.md`, outside the repo, so implementers build instead of explore.
 6. **Fan out**: spawn one general-purpose implementer per frontier ticket, all in one message, in the background, each in its own git worktree (`isolation: worktree`) on branch `build/<slug>-<n>`. Brief with **context pointers**, never copies: absolute paths to the tickets file and ticket number, the spec, and the notes, plus the integration branch name. `.specs/` is often gitignored, so a worktree lacks it. Each implementer:
    - confirms its worktree is based on the integration branch tip, and resets onto it if not; installs dependencies if the worktree lacks them;
-   - calls the Skill tool with `tdd` for its ticket's acceptance criteria, then `check`, then `commit`;
+   - calls the Skill tool with `tdd` for its ticket's acceptance criteria, then with `check`, then with `commit`, one skill per call;
    - merges the integration branch tip into its branch before reporting;
    - never edits the tickets file, and reports in a few lines: branch, commits, which criteria hold.
 7. **Merge**: as each implementer reports, merge its branch into the integration branch. A conflict → a merger subagent resolves it there and runs `check`. Then flip that ticket's checkboxes.
@@ -88,7 +88,7 @@ You are the orchestrator. You own the **integration branch** and the tickets fil
 
 ### Close
 
-10. All tickets done → call the Skill tool with `code-review` on the integration branch against its base. One implementer fixes the Critical findings and Suggestions; list the rest.
+10. All tickets done → call the Skill tool with `code-review` (in Claude Code, `hb:code-review`, not the built-in) on the integration branch against its base. One implementer fixes the Critical findings and Suggestions; list the rest.
 11. Remove every implementer worktree and merged `build/<slug>-*` branch.
 12. Summarize: tickets completed, tests added, merges made, anything skipped or flagged. End with `Next: /hb:review`.
 

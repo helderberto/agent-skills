@@ -24,7 +24,7 @@ Always: correctness (`code-review`), standards, sensitive data (`safe-repo --dif
 
 | Reviewer | When | Agent type |
 |----------|------|------------|
-| Correctness (`code-review`) | always | `general-purpose` |
+| Correctness (`code-review`; in Claude Code, `hb:code-review`, not the built-in) | always | `general-purpose` |
 | Standards | always | `general-purpose` |
 | Spec conformance + ticket checkboxes | `.specs/specs/<slug>.md` matches the branch or tickets | `general-purpose` |
 | Quality bar (floor-guard) | always | none: run inline |
