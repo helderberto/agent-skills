@@ -24,7 +24,7 @@ Different agents discover skills through different mechanisms. This repo support
 | Claude Code | Plugin marketplace (`/plugin install hb@helderberto-skills`)  |
 | Gemini CLI  | `gemini skills install` from this repo                        |
 | OpenCode    | Auto-routes via this `AGENTS.md` + the `skill` tool           |
-| Cursor      | Copy skills into `.cursor/rules/` or reference via `.cursorrules` |
+| Cursor      | Sync `skills/` into `.cursor/skills/` (native skills)            |
 
 See [docs/](./docs/) for per-agent setup instructions.
 

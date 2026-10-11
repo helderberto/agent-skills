@@ -1,66 +1,48 @@
 # Using helderberto/agent-skills with Cursor
 
-Cursor doesn't have a native skill system, but it loads Markdown rules from `.cursor/rules/` or `.cursorrules`. Skills are plain Markdown, so they work as Cursor rules with minor adaptation.
+Cursor reads skills natively: each `.cursor/skills/<name>/SKILL.md` is loaded when a task matches its `description`. Rules (`.cursor/rules/*.mdc`) are for short always-on policies; don't paste whole skills into them.
 
 ## Setup
 
-### Option 1: Rules directory (recommended)
+### Project skills (recommended)
 
 ```bash
-# In your project root
-mkdir -p .cursor/rules
-
-# Copy the skills you want to load as rules
-cp /path/to/agent-skills/skills/tdd/SKILL.md .cursor/rules/tdd.md
-cp /path/to/agent-skills/skills/code-review/SKILL.md .cursor/rules/code-review.md
-cp /path/to/agent-skills/skills/commit/SKILL.md .cursor/rules/commit.md
+git clone https://github.com/helderberto/agent-skills.git /path/to/agent-skills
+mkdir -p .cursor/skills
+rsync -a /path/to/agent-skills/skills/ .cursor/skills/
 ```
 
-Cursor auto-loads everything in `.cursor/rules/` into its context.
-
-### Option 2: Single `.cursorrules` file
-
-For projects that prefer one consolidated rules file:
+Only a few? Copy their folders whole, so `references/` comes along:
 
 ```bash
-{
-  cat /path/to/agent-skills/skills/tdd/SKILL.md
-  echo "\n---\n"
-  cat /path/to/agent-skills/skills/code-review/SKILL.md
-} > .cursorrules
+cp -R /path/to/agent-skills/skills/{tdd,code-review,commit} .cursor/skills/
 ```
+
+### User skills
+
+For every workspace, sync into `~/.cursor/skills/` instead. Project skills win for that project.
 
 ## Recommended starter set
 
-The skills below cover the most common moments where Cursor benefits from explicit guidance:
+| Skill                | Why it helps in Cursor                                  |
+| -------------------- | ------------------------------------------------------- |
+| `tdd`                | Forces red-green-refactor for new features and bugs     |
+| `code-review`        | Correctness lens on a diff: bugs, security, performance |
+| `commit`             | Atomic commits in the repository's message style        |
+| `debug`              | Disciplined debugging loop for hard bugs                |
+| `source-driven`      | Forces use of official docs over training data          |
+| `architecture-audit` | Surfaces friction toward deep modules                   |
 
-| Skill            | Why it helps in Cursor                                  |
-| ---------------- | ------------------------------------------------------- |
-| `tdd`            | Forces red-green-refactor for new features and bugs     |
-| `code-review`    | Five-axis review framework for diffs                    |
-| `commit`         | Repository-style commit messages, conventional commits  |
-| `debug`          | Disciplined debugging loop for hard bugs                |
-| `source-driven`  | Forces use of official docs over training data          |
-| `architecture-audit` | Surfaces friction toward deep modules               |
-
-## Workflow-style skills (tracer-bullet flow)
-
-If you want the full to-spec → to-tickets → build loop in Cursor:
-
-```bash
-cp /path/to/agent-skills/skills/to-spec/SKILL.md  .cursor/rules/to-spec.md
-cp /path/to/agent-skills/skills/to-tickets/SKILL.md  .cursor/rules/to-tickets.md
-cp /path/to/agent-skills/skills/build/SKILL.md .cursor/rules/build.md
-```
-
-Cursor will then route prompts like "slice the dark mode spec into tickets" or "build the next ticket" through these rules automatically.
+For the tracer-bullet flow, add `to-spec`, `to-tickets`, and `build`. Prompts like "slice the dark mode spec into tickets" or "build the next ticket" then route to them.
 
 ## Limitations
 
-- Cursor does not support slash-style invocation (e.g., `/hb:to-spec`). Reference skills by name in prompts: "use the to-spec skill to ...".
-- Rules can grow Cursor's context fast. Load only the skills you actively need per project rather than the entire set.
-- Cursor does not auto-detect when a skill applies. State the skill in your prompt explicitly.
+- No `/hb:` commands. Ask for a skill by name: "use the to-spec skill for dark-mode".
+- `agents/` subagents are Claude Code only.
 
 ## Updating
 
-Rules are file copies, not symlinks. To refresh, re-copy the relevant SKILL.md files.
+```bash
+git -C /path/to/agent-skills pull
+rsync -a /path/to/agent-skills/skills/ .cursor/skills/
+```

@@ -60,15 +60,12 @@ Open the project in OpenCode. The `.opencode/skills` symlink and root `AGENTS.md
 <details>
 <summary><b>Cursor</b></summary>
 
-Clone the repo, then copy individual skills into `.cursor/rules/`:
+Sync the skills into `.cursor/skills/`, which Cursor reads natively; keep `.cursor/rules/*.mdc` for short policies, not whole skills. See [docs/cursor-setup.md](docs/cursor-setup.md) for the starter set.
 
 ```bash
 git clone https://github.com/helderberto/agent-skills.git
-cp agent-skills/skills/tdd/SKILL.md .cursor/rules/tdd.md
-cp agent-skills/skills/code-review/SKILL.md .cursor/rules/code-review.md
+mkdir -p .cursor/skills && rsync -a agent-skills/skills/ .cursor/skills/
 ```
-
-See [docs/cursor-setup.md](docs/cursor-setup.md) for the recommended starter set.
 
 </details>
 
