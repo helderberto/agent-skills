@@ -1,10 +1,10 @@
 ---
-name: fortify
+name: refactor
 effort: high
-description: Improve existing code without changing behavior — split large functions, backfill tests, simplify. Use when asked to "fortify", "make robust", "bulletproof", "strengthen", "add missing tests", "split functions", "simplify", "clean up", or "reduce complexity". Don't use for new features (/tdd), security (/harden), or PR review.
+description: Improve existing code without changing behavior — split large functions, backfill tests, simplify. Use when asked to "refactor", "make robust", "bulletproof", "strengthen", "add missing tests", "split functions", "simplify", "clean up", or "reduce complexity". Don't use for new features (/tdd), security (/harden), or PR review.
 ---
 
-# Fortify
+# Refactor
 
 Target: $ARGUMENTS (file, directory, or module — if blank, use unstaged changes)
 
@@ -15,8 +15,8 @@ Behavior is frozen — the test suite is the contract. Green before and after; i
 ### 1. Scope
 
 - Identify target files (blank → unstaged changes)
-- Locate each file's tests using the project's convention (co-located, `__tests__/`, `tests/`, `spec/`). A file with no tests gets **Test gaps** items first — Split/Simplify on untested code is unverifiable, so backfill or skip. No test runner at all → ask which to use. Entrypoint scripts without exports → audit only.
-- Run the suite. If red, stop — don't fortify broken code
+- Locate each file's tests using the project's convention (co-located, `__tests__/`, `tests/`, `spec/`). A file with no tests gets **Test gaps** items first — Split/Simplify on untested code is unverifiable, so backfill or skip. No test runner at all → ask which to use. UI flows → backfill end-to-end tests: call the Skill tool with `tdd`, which holds the UI-tests reference. Entrypoint scripts without exports → audit only.
+- Run the suite. If red, stop — don't refactor broken code
 
 ### 2. Audit
 

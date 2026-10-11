@@ -39,26 +39,25 @@ The skills below cover the most common moments where Cursor benefits from explic
 | `tdd`            | Forces red-green-refactor for new features and bugs     |
 | `code-review`    | Five-axis review framework for diffs                    |
 | `commit`         | Repository-style commit messages, conventional commits  |
-| `diagnose`       | Disciplined debugging loop for hard bugs                |
+| `debug`          | Disciplined debugging loop for hard bugs                |
 | `source-driven`  | Forces use of official docs over training data          |
 | `architecture-audit` | Surfaces friction toward deep modules               |
 
 ## Workflow-style skills (tracer-bullet flow)
 
-If you want the full spec → plan → build → test loop in Cursor:
+If you want the full to-spec → to-tickets → build loop in Cursor:
 
 ```bash
-cp /path/to/agent-skills/skills/spec/SKILL.md  .cursor/rules/spec.md
-cp /path/to/agent-skills/skills/plan/SKILL.md  .cursor/rules/plan.md
+cp /path/to/agent-skills/skills/to-spec/SKILL.md  .cursor/rules/to-spec.md
+cp /path/to/agent-skills/skills/to-tickets/SKILL.md  .cursor/rules/to-tickets.md
 cp /path/to/agent-skills/skills/build/SKILL.md .cursor/rules/build.md
-cp /path/to/agent-skills/skills/test/SKILL.md  .cursor/rules/test.md
 ```
 
-Cursor will then route prompts like "plan the dark mode feature" or "build the next phase" through these rules automatically.
+Cursor will then route prompts like "slice the dark mode spec into tickets" or "build the next ticket" through these rules automatically.
 
 ## Limitations
 
-- Cursor does not support slash-style invocation (e.g., `/hb:spec`). Reference skills by name in prompts: "use the spec skill to ...".
+- Cursor does not support slash-style invocation (e.g., `/hb:to-spec`). Reference skills by name in prompts: "use the to-spec skill to ...".
 - Rules can grow Cursor's context fast. Load only the skills you actively need per project rather than the entire set.
 - Cursor does not auto-detect when a skill applies. State the skill in your prompt explicitly.
 

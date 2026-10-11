@@ -1,7 +1,8 @@
 ---
 name: architecture-audit
 effort: xhigh
-description: Surface architectural friction across a codebase and propose refactors toward deep modules as RFCs. Use when asked to audit architecture, find structural friction, or spot refactor opportunities. Don't use for one module's interface (/codebase-design) or a diff (/code-review).
+description: Surface architectural friction across a codebase and propose deep-module refactors as RFCs.
+disable-model-invocation: true
 argument-hint: '[direction] [--html]'
 ---
 
@@ -40,7 +41,7 @@ Show a numbered list. For each candidate:
 
 `--html` → also render the candidates as a report with before/after diagrams, per [references/html-report.md](references/html-report.md).
 
-Do NOT propose interfaces yet. Ask which candidate to explore. The user rejects one for a load-bearing reason → offer to record it (call the Skill tool with `create-adr`) so later audits don't re-suggest it. Skip ephemeral reasons ("not now").
+Do NOT propose interfaces yet. Ask which candidate to explore. The user rejects one for a load-bearing reason → offer to record it (call the Skill tool with `to-adr`) so later audits don't re-suggest it. Skip ephemeral reasons ("not now").
 
 ### 3. Design the interface
 
@@ -48,7 +49,7 @@ For the chosen candidate, run the Design-It-Twice procedure from the DESIGN-IT-T
 
 ### 4. Write improvement PRD
 
-Save a markdown file named `architecture-<cluster-name>.md` using the template in [references/improvement-template.md](references/improvement-template.md). If `.specs/specs/` exists, save there; otherwise, save in `specs/`.
+Save a markdown file named `architecture-<cluster-name>.md` using the template in [references/improvement-template.md](references/improvement-template.md). Save it in `.specs/specs/`, creating the directory if missing.
 
 Fill with concrete details: file paths, function names, migration steps. Share the file path with the user when done.
 
@@ -57,3 +58,5 @@ Fill with concrete details: file paths, function names, migration steps. Share t
 - Old unit tests on shallow modules are waste once seam tests exist — note them for deletion
 - Don't introduce a new seam unless something actually varies across it (one adapter = hypothetical, two = real)
 - Candidate scope turns out much larger than expected → surface it and re-scope before designing
+
+Next: `/hb:to-tickets architecture-<cluster-name>` to slice the improvement PRD.

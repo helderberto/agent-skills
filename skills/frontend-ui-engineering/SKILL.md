@@ -2,6 +2,7 @@
 name: frontend-ui-engineering
 effort: high
 description: Front-load UI construction decisions — component boundary and prop API, state placement, required states, responsiveness, accessibility. Use when creating or refactoring a component, page, or design-system primitive. Don't use for pure logic (/tdd), throwaway exploration (/prototype), or auditing finished UI (/a11y-audit).
+user-invocable: false
 argument-hint: '[component or path]'
 ---
 
@@ -31,4 +32,4 @@ Decide **how to structure a UI unit before writing it**, so the choices audits w
 
 ## 3. Build and hand off
 
-Apply the decisions. Call the Skill tool with `tdd` for non-trivial logic and its tests, then with `visual-validate` for before/after in a real browser. `/review` then runs the audits as the QA pass before `/ship`.
+Apply the decisions. Call the Skill tool with `tdd` for non-trivial logic and its tests, then with `visual-review` in UI mode for before/after in a real browser. `/hb:review` then runs the audits as the QA pass before `/hb:to-pr`.

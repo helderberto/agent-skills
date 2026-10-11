@@ -38,70 +38,72 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 - Skills live at `skills/<skill-name>/SKILL.md`
 - Never implement directly when a skill applies
 - Always follow the skill instructions exactly — do not partially apply them
+- Typed-only skills (`disable-model-invocation: true`) are rows that say *suggest*: name the command for the user to type, don't run it
 
 ### Intent → Skill Mapping
 
 | User intent                             | Skill to invoke                                |
 | --------------------------------------- | ---------------------------------------------- |
-| New feature with unclear requirements   | `spec` → `plan` → `build`                      |
-| Implement next phase of a plan          | `build`                                        |
-| Verify work + check plan progress       | `test`                                         |
+| New feature with unclear requirements   | suggest `/hb:triage` → `/hb:grill` → `/hb:to-spec` |
+| Slice a spec or ticket into tickets     | suggest `/hb:to-tickets`                       |
+| Implement the next ticket               | suggest `/hb:build`                            |
 | Test-first development                  | `tdd`                                          |
 | Implement using official docs           | `source-driven`                                |
 | Research a question against sources     | `research`                                     |
-| Bug, error, unexpected behavior         | `diagnose`                                     |
-| Backfill tests / split functions / simplify | `fortify`                                  |
+| Bug, error, unexpected behavior         | `debug`                                        |
+| Backfill tests / split functions / simplify | `refactor`                                 |
 | Design or improve a module's interface  | `codebase-design`                              |
-| Architectural friction in codebase      | `architecture-audit`                           |
+| Architectural friction in codebase      | suggest `/hb:architecture-audit`               |
 | Prototype a design (logic demo or UI)   | `prototype`                                    |
-| Explain code or codebase area           | `explain-code`                                 |
+| Explain code or codebase area           | `zoom-out`                                     |
 | Build or refactor a UI component/page   | `frontend-ui-engineering`                      |
 | Code at a trust boundary (auth, input, external API) | `harden`                          |
-| Full pre-ship review (parallel reviewers) | `review`                                     |
-| Validate a UI change in a real browser  | `visual-validate`                              |
-| Learn a concept over multiple sessions  | `teach`                                        |
+| Full pre-ship review (parallel reviewers) | suggest `/hb:review`                         |
+| Validate a UI change in a real browser  | `visual-review --ui`                           |
+| Learn a concept over multiple sessions  | suggest `/hb:teach`                            |
 | Code review on a PR or pasted diff      | `code-review`                                  |
 | Visual/HTML PR review (annotated diff)  | `visual-review`                                |
-| Triage existing PR review comments (what to fix) | `triage-review`                        |
+| Triage existing PR review comments (what to fix) | `feedback`                            |
 | Check accessibility                     | `a11y-audit`                                   |
 | Check i18n coverage                     | `i18n`                                         |
 | Audit bundle size / performance         | `perf-audit`                                   |
 | Audit dependencies for CVEs             | `deps-audit`                                   |
 | Check for sensitive data in repo        | `safe-repo`                                    |
-| Run linter / formatter                  | `validate-code`                                |
-| Validate code (lint + types + tests)    | `validate-code`                                |
-| Write end-to-end tests                  | `e2e`                                          |
-| Commit changes (atomic, grouped by concern) | `commit`                                    |
-| Commit and push                         | `ship`                                         |
-| Create a pull request                   | `create-pull-request`                          |
-| Record an architectural decision        | `create-adr`                                   |
+| Run linter / formatter                  | `check`                                        |
+| Validate code (lint + types + tests)    | `check`                                        |
+| Write end-to-end tests                  | `tdd`                                          |
+| Commit changes (atomic, grouped by concern) | `commit`                                   |
+| Push and create a pull request          | suggest `/hb:to-pr`                            |
+| Record an architectural decision        | `to-adr`                                       |
 | Pin down domain terminology / glossary  | `domain-modeling`                              |
-| Stress-test a plan or design            | `grill-me`                                     |
+| Stress-test a plan or design            | suggest `/hb:grill`                            |
 | Fix prose / typos in markdown           | `revise`                                       |
 | Restructure an article draft            | `revise`                                       |
-| Hand off mid-session work to a fresh agent | `handoff`                                   |
-| Retrospective on a session (improve the agent's environment) | `retro`                   |
-| Last message didn't land — re-explain plainly | `wait-what`                             |
+| Hand off mid-session work to a fresh agent | suggest `/hb:handoff`                       |
+| Retrospective on a session (improve the agent's environment) | suggest `/hb:retro`       |
+| Last message didn't land — re-explain plainly | suggest `/hb:wait-what`                  |
 | Author a new skill                      | `create-skill`                                 |
-| Which skill fits my situation?          | `ask`                                          |
+| Classify a task, or where am I?         | suggest `/hb:triage`                           |
+| Which skill fits my situation?          | suggest `/hb:guide`                            |
 
 ### Lifecycle Mapping (Implicit Flow)
 
-When the user has a non-trivial task, follow this flow even without explicit commands:
+When the user has a non-trivial task, suggest the flow commands in order. They are typed-only, so the user runs each one:
 
-- **SPEC** → `spec` (interviews via `grill-me`; settled terms go to the glossary via `domain-modeling`)
-- **PLAN** → `plan` (spec to vertical-slice phases), with `architecture-audit` or `codebase-design` as needed
-- **BUILD** → `build` (one phase per invocation, or `--all`), driven by `tdd` and `source-driven`
-- **TEST** → `test` (`validate-code --check` + changed-line coverage + plan vs codebase), with `diagnose` on failure
-- **REVIEW** → `review` (orchestrates the audits below as parallel reviewers plus independent agent lenses, including spec conformance, standards, and the floor-guard quality-bar check; `code-review` for a single in-thread lens; `visual-review` for an annotated HTML diff report; `triage-review` to sort existing reviewer comments), covering `a11y-audit`, `i18n`, `perf-audit`, `deps-audit`, `safe-repo`, `harden`
-- **SHIP** → `ship` (gate: `validate-code`, `safe-repo`, floor-guard) → `create-pull-request`
-- **RETRO** → `retro`, in the same session before `/clear`; `ask` routes any situation to its skill
+- **TRIAGE** → `triage` classifies the input, sizes it, and names the entry command; with no args it reports the current phase
+- **GRILL** → `grill` interviews; settled terms go to the glossary via `domain-modeling`, decisions to `to-adr`
+- **SPEC** → `to-spec` writes the spec from the conversation, no interview
+- **TICKETS** → `to-tickets` slices the spec into tracer-bullet tickets, with `architecture-audit` or `codebase-design` as needed
+- **BUILD** → `build` (one ticket per invocation, or `--all`), driven by `tdd`, `source-driven`, and `check`
+- **REVIEW** → `review` (audits as parallel reviewers plus agent lenses: spec conformance with ticket checkboxes, standards, test effectiveness with changed-line coverage, floor-guard), covering `a11y-audit`, `i18n`, `perf-audit`, `deps-audit`, `safe-repo`, `harden`; `feedback` sorts existing reviewer comments
+- **SHIP** → `to-pr` (gate, push, PR, CI watch); `--safe` adds a `safe-repo` scan before the push
+- **RETRO** → `retro`, in the same session before `/clear`
 
 ## Conventions
 
 - Every skill lives in `skills/<name>/SKILL.md` (or `<name>/SKILL.md` if flat at root — see structure section)
 - YAML frontmatter requires `name` and `description`
-- Description starts with what the skill does, followed by trigger conditions ("Use when...")
+- Description starts with what the skill does. Model-visible skills follow with trigger conditions ("Use when..."); typed-only skills stop at one sentence
 - Optional `effort` frontmatter (`low`/`medium`/`high`/`xhigh`/`max`) overrides reasoning effort for the turn the skill fires — set it only when the task deviates from the `medium` default
 - Supporting files split into subfolders: `references/` (long-form docs loaded on demand), `scripts/` (deterministic helpers), `assets/` (templates/icons used in output). Split when `SKILL.md` exceeds ~150 lines
 - Bump `.claude-plugin/plugin.json` `version` (semver) on every user-visible change to a skill so plugin consumers can track updates

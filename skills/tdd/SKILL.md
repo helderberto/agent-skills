@@ -1,7 +1,8 @@
 ---
 name: tdd
 effort: high
-description: Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration tests. Don't use to backfill tests on existing code (/fortify) or diagnose an unknown bug (/diagnose).
+description: Test-driven development, from unit to end-to-end tests. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration or end-to-end tests (Playwright, Cypress). Don't use to backfill tests on existing code (/refactor) or diagnose an unknown bug (/debug).
+user-invocable: false
 ---
 
 # Test-Driven Development
@@ -14,7 +15,7 @@ description: Test-driven development. Use when the user wants to build features 
 
 **Bad tests** are coupled to implementation. They mock internal collaborators, test private methods, or verify through external means (like querying a database directly instead of using the interface). The warning sign: your test breaks when you refactor, but behavior hasn't changed. If you rename an internal function and tests fail, those tests were testing implementation, not behavior.
 
-See [tests.md](references/tests.md) for examples and [mocking.md](references/mocking.md) for mocking guidelines.
+See [tests.md](references/tests.md) for examples, [mocking.md](references/mocking.md) for mocking guidelines, and [ui-tests.md](references/ui-tests.md) for end-to-end tests of user flows.
 
 ## Anti-Pattern: Horizontal Slices
 

@@ -1,10 +1,10 @@
 ---
-name: diagnose
+name: debug
 effort: high
 description: Disciplined diagnosis loop for hard bugs and performance regressions. Use when user says "diagnose" or "debug this", or reports something broken, throwing, failing, or slow. Don't use to build a feature or fix an understood bug test-first (/tdd).
 ---
 
-# Diagnose
+# Debug
 
 A discipline for hard bugs. Skip phases only when explicitly justified.
 
@@ -132,4 +132,4 @@ Required before declaring done:
 - [ ] Throwaway prototypes deleted (or moved to a clearly-marked debug location)
 - [ ] The hypothesis that turned out correct is stated in the commit / PR message — so the next debugger learns
 
-Next: `/retro` in this session, before `/clear`, once the fix is in — you know more now than when you started. It asks what would have prevented this bug and routes a no-seam finding to `/architecture-audit`.
+Next: `/hb:retro` in this session, before `/clear`, once the fix is in — you know more now than when you started. It asks what would have prevented this bug and routes a no-seam finding to `/hb:architecture-audit`.

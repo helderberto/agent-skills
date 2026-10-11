@@ -1,9 +1,10 @@
 ---
-name: grill-me
-description: Relentless interview to sharpen a plan or design. Use when the user wants to stress-test a plan, pressure-test assumptions, or says "grill me" or "poke holes in this". Don't use for code review (/code-review) or gathering initial requirements (/spec).
+name: grill
+description: Interview in rounds until a plan or idea has no open decisions.
+disable-model-invocation: true
 ---
 
-# Grill Me
+# Grill
 
 Interview the user relentlessly until you reach a shared understanding. Map the plan as a **design tree**: every decision branches into the decisions that hang off it.
 
@@ -27,4 +28,8 @@ Each answered round reshapes the tree: settled decisions push the frontier outwa
 
 **Facts are your job; decisions are the user's.** If a frontier question can be answered from the codebase or environment, dispatch a subagent to find it — never ask the user for anything you could look up yourself. Don't block the round on a running lookup: only the questions downstream of it wait; ask the rest of the frontier now.
 
+**Write as you go.** A domain term settles → call the Skill tool with `domain-modeling` to write it into the glossary. A decision settles that is hard to reverse, surprising without context, and a real trade-off → call the Skill tool with `to-adr` to record it. Do both inline, the moment it settles, not in a batch at the end.
+
 Done when the frontier is empty: every branch visited, nothing left silently assumed. Do not act until the user explicitly confirms the shared understanding — "whatever you think is best" or "you decide" is delegation, not confirmation; put the specific decision back to them.
+
+Next: `/hb:to-spec <slug>`, with `<slug>` derived from the idea.

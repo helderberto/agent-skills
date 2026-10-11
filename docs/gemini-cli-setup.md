@@ -35,7 +35,7 @@ Always apply these skills when relevant:
 - tdd — red-green-refactor for any new feature or bug
 - code-review — five-axis review before merge
 - commit — conventional commit messages
-- diagnose — disciplined debugging loop
+- debug — disciplined debugging loop
 ```
 
 Gemini reads `GEMINI.md` automatically at session start.
@@ -62,20 +62,23 @@ gemini skills update <skill-name>
 
 ## Tracer-bullet workflow
 
-The six workflow skills (`spec`, `plan`, `build`, `test`, `review`, `ship`) work the same way in Gemini as in Claude Code, only without the `/hb:` prefix:
+The workflow skills (`triage`, `grill`, `to-spec`, `to-tickets`, `build`, `review`, `to-pr`, `retro`) work the same way in Gemini as in Claude Code, only without the `/hb:` prefix:
 
 ```
-You: invoke the spec skill to define a dark mode feature
-Gemini: [interview → spec written to .specs/specs/dark-mode.md]
+You: invoke the grill skill on a dark mode feature
+Gemini: [interviews you; settled terms go to the glossary]
 
-You: now use the plan skill on dark-mode
-Gemini: [spec parsed into phases]
+You: now the to-spec skill for dark-mode
+Gemini: [spec written to .specs/specs/dark-mode.md from the conversation]
 
-You: build the next phase of dark-mode
-Gemini: [implements phase, runs feedback loops]
+You: now use the to-tickets skill on dark-mode
+Gemini: [spec sliced into tickets in .specs/tickets/dark-mode.md]
+
+You: build the next ticket of dark-mode
+Gemini: [implements the ticket test-first, runs feedback loops]
 ```
 
 ## Limitations
 
-- Gemini does not support slash commands like `/hb:spec`. Invoke by skill name in natural language.
+- Gemini does not support slash commands like `/hb:to-spec`. Invoke by skill name in natural language.
 - Auto-routing relies on the `description` field. Skills with vague descriptions may not trigger automatically — be explicit when in doubt.

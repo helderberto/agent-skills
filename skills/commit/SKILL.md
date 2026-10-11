@@ -1,13 +1,13 @@
 ---
 name: commit
 effort: low
-description: Group unstaged changes into atomic commits by concern, matching repository style. Use when asked to "commit", "create a commit", or "commit changes". Don't use for pushing (/ship) or pull requests.
+description: Group unstaged changes into atomic commits by concern, matching repository style. Use when asked to "commit", "create a commit", or "commit changes". Don't use for pushing or pull requests (/to-pr).
 argument-hint: '[paths...]'
 ---
 
 # Git Commit
 
-Group all unstaged/untracked changes into **atomic commits** — one commit per logical concern. A single concern is just the degenerate case: one commit. **Never push** — pushing belongs to `/ship`.
+Group all unstaged/untracked changes into **atomic commits** — one commit per logical concern. A single concern is just the degenerate case: one commit. **Never push** — pushing belongs to `/hb:to-pr`.
 
 Paths in `$ARGUMENTS` scope the run: commit only those files and leave the rest of the tree as it is.
 

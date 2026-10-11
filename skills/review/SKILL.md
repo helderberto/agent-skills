@@ -1,7 +1,8 @@
 ---
 name: review
 effort: high
-description: Fan out parallel read-only reviewers over a diff and consolidate into one severity-ranked verdict. Use for a full pre-ship review, "review/validate this PR", or "spawn agents to review". Don't use for a single-lens PR review or a pasted diff (/code-review), one audit, or triaging existing comments (/triage-review).
+description: Fan out parallel read-only reviewers over a diff and consolidate one severity-ranked verdict.
+disable-model-invocation: true
 argument-hint: '[PR-number-or-branch] [agent-count]'
 ---
 
@@ -19,16 +20,16 @@ PR number → `gh pr view` + `gh pr diff` (fails → current-branch diff, warn).
 
 ### 2. Select reviewers
 
-Always: correctness (`code-review`), standards, sensitive data (`safe-repo` diff-only), test effectiveness, quality bar. Spec whenever `.specs/specs/` holds this work's spec. Add the rest from the diff. An explicit count in `$ARGUMENTS` (2–8) caps the subagents; drop diff-selected ones first. Never spawn `e2e` or `visual-validate` — those are VERIFY phase, not REVIEW.
+Always: correctness (`code-review`), standards, sensitive data (`safe-repo --diff <base>`), test effectiveness, quality bar. Spec whenever `.specs/specs/` holds this work's spec. Add the rest from the diff. An explicit count in `$ARGUMENTS` (2–8) caps the subagents; drop diff-selected ones first. Never spawn `visual-review` in UI mode: it needs a dev server the user owns.
 
 | Reviewer | When | Agent type |
 |----------|------|------------|
-| Correctness (`code-review`) | always | `general-purpose` |
+| Correctness (`code-review`; in Claude Code, `hb:code-review`, not the built-in) | always | `general-purpose` |
 | Standards | always | `general-purpose` |
-| Spec conformance | `.specs/specs/<slug>.md` matches the branch or plan | `general-purpose` |
+| Spec conformance + ticket checkboxes | `.specs/specs/<slug>.md` matches the branch or tickets | `general-purpose` |
 | Quality bar (floor-guard) | always | none: run inline |
-| Sensitive data (`safe-repo` diff-only) | always | `general-purpose` |
-| Test effectiveness | always | `test-auditor` |
+| Sensitive data (`safe-repo --diff <base>`) | always | `general-purpose` |
+| Test effectiveness + changed-line coverage | always | `test-auditor` |
 | Accessibility (`a11y-audit`) | JSX/TSX/HTML/CSS changed | `general-purpose` |
 | User-facing strings (`i18n`) | new JSX text / template literals | `general-purpose` |
 | Bundle / perf (`perf-audit`) | `package.json`, bundler config changed | `general-purpose` |
@@ -40,12 +41,13 @@ Always: correctness (`code-review`), standards, sensitive data (`safe-repo` diff
 Match each reviewer to an agent type **available in the harness**; never invent one. Announce chosen reviewers before spawning and skip irrelevant ones with a one-line reason.
 
 - **Standards**: first find every file that documents how code should be written; `CODING_STANDARDS.md` and `CONTRIBUTING.md` must be on the list when present. Brief: report every place the diff breaks a documented standard, citing the file and the rule. Skip what tooling enforces.
-- **Spec**: several specs and none matches → ask which. Brief, verbatim: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding."
+- **Spec**: several specs and none matches → ask which. Brief, verbatim: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding." With tickets in `.specs/tickets/<slug>.md`, also check every ticket checkbox against the code: a checked box that doesn't hold is Important; an unchecked box the diff satisfies is a Suggestion. Report only, never edit the tickets file.
+- **Test effectiveness**: besides the `test-auditor` brief, if the project emits coverage, confirm the changed lines (`git diff -U0 <base>`) are exercised, not just the global %. Uncovered changed lines are Important. No coverage tooling → note the check as skipped.
 - **Quality bar**: run `bash ${CLAUDE_SKILL_DIR}/scripts/floor-guard.sh --base <base>`. Exit 1 → each `[rule] file:line` is Important unless the diff or a commit message gives the reason. Exit 2 → note the check as skipped.
 
 ### 3. Fan out
 
-Spawn all reviewers in **one message** so they run concurrently. Each gets: repo path (note if it's a worktree), the exact diff command and its subset of files, one paragraph of context, its instruction (run the audit skill via the Skill tool — fall back to the skill's checklist if subagents can't load skills — or apply the lens), a pointer to `.specs/plans/*.md` if present, and the output contract — findings with `file:line`, severity (`critical` / `important` / `suggestion`), one-line rationale. **Read-only**: no edits, staging, commits, or pushes. Brief with the artifact and the requirements, never your own conclusion: a reviewer told what to find finds it.
+Spawn all reviewers in **one message** so they run concurrently. Each gets: repo path (note if it's a worktree), the exact diff command and its subset of files, one paragraph of context, its instruction (run the audit skill via the Skill tool — fall back to the skill's checklist if subagents can't load skills — or apply the lens), a pointer to `.specs/tickets/*.md` if present, and the output contract — findings with `file:line`, severity (`critical` / `important` / `suggestion`), one-line rationale. **Read-only**: no edits, staging, commits, or pushes. Brief with the artifact and the requirements, never your own conclusion: a reviewer told what to find finds it.
 
 **Build/install collisions**: `perf-audit` builds and `deps-audit` may touch `node_modules` — give those worktree isolation or run them serially after the read-only reviewers.
 
@@ -70,4 +72,4 @@ Merge findings, dedupe, and flag convergence (≥2 reviewers on the same line). 
 
 Count Standards and Spec findings by their severity. **APPROVE** (zero Critical, zero Important) · **REQUEST CHANGES** (any Critical, or 3+ Important) · **NEEDS DISCUSSION** (Important findings involving architectural tradeoffs). Never auto-fix.
 
-Next: REQUEST CHANGES → fix, re-run `/review`. NEEDS DISCUSSION → settle it with the user, then re-run. APPROVE → `/ship`.
+Next: REQUEST CHANGES → fix, re-run `/hb:review`. NEEDS DISCUSSION → settle it with the user, then re-run. APPROVE → `/hb:to-pr`.

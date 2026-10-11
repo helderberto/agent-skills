@@ -1,6 +1,7 @@
 ---
 name: handoff
-description: Compact the current conversation into a handoff document for another agent. Use when the user wants to hand off, move context to a fresh session, or says "write a handoff". Don't use to summarize for the current session or to brief on plan progress (/test).
+description: Compact the current conversation into a handoff document for a fresh agent.
+disable-model-invocation: true
 argument-hint: "What will the next session be used for?"
 ---
 
@@ -13,3 +14,5 @@ Do not duplicate content already captured in other artifacts (PRDs, plans, ADRs,
 Redact any sensitive information, such as API keys, passwords, or personally identifiable information.
 
 If the user passed arguments, treat them as a description of what the next session will focus on and tailor the doc accordingly.
+
+Next: in the fresh session, `/hb:triage` with the handoff path, or the first suggested command from the doc.

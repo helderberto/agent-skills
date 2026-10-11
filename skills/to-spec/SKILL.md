@@ -1,11 +1,12 @@
 ---
-name: spec
+name: to-spec
 effort: high
-description: Create a spec (PRD) through user interview, codebase exploration, and module design. Use when starting a feature with unclear requirements, or asked to spec or define what to build, "write a spec", "write a PRD". Don't use when requirements are crisp and a plan exists (/plan, /build).
+description: Turn the settled conversation into a spec (PRD) at `.specs/specs/<slug>.md`.
+disable-model-invocation: true
 argument-hint: <idea>
 ---
 
-# Spec
+# To Spec
 
 Idea: $ARGUMENTS (if empty, ask for the problem and any solution ideas first).
 
@@ -17,9 +18,9 @@ Derive a kebab-case `<slug>` from the text before the first `—`/`–` (≤4 me
 
 Map current state: data models, services, API routes, frontend, tests. Note exists vs. must build. Codebase first, then docs. Unverifiable claims → flag as uncertain, never fabricate.
 
-### 2. Interview
+### 2. Check the branches
 
-Call the Skill tool with `grill-me`, seeded with the branches below as the design tree. Skip branches the conversation already settled: synthesize those, don't re-ask. Explore code instead of asking when possible. When a domain term settles mid-grill, call the Skill tool with `domain-modeling` to write it into the glossary, so spec and glossary agree.
+Never interview here. Check each branch below against the conversation and the code: settled → synthesize it. Open branches → one confirm round at most, each question with your recommended answer. Still open after that → stop with `Next: /hb:grill <slug>`. A domain term that settles here → call the Skill tool with `domain-modeling` to write it into the glossary, so spec and glossary agree.
 
 | Branch           | Key questions                           | Skip when                        |
 | ---------------- | --------------------------------------- | -------------------------------- |
@@ -31,17 +32,20 @@ Call the Skill tool with `grill-me`, seeded with the branches below as the desig
 | Boundaries       | Out of scope, deferred features         | Never skip                       |
 | Integration      | Schema, services, external deps         | Self-contained change            |
 
-Then surface **gray areas** — ambiguities, contradictions, unstated assumptions — each with proposed resolutions. Resolve all before continuing.
+**Gray areas** — ambiguities, contradictions, unstated assumptions — join that same round, each with a proposed resolution.
 
 ### 3. Design modules
 
-Sketch modules. Favor **deep modules** — simple interface (1–3 entry points) hiding large implementation. Shallow signals: many 1:1 functions, callers compose multiple calls, feature changes require interface changes. Confirm which modules need tests.
+Sketch modules. Favor **deep modules** — simple interface (1–3 entry points) hiding large implementation. Shallow signals: many 1:1 functions, callers compose multiple calls, feature changes require interface changes. Mark which modules need tests.
 
 ### 4. Write spec
 
-Save to `.specs/specs/<slug>.md`. Omit empty sections. No file paths or code snippets.
+Save to `.specs/specs/<slug>.md`. Omit empty sections. No file paths or code snippets. A related ticket (a key or `#42` in the conversation, the argument, or the branch name) → record it in frontmatter; no ticket → no frontmatter.
 
 ```
+---
+ticket: <key>
+---
 # Feature Name
 ## Problem Statement
 ## Current State (skip if greenfield)
@@ -57,4 +61,4 @@ Save to `.specs/specs/<slug>.md`. Omit empty sections. No file paths or code sni
 ## Out of Scope (be specific)
 ```
 
-Next: `/plan <slug>` (Recommended) or done for now.
+Next: `/hb:to-tickets <slug>`
