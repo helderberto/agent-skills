@@ -1,11 +1,11 @@
 ---
-name: spec
+name: to-spec
 effort: high
-description: Create a spec (PRD) through user interview, codebase exploration, and module design. Use when starting a feature with unclear requirements, or asked to spec or define what to build, "write a spec", "write a PRD". Don't use when requirements are crisp and a plan exists (/plan, /build).
+description: Create a spec (PRD) through user interview, codebase exploration, and module design. Use when starting a feature with unclear requirements, or asked to spec or define what to build, "write a spec", "write a PRD". Don't use when requirements are crisp and a plan exists (/to-tickets, /build).
 argument-hint: <idea>
 ---
 
-# Spec
+# To Spec
 
 Idea: $ARGUMENTS (if empty, ask for the problem and any solution ideas first).
 
@@ -19,7 +19,7 @@ Map current state: data models, services, API routes, frontend, tests. Note exis
 
 ### 2. Interview
 
-Call the Skill tool with `grill-me`, seeded with the branches below as the design tree. Skip branches the conversation already settled: synthesize those, don't re-ask. Explore code instead of asking when possible. When a domain term settles mid-grill, call the Skill tool with `domain-modeling` to write it into the glossary, so spec and glossary agree.
+Call the Skill tool with `grill`, seeded with the branches below as the design tree. Skip branches the conversation already settled: synthesize those, don't re-ask. Explore code instead of asking when possible. When a domain term settles mid-grill, call the Skill tool with `domain-modeling` to write it into the glossary, so spec and glossary agree.
 
 | Branch           | Key questions                           | Skip when                        |
 | ---------------- | --------------------------------------- | -------------------------------- |
@@ -57,4 +57,4 @@ Save to `.specs/specs/<slug>.md`. Omit empty sections. No file paths or code sni
 ## Out of Scope (be specific)
 ```
 
-Next: `/plan <slug>` (Recommended) or done for now.
+Next: `/to-tickets <slug>` (Recommended) or done for now.

@@ -40,7 +40,7 @@ Show a numbered list. For each candidate:
 
 `--html` → also render the candidates as a report with before/after diagrams, per [references/html-report.md](references/html-report.md).
 
-Do NOT propose interfaces yet. Ask which candidate to explore. The user rejects one for a load-bearing reason → offer to record it (call the Skill tool with `create-adr`) so later audits don't re-suggest it. Skip ephemeral reasons ("not now").
+Do NOT propose interfaces yet. Ask which candidate to explore. The user rejects one for a load-bearing reason → offer to record it (call the Skill tool with `to-adr`) so later audits don't re-suggest it. Skip ephemeral reasons ("not now").
 
 ### 3. Design the interface
 

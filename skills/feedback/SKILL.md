@@ -1,11 +1,11 @@
 ---
-name: triage-review
+name: feedback
 effort: high
 description: Fetch unresolved review comments on a GitHub PR (Copilot and human), verify against the code, classify Address / Skip / Optional / Discuss. Use when asked to triage reviewer feedback, which comments to actually fix, or to sort signal from noise on a PR. Don't use to reply to or resolve threads, or to write a fresh review (/code-review).
 argument-hint: '[PR-number-or-branch]'
 ---
 
-# Triage Review Comments
+# Feedback
 
 Consume the review comments **already on a PR** — Copilot and human reviewers — and sort them into what's worth fixing and what isn't. This is judgment, not a fresh review: each comment is verified against the current code before a verdict.
 

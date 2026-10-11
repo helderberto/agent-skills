@@ -1,11 +1,11 @@
 ---
-name: create-pull-request
+name: to-pr
 description: Create a GitHub pull request — concise body on the repo's PR template, conventional-commit title, ticket refs. `--draft` for a draft PR, `--diagram[=type]` to add a mermaid diagram of the change.
 argument-hint: '[--draft] [--diagram[=flow|sequence|class|state]]'
 disable-model-invocation: true
 ---
 
-# Create Pull Request
+# To PR
 
 Arguments: $ARGUMENTS
 

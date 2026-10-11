@@ -1,7 +1,7 @@
 ---
 name: domain-modeling
 effort: high
-description: Build a project's domain model — challenge terms, pin down a ubiquitous language, write the glossary down. Use when defining domain terminology, resolving ambiguous terms, or another skill needs the shared vocabulary. Don't use for a single architectural decision (/create-adr) or explaining code (/explain-code).
+description: Build a project's domain model — challenge terms, pin down a ubiquitous language, write the glossary down. Use when defining domain terminology, resolving ambiguous terms, or another skill needs the shared vocabulary. Don't use for a single architectural decision (/to-adr) or explaining code (/zoom-out).
 ---
 
 # Domain Modeling
@@ -10,7 +10,7 @@ The *active* discipline of shaping the model — challenging terms, inventing ed
 
 ## Artifact
 
-Maintain the project's glossary in its existing convention; a legacy `CONTEXT.md` counts. If there is none, create `GLOSSARY.md` at the repo root. A repo with several bounded contexts gets one glossary per context, plus a root `GLOSSARY-MAP.md` that points to each. Call the Skill tool with `create-adr` to record decisions that settle a term, so the *why* is preserved separately from the *what*.
+Maintain the project's glossary in its existing convention; a legacy `CONTEXT.md` counts. If there is none, create `GLOSSARY.md` at the repo root. A repo with several bounded contexts gets one glossary per context, plus a root `GLOSSARY-MAP.md` that points to each. Call the Skill tool with `to-adr` to record decisions that settle a term, so the *why* is preserved separately from the *what*.
 
 ## Ubiquitous language
 

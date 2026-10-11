@@ -1,10 +1,10 @@
 ---
-name: diagnose
+name: debug
 effort: high
 description: Disciplined diagnosis loop for hard bugs and performance regressions. Use when user says "diagnose" or "debug this", or reports something broken, throwing, failing, or slow. Don't use to build a feature or fix an understood bug test-first (/tdd).
 ---
 
-# Diagnose
+# Debug
 
 A discipline for hard bugs. Skip phases only when explicitly justified.
 

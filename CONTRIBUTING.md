@@ -24,7 +24,7 @@ When in doubt, open an issue first to discuss scope.
    ```bash
    git checkout -b <type>/<short-description>
    ```
-   Branch name examples: `feat/visual-validate`, `fix/safe-repo-diff`, `docs/cursor-setup`.
+   Branch name examples: `feat/visual-review`, `fix/safe-repo-diff`, `docs/cursor-setup`.
 
 2. **Read [`skills/create-skill/SKILL.md`](skills/create-skill/SKILL.md)** if you're adding or modifying a skill. It covers directory layout, frontmatter rules, description writing, and the review checklist.
 
@@ -47,7 +47,7 @@ When in doubt, open an issue first to discuss scope.
 
 - **English only** for all written artifacts (code, comments, commits, PR titles/bodies, ADRs, docs)
 - **Skill names** are lowercase kebab-case: `code-review`, `safe-repo`
-- **Workflow skills** (`spec`, `plan`, `build`, `test`, `review`, `ship`) are invoked as `/hb:<name>`
+- **Workflow skills** (`grill`, `to-spec`, `to-tickets`, `build`, `review`, `ship`, `to-pr`) are invoked as `/hb:<name>`
 - **Toolbelt skills** auto-trigger from the `description` field — write that carefully
 
 ## Where to start

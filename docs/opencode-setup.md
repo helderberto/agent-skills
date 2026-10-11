@@ -57,20 +57,20 @@ cp /path/to/agent-skills/AGENTS.md ./AGENTS.md
 
 ## Tracer-bullet workflow
 
-For features beyond a few files, follow the SPEC → PLAN → BUILD → TEST loop:
+For features beyond a few files, follow the SPEC → PLAN → BUILD → REVIEW loop:
 
 ```
 You: I want to add dark mode support.
-OpenCode: [invokes spec skill, interviews, writes .specs/specs/dark-mode.md]
+OpenCode: [invokes to-spec skill, interviews, writes .specs/specs/dark-mode.md]
 
 You: Plan it.
-OpenCode: [invokes plan skill, writes phases into .specs/plans/dark-mode.md]
+OpenCode: [invokes to-tickets skill, writes phases into .specs/plans/dark-mode.md]
 
 You: Build the next phase.
 OpenCode: [invokes build skill, implements, runs feedback loops, marks checkboxes]
 
-You: Verify.
-OpenCode: [invokes test skill, validates plan against codebase]
+You: Review it.
+OpenCode: [invokes review skill, checks the diff and plan checkboxes]
 ```
 
 ## Customizing the agent persona
@@ -85,7 +85,7 @@ If you want to constrain OpenCode further — for example, enforce TDD on every 
 ## Project-specific rules
 
 - Always use the tdd skill, even for one-line fixes
-- Never use the visual-validate skill — this project has no UI
+- Never use visual-review's UI mode — this project has no UI
 ```
 
 ## Limitations

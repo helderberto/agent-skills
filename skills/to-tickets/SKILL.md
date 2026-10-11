@@ -1,11 +1,11 @@
 ---
-name: plan
+name: to-tickets
 effort: high
-description: Turn a spec into a multi-phase implementation plan of tracer-bullet vertical slices. Use after /spec when `.specs/specs/<slug>.md` exists, or when asked to break work into phases or slices. Don't use without a spec, or for single-file changes with obvious scope.
+description: Turn a spec into a multi-phase implementation plan of tracer-bullet vertical slices. Use after /to-spec when `.specs/specs/<slug>.md` exists, or when asked to break work into phases or slices. Don't use without a spec, or for single-file changes with obvious scope.
 argument-hint: "[slug]"
 ---
 
-# Plan
+# To Tickets
 
 Break a spec into phased vertical slices (tracer bullets).
 
@@ -130,7 +130,7 @@ Carried forward from spec verbatim.
 Gaps found in the spec needing resolution. Blank if none.
 ```
 
-Print one line per phase: `Phase N — <title> (<condition summary>)`. Next: `/build <slug>` (Recommended — one phase per invocation), `/test <slug>`, or done for now.
+Print one line per phase: `Phase N — <title> (<condition summary>)`. Next: `/build <slug>` (Recommended — one phase per invocation) or done for now.
 
 ## Rules
 

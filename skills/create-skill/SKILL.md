@@ -30,7 +30,7 @@ Every step ends on a **completion criterion** the agent can check ("every error 
 | `effort` | `low` / `medium` / `high` / `xhigh` / `max` for the turn the skill fires; set only when it deviates from the `medium` default |
 | `allowed-tools` | Tools pre-approved for the invoking turn — use sparingly |
 
-Effort routing: `low` for mechanical single-place edits (`commit`, `create-adr`); `high` for multi-file features, unknown-cause debugging, review (`build`, `diagnose`); `xhigh` for architecture, migrations, security-sensitive work (`architecture-audit`, `harden`).
+Effort routing: `low` for mechanical single-place edits (`commit`, `to-adr`); `high` for multi-file features, unknown-cause debugging, review (`build`, `debug`); `xhigh` for architecture, migrations, security-sensitive work (`architecture-audit`, `harden`).
 
 ## Description
 
@@ -66,5 +66,5 @@ Diagnose a misbehaving skill against these:
 - [ ] `effort` set only when it deviates from `medium`
 - [ ] `SKILL.md` under ~150 lines
 - [ ] Calls to another skill say "Call the Skill tool with `<skill-name>`" (one skill per call); user-facing suggestions keep `/<skill-name>`; no `../` links across skill folders
-- [ ] Added to README, the `AGENTS.md` intent → skill mapping, and `ask`'s router; no existing skill already covers it
+- [ ] Added to README, the `AGENTS.md` intent → skill mapping, and `triage`'s router; no existing skill already covers it
 - [ ] `.claude-plugin/plugin.json` `version` bumped (semver)

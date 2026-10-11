@@ -1,9 +1,9 @@
 ---
-name: grill-me
-description: Relentless interview to sharpen a plan or design. Use when the user wants to stress-test a plan, pressure-test assumptions, or says "grill me" or "poke holes in this". Don't use for code review (/code-review) or gathering initial requirements (/spec).
+name: grill
+description: Relentless interview to sharpen a plan or design. Use when the user wants to stress-test a plan, pressure-test assumptions, or says "grill me" or "poke holes in this". Don't use for code review (/code-review) or gathering initial requirements (/to-spec).
 ---
 
-# Grill Me
+# Grill
 
 Interview the user relentlessly until you reach a shared understanding. Map the plan as a **design tree**: every decision branches into the decisions that hang off it.
 

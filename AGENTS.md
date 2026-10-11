@@ -43,59 +43,57 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 
 | User intent                             | Skill to invoke                                |
 | --------------------------------------- | ---------------------------------------------- |
-| New feature with unclear requirements   | `spec` → `plan` → `build`                      |
+| New feature with unclear requirements   | `to-spec` → `to-tickets` → `build`             |
 | Implement next phase of a plan          | `build`                                        |
-| Verify work + check plan progress       | `test`                                         |
 | Test-first development                  | `tdd`                                          |
 | Implement using official docs           | `source-driven`                                |
 | Research a question against sources     | `research`                                     |
-| Bug, error, unexpected behavior         | `diagnose`                                     |
-| Backfill tests / split functions / simplify | `fortify`                                  |
+| Bug, error, unexpected behavior         | `debug`                                        |
+| Backfill tests / split functions / simplify | `refactor`                                 |
 | Design or improve a module's interface  | `codebase-design`                              |
 | Architectural friction in codebase      | `architecture-audit`                           |
 | Prototype a design (logic demo or UI)   | `prototype`                                    |
-| Explain code or codebase area           | `explain-code`                                 |
+| Explain code or codebase area           | `zoom-out`                                     |
 | Build or refactor a UI component/page   | `frontend-ui-engineering`                      |
 | Code at a trust boundary (auth, input, external API) | `harden`                          |
 | Full pre-ship review (parallel reviewers) | `review`                                     |
-| Validate a UI change in a real browser  | `visual-validate`                              |
+| Validate a UI change in a real browser  | `visual-review --ui`                           |
 | Learn a concept over multiple sessions  | `teach`                                        |
 | Code review on a PR or pasted diff      | `code-review`                                  |
 | Visual/HTML PR review (annotated diff)  | `visual-review`                                |
-| Triage existing PR review comments (what to fix) | `triage-review`                        |
+| Triage existing PR review comments (what to fix) | `feedback`                            |
 | Check accessibility                     | `a11y-audit`                                   |
 | Check i18n coverage                     | `i18n`                                         |
 | Audit bundle size / performance         | `perf-audit`                                   |
 | Audit dependencies for CVEs             | `deps-audit`                                   |
 | Check for sensitive data in repo        | `safe-repo`                                    |
-| Run linter / formatter                  | `validate-code`                                |
-| Validate code (lint + types + tests)    | `validate-code`                                |
-| Write end-to-end tests                  | `e2e`                                          |
-| Commit changes (atomic, grouped by concern) | `commit`                                    |
+| Run linter / formatter                  | `check`                                        |
+| Validate code (lint + types + tests)    | `check`                                        |
+| Write end-to-end tests                  | `tdd`                                          |
+| Commit changes (atomic, grouped by concern) | `commit`                                   |
 | Commit and push                         | `ship`                                         |
-| Create a pull request                   | `create-pull-request`                          |
-| Record an architectural decision        | `create-adr`                                   |
+| Create a pull request                   | `to-pr`                                        |
+| Record an architectural decision        | `to-adr`                                       |
 | Pin down domain terminology / glossary  | `domain-modeling`                              |
-| Stress-test a plan or design            | `grill-me`                                     |
+| Stress-test a plan or design            | `grill`                                        |
 | Fix prose / typos in markdown           | `revise`                                       |
 | Restructure an article draft            | `revise`                                       |
 | Hand off mid-session work to a fresh agent | `handoff`                                   |
 | Retrospective on a session (improve the agent's environment) | `retro`                   |
-| Last message didn't land — re-explain plainly | `wait-what`                             |
+| Last message didn't land — re-explain plainly | `wait-what`                              |
 | Author a new skill                      | `create-skill`                                 |
-| Which skill fits my situation?          | `ask`                                          |
+| Which skill fits my situation?          | `triage`                                       |
 
 ### Lifecycle Mapping (Implicit Flow)
 
 When the user has a non-trivial task, follow this flow even without explicit commands:
 
-- **SPEC** → `spec` (interviews via `grill-me`; settled terms go to the glossary via `domain-modeling`)
-- **PLAN** → `plan` (spec to vertical-slice phases), with `architecture-audit` or `codebase-design` as needed
+- **SPEC** → `to-spec` (interviews via `grill`; settled terms go to the glossary via `domain-modeling`)
+- **PLAN** → `to-tickets` (spec to vertical-slice phases), with `architecture-audit` or `codebase-design` as needed
 - **BUILD** → `build` (one phase per invocation, or `--all`), driven by `tdd` and `source-driven`
-- **TEST** → `test` (`validate-code --check` + changed-line coverage + plan vs codebase), with `diagnose` on failure
-- **REVIEW** → `review` (orchestrates the audits below as parallel reviewers plus independent agent lenses, including spec conformance, standards, and the floor-guard quality-bar check; `code-review` for a single in-thread lens; `visual-review` for an annotated HTML diff report; `triage-review` to sort existing reviewer comments), covering `a11y-audit`, `i18n`, `perf-audit`, `deps-audit`, `safe-repo`, `harden`
-- **SHIP** → `ship` (gate: `validate-code`, `safe-repo`, floor-guard) → `create-pull-request`
-- **RETRO** → `retro`, in the same session before `/clear`; `ask` routes any situation to its skill
+- **REVIEW** → `review` (orchestrates the audits below as parallel reviewers plus independent agent lenses, including spec conformance with ticket checkboxes, standards, test effectiveness with changed-line coverage, and the floor-guard quality-bar check; `code-review` for a single in-thread lens; `visual-review` for an annotated HTML diff report or `--ui` browser check; `feedback` to sort existing reviewer comments), covering `a11y-audit`, `i18n`, `perf-audit`, `deps-audit`, `safe-repo`, `harden`
+- **SHIP** → `ship` (gate: `check`, `safe-repo`, floor-guard) → `to-pr`
+- **RETRO** → `retro`, in the same session before `/clear`; `triage` routes any situation to its skill
 
 ## Conventions
 

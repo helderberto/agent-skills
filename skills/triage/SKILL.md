@@ -1,32 +1,32 @@
 ---
-name: ask
+name: triage
 description: Ask which skill or flow fits your situation — a router over the hb skills.
 disable-model-invocation: true
 argument-hint: '<situation>'
 ---
 
-# Ask
+# Triage
 
 Map the situation in `$ARGUMENTS` (empty → ask what the user is trying to do) to the skill or flow that fits, and end on the one command to type next. Before you say what a skill does or recommend skipping one, read its SKILL.md: the summaries below are orientation only.
 
 ## Main flow
 
-`grill-me → spec → plan → build → test → review → ship → create-pull-request → retro`
+`grill → to-spec → to-tickets → build → review → ship → to-pr → retro`
 
-- `/grill-me` sharpens the idea; `/spec` writes it to `.specs/specs/<slug>.md`, grilling only what's still open.
+- `/grill` sharpens the idea; `/to-spec` writes it to `.specs/specs/<slug>.md`, grilling only what's still open.
 - A question that needs a runnable answer (a state model, a UI you have to see) → `/prototype` first.
-- `/plan` slices the spec into phases. `/build` implements one phase per run, test-first through `/tdd`; `--all` runs every phase after one approval.
-- `/test` verifies, `/review` is the QA pass, `/ship` gates, commits, and pushes, `/create-pull-request` opens the PR.
+- `/to-tickets` slices the spec into phases. `/build` implements one phase per run, test-first through `/tdd`; `--all` runs every phase after one approval.
+- `/review` verifies and is the QA pass, `/ship` gates, commits, and pushes, `/to-pr` opens the PR.
 - `/retro` closes the loop, in the same session, before `/clear`.
 
 Small, crisp change that needs no spec → `/tdd`, then `/review`.
 
 ## On-ramps
 
-- Something broken, flaky, or slow → `/diagnose`, then `/retro`.
-- Review comments piling up on a PR → `/triage-review`, then `/tdd` for the Address items.
-- Spare time for upkeep → `/architecture-audit`; a picked candidate becomes an idea for `/grill-me`.
-- Existing code that needs tests, splitting, or simplifying → `/fortify`.
+- Something broken, flaky, or slow → `/debug`, then `/retro`.
+- Review comments piling up on a PR → `/feedback`, then `/tdd` for the Address items.
+- Spare time for upkeep → `/architecture-audit`; a picked candidate becomes an idea for `/grill`.
+- Existing code that needs tests, splitting, or simplifying → `/refactor`.
 
 ## Vocabulary underneath
 
@@ -37,10 +37,10 @@ Small, crisp change that needs no spec → `/tdd`, then `/review`.
 
 - Audits: `/a11y-audit`, `/i18n`, `/perf-audit`, `/deps-audit`, `/safe-repo`, `/harden`
 - Review: `/code-review` (one lens; a PR or a pasted diff), `/visual-review` (annotated HTML)
-- Verify: `/validate-code`, `/visual-validate`, `/e2e`
+- Verify: `/check`, `/visual-review` (`--ui` for a real browser), `/tdd` (end-to-end tests too)
 - Build helpers: `/source-driven`, `/frontend-ui-engineering`
-- Git: `/commit`, `/create-adr`
-- Session: `/handoff`, `/wait-what`, `/research`, `/explain-code`, `/teach`
+- Git: `/commit`, `/to-adr`
+- Session: `/handoff`, `/wait-what`, `/research`, `/zoom-out`, `/teach`
 - Writing: `/revise`, `/create-skill`
 
 ## Phase boundaries

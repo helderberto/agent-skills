@@ -1,10 +1,10 @@
 ---
-name: validate-code
+name: check
 description: Validate code quality — auto-fix formatting/lint, verify types, run tests. Use when asked to "validate code", "check code", or validate before committing; also lint-only asks ("run linter", "fix lint errors"). Don't use for committing, pushing, or writing new tests.
 argument-hint: '[--check]'
 ---
 
-# Validate Code
+# Check
 
 Run the project's own quality gates — format/lint fix, type check, tests — whatever this project defines. Detect the toolchain; never assume npm. Lint-only ask → steps 1–3, skip tests. `--check` or check-only wording ("check lint", "run the linter" without "fix") → skip step 2, so no file is written.
 

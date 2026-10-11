@@ -1,6 +1,6 @@
 ---
 name: revise
-description: Edit prose in place — restructure article drafts (reorder sections, tighten arguments) or polish any markdown/text (typos, dashes, filler). Use when asked to "revise", "edit my draft", "improve my article", "fix typos", "fix dashes", "clean up text", or "improve sentences". Don't use for code style or linting (/validate-code).
+description: Edit prose in place — restructure article drafts (reorder sections, tighten arguments) or polish any markdown/text (typos, dashes, filler). Use when asked to "revise", "edit my draft", "improve my article", "fix typos", "fix dashes", "clean up text", or "improve sentences". Don't use for code style or linting (/check).
 ---
 
 # Revise

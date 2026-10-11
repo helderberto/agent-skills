@@ -25,7 +25,7 @@ Look back over a session and suggest changes to the agent's **environment** — 
 - **Tool economy** — expensive or token-heavy calls a cheaper call or script would replace.
 - **No-ops** — steering lines that don't change behavior.
 - **Information access** — what the agent lacked: dev-server logs, read-only access to a third-party service.
-- **Bug prevention** — after `/diagnose`: what would have prevented the bug? No good test seam, tangled callers, hidden coupling → the candidate is an `/architecture-audit` run with those specifics.
+- **Bug prevention** — after `/debug`: what would have prevented the bug? No good test seam, tangled callers, hidden coupling → the candidate is an `/architecture-audit` run with those specifics.
 
 ## Where things go
 

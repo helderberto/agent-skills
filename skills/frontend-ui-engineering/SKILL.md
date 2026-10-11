@@ -31,4 +31,4 @@ Decide **how to structure a UI unit before writing it**, so the choices audits w
 
 ## 3. Build and hand off
 
-Apply the decisions. Call the Skill tool with `tdd` for non-trivial logic and its tests, then with `visual-validate` for before/after in a real browser. `/review` then runs the audits as the QA pass before `/ship`.
+Apply the decisions. Call the Skill tool with `tdd` for non-trivial logic and its tests, then with `visual-review` in UI mode for before/after in a real browser. `/review` then runs the audits as the QA pass before `/ship`.
