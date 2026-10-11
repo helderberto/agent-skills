@@ -137,7 +137,7 @@ Rule: on the flow, outward-facing, expensive, or session control → **typed-onl
 | Both (11) | default | debug · to-adr · zoom-out · commit · check · feedback · refactor · prototype · research · revise · create-skill |
 | Model only (13) | `user-invocable: false` | tdd · code-review · codebase-design · domain-modeling · harden · source-driven · frontend-ui-engineering · visual-review · a11y-audit · i18n · perf-audit · deps-audit · safe-repo |
 
-The `/hb:` menu shows typed-only and both (24 entries); the model sees both and model-only descriptions (24). Typed-only skills call model skills through the Skill tool and mention other typed-only skills only in `Next:` lines. Typed-only descriptions keep one what-it-does sentence; trigger phrases live only on model-visible skills. `ship` stays typed-only until `to-pr` absorbs it.
+The `/hb:` menu shows typed-only and both (24 entries); the model sees both and model-only descriptions (24). Typed-only skills call model skills through the Skill tool and mention other typed-only skills only in `Next:` lines. Typed-only descriptions keep one what-it-does sentence; trigger phrases live only on model-visible skills.
 
 Skills also carry an **effort** hint: mechanical ones (`commit`, `to-adr`) run at low reasoning effort, heavy ones (`architecture-audit`, `harden`, `debug`) at high or xhigh, and the rest at the implicit medium default. The override lasts only for the turn the skill fires — so complexity matches the task without you touching `/effort`.
 
@@ -153,8 +153,7 @@ The flow, one typed command per step:
 | [`to-tickets`](skills/to-tickets/SKILL.md) | TICKETS | Slice a spec into tracer-bullet vertical slices with blocking edges |
 | [`build`](skills/build/SKILL.md) | BUILD | Implement the next unblocked slice test-first via `tdd`, with feedback loops; `--all` fans every ticket out to parallel implementer subagents after one approval |
 | [`review`](skills/review/SKILL.md) | REVIEW | Fan out parallel reviewers (scope-detected audits + agent lenses incl. spec conformance, standards, coverage, and a quality-bar check), consolidate into one verdict |
-| [`ship`](skills/ship/SKILL.md) | SHIP | Pre-launch gate (check + safe-repo + floor-guard) + atomic commits + push (`--fast` to skip gate); folds into `to-pr` |
-| [`to-pr`](skills/to-pr/SKILL.md) | SHIP | Open a GitHub PR with a concise templated body: Before/After evidence, merge danger (one-way or two-way door, blast radius); `--diagram` adds a mermaid diagram of the change |
+| [`to-pr`](skills/to-pr/SKILL.md) | SHIP | Gate (check, ADR check), push, open a GitHub PR with a concise templated body: Before/After evidence, merge danger (one-way or two-way door, blast radius); watch CI, `debug` on red (max 2); `--fast` skips the gate, `--diagram` adds a mermaid diagram of the change |
 | [`retro`](skills/retro/SKILL.md) | RETRO | Retrospective on a session — suggests navigation pointers, checks, coding standards, steering fixes; mechanical mistakes become checks |
 
 ### On-demand tools
@@ -251,6 +250,17 @@ Subagents the skills fan out to for independent, read-only perspectives (e.g. `/
 
 ---
 
+## Guard hook
+
+A PreToolUse hook on the agent's shell commands, bundled with the plugin. **Claude Code only**, no configuration. Your own terminal is untouched.
+
+- Blocks `git push --force` (`-f`, `--force-with-lease`, `+refspec`), `reset --hard`, `clean -f`, `branch -D`, and `--no-verify` on any git command.
+- On `git push`, runs the secret scan on outgoing commits and `floor-guard` (base `@{u}` when set). Any finding blocks the push and names `file:line`.
+- Quoted strings don't count, so a commit message can mention `--no-verify`.
+- Needs `jq`. Without it the hook allows every command.
+
+---
+
 ## Structure
 
 ```
@@ -259,6 +269,7 @@ agent-skills/
 ├── .opencode/skills →   Symlink to skills/ for OpenCode discovery
 ├── skills/              one folder per skill, each with SKILL.md
 ├── agents/              subagent definitions (Claude Code only)
+├── hooks/               guard hook on agent git commands (Claude Code only)
 ├── docs/                Skill anatomy + per-agent setup guides
 ├── AGENTS.md            Intent → skill mapping (drives OpenCode auto-routing)
 ├── CONTRIBUTING.md      How to contribute new skills or improvements
@@ -277,6 +288,31 @@ Workflow skills write structured artifacts to `.specs/`:
 The `.specs/` directory is local-first. Add it to `.gitignore` if you prefer specs as scratch space, or commit it if you want specs as versioned project documentation.
 
 Throwaway output stays out of the working tree, so `commit` never sweeps it up: `visual-review` and `architecture-audit --html` reports, `perf-audit` bundle reports, and `handoff` docs go to `$TMPDIR` (else `/tmp`), and the skill prints the path.
+
+---
+
+## Migrating from v3
+
+v4.0.0 is a hard break: no aliases for v3 names.
+
+| v3 | v4 |
+|---|---|
+| `ask` | `triage` (routes any input; no args → where you are) |
+| `grill-me` | `grill` |
+| `spec` | `to-spec` (interview moved to `grill`) |
+| `plan` | `to-tickets`, writing `.specs/tickets/` (was `.specs/plans/`) |
+| `create-pull-request` | `to-pr` (absorbs `ship`: gate, push, CI watch) |
+| `ship` | removed, folded into `to-pr`; secret scan and floor-guard moved to the guard hook |
+| `create-adr` | `to-adr` |
+| `diagnose` | `debug` |
+| `explain-code` | `zoom-out` |
+| `fortify` | `refactor` |
+| `triage-review` | `feedback` |
+| `validate-code` | `check` |
+| `test` | removed: validation in `build`, checkbox and coverage checks in `review` lenses |
+| `e2e` | removed: a UI-tests reference in `tdd` |
+| `visual-validate` | `visual-review --ui` |
+| — | `guide` (new: which skill fits?) |
 
 ---
 
