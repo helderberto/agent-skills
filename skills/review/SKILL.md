@@ -47,7 +47,7 @@ Match each reviewer to an agent type **available in the harness**; never invent 
 
 ### 3. Fan out
 
-Spawn all reviewers in **one message** so they run concurrently. Each gets: repo path (note if it's a worktree), the exact diff command and its subset of files, one paragraph of context, its instruction (run the audit skill via the Skill tool — fall back to the skill's checklist if subagents can't load skills — or apply the lens), a pointer to `.specs/tickets/*.md` if present, and the output contract — findings with `file:line`, severity (`critical` / `important` / `suggestion`), one-line rationale. **Read-only**: no edits, staging, commits, or pushes. Brief with the artifact and the requirements, never your own conclusion: a reviewer told what to find finds it.
+Spawn all reviewers in **one message** so they run concurrently. Each gets: repo path (note if it's a worktree), the exact diff command and its subset of files, one paragraph of context, its instruction (run the audit skill via the Skill tool; `*-auditor` agents have it preloaded — fall back to the skill's checklist if subagents can't load skills — or apply the lens), a pointer to `.specs/tickets/*.md` if present, and the output contract — findings with `file:line`, severity (`critical` / `important` / `suggestion`), one-line rationale. **Read-only**: no edits, staging, commits, or pushes. Brief with the artifact and the requirements, never your own conclusion: a reviewer told what to find finds it.
 
 **Build/install collisions**: `perf-audit` builds and `deps-audit` may touch `node_modules` — give those worktree isolation or run them serially after the read-only reviewers.
 
