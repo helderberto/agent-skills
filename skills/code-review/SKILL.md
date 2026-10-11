@@ -42,5 +42,6 @@ Group by severity, `file:line` on every finding, a suggested fix for every Criti
 - **Nit** — minor and optional; label true nitpicks as Nit rather than dropping or inflating them
 - **FYI** — informational
 - **Positives** — good patterns to call out
+- **Verified** — what you ran (tests, build, experiments) and what you only read
 
 One structural problem and ten nits: the structural problem _is_ the review — lead with it. Close with the verdict against the approval standard.
