@@ -1,0 +1,53 @@
+# Flow map
+
+A **flow** is a path through the skills. Most work runs along the **main flow**; **on-ramps** merge onto it. Everything else is standalone, or a vocabulary layer underneath. Before stating what a skill does or recommending a step be skipped, read its SKILL.md: this map is orientation only.
+
+## Main flow: idea → PR
+
+1. **`/hb:triage`** classifies the input, sizes it, and names the entry. S work skips to `/hb:build`; M work with a crisp ticket skips to `/hb:to-tickets`.
+2. **`/hb:grill`** sharpens the idea by interview, in rounds over the design-tree frontier. It writes settled terms to `GLOSSARY.md` (via `domain-modeling`) and hard-to-reverse decisions to ADRs (via `to-adr`) as they land.
+   - **A question needs a runnable answer?** A state model, business logic, a UI you have to see → detour through **`/hb:prototype`**, kept on a `prototype/<name>` branch, then back to the grill with what you learned.
+3. **`/hb:to-spec`** turns the settled conversation into `.specs/specs/<slug>.md`. No interview: an open branch sends you back to `/hb:grill`.
+4. **`/hb:to-tickets`** slices the spec into tracer-bullet tickets in `.specs/tickets/<slug>.md`, each with **blocking edges**. Only exceptions get a `hitl` label.
+5. **`/hb:build`** implements the next unblocked ticket test-first through `tdd`, runs `check`, and commits. `--all` runs every ticket after one approval and stops before each `hitl` one.
+6. **`/hb:review`** fans out parallel reviewers: correctness, standards, spec conformance with ticket checkboxes, test effectiveness with changed-line coverage, the quality bar, and the audits the diff calls for.
+7. **`/hb:to-pr`** is the only command that publishes: gate, push, PR body with evidence and merge danger, `gh pr create`, CI watch.
+8. **`/hb:retro`** closes the loop. It suggests changes to the agent's **environment**, not the code: navigation pointers, checks, coding standards, steering files. Mechanical mistakes become checks; judgement calls become standards.
+
+### Context hygiene
+
+Keep steps 2–4 in **one unbroken context window**, so the grill, the spec, and the tickets build on the same thinking. Each `/hb:build` can start fresh from its ticket: the ticket is self-contained. Run `/hb:retro` in the session it looks back on, before `/clear`.
+
+Past the window where the model still reasons sharply (~150k tokens), don't push on degraded: `/compact` at the nearest phase boundary.
+
+## On-ramps
+
+- **Something's broken, flaky, or slow** → **`/hb:debug`**. It builds a feedback loop that goes red on *this* bug before any theory, then fixes with a regression test. Then `/hb:retro` asks what would have prevented it; a missing seam becomes an `/hb:architecture-audit` run.
+- **Review comments piling up on your PR** → **`/hb:feedback`** sorts them into Address / Skip / Optional / Discuss, then fixes the Address items test-first.
+- **Someone else's PR** → **`/hb:review <PR>`**.
+- **Existing code that needs tests, splitting, or simplifying** → **`/hb:refactor`**, behavior frozen.
+
+## Codebase health
+
+- **`/hb:architecture-audit`** surfaces deepening opportunities in git hot spots. A picked candidate becomes an improvement PRD you slice with `/hb:to-tickets`, or an idea for `/hb:grill`.
+
+## Vocabulary underneath
+
+Model skills that other skills pull in. Reach for them directly in plain words when the **words**, not the process, are the problem.
+
+- **`domain-modeling`** — the project's domain language in `GLOSSARY.md`: challenge a fuzzy term, split an overloaded word.
+- **`codebase-design`** — the deep-module vocabulary (module, interface, depth, seam, adapter, leverage, locality) for a module's shape.
+
+## Standalone
+
+- **`/hb:zoom-out`** — explain code with an analogy and a diagram.
+- **`/hb:research`** — a background agent reads primary sources and leaves a cited file in `.specs/research/`. Feed it into `/hb:grill`.
+- **`/hb:check`** — lint, types, tests; `--check` writes nothing.
+- **`/hb:commit`** — atomic commits by concern, never a push.
+- **`/hb:to-adr`** — record one architectural decision.
+- **`/hb:revise`** — restructure a draft or polish prose.
+- **`/hb:create-skill`** — author a new skill.
+- **`/hb:handoff`** — a portable doc for a new harness, directory, or colleague.
+- **`/hb:wait-what`** — the last message didn't land; re-pitch it plainly in glossary terms.
+- **`/hb:teach`** — learn a concept over multiple sessions in a stateful workspace.
+- Audits and lenses route themselves from plain words: accessibility, i18n, bundle size, dependency CVEs, sensitive data, trust boundaries, a visual diff report, a browser check.
