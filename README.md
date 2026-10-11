@@ -282,17 +282,6 @@ Throwaway output stays out of the working tree, so `commit` never sweeps it up: 
 
 ---
 
-## Migrating to v4.2
-
-| v4.1 | v4.2 |
-|---|---|
-| `/hb:to-pr --fast` | removed: the gate always runs; `--skip-ci` skips remote CI instead |
-| `/hb:to-pr --draft` | removed: PRs open ready for review |
-| `/hb:to-pr --no-diagram` | removed: the model picks the Summary visual; `--diagram[=<type>]` forces mermaid |
-| `parity-check` agent | `parity-auditor` |
-
----
-
 ## Contributing
 
 PRs welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for workflow, conventions, and where to start.
