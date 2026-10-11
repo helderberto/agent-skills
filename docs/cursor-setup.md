@@ -53,7 +53,7 @@ cp /path/to/agent-skills/skills/to-tickets/SKILL.md  .cursor/rules/to-tickets.md
 cp /path/to/agent-skills/skills/build/SKILL.md .cursor/rules/build.md
 ```
 
-Cursor will then route prompts like "plan the dark mode feature" or "build the next phase" through these rules automatically.
+Cursor will then route prompts like "slice the dark mode spec into tickets" or "build the next ticket" through these rules automatically.
 
 ## Limitations
 

@@ -20,7 +20,7 @@ Map current state: data models, services, API routes, frontend, tests. Note exis
 
 ### 2. Check the branches
 
-Never interview here. Check each branch below against the conversation and the code: settled → synthesize it. Open branches → one confirm round at most, each question with your recommended answer. Still open after that → stop with `Next: /hb:grill <slug>`. When a domain term settles, call the Skill tool with `domain-modeling` to write it into the glossary, so spec and glossary agree.
+Never interview here. Check each branch below against the conversation and the code: settled → synthesize it. Open branches → one confirm round at most, each question with your recommended answer. Still open after that → stop with `Next: /hb:grill <slug>`. A domain term that settles here → call the Skill tool with `domain-modeling` to write it into the glossary, so spec and glossary agree.
 
 | Branch           | Key questions                           | Skip when                        |
 | ---------------- | --------------------------------------- | -------------------------------- |
@@ -40,9 +40,12 @@ Sketch modules. Favor **deep modules** — simple interface (1–3 entry points)
 
 ### 4. Write spec
 
-Save to `.specs/specs/<slug>.md`. Omit empty sections. No file paths or code snippets.
+Save to `.specs/specs/<slug>.md`. Omit empty sections. No file paths or code snippets. A related ticket (a key or `#42` in the conversation, the argument, or the branch name) → record it in frontmatter; no ticket → no frontmatter.
 
 ```
+---
+ticket: <key>
+---
 # Feature Name
 ## Problem Statement
 ## Current State (skip if greenfield)
@@ -58,4 +61,4 @@ Save to `.specs/specs/<slug>.md`. Omit empty sections. No file paths or code sni
 ## Out of Scope (be specific)
 ```
 
-Next: `/hb:to-tickets <slug>` (Recommended) or done for now.
+Next: `/hb:to-tickets <slug>`

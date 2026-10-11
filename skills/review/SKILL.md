@@ -26,7 +26,7 @@ Always: correctness (`code-review`), standards, sensitive data (`safe-repo` diff
 |----------|------|------------|
 | Correctness (`code-review`) | always | `general-purpose` |
 | Standards | always | `general-purpose` |
-| Spec conformance + ticket checkboxes | `.specs/specs/<slug>.md` matches the branch or plan | `general-purpose` |
+| Spec conformance + ticket checkboxes | `.specs/specs/<slug>.md` matches the branch or tickets | `general-purpose` |
 | Quality bar (floor-guard) | always | none: run inline |
 | Sensitive data (`safe-repo` diff-only) | always | `general-purpose` |
 | Test effectiveness + changed-line coverage | always | `test-auditor` |
@@ -41,13 +41,13 @@ Always: correctness (`code-review`), standards, sensitive data (`safe-repo` diff
 Match each reviewer to an agent type **available in the harness**; never invent one. Announce chosen reviewers before spawning and skip irrelevant ones with a one-line reason.
 
 - **Standards**: first find every file that documents how code should be written; `CODING_STANDARDS.md` and `CONTRIBUTING.md` must be on the list when present. Brief: report every place the diff breaks a documented standard, citing the file and the rule. Skip what tooling enforces.
-- **Spec**: several specs and none matches → ask which. Brief, verbatim: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding." With a plan in `.specs/plans/<slug>.md`, also check every ticket checkbox against the code: a checked box that doesn't hold is Important; an unchecked box the diff satisfies is a Suggestion. Report only, never edit the plan.
+- **Spec**: several specs and none matches → ask which. Brief, verbatim: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding." With tickets in `.specs/tickets/<slug>.md`, also check every ticket checkbox against the code: a checked box that doesn't hold is Important; an unchecked box the diff satisfies is a Suggestion. Report only, never edit the tickets file.
 - **Test effectiveness**: besides the `test-auditor` brief, if the project emits coverage, confirm the changed lines (`git diff -U0 <base>`) are exercised, not just the global %. Uncovered changed lines are Important. No coverage tooling → note the check as skipped.
 - **Quality bar**: run `bash ${CLAUDE_SKILL_DIR}/scripts/floor-guard.sh --base <base>`. Exit 1 → each `[rule] file:line` is Important unless the diff or a commit message gives the reason. Exit 2 → note the check as skipped.
 
 ### 3. Fan out
 
-Spawn all reviewers in **one message** so they run concurrently. Each gets: repo path (note if it's a worktree), the exact diff command and its subset of files, one paragraph of context, its instruction (run the audit skill via the Skill tool — fall back to the skill's checklist if subagents can't load skills — or apply the lens), a pointer to `.specs/plans/*.md` if present, and the output contract — findings with `file:line`, severity (`critical` / `important` / `suggestion`), one-line rationale. **Read-only**: no edits, staging, commits, or pushes. Brief with the artifact and the requirements, never your own conclusion: a reviewer told what to find finds it.
+Spawn all reviewers in **one message** so they run concurrently. Each gets: repo path (note if it's a worktree), the exact diff command and its subset of files, one paragraph of context, its instruction (run the audit skill via the Skill tool — fall back to the skill's checklist if subagents can't load skills — or apply the lens), a pointer to `.specs/tickets/*.md` if present, and the output contract — findings with `file:line`, severity (`critical` / `important` / `suggestion`), one-line rationale. **Read-only**: no edits, staging, commits, or pushes. Brief with the artifact and the requirements, never your own conclusion: a reviewer told what to find finds it.
 
 **Build/install collisions**: `perf-audit` builds and `deps-audit` may touch `node_modules` — give those worktree isolation or run them serially after the read-only reviewers.
 

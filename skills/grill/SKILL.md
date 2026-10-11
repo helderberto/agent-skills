@@ -28,6 +28,8 @@ Each answered round reshapes the tree: settled decisions push the frontier outwa
 
 **Facts are your job; decisions are the user's.** If a frontier question can be answered from the codebase or environment, dispatch a subagent to find it — never ask the user for anything you could look up yourself. Don't block the round on a running lookup: only the questions downstream of it wait; ask the rest of the frontier now.
 
+**Write as you go.** A domain term settles → call the Skill tool with `domain-modeling` to write it into the glossary. A decision settles that is hard to reverse, surprising without context, and a real trade-off → call the Skill tool with `to-adr` to record it. Do both inline, the moment it settles, not in a batch at the end.
+
 Done when the frontier is empty: every branch visited, nothing left silently assumed. Do not act until the user explicitly confirms the shared understanding — "whatever you think is best" or "you decide" is delegation, not confirmation; put the specific decision back to them.
 
 Next: `/hb:to-spec <slug>`, with `<slug>` derived from the idea.

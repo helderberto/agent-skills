@@ -269,7 +269,7 @@ agent-skills/
 Workflow skills write structured artifacts to `.specs/`:
 
 - `.specs/specs/<slug>.md` — specs from `/hb:to-spec`
-- `.specs/plans/<slug>.md` — phased plans from `/hb:to-tickets`
+- `.specs/tickets/<slug>.md` — tracer-bullet tickets from `/hb:to-tickets`
 - `.specs/research/<slug>.md` — cited findings from `/hb:research`, when the repo has no notes convention of its own
 
 The `.specs/` directory is local-first. Add it to `.gitignore` if you prefer specs as scratch space, or commit it if you want specs as versioned project documentation.

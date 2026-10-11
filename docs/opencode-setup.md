@@ -64,13 +64,13 @@ You: I want to add dark mode support.
 OpenCode: [invokes to-spec skill, interviews, writes .specs/specs/dark-mode.md]
 
 You: Plan it.
-OpenCode: [invokes to-tickets skill, writes phases into .specs/plans/dark-mode.md]
+OpenCode: [invokes to-tickets skill, writes tickets into .specs/tickets/dark-mode.md]
 
 You: Build the next phase.
 OpenCode: [invokes build skill, implements, runs feedback loops, marks checkboxes]
 
 You: Review it.
-OpenCode: [invokes review skill, checks the diff and plan checkboxes]
+OpenCode: [invokes review skill, checks the diff and ticket checkboxes]
 ```
 
 ## Customizing the agent persona

@@ -42,7 +42,7 @@ Next: /hb:<cmd> <args>
 No args → read the state in parallel, then report the phase and the next command:
 
 - `git branch --show-current`, `git status --short`, and the default branch
-- `.specs/specs/` and `.specs/plans/`: the spec and plan matching the branch slug, with checked/total boxes
+- `.specs/specs/` and `.specs/tickets/`: the spec and tickets matching the branch slug, with checked/total boxes
 - `gh pr view --json number,state,url,reviewDecision` for the branch, and `gh pr checks` for CI. `gh` missing or not authenticated → skip both and say so
 
 The most advanced row that matches wins:
@@ -53,16 +53,16 @@ The most advanced row that matches wins:
 | PR open, CI red | SHIP | `/hb:debug <failing check>` |
 | PR open, unresolved review comments | SHIP | `/hb:feedback` |
 | PR open, CI green | SHIP | `/hb:retro` |
-| Plan fully checked, no PR | REVIEW | `/hb:review`, then `/hb:to-pr` |
-| Plan with unchecked boxes | BUILD | `/hb:build <slug>` |
-| Spec, no plan | TICKETS | `/hb:to-tickets <slug>` |
+| Tickets fully checked, no PR | REVIEW | `/hb:review`, then `/hb:to-pr` |
+| Tickets with unchecked boxes | BUILD | `/hb:build <slug>` |
+| Spec, no tickets | TICKETS | `/hb:to-tickets <slug>` |
 | Commits or changes on a branch, no spec | BUILD (S) | `/hb:review`, then `/hb:to-pr` |
 | Nothing yet | TRIAGE | `/hb:triage <what you want to do>` |
 
 Report one status line, then the `Next:` line:
 
 ```
-<branch> · spec <slug|none> · plan <checked>/<total> · PR #<n> <state> · CI <state>
+<branch> · spec <slug|none> · tickets <checked>/<total> · PR #<n> <state> · CI <state>
 Next: /hb:<cmd> <args>
 ```
 
