@@ -13,6 +13,7 @@ skills/         → Core skills (one folder per skill, each with SKILL.md)
 agents/         → Subagent definitions the skills fan out to (Claude Code only)
 docs/           → Setup guides per agent (Cursor, Gemini CLI, OpenCode, Copilot)
 .claude-plugin/ → Plugin manifest + marketplace entry (Claude Code)
+plugin.json     → Plugin manifest (Antigravity CLI)
 ```
 
 ## Integration Model
@@ -25,6 +26,7 @@ Different agents discover skills through different mechanisms. This repo support
 | Gemini CLI  | `gemini skills install` from this repo                        |
 | OpenCode    | Auto-routes via this `AGENTS.md` + the `skill` tool           |
 | Cursor      | Sync `skills/` into `.cursor/skills/` (native skills)            |
+| Antigravity CLI | Native plugin via root `plugin.json` (`agy plugin install`)  |
 
 See [docs/](./docs/) for per-agent setup instructions.
 
@@ -108,6 +110,7 @@ When the user has a non-trivial task, suggest the flow commands in order. They a
 - Optional `effort` frontmatter (`low`/`medium`/`high`/`xhigh`/`max`) overrides reasoning effort for the turn the skill fires — set it only when the task deviates from the `medium` default
 - No Claude Code hooks: they would block the user's own sessions. Safety checks run when the user asks (`/hb:safe-repo`, `/hb:to-pr --safe`)
 - Supporting files split into subfolders: `references/` (long-form docs loaded on demand), `scripts/` (deterministic helpers), `assets/` (templates/icons used in output). Split when `SKILL.md` exceeds ~150 lines
+- Keep `name` and `description` identical in every plugin manifest (`.claude-plugin/plugin.json`, `plugin.json`)
 - Bump `.claude-plugin/plugin.json` `version` (semver) once per PR that changes a skill users see, so plugin consumers can track updates
 - After the PR merges: annotated tag `vX.Y.Z` on the merge commit, summarizing changes since the previous tag; `git push origin vX.Y.Z`; then `gh release create vX.Y.Z` with notes shaped like the previous release (`gh release view`)
 

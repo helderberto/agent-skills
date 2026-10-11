@@ -65,6 +65,19 @@ mkdir -p .cursor/skills && rsync -a agent-skills/skills/ .cursor/skills/
 </details>
 
 <details>
+<summary><b>Antigravity CLI</b></summary>
+
+Install as a native plugin: skills activate on demand or run as `/hb:<skill>`.
+
+```bash
+agy plugin install https://github.com/helderberto/agent-skills
+```
+
+See [docs/antigravity-setup.md](docs/antigravity-setup.md).
+
+</details>
+
+<details>
 <summary><b>Gemini CLI</b></summary>
 
 Install as native skills, activated on demand, or list them in `GEMINI.md` for persistent context. See [docs/gemini-cli-setup.md](docs/gemini-cli-setup.md).
@@ -281,6 +294,7 @@ Subagents the skills fan out to for independent, read-only perspectives (e.g. `/
 ```
 agent-skills/
 ├── .claude-plugin/      Plugin manifest + marketplace entry (Claude Code)
+├── plugin.json          Plugin manifest (Antigravity CLI)
 ├── .opencode/skills →   Symlink to skills/ for OpenCode discovery
 ├── skills/              one folder per skill, each with SKILL.md
 ├── agents/              subagent definitions (Claude Code only)
