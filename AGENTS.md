@@ -45,6 +45,7 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | User intent                             | Skill to invoke                                |
 | --------------------------------------- | ---------------------------------------------- |
 | New feature with unclear requirements   | suggest `/hb:triage` → `/hb:grill` → `/hb:to-spec` |
+| Slice a spec or ticket into tickets     | suggest `/hb:to-tickets`                       |
 | Implement the next ticket               | suggest `/hb:build`                            |
 | Test-first development                  | `tdd`                                          |
 | Implement using official docs           | `source-driven`                                |
@@ -102,7 +103,7 @@ When the user has a non-trivial task, suggest the flow commands in order. They a
 
 - Every skill lives in `skills/<name>/SKILL.md` (or `<name>/SKILL.md` if flat at root — see structure section)
 - YAML frontmatter requires `name` and `description`
-- Description starts with what the skill does, followed by trigger conditions ("Use when...")
+- Description starts with what the skill does. Model-visible skills follow with trigger conditions ("Use when..."); typed-only skills stop at one sentence
 - Optional `effort` frontmatter (`low`/`medium`/`high`/`xhigh`/`max`) overrides reasoning effort for the turn the skill fires — set it only when the task deviates from the `medium` default
 - Supporting files split into subfolders: `references/` (long-form docs loaded on demand), `scripts/` (deterministic helpers), `assets/` (templates/icons used in output). Split when `SKILL.md` exceeds ~150 lines
 - Bump `.claude-plugin/plugin.json` `version` (semver) on every user-visible change to a skill so plugin consumers can track updates

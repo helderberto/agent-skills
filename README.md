@@ -137,7 +137,7 @@ Rule: on the flow, outward-facing, expensive, or session control → **typed-onl
 | Both (12) | default | debug · to-adr · zoom-out · commit · check · feedback · refactor · prototype · research · revise · create-skill · safe-repo |
 | Model only (12) | `user-invocable: false` | tdd · code-review · codebase-design · domain-modeling · harden · source-driven · frontend-ui-engineering · visual-review · a11y-audit · i18n · perf-audit · deps-audit |
 
-The `/hb:` menu shows typed-only and both (25 entries); the model sees both and model-only descriptions (24). Typed-only skills call model skills through the Skill tool and mention other typed-only skills only in `Next:` lines. Typed-only descriptions keep one what-it-does sentence; trigger phrases live only on model-visible skills.
+The `/hb:` menu shows typed-only and both (25 entries); the model sees both and model-only descriptions (24). Typed-only skills call model skills through the Skill tool and mention other typed-only skills only in `Next:` lines; the routers `triage` and `guide` name commands by design. Typed-only descriptions keep one what-it-does sentence; trigger phrases live only on model-visible skills.
 
 Skills also carry an **effort** hint: mechanical ones (`commit`, `to-adr`) run at low reasoning effort, heavy ones (`architecture-audit`, `harden`, `debug`) at high or xhigh, and the rest at the implicit medium default. The override lasts only for the turn the skill fires — so complexity matches the task without you touching `/effort`.
 
@@ -186,7 +186,7 @@ Focused capabilities the agent applies based on the task; both-tier ones are als
 
 | Skill | What it does |
 |-------|--------------|
-| [`code-review`](skills/code-review/SKILL.md) | PR or pasted-diff review against an approval standard — correctness, security, performance, a Fowler smell baseline; Critical→Nit severities |
+| [`code-review`](skills/code-review/SKILL.md) | Correctness lens used by `build` and `review`: a PR or diff against an approval standard — correctness, security, performance, a Fowler smell baseline; Critical→Nit severities |
 | [`visual-review`](skills/visual-review/SKILL.md) | Render a PR diff as an annotated HTML page — each hunk linked to a design/simplification principle with a suggested rewrite; `--ui` checks a UI change in a real browser via Chrome DevTools or Playwright MCP |
 | [`feedback`](skills/feedback/SKILL.md) | Triage existing PR review comments (Copilot + human), verify against code, classify Address/Skip/Optional/Discuss |
 | [`a11y-audit`](skills/a11y-audit/SKILL.md) | Accessibility compliance audit (WCAG) |

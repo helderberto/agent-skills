@@ -62,7 +62,7 @@ Model skills that other skills pull in. Reach for them directly in plain words w
 - **`/hb:handoff`** — a portable doc for a new harness, directory, or colleague.
 - **`/hb:wait-what`** — the last message didn't land; re-pitch it plainly in glossary terms.
 - **`/hb:teach`** — learn a concept over multiple sessions in a stateful workspace.
-- Audits and lenses route themselves from plain words: accessibility, i18n, bundle size, dependency CVEs, trust boundaries, a visual diff report, a browser check.
+- Model skills route themselves from plain words: test-first work (`tdd`), official-docs implementation (`source-driven`), UI construction (`frontend-ui-engineering`), a correctness review (`code-review`), accessibility, i18n, bundle size, dependency CVEs, trust boundaries, a visual diff report, a browser check.
 
 ## Phase boundaries
 

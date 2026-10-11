@@ -47,8 +47,8 @@ When in doubt, open an issue first to discuss scope.
 
 - **English only** for all written artifacts (code, comments, commits, PR titles/bodies, ADRs, docs)
 - **Skill names** are lowercase kebab-case: `code-review`, `safe-repo`
-- **Workflow skills** (`grill`, `to-spec`, `to-tickets`, `build`, `review`, `to-pr`) are invoked as `/hb:<name>`
-- **Toolbelt skills** auto-trigger from the `description` field — write that carefully
+- **Workflow skills** (`triage`, `grill`, `to-spec`, `to-tickets`, `build`, `review`, `to-pr`, `retro`) are typed as `/hb:<name>`
+- **Toolbelt skills** in the both and model-only tiers auto-trigger from the `description` field — write that carefully
 
 ## Where to start
 
