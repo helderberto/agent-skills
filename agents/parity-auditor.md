@@ -1,5 +1,5 @@
 ---
-name: parity-check
+name: parity-auditor
 description: >
   Audit code migrations for missing functionality. Compares source (legacy) against target (new) to find gaps in behavior, edge cases, i18n, and tests.
 tools: Read, Grep, Glob, Bash

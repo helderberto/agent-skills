@@ -126,6 +126,7 @@ For quick standalone tasks, you don't need the flow — describe what you want a
 - **Verb** — does work, asks you something or changes code: `triage`, `grill`, `build`, `review`, `retro`, `debug`, `refactor`.
 - **`to-X`** — turns what's in context into artifact X, at most one question round, never an interview: `to-spec`, `to-tickets`, `to-pr`, `to-adr`.
 - **`*-audit`** — read-only report: `a11y-audit`, `perf-audit`, `deps-audit`, `architecture-audit`.
+- **`*-auditor`** — Claude Code agent: a read-only reviewer that skills fan out to, preloading the skill that holds its checklist when one exists: `test-auditor`, `parity-auditor`.
 
 ### Invocation tiers
 
@@ -246,7 +247,7 @@ Subagents the skills fan out to for independent, read-only perspectives (e.g. `/
 | Agent | Purpose |
 |-------|---------|
 | [`test-auditor`](agents/test-auditor.md) | Test effectiveness beyond coverage |
-| [`parity-check`](agents/parity-check.md) | Audit code migrations for missing functionality |
+| [`parity-auditor`](agents/parity-auditor.md) | Audit code migrations for missing functionality |
 
 ---
 

@@ -103,6 +103,7 @@ When the user has a non-trivial task, suggest the flow commands in order. They a
 
 - Every skill lives in `skills/<name>/SKILL.md` (or `<name>/SKILL.md` if flat at root — see structure section)
 - YAML frontmatter requires `name` and `description`
+- Agents in `agents/` are named `*-auditor`: read-only reviewers that preload, through `skills:` frontmatter, the skill holding their checklist when one exists
 - Description starts with what the skill does. Model-visible skills follow with trigger conditions ("Use when..."); typed-only skills stop at one sentence
 - Optional `effort` frontmatter (`low`/`medium`/`high`/`xhigh`/`max`) overrides reasoning effort for the turn the skill fires — set it only when the task deviates from the `medium` default
 - No Claude Code hooks: they would block the user's own sessions. Safety checks run when the user asks (`/hb:safe-repo`, `/hb:to-pr --safe`)
