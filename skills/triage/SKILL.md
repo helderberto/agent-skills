@@ -1,13 +1,13 @@
 ---
 name: triage
-description: Classify any input — idea, bug, ticket key, `#42`, PR URL, stack trace, or a question about the skills — size it, and name the command to type; with no args, report where you are.
+description: Classify any input — idea, bug, ticket key, `#42`, PR URL, stack trace — size it, and name the command to type; with no args, report where you are.
 disable-model-invocation: true
 argument-hint: '[idea | ticket | #42 | PR URL | stack trace]'
 ---
 
 # Triage
 
-Input: `$ARGUMENTS`. Empty → [Where am I](#where-am-i). Otherwise classify, size, and end on one filled-in `Next:` line. A question about the skills themselves ("which skill fits?", "how does the flow work?") → answer from the [flow map](references/flow-map.md), ending on a `Next:` line. Before you say what a skill does or recommend skipping one, read its SKILL.md.
+Input: `$ARGUMENTS`. Empty → [Where am I](#where-am-i). Otherwise classify, size, and end on one filled-in `Next:` line. Before you say what a skill does or recommend skipping one, read its SKILL.md.
 
 ## Classify
 
@@ -65,15 +65,3 @@ Report one status line, then the `Next:` line:
 <branch> · spec <slug|none> · tickets <checked>/<total> · PR #<n> <state> · CI <state>
 Next: /hb:<cmd> <args>
 ```
-
-## Phase boundaries
-
-Decide at a boundary, never mid-phase: mid-phase, continue or split the rest into subagents. Work top to bottom; the first yes wins.
-
-1. **Continue** — the next phase needs this one as a primary source, or there's room left in the context window.
-2. **`/clear`** — nothing here matters to what's next.
-3. **`/hb:handoff`** — only for a new harness, a new directory, a colleague, or a side task found mid-phase.
-4. **Subagent** — the task can run AFK, like an automated review.
-5. **`/compact`** with an instruction (`/compact we're going to QA this area`).
-
-Every move but Continue replaces the session with a summary of it, so rule Continue out first.

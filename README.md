@@ -132,11 +132,11 @@ Rule: on the flow, outward-facing, expensive, or session control → **typed-onl
 
 | Tier | Frontmatter | Skills |
 |---|---|---|
-| Typed-only (12) | `disable-model-invocation: true` | triage · grill · to-spec · to-tickets · build · review · to-pr · retro · architecture-audit · handoff · wait-what · teach |
+| Typed-only (13) | `disable-model-invocation: true` | triage · grill · to-spec · to-tickets · build · review · to-pr · retro · architecture-audit · guide · handoff · wait-what · teach |
 | Both (11) | default | debug · to-adr · zoom-out · commit · check · feedback · refactor · prototype · research · revise · create-skill |
 | Model only (13) | `user-invocable: false` | tdd · code-review · codebase-design · domain-modeling · harden · source-driven · frontend-ui-engineering · visual-review · a11y-audit · i18n · perf-audit · deps-audit · safe-repo |
 
-The `/hb:` menu shows typed-only and both (23 entries); the model sees both and model-only descriptions (24). Typed-only skills call model skills through the Skill tool and mention other typed-only skills only in `Next:` lines. Typed-only descriptions keep one what-it-does sentence; trigger phrases live only on model-visible skills. `ship` stays typed-only until `to-pr` absorbs it.
+The `/hb:` menu shows typed-only and both (24 entries); the model sees both and model-only descriptions (24). Typed-only skills call model skills through the Skill tool and mention other typed-only skills only in `Next:` lines. Typed-only descriptions keep one what-it-does sentence; trigger phrases live only on model-visible skills. `ship` stays typed-only until `to-pr` absorbs it.
 
 Skills also carry an **effort** hint: mechanical ones (`commit`, `to-adr`) run at low reasoning effort, heavy ones (`architecture-audit`, `harden`, `debug`) at high or xhigh, and the rest at the implicit medium default. The override lasts only for the turn the skill fires — so complexity matches the task without you touching `/effort`.
 
@@ -146,7 +146,7 @@ The flow, one typed command per step:
 
 | Skill | Phase | What it does |
 |-------|-------|--------------|
-| [`triage`](skills/triage/SKILL.md) | TRIAGE | Router — maps your situation to the command to type next, plus when to continue, `/clear`, hand off, or `/compact` |
+| [`triage`](skills/triage/SKILL.md) | TRIAGE | Classify any input (idea, bug, ticket, PR, stack trace), size it, name the command to type; no args → where you are |
 | [`grill`](skills/grill/SKILL.md) | GRILL | Interview in rounds over the design-tree frontier, each question with a recommended answer |
 | [`to-spec`](skills/to-spec/SKILL.md) | SPEC | Settled conversation + codebase scan → structured spec in `.specs/specs/<slug>.md` |
 | [`to-tickets`](skills/to-tickets/SKILL.md) | TICKETS | Slice a spec into tracer-bullet vertical slices with blocking edges |
@@ -227,6 +227,7 @@ Focused capabilities the agent applies based on the task; both-tier ones are als
 
 | Skill | What it does |
 |-------|--------------|
+| [`guide`](skills/guide/SKILL.md) | Which skill fits? A map of the flow, on-ramps, and standalone skills, plus when to continue, `/clear`, hand off, or `/compact` |
 | [`handoff`](skills/handoff/SKILL.md) | Compact the current conversation into a handoff doc for a fresh agent |
 | [`teach`](skills/teach/SKILL.md) | Stateful teaching workspace — lessons, references, learning records tied to a mission |
 | [`wait-what`](skills/wait-what/SKILL.md) | Last message didn't land — re-pitch it with context, in Simplified Technical English and glossary terms |
