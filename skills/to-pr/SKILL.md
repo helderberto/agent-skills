@@ -1,7 +1,7 @@
 ---
 name: to-pr
-description: Create a GitHub pull request — concise body on the repo's PR template, conventional-commit title, ticket refs. `--draft` for a draft PR, `--diagram[=type]` to add a mermaid diagram of the change.
-argument-hint: '[--draft] [--diagram[=flow|sequence|class|state]]'
+description: Gate, push, and open a GitHub pull request, then watch CI — concise body on the repo's PR template, conventional-commit title, ticket refs. `--fast` skips the gate, `--draft` for a draft PR, `--diagram[=type]` to add a mermaid diagram of the change.
+argument-hint: '[--fast] [--draft] [--diagram[=flow|sequence|class|state]]'
 disable-model-invocation: true
 ---
 
@@ -9,19 +9,27 @@ disable-model-invocation: true
 
 Arguments: $ARGUMENTS
 
+- `--fast` — skip the gate. Only for hotfixes, disposable branches (spike/prototype/CI), or when the gate already passed this session. Never on main/release. Say why in the PR body.
 - `--draft` — create as draft.
 - `--diagram` — append a `## Diagram` section with a mermaid diagram of the change (GitHub renders it natively). Optional `=flow|sequence|class|state` forces the type; otherwise pick by the shape of the change (below).
 
 ## Workflow
 
-1. In parallel: base branch (`git remote show origin | grep 'HEAD branch'`), ticket id from the branch name (`[A-Z]+-[0-9]+`), PR template (`.github/pull_request_template.md`, `.github/PULL_REQUEST_TEMPLATE.md`, `.github/PULL_REQUEST_TEMPLATE/`, `docs/pull_request_template.md`, `pull_request_template.md`).
-2. In parallel: `git diff <base>...HEAD` and the full commit list — review every commit, not just the latest.
-3. Ask the user, all at once: **effort** in hours (required), **what was done** in their words (required), testing not visible in the diff, tricky parts, and any template field the diff can't answer (breaking change? type of change?).
-4. Draft title and body.
+1. `gh auth status`. Not logged in → stop: "Run `! gh auth login`, then `/hb:to-pr` again."
+2. In parallel: base branch (`git remote show origin | grep 'HEAD branch'`), ticket id from the branch name (`[A-Z]+-[0-9]+`), PR template (`.github/pull_request_template.md`, `.github/PULL_REQUEST_TEMPLATE.md`, `.github/PULL_REQUEST_TEMPLATE/`, `docs/pull_request_template.md`, `pull_request_template.md`).
+3. In parallel: `git diff <base>...HEAD` and the full commit list — review every commit, not just the latest.
+4. **Gate** (skipped with `--fast`):
+   - Call the Skill tool with `check`. FAIL → report, stop.
+   - ADR check: the diff adds a dependency or a module, changes a public API, or adds a migration, and nothing in `docs/adr/` covers it → offer to call the Skill tool with `to-adr` before pushing.
+5. Uncommitted work → call the Skill tool with `commit` (never open a PR on a dirty tree).
+6. Push with `-u`. On the default branch → confirm first. Rejected as non-fast-forward → `git pull --rebase`, retry once. **Never force push.** The plugin's guard hook runs the secret scan and floor-guard on every push; blocked → report its `file:line` findings, stop.
+7. Ask the user, all at once: **effort** in hours (required), **what was done** in their words (required), testing not visible in the diff, tricky parts, and any template field the diff can't answer (breaking change? type of change?).
+8. Draft title and body.
    - Title matches `^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\(.*\))?: .+$`.
    - Template found → it is the body, verbatim structure: fill every section and placeholder, check applicable boxes, add nothing outside it except `## Diagram` when requested. Its testing section carries the Evidence, its risk section the Merge Danger. No template → `## Summary` + `## Evidence` + `## Merge Danger`.
    - Reference the ticket (`Resolves TICKET-123`).
-5. Uncommitted work → call the Skill tool with `commit` first (never open a PR on a dirty tree). Push with `-u` if needed, `gh pr create` with a HEREDOC body (`--draft` if requested). Return the URL.
+9. `gh pr create` with a HEREDOC body (`--draft` if requested). Return the URL.
+10. `gh pr checks --watch`. Red → call the Skill tool with `debug` on the failing check, fix, commit, push. At most 2 rounds; still red → stop and report the failing checks.
 
 Next: `/hb:retro` in this session, before `/clear`.
 

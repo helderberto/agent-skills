@@ -72,8 +72,7 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Validate code (lint + types + tests)    | `check`                                        |
 | Write end-to-end tests                  | `tdd`                                          |
 | Commit changes (atomic, grouped by concern) | `commit`                                   |
-| Commit and push                         | suggest `/hb:ship`                             |
-| Create a pull request                   | suggest `/hb:to-pr`                            |
+| Push and create a pull request          | suggest `/hb:to-pr`                            |
 | Record an architectural decision        | `to-adr`                                       |
 | Pin down domain terminology / glossary  | `domain-modeling`                              |
 | Stress-test a plan or design            | suggest `/hb:grill`                            |
@@ -96,7 +95,7 @@ When the user has a non-trivial task, suggest the flow commands in order. They a
 - **TICKETS** → `to-tickets` slices the spec into tracer-bullet tickets, with `architecture-audit` or `codebase-design` as needed
 - **BUILD** → `build` (one ticket per invocation, or `--all`), driven by `tdd`, `source-driven`, and `check`
 - **REVIEW** → `review` (audits as parallel reviewers plus agent lenses: spec conformance with ticket checkboxes, standards, test effectiveness with changed-line coverage, floor-guard), covering `a11y-audit`, `i18n`, `perf-audit`, `deps-audit`, `safe-repo`, `harden`; `feedback` sorts existing reviewer comments
-- **SHIP** → `to-pr` (gate, push, PR, CI watch); `ship` gates and pushes until `to-pr` absorbs it
+- **SHIP** → `to-pr` (gate, push, PR, CI watch); the guard hook scans every agent push
 - **RETRO** → `retro`, in the same session before `/clear`
 
 ## Conventions

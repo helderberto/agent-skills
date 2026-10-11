@@ -62,7 +62,7 @@ gemini skills update <skill-name>
 
 ## Tracer-bullet workflow
 
-The workflow skills (`grill`, `to-spec`, `to-tickets`, `build`, `review`, `ship`, `to-pr`) work the same way in Gemini as in Claude Code, only without the `/hb:` prefix:
+The workflow skills (`grill`, `to-spec`, `to-tickets`, `build`, `review`, `to-pr`) work the same way in Gemini as in Claude Code, only without the `/hb:` prefix:
 
 ```
 You: invoke the to-spec skill to define a dark mode feature

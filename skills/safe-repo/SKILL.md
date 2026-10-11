@@ -14,7 +14,7 @@ Security audit for sensitive data in repository. Check for credentials, API keys
 ## Modes
 
 - **Default (full-scan)**: scans all git-tracked files plus history. Use for periodic audits or first-time repo review.
-- **`--diff`**: scans only staged + unstaged changes (`git diff` + `git diff --cached`). Use before commit or when called from `review` / `ship` workflows. Fast, no false positives from pre-existing files.
+- **`--diff`**: scans only staged + unstaged changes (`git diff` + `git diff --cached`). Use before commit or when called from `review`. Fast, no false positives from pre-existing files.
 
 ## Workflow
 

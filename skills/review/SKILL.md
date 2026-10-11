@@ -72,4 +72,4 @@ Merge findings, dedupe, and flag convergence (≥2 reviewers on the same line). 
 
 Count Standards and Spec findings by their severity. **APPROVE** (zero Critical, zero Important) · **REQUEST CHANGES** (any Critical, or 3+ Important) · **NEEDS DISCUSSION** (Important findings involving architectural tradeoffs). Never auto-fix.
 
-Next: REQUEST CHANGES → fix, re-run `/hb:review`. NEEDS DISCUSSION → settle it with the user, then re-run. APPROVE → `/hb:ship`.
+Next: REQUEST CHANGES → fix, re-run `/hb:review`. NEEDS DISCUSSION → settle it with the user, then re-run. APPROVE → `/hb:to-pr`.
