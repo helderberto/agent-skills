@@ -34,7 +34,7 @@ Always: correctness (`code-review`), standards, sensitive data (`safe-repo --dif
 | User-facing strings (`i18n`) | new JSX text / template literals | `general-purpose` |
 | Bundle / perf (`perf-audit`) | `package.json`, bundler config changed | `general-purpose` |
 | Dependencies (`deps-audit`) | manifest / lockfile changed | `general-purpose` |
-| Trust boundaries (`harden`) | routes, controllers, models, SQL, auth/input/external calls | `general-purpose` |
+| Trust boundaries (`harden`) | routes, controllers, models, SQL, auth/input/external or LLM calls | `security-auditor` |
 | Type safety | heavy type-level changes | `general-purpose` |
 | Architecture friction | cross-module changes | `general-purpose` (uses `codebase-design` vocabulary) |
 
