@@ -16,8 +16,8 @@ Resolve the input first. A ticket key (`[A-Z]+-[0-9]+`) → its text from the tr
 | Class | Entry | Size |
 |---|---|---|
 | Fuzzy feature | `/hb:grill` | L |
-| Crisp feature (ticket with AC) | `/hb:to-tickets`, or `/hb:build` when it's one ticket | M |
-| Bug, known cause | `/hb:build` (tdd regression test first) | S |
+| Crisp feature (ticket with AC) | `/hb:to-tickets <ticket>` | M |
+| Bug, known cause | `/hb:build <the fix in one line>` (tdd regression test first) | S |
 | Bug, unknown / flaky | `/hb:debug` | S–M |
 | Perf | `/hb:debug` (baseline first) | M |
 | Refactor | `/hb:refactor` (characterization tests first) | S–M |

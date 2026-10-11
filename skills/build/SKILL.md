@@ -14,7 +14,7 @@ Implement the next unblocked ticket from `.specs/tickets/<slug>.md` — one tick
 
 `$ARGUMENTS` is a `<slug>` or an `@path` (read that file directly as the tickets file). If empty or the file is missing, list `.specs/tickets/*.md` as numbered options and wait.
 
-Free text from `triage` (an S change: one commit, no tickets) → call the Skill tool with `tdd` for it, regression test first for a bug. Then run steps 4, 6, and 7 as one ticket with one commit, and end with `Next: /hb:review`.
+Free text (an S change: one commit, no tickets) → on the default branch, offer `feat/<slug>` first, as in step 2. Then call the Skill tool with `tdd` for it, regression test first for a bug, run steps 4, 6, and 7 as one ticket with one commit, and end with `Next: /hb:review`.
 
 ## Workflow
 
