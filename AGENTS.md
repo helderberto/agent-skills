@@ -83,6 +83,7 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Record an architectural decision        | `to-adr`                                       |
 | Pin down domain terminology / glossary  | `domain-modeling`                              |
 | Stress-test a plan or design            | suggest `/hb:grill`                            |
+| Is a risky change or PR worth it?       | suggest `/hb:debate`                           |
 | Fix prose / typos in markdown           | `revise`                                       |
 | Restructure an article draft            | `revise`                                       |
 | Hand off mid-session work to a fresh agent | suggest `/hb:handoff`                       |
