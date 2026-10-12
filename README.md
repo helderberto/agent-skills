@@ -30,7 +30,7 @@ It installs skills only; the Claude Code plugin also ships the `agents/` subagen
 Prefer a native integration? Pick your tool below.
 
 <details open>
-<summary><b>Claude Code (recommended)</b></summary>
+<summary><b>Claude Code (Recommended)</b></summary>
 
 **Marketplace install:**
 
@@ -49,6 +49,20 @@ Third-party marketplaces don't auto-update: turn it on in `/plugin` → **Market
 git clone https://github.com/helderberto/agent-skills.git
 claude --plugin-dir /path/to/agent-skills
 ```
+
+</details>
+
+<details>
+<summary><b>Codex</b></summary>
+
+Install as a native Codex plugin (Codex CLI 0.131+). Skills load from `skills/` and are invoked as `$hb:<skill-name>`.
+
+```bash
+codex plugin marketplace add helderberto/agent-skills
+codex plugin add hb@helderberto-skills
+```
+
+See [docs/codex-setup.md](docs/codex-setup.md).
 
 </details>
 
@@ -97,18 +111,6 @@ gemini skills install ./agent-skills/skills/
 </details>
 
 <details>
-<summary><b>OpenCode</b></summary>
-
-Copy the skill folders to `.opencode/skills/` (or `~/.config/opencode/skills/`), then paste the OpenCode section of this repo's `AGENTS.md` into your project's `AGENTS.md`; the built-in `skill` tool routes from there. See [docs/opencode-setup.md](docs/opencode-setup.md).
-
-```bash
-git clone https://github.com/helderberto/agent-skills.git
-mkdir -p .opencode/skills && cp -R agent-skills/skills/* .opencode/skills/
-```
-
-</details>
-
-<details>
 <summary><b>GitHub Copilot</b></summary>
 
 Install as a native plugin with the Copilot CLI. VS Code picks it up too, or run **Chat: Install Plugin From Source** with `https://github.com/helderberto/agent-skills`.
@@ -123,23 +125,23 @@ See [docs/copilot-setup.md](docs/copilot-setup.md).
 </details>
 
 <details>
-<summary><b>Codex</b></summary>
+<summary><b>OpenCode</b></summary>
 
-Install as a native Codex plugin (Codex CLI 0.131+). Skills load from `skills/` and are invoked as `$hb:<skill-name>`.
+Copy the skill folders to `.opencode/skills/` (or `~/.config/opencode/skills/`), then paste the OpenCode section of this repo's `AGENTS.md` into your project's `AGENTS.md`; the built-in `skill` tool routes from there. See [docs/opencode-setup.md](docs/opencode-setup.md).
 
 ```bash
-codex plugin marketplace add helderberto/agent-skills
-codex plugin add hb@helderberto-skills
+git clone https://github.com/helderberto/agent-skills.git
+mkdir -p .opencode/skills && cp -R agent-skills/skills/* .opencode/skills/
 ```
-
-See [docs/codex-setup.md](docs/codex-setup.md).
 
 </details>
 
 <details>
-<summary><b>Other agents</b></summary>
+<summary><b>Other Agents</b></summary>
 
-Skills are plain Markdown: any agent that reads instruction files can use `skills/<name>/SKILL.md`. The skills CLI above covers 70+ of them.
+```bash
+npx skills@latest add helderberto/agent-skills -a <agent>  # devin, windsurf, amp, pi; omit -a to choose
+```
 
 </details>
 
