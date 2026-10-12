@@ -143,6 +143,7 @@ Focused capabilities the agent applies based on the task; both-tier ones are als
 | [`domain-modeling`](skills/domain-modeling/SKILL.md)                 | Build and sharpen the project's ubiquitous language and glossary                                                                   |
 | [`research`](skills/research/SKILL.md)                               | Investigate a question against primary sources; capture cited findings as Markdown                                                 |
 | [`prototype`](skills/prototype/SKILL.md)                             | Build a throwaway prototype — shareable HTML logic demo or toggleable UI variations — kept on a `prototype/<name>` branch          |
+| [`debate`](skills/debate/SKILL.md)                                   | Is a risky change or PR worth it? Advocate, skeptic, and neutral investigator argue it over two rounds, then one recommendation    |
 
 </details>
 
