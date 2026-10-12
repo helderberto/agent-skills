@@ -13,6 +13,8 @@ triage ─▶ grill ─▶ to-spec ─▶ to-tickets ─▶ build ─▶ review 
 
 Type `/hb:<command>` for each step; `/hb:triage` tells you where to enter. The SHIP phase is `/hb:to-pr`: gate, push, PR, CI watch. Flow commands never chain on their own and never call each other. Each ends with a filled-in `Next: /hb:<cmd> <args>` line, so you always pull the trigger yourself.
 
+Full walkthrough and the `.specs/` artifact layout: [docs/workflow.md](docs/workflow.md).
+
 ---
 
 ## Quick Start
@@ -45,168 +47,23 @@ Prefer a native integration? Pick your tool below.
 
 </details>
 
-<details>
-<summary><b>Codex</b></summary>
+| Agent           | Install                                                                                                     | Guide                                             |
+| --------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| Codex           | `codex plugin marketplace add helderberto/agent-skills` → `codex plugin add hb@helderberto-skills`          | [codex-setup.md](docs/codex-setup.md)             |
+| Cursor          | Clone, then `rsync -a agent-skills/skills/ .cursor/skills/`                                                 | [cursor-setup.md](docs/cursor-setup.md)           |
+| Antigravity CLI | `agy plugin install https://github.com/helderberto/agent-skills`                                            | [antigravity-setup.md](docs/antigravity-setup.md) |
+| Gemini CLI      | `gemini skills install https://github.com/helderberto/agent-skills.git --path skills`                       | [gemini-cli-setup.md](docs/gemini-cli-setup.md)   |
+| GitHub Copilot  | `copilot plugin marketplace add helderberto/agent-skills` → `copilot plugin install hb@helderberto-skills`   | [copilot-setup.md](docs/copilot-setup.md)         |
+| OpenCode        | Clone, copy `skills/*` to `.opencode/skills/`, paste the OpenCode section of `AGENTS.md` into yours          | [opencode-setup.md](docs/opencode-setup.md)       |
+| Other agents    | `npx skills@latest add helderberto/agent-skills -a <agent>` (devin, windsurf, amp, pi; omit `-a` to choose) | —                                                 |
 
-Install as a native Codex plugin (Codex CLI 0.131+). Skills load from `skills/` and are invoked as `$hb:<skill-name>`.
-
-```bash
-codex plugin marketplace add helderberto/agent-skills
-codex plugin add hb@helderberto-skills
-```
-
-See [docs/codex-setup.md](docs/codex-setup.md).
-
-</details>
-
-<details>
-<summary><b>Cursor</b></summary>
-
-Sync the skills into `.cursor/skills/`, which Cursor reads natively; keep `.cursor/rules/*.mdc` for short policies, not whole skills. See [docs/cursor-setup.md](docs/cursor-setup.md) for the starter set.
-
-```bash
-git clone https://github.com/helderberto/agent-skills.git
-mkdir -p .cursor/skills && rsync -a agent-skills/skills/ .cursor/skills/
-```
-
-</details>
-
-<details>
-<summary><b>Antigravity CLI</b></summary>
-
-Install as a native plugin: skills activate on demand or run as `/hb:<skill>`.
-
-```bash
-agy plugin install https://github.com/helderberto/agent-skills
-```
-
-See [docs/antigravity-setup.md](docs/antigravity-setup.md).
-
-</details>
-
-<details>
-<summary><b>Gemini CLI</b></summary>
-
-Install as native skills, activated on demand, or list them in `GEMINI.md` for persistent context. See [docs/gemini-cli-setup.md](docs/gemini-cli-setup.md).
-
-**Install from the repo:**
-
-```bash
-gemini skills install https://github.com/helderberto/agent-skills.git --path skills
-```
-
-**Install from a local clone:**
-
-```bash
-gemini skills install ./agent-skills/skills/
-```
-
-</details>
-
-<details>
-<summary><b>GitHub Copilot</b></summary>
-
-Install as a native plugin with the Copilot CLI. VS Code picks it up too, or run **Chat: Install Plugin From Source** with `https://github.com/helderberto/agent-skills`.
-
-```bash
-copilot plugin marketplace add helderberto/agent-skills
-copilot plugin install hb@helderberto-skills
-```
-
-See [docs/copilot-setup.md](docs/copilot-setup.md).
-
-</details>
-
-<details>
-<summary><b>OpenCode</b></summary>
-
-Copy the skill folders to `.opencode/skills/` (or `~/.config/opencode/skills/`), then paste the OpenCode section of this repo's `AGENTS.md` into your project's `AGENTS.md`; the built-in `skill` tool routes from there. See [docs/opencode-setup.md](docs/opencode-setup.md).
-
-```bash
-git clone https://github.com/helderberto/agent-skills.git
-mkdir -p .opencode/skills && cp -R agent-skills/skills/* .opencode/skills/
-```
-
-</details>
-
-<details>
-<summary><b>Other Agents</b></summary>
-
-```bash
-npx skills@latest add helderberto/agent-skills -a <agent>  # devin, windsurf, amp, pi; omit -a to choose
-```
-
-</details>
-
----
-
-<details>
-<summary><b>Workflow example</b> — full SDLC walkthrough</summary>
-
-A non-trivial feature flows through every step. Each command is one invocation:
-
-```
-You: /hb:triage add dark mode support
-AI:  L, fuzzy feature → /hb:grill dark mode
-
-You: /hb:grill dark mode
-AI:  Interviews you in rounds; writes settled terms to the glossary and ADRs inline.
-     Next: /hb:to-spec dark-mode
-
-You: /hb:to-spec dark-mode
-AI:  Writes .specs/specs/dark-mode.md from the conversation, no re-interview.
-     Next: /hb:to-tickets dark-mode
-
-You: /hb:to-tickets dark-mode
-AI:  Slices the spec into tracer-bullet tickets with blocking edges.
-
-You: /hb:build dark-mode
-AI:  Implements the next unblocked ticket test-first via tdd, then lint and
-     type-check. Marks checkboxes, commits.
-     /hb:build dark-mode --all fans the tickets out to parallel subagents,
-     frontier by frontier, after one approval.
-
-You: /hb:review
-AI:  Fans out reviewers in parallel (correctness, standards, spec + checkboxes,
-     tests + coverage, quality bar, a11y-audit, safe-repo, ...).
-     Consolidates findings into Critical / Important / Suggestion.
-
-You: /hb:to-pr
-AI:  Gate (check, ADR check), push, writes the PR body itself (Summary visual,
-     Before/After evidence, merge danger), gh pr create, then watches CI.
-
-You: /hb:retro
-AI:  Suggests environment fixes from this session: pointers, checks, standards.
-```
-
-For quick standalone tasks, you don't need the flow — describe what you want and the relevant skill triggers ("write tests for X", "audit deps", "create an ADR for Y").
-
-</details>
+Codex invokes skills as `$hb:<skill>`; the others use `/hb:<skill>`.
 
 ---
 
 ## Skills
 
-### Naming
-
-- **Verb** — does work, asks you something or changes code: `triage`, `grill`, `build`, `review`, `retro`, `debug`, `refactor`.
-- **`to-X`** — turns what's in context into artifact X, at most one question round, never an interview: `to-spec`, `to-tickets`, `to-pr`, `to-adr`.
-- **`*-audit`** — read-only report: `a11y-audit`, `perf-audit`, `deps-audit`, `architecture-audit`.
-- **`*-auditor`** — Claude Code agent: a read-only reviewer that skills fan out to, preloading the skill that holds its checklist when one exists: `test-auditor`, `security-auditor`, `perf-auditor`, `parity-auditor`.
-
-### Invocation tiers
-
-Rule: on the flow, outward-facing, expensive, or session control → **typed-only**. Reached only by other skills or plain phrasing → **model only**. Otherwise → **both**.
-
-| Tier            | Frontmatter                      | Skills                                                                                                                                                                 |
-| --------------- | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Typed-only (13) | `disable-model-invocation: true` | triage · grill · to-spec · to-tickets · build · review · to-pr · retro · architecture-audit · guide · handoff · wait-what · teach                                      |
-| Both (12)       | default                          | debug · to-adr · zoom-out · commit · check · feedback · refactor · prototype · research · revise · create-skill · safe-repo                                            |
-| Model only (12) | `user-invocable: false`          | tdd · code-review · codebase-design · domain-modeling · harden · source-driven · frontend-ui-engineering · visual-review · a11y-audit · i18n · perf-audit · deps-audit |
-
-The `/hb:` menu shows typed-only and both (25 entries); the model sees both and model-only descriptions (24). Typed-only skills call model skills through the Skill tool and mention other typed-only skills only in `Next:` lines; the routers `triage` and `guide` name commands by design. Typed-only descriptions keep one what-it-does sentence; trigger phrases live only on model-visible skills.
-
-Skills also carry an **effort** hint: mechanical ones (`commit`, `to-adr`) run at low reasoning effort, heavy ones (`architecture-audit`, `harden`, `debug`) at high or xhigh, and the rest at the implicit medium default. The override lasts only for the turn the skill fires — so complexity matches the task without you touching `/effort`.
+Typed as `/hb:<name>` or triggered from the task. Naming, invocation tiers, and effort hints: [docs/skill-conventions.md](docs/skill-conventions.md).
 
 ### SDLC workflow
 
@@ -316,38 +173,6 @@ Subagents the skills fan out to for independent, read-only perspectives (e.g. `/
 | [`security-auditor`](agents/security-auditor.md) | Exploitable flaws at trust boundaries, STRIDE per boundary; preloads `harden`                  |
 | [`perf-auditor`](agents/perf-auditor.md)         | Bundle size and Core Web Vitals risks, graded for review; preloads `perf-audit`                |
 | [`parity-auditor`](agents/parity-auditor.md)     | Audit code migrations for missing functionality                                                |
-
----
-
-## Structure
-
-```
-agent-skills/
-├── .claude-plugin/      Plugin manifest + marketplace entry (Claude Code)
-├── plugin.json          Plugin manifest (Antigravity CLI)
-├── .agents/plugins/     Marketplace entry (Codex)
-├── .plugin/             Copy of .claude-plugin/plugin.json (Copilot CLI reads it first)
-├── .opencode/skills →   Symlink to skills/ for OpenCode discovery
-├── skills/              one folder per skill, each with SKILL.md
-├── agents/              subagent definitions (Claude Code only)
-├── docs/                per-agent setup guides
-├── AGENTS.md            Intent → skill mapping (drives OpenCode auto-routing)
-├── CONTRIBUTING.md      How to contribute new skills or improvements
-├── LICENSE              MIT
-└── README.md
-```
-
-### Artifact convention
-
-Workflow skills write structured artifacts to `.specs/`:
-
-- `.specs/specs/<slug>.md` — specs from `/hb:to-spec`
-- `.specs/tickets/<slug>.md` — tracer-bullet tickets from `/hb:to-tickets`
-- `.specs/research/<slug>.md` — cited findings from `/hb:research`, when the repo has no notes convention of its own
-
-The `.specs/` directory is local-first. Add it to `.gitignore` if you prefer specs as scratch space, or commit it if you want specs as versioned project documentation.
-
-Throwaway output stays out of the working tree, so `commit` never sweeps it up: `visual-review` and `architecture-audit --html` reports, `perf-audit` bundle reports, and `handoff` docs go to `$TMPDIR` (else `/tmp`), and the skill prints the path.
 
 ---
 
