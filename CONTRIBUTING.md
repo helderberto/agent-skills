@@ -50,11 +50,30 @@ When in doubt, open an issue first to discuss scope.
 - **Workflow skills** (`triage`, `grill`, `to-spec`, `to-tickets`, `build`, `review`, `to-pr`, `retro`) are typed as `/hb:<name>`
 - **Toolbelt skills** in the both and model-only tiers auto-trigger from the `description` field — write that carefully
 
+## Structure
+
+```
+agent-skills/
+├── .claude-plugin/      Plugin manifest + marketplace entry (Claude Code)
+├── plugin.json          Plugin manifest (Antigravity CLI)
+├── .agents/plugins/     Marketplace entry (Codex)
+├── .plugin/             Copy of .claude-plugin/plugin.json (Copilot CLI reads it first)
+├── .opencode/skills →   Symlink to skills/ for OpenCode discovery
+├── skills/              one folder per skill, each with SKILL.md
+├── agents/              subagent definitions (Claude Code only)
+├── docs/                per-agent setup guides, workflow, skill conventions
+├── AGENTS.md            Intent → skill mapping (drives OpenCode auto-routing)
+├── CONTRIBUTING.md      How to contribute new skills or improvements
+├── LICENSE              MIT
+└── README.md
+```
+
 ## Where to start
 
 | You want to... | Read this |
 |----------------|-----------|
-| Understand the plugin structure | [README.md](README.md) |
+| Understand the plugin structure | [Structure](#structure) |
+| Naming, invocation tiers, effort | [docs/skill-conventions.md](docs/skill-conventions.md) |
 | Write a new skill from scratch | [skills/create-skill/SKILL.md](skills/create-skill/SKILL.md) |
 | Scaffold a skill interactively | Invoke `/hb:create-skill` |
 | Configure another agent | [`docs/`](docs/): one setup guide per tool |
