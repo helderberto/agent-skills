@@ -34,21 +34,14 @@ Prefer a native integration? Pick your tool below.
 
 **Marketplace install:**
 
-```
+```bash
 /plugin marketplace add helderberto/agent-skills
 /plugin install hb@helderberto-skills
 ```
 
-After install, skills are available as `/hb:<skill-name>` — e.g. `/hb:triage`, `/hb:to-spec`, `/hb:to-pr`. Both-tier and model-only skills also trigger from natural language ("review this PR", "check accessibility", etc.) based on their description.
-
-Third-party marketplaces don't auto-update: turn it on in `/plugin` → **Marketplaces**. SSH errors on install → `git config --global url."https://github.com/".insteadOf git@github.com:`.
-
-**Local / development:**
-
-```bash
-git clone https://github.com/helderberto/agent-skills.git
-claude --plugin-dir /path/to/agent-skills
-```
+> Third-party marketplaces don't auto-update: turn it on in `/plugin` → **Marketplaces**.
+>
+> SSH errors on install → `git config --global url."https://github.com/".insteadOf git@github.com:`.
 
 </details>
 
@@ -205,11 +198,11 @@ For quick standalone tasks, you don't need the flow — describe what you want a
 
 Rule: on the flow, outward-facing, expensive, or session control → **typed-only**. Reached only by other skills or plain phrasing → **model only**. Otherwise → **both**.
 
-| Tier | Frontmatter | Skills |
-|---|---|---|
-| Typed-only (13) | `disable-model-invocation: true` | triage · grill · to-spec · to-tickets · build · review · to-pr · retro · architecture-audit · guide · handoff · wait-what · teach |
-| Both (12) | default | debug · to-adr · zoom-out · commit · check · feedback · refactor · prototype · research · revise · create-skill · safe-repo |
-| Model only (12) | `user-invocable: false` | tdd · code-review · codebase-design · domain-modeling · harden · source-driven · frontend-ui-engineering · visual-review · a11y-audit · i18n · perf-audit · deps-audit |
+| Tier            | Frontmatter                      | Skills                                                                                                                                                                 |
+| --------------- | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Typed-only (13) | `disable-model-invocation: true` | triage · grill · to-spec · to-tickets · build · review · to-pr · retro · architecture-audit · guide · handoff · wait-what · teach                                      |
+| Both (12)       | default                          | debug · to-adr · zoom-out · commit · check · feedback · refactor · prototype · research · revise · create-skill · safe-repo                                            |
+| Model only (12) | `user-invocable: false`          | tdd · code-review · codebase-design · domain-modeling · harden · source-driven · frontend-ui-engineering · visual-review · a11y-audit · i18n · perf-audit · deps-audit |
 
 The `/hb:` menu shows typed-only and both (25 entries); the model sees both and model-only descriptions (24). Typed-only skills call model skills through the Skill tool and mention other typed-only skills only in `Next:` lines; the routers `triage` and `guide` name commands by design. Typed-only descriptions keep one what-it-does sentence; trigger phrases live only on model-visible skills.
 
@@ -219,16 +212,16 @@ Skills also carry an **effort** hint: mechanical ones (`commit`, `to-adr`) run a
 
 The flow, one typed command per step:
 
-| Skill | Phase | What it does |
-|-------|-------|--------------|
-| [`triage`](skills/triage/SKILL.md) | TRIAGE | Classify any input (idea, bug, ticket, PR, stack trace), size it, name the command to type; no args → where you are |
-| [`grill`](skills/grill/SKILL.md) | GRILL | Interview in rounds over the design-tree frontier, each question with a recommended answer |
-| [`to-spec`](skills/to-spec/SKILL.md) | SPEC | Settled conversation + codebase scan → structured spec in `.specs/specs/<slug>.md` |
-| [`to-tickets`](skills/to-tickets/SKILL.md) | TICKETS | Slice a spec into tracer-bullet vertical slices with blocking edges |
-| [`build`](skills/build/SKILL.md) | BUILD | Implement the next unblocked slice test-first via `tdd`, with feedback loops; `--all` fans every ticket out to parallel implementer subagents after one approval |
-| [`review`](skills/review/SKILL.md) | REVIEW | Fan out parallel reviewers (scope-detected audits + agent lenses incl. spec conformance, standards, coverage, and a quality-bar check), consolidate into one verdict |
-| [`to-pr`](skills/to-pr/SKILL.md) | SHIP | Gate (check, ADR check), push, open a GitHub PR on the repo's template or the default, every field written by the model with no questions: Summary with a visual (diagram, diff sketch, or tree), Before/After evidence, merge danger (one-way or two-way door, blast radius); watch CI, `debug` on red (max 2); `--safe` runs `safe-repo` before the push, `--skip-ci` marks the HEAD commit `[skip ci]` and skips the watch, `--diagram[=<type>]` makes the visual a mermaid diagram, typed by the change unless given |
-| [`retro`](skills/retro/SKILL.md) | RETRO | Retrospective on a session — suggests navigation pointers, checks, coding standards, steering fixes; mechanical mistakes become checks |
+| Skill                                      | Phase   | What it does                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ------------------------------------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [`triage`](skills/triage/SKILL.md)         | TRIAGE  | Classify any input (idea, bug, ticket, PR, stack trace), size it, name the command to type; no args → where you are                                                                                                                                                                                                                                                                                                                                                                                                      |
+| [`grill`](skills/grill/SKILL.md)           | GRILL   | Interview in rounds over the design-tree frontier, each question with a recommended answer                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| [`to-spec`](skills/to-spec/SKILL.md)       | SPEC    | Settled conversation + codebase scan → structured spec in `.specs/specs/<slug>.md`                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| [`to-tickets`](skills/to-tickets/SKILL.md) | TICKETS | Slice a spec into tracer-bullet vertical slices with blocking edges                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| [`build`](skills/build/SKILL.md)           | BUILD   | Implement the next unblocked slice test-first via `tdd`, with feedback loops; `--all` fans every ticket out to parallel implementer subagents after one approval                                                                                                                                                                                                                                                                                                                                                         |
+| [`review`](skills/review/SKILL.md)         | REVIEW  | Fan out parallel reviewers (scope-detected audits + agent lenses incl. spec conformance, standards, coverage, and a quality-bar check), consolidate into one verdict                                                                                                                                                                                                                                                                                                                                                     |
+| [`to-pr`](skills/to-pr/SKILL.md)           | SHIP    | Gate (check, ADR check), push, open a GitHub PR on the repo's template or the default, every field written by the model with no questions: Summary with a visual (diagram, diff sketch, or tree), Before/After evidence, merge danger (one-way or two-way door, blast radius); watch CI, `debug` on red (max 2); `--safe` runs `safe-repo` before the push, `--skip-ci` marks the HEAD commit `[skip ci]` and skips the watch, `--diagram[=<type>]` makes the visual a mermaid diagram, typed by the change unless given |
+| [`retro`](skills/retro/SKILL.md)           | RETRO   | Retrospective on a session — suggests navigation pointers, checks, coding standards, steering fixes; mechanical mistakes become checks                                                                                                                                                                                                                                                                                                                                                                                   |
 
 ### On-demand tools
 
@@ -237,77 +230,77 @@ Focused capabilities the agent applies based on the task; both-tier ones are als
 <details>
 <summary><b>Build &amp; test</b></summary>
 
-| Skill | What it does |
-|-------|--------------|
-| [`tdd`](skills/tdd/SKILL.md) | Red → green → refactor loop for any new logic, unit to end-to-end |
-| [`source-driven`](skills/source-driven/SKILL.md) | Implement using official docs for exact dependency versions |
-| [`refactor`](skills/refactor/SKILL.md) | Behavior-preserving improvement: split large functions, backfill tests, simplify (Chesterton's Fence) |
+| Skill                                            | What it does                                                                                          |
+| ------------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
+| [`tdd`](skills/tdd/SKILL.md)                     | Red → green → refactor loop for any new logic, unit to end-to-end                                     |
+| [`source-driven`](skills/source-driven/SKILL.md) | Implement using official docs for exact dependency versions                                           |
+| [`refactor`](skills/refactor/SKILL.md)           | Behavior-preserving improvement: split large functions, backfill tests, simplify (Chesterton's Fence) |
 
 </details>
 
 <details>
 <summary><b>Verify</b></summary>
 
-| Skill | What it does |
-|-------|--------------|
+| Skill                            | What it does                                                     |
+| -------------------------------- | ---------------------------------------------------------------- |
 | [`check`](skills/check/SKILL.md) | Auto-fix lint, verify types, run tests; `--check` writes nothing |
-| [`debug`](skills/debug/SKILL.md) | Disciplined diagnosis loop for hard bugs and perf regressions |
+| [`debug`](skills/debug/SKILL.md) | Disciplined diagnosis loop for hard bugs and perf regressions    |
 
 </details>
 
 <details>
 <summary><b>Review &amp; audit</b></summary>
 
-| Skill | What it does |
-|-------|--------------|
-| [`code-review`](skills/code-review/SKILL.md) | Correctness lens used by `build` and `review`: a PR or diff against an approval standard — correctness, security, performance, a Fowler smell baseline; Critical→Nit severities |
+| Skill                                            | What it does                                                                                                                                                                                                   |
+| ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`code-review`](skills/code-review/SKILL.md)     | Correctness lens used by `build` and `review`: a PR or diff against an approval standard — correctness, security, performance, a Fowler smell baseline; Critical→Nit severities                                |
 | [`visual-review`](skills/visual-review/SKILL.md) | Render a PR diff as an annotated HTML page — each hunk linked to a design/simplification principle with a suggested rewrite; `--ui` checks a UI change in a real browser via Chrome DevTools or Playwright MCP |
-| [`feedback`](skills/feedback/SKILL.md) | Triage existing PR review comments (Copilot + human), verify against code, classify Address/Skip/Optional/Discuss |
-| [`a11y-audit`](skills/a11y-audit/SKILL.md) | Accessibility compliance audit (WCAG) |
-| [`i18n`](skills/i18n/SKILL.md) | Find hardcoded strings, check translation coverage |
-| [`perf-audit`](skills/perf-audit/SKILL.md) | Frontend bundle size and Core Web Vitals risks; no metric without a measurement |
-| [`deps-audit`](skills/deps-audit/SKILL.md) | Check dependencies for vulnerabilities (npm/pnpm/yarn/pip/go/cargo) |
-| [`safe-repo`](skills/safe-repo/SKILL.md) | Sensitive data scan; `--diff [<base>]` scopes to a branch's changes |
-| [`harden`](skills/harden/SKILL.md) | Proactive security hardening at trust boundaries (OWASP-style), including LLM features |
+| [`feedback`](skills/feedback/SKILL.md)           | Triage existing PR review comments (Copilot + human), verify against code, classify Address/Skip/Optional/Discuss                                                                                              |
+| [`a11y-audit`](skills/a11y-audit/SKILL.md)       | Accessibility compliance audit (WCAG)                                                                                                                                                                          |
+| [`i18n`](skills/i18n/SKILL.md)                   | Find hardcoded strings, check translation coverage                                                                                                                                                             |
+| [`perf-audit`](skills/perf-audit/SKILL.md)       | Frontend bundle size and Core Web Vitals risks; no metric without a measurement                                                                                                                                |
+| [`deps-audit`](skills/deps-audit/SKILL.md)       | Check dependencies for vulnerabilities (npm/pnpm/yarn/pip/go/cargo)                                                                                                                                            |
+| [`safe-repo`](skills/safe-repo/SKILL.md)         | Sensitive data scan; `--diff [<base>]` scopes to a branch's changes                                                                                                                                            |
+| [`harden`](skills/harden/SKILL.md)               | Proactive security hardening at trust boundaries (OWASP-style), including LLM features                                                                                                                         |
 
 </details>
 
 <details>
 <summary><b>Git &amp; release</b></summary>
 
-| Skill | What it does |
-|-------|--------------|
+| Skill                              | What it does                                                             |
+| ---------------------------------- | ------------------------------------------------------------------------ |
 | [`commit`](skills/commit/SKILL.md) | Group unstaged changes into atomic commits by concern (repository style) |
-| [`to-adr`](skills/to-adr/SKILL.md) | Record a 1–3 sentence Architecture Decision Record |
+| [`to-adr`](skills/to-adr/SKILL.md) | Record a 1–3 sentence Architecture Decision Record                       |
 
 </details>
 
 <details>
 <summary><b>Design &amp; discovery</b></summary>
 
-| Skill | What it does |
-|-------|--------------|
-| [`codebase-design`](skills/codebase-design/SKILL.md) | Shared deep-module vocabulary for designing or improving an interface |
-| [`frontend-ui-engineering`](skills/frontend-ui-engineering/SKILL.md) | Front-load UI construction decisions — prop API, state placement, required states, a11y by construction |
-| [`architecture-audit`](skills/architecture-audit/SKILL.md) | Surface architectural friction in git hot spots, propose refactors toward deep modules as RFCs; `--html` for a before/after report |
-| [`domain-modeling`](skills/domain-modeling/SKILL.md) | Build and sharpen the project's ubiquitous language and glossary |
-| [`research`](skills/research/SKILL.md) | Investigate a question against primary sources; capture cited findings as Markdown |
-| [`prototype`](skills/prototype/SKILL.md) | Build a throwaway prototype — shareable HTML logic demo or toggleable UI variations — kept on a `prototype/<name>` branch |
+| Skill                                                                | What it does                                                                                                                       |
+| -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| [`codebase-design`](skills/codebase-design/SKILL.md)                 | Shared deep-module vocabulary for designing or improving an interface                                                              |
+| [`frontend-ui-engineering`](skills/frontend-ui-engineering/SKILL.md) | Front-load UI construction decisions — prop API, state placement, required states, a11y by construction                            |
+| [`architecture-audit`](skills/architecture-audit/SKILL.md)           | Surface architectural friction in git hot spots, propose refactors toward deep modules as RFCs; `--html` for a before/after report |
+| [`domain-modeling`](skills/domain-modeling/SKILL.md)                 | Build and sharpen the project's ubiquitous language and glossary                                                                   |
+| [`research`](skills/research/SKILL.md)                               | Investigate a question against primary sources; capture cited findings as Markdown                                                 |
+| [`prototype`](skills/prototype/SKILL.md)                             | Build a throwaway prototype — shareable HTML logic demo or toggleable UI variations — kept on a `prototype/<name>` branch          |
 
 </details>
 
 <details>
 <summary><b>Session, meta &amp; writing</b></summary>
 
-| Skill | What it does |
-|-------|--------------|
-| [`guide`](skills/guide/SKILL.md) | Which skill fits? A map of the flow, on-ramps, and standalone skills, plus when to continue, `/clear`, `/hb:handoff`, or `/compact` |
-| [`handoff`](skills/handoff/SKILL.md) | Compact the current conversation into a handoff doc for a fresh agent |
-| [`teach`](skills/teach/SKILL.md) | Stateful teaching workspace — lessons, references, learning records tied to a mission |
-| [`wait-what`](skills/wait-what/SKILL.md) | Last message didn't land — re-pitch it with context, in Simplified Technical English and glossary terms |
-| [`zoom-out`](skills/zoom-out/SKILL.md) | Explain code with visual diagrams and analogies |
-| [`create-skill`](skills/create-skill/SKILL.md) | Author a new skill with proper structure |
-| [`revise`](skills/revise/SKILL.md) | Restructure article drafts, or polish any markdown (typos, dashes, filler) |
+| Skill                                          | What it does                                                                                                                        |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| [`guide`](skills/guide/SKILL.md)               | Which skill fits? A map of the flow, on-ramps, and standalone skills, plus when to continue, `/clear`, `/hb:handoff`, or `/compact` |
+| [`handoff`](skills/handoff/SKILL.md)           | Compact the current conversation into a handoff doc for a fresh agent                                                               |
+| [`teach`](skills/teach/SKILL.md)               | Stateful teaching workspace — lessons, references, learning records tied to a mission                                               |
+| [`wait-what`](skills/wait-what/SKILL.md)       | Last message didn't land — re-pitch it with context, in Simplified Technical English and glossary terms                             |
+| [`zoom-out`](skills/zoom-out/SKILL.md)         | Explain code with visual diagrams and analogies                                                                                     |
+| [`create-skill`](skills/create-skill/SKILL.md) | Author a new skill with proper structure                                                                                            |
+| [`revise`](skills/revise/SKILL.md)             | Restructure article drafts, or polish any markdown (typos, dashes, filler)                                                          |
 
 </details>
 
@@ -317,12 +310,12 @@ Focused capabilities the agent applies based on the task; both-tier ones are als
 
 Subagents the skills fan out to for independent, read-only perspectives (e.g. `/hb:review` spawns `test-auditor` as a lens). Bundled with the plugin, so installing `hb` ships them too. **Claude Code only** — other agents consume `skills/` and ignore this directory.
 
-| Agent | Purpose |
-|-------|---------|
-| [`test-auditor`](agents/test-auditor.md) | Test effectiveness beyond coverage: weak assertions, missing edge scenarios, surviving mutants |
-| [`security-auditor`](agents/security-auditor.md) | Exploitable flaws at trust boundaries, STRIDE per boundary; preloads `harden` |
-| [`perf-auditor`](agents/perf-auditor.md) | Bundle size and Core Web Vitals risks, graded for review; preloads `perf-audit` |
-| [`parity-auditor`](agents/parity-auditor.md) | Audit code migrations for missing functionality |
+| Agent                                            | Purpose                                                                                        |
+| ------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
+| [`test-auditor`](agents/test-auditor.md)         | Test effectiveness beyond coverage: weak assertions, missing edge scenarios, surviving mutants |
+| [`security-auditor`](agents/security-auditor.md) | Exploitable flaws at trust boundaries, STRIDE per boundary; preloads `harden`                  |
+| [`perf-auditor`](agents/perf-auditor.md)         | Bundle size and Core Web Vitals risks, graded for review; preloads `perf-audit`                |
+| [`parity-auditor`](agents/parity-auditor.md)     | Audit code migrations for missing functionality                                                |
 
 ---
 
