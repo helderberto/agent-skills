@@ -10,11 +10,11 @@ Edit prose in place without changing the author's voice or meaning. Preserve cod
 Two depths:
 
 - **Full revise** — an article draft: steps 1–4.
-- **Polish only** — the ask is typos, dashes, or formatting, or the file isn't an article: step 4.
+- **Polish only** — the ask is typos, dashes, AI tells, or formatting, or the file isn't an article: step 4.
 
 ## 1. Context
 
-Ask, unless already answered: target audience, publication venue, and the **one takeaway** the reader should remember.
+Ask for the **one takeaway** the reader should remember, unless the draft already states it. Assume engineers reading a public post unless told otherwise.
 
 ## 2. Analyze structure
 
@@ -36,19 +36,28 @@ Re-read the whole for flow: intro promises what the article delivers, conclusion
 
 ## 4. Polish
 
-One pass per category, in order: formatting → typos → clarity. This pass only removes or substitutes; it never adds words, and never rewrites a sentence that is already clear.
+One pass per category, in order: formatting → typos → AI tells → clarity. This pass only removes or substitutes; it never adds words, and never rewrites a sentence that is already clear.
 
 **Formatting**
 
-| Issue                     | Replace with                                              |
-| ------------------------- | --------------------------------------------------------- |
-| Em dash `—` (with spaces) | Period, comma, colon, or parentheses depending on context |
-| Em dash `—` (no spaces)   | Split into two sentences or use comma                     |
-| Double spaces             | Single space                                              |
+| Issue                           | Replace with                                              |
+| ------------------------------- | --------------------------------------------------------- |
+| `—`, `–`, or `--` (with spaces) | Period, comma, colon, or parentheses depending on context |
+| Em dash `—` (no spaces)         | Split into two sentences or use comma                     |
+| Double spaces                   | Single space                                              |
 
-Grep for `—` before and after to confirm none remain.
+Run `grep -nE '—| – | -- '` before and after to confirm none remain outside code.
 
 **Typos**: misspellings, wrong word form ("teh", "dont"), missing apostrophes in contractions.
+
+**AI tells**: cut or swap when vague, keep when it's the precise term ("robust estimator").
+
+- "leverage", "utilize" → "use"; "delve into" → "look at"
+- Cut "robust", "seamless", "powerful"
+- Cut throat-clearing: "it's worth noting that", "let's dive in", "in conclusion"
+- "It's not X, it's Y" → state Y
+- Cut a closing sentence that only restates its paragraph
+- Bold mid-sentence, emoji in headings → plain text
 
 **Clarity**:
 
