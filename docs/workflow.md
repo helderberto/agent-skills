@@ -42,6 +42,8 @@ For quick standalone tasks, you don't need the flow — describe what you want a
 
 ## Artifact convention
 
+Local markdown is the default. Run `/hb:setup` once per repo to also publish specs and tickets to GitHub or Jira; the choice lives in `.specs/issue-tracker.md`.
+
 Workflow skills write structured artifacts to `.specs/`:
 
 - `.specs/specs/<slug>.md` — specs from `/hb:to-spec`

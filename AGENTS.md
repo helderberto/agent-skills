@@ -50,6 +50,7 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 
 | User intent                             | Skill to invoke                                |
 | --------------------------------------- | ---------------------------------------------- |
+| Configure the repo's issue tracker      | suggest `/hb:setup`                            |
 | New feature with unclear requirements   | suggest `/hb:triage` → `/hb:grill` → `/hb:to-spec` |
 | Slice a spec or ticket into tickets     | suggest `/hb:to-tickets`                       |
 | Implement the next ticket               | suggest `/hb:build`                            |
