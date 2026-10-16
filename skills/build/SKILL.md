@@ -8,11 +8,13 @@ argument-hint: '[slug] [--all]'
 
 # Build
 
-Implement the next unblocked ticket from `.specs/tickets/<slug>.md` — one ticket per invocation. `--all` fans every remaining ticket out to implementer subagents after one approval ([below](#--all)).
+Implement the next unblocked ticket — one ticket per invocation. `--all` fans every remaining ticket out to implementer subagents after one approval ([below](#--all)).
 
 ## Input
 
-`$ARGUMENTS` is a `<slug>` or an `@path` (read that file directly as the tickets file). If empty or the file is missing, list `.specs/tickets/*.md` as numbered options and wait.
+**Tracker**: follow `.specs/issue-tracker.md`, else [the local default](../setup/issue-tracker-local.md). Its verbs (**Publish spec**, **List tickets**, …) are the only tracker steps.
+
+`$ARGUMENTS` is the spec ref (or an `@path` to a tickets file). Empty → ask for it.
 
 Free text (an S change: one commit, no tickets) → on the default branch, offer `feat/<slug>` first, as in step 2. Then call the Skill tool with `tdd` for it, regression test first for a bug, run steps 4, 6, and 7 as one ticket with one commit, and end with `Next: /hb:review`.
 
@@ -20,7 +22,7 @@ Free text (an S change: one commit, no tickets) → on the default branch, offer
 
 ### 1. Find the next unblocked ticket
 
-Scan `## Ticket N` headings and count `- [ ]` / `- [x]`. The next ticket is the first with an unchecked item **and** whose `**Blocked by**` tickets (if declared) are all complete. If the first incomplete ticket is blocked, pick the next unblocked one and say why.
+**List tickets**. The next ticket is the first not done **and** whose blockers (if declared) are all done. If the first incomplete ticket is blocked, pick the next unblocked one and say why.
 
 All tickets complete → "All tickets complete." Stop with `Next: /hb:review`.
 
@@ -30,7 +32,7 @@ Show the title, its `hitl` label if any, and unchecked items. If on the default 
 
 ### 3. Implement
 
-For each unchecked item, in order: read the file's architectural decisions and the item's context, explore the surrounding code, and follow the project's conventions (CLAUDE.md, linter, test setup). Call the Skill tool with `tdd` at the ticket's seams — the ones its acceptance criteria name. Completion: every item's test went red before it went green.
+For each unchecked item, in order: read the architectural decisions and the item's context, explore the surrounding code, and follow the project's conventions (CLAUDE.md, linter, test setup). Call the Skill tool with `tdd` at the ticket's seams — the ones its acceptance criteria name. Completion: every item's test went red before it went green.
 
 Stay inside the ticket boundary — never implement items from other tickets. Never impose conventions the project doesn't already use.
 
@@ -42,7 +44,7 @@ Anything the agent cannot provide (API key, external service, manual setup, desi
 
 ### 5. Mark checkboxes
 
-Flip completed items `- [ ]` → `- [x]` in the tickets file. This is the only tickets edit; the spec is read-only.
+**Tick boxes** for completed items. This is the only tickets edit; the spec is read-only.
 
 ### 6. Summarize
 
@@ -57,7 +59,7 @@ POTENTIAL CONCERNS:
 
 ### 7. Offer commit
 
-"Ticket N complete — all checks pass. Commit?" If yes, call the Skill tool with `commit`, passing the ticket's files (`.specs/` only when the project commits specs). Never push.
+"Ticket N complete — all checks pass. Commit?" If yes, call the Skill tool with `commit`, passing the ticket's files (`.specs/` only when the project commits specs) and the **Commit ref**. Then **Close ticket**. Never push.
 
 Next: `/hb:build <slug>` for Ticket N+1, or `/hb:review` once every ticket is done.
 
@@ -67,7 +69,7 @@ Every remaining ticket after one approval, fanned out to **implementer subagents
 
 ### Gate
 
-1. A tickets file must exist. None → stop with `Next: /hb:to-tickets <slug>`.
+1. **List tickets**. None → stop with `Next: /hb:to-tickets <spec ref>`.
 2. `git status --porcelain` must be clean apart from `.specs/`. Anything else → ask the user to commit, stash, or confirm. Merges never absorb unrelated work.
 3. Present the task graph (every remaining ticket, its blocked-by edges, its `hitl` label, the first frontier) and wait for an unambiguous yes ("go", "approve", "yes"). Hedged answers ("looks reasonable", "I guess") are not approval. This approval also covers `tdd`'s seam confirmation for each ticket.
 
@@ -77,12 +79,12 @@ You are the orchestrator. You own the **integration branch** and the tickets fil
 
 4. **Integration branch**: the current branch, or `feat/<slug>` when on the default branch.
 5. **Explore** (optional): tickets that need codebase or docs exploration → one Explore subagent saves notes to `<tmpdir>/build-<slug>/notes.md`, outside the repo, so implementers build instead of explore.
-6. **Fan out**: spawn one general-purpose implementer per frontier ticket, all in one message, in the background, each in its own git worktree (`isolation: worktree`) on branch `build/<slug>-<n>`. Brief with **context pointers**, never copies: absolute paths to the tickets file and ticket number, the spec, and the notes, plus the integration branch name. `.specs/` is often gitignored, so a worktree lacks it. Each implementer:
+6. **Fan out**: spawn one general-purpose implementer per frontier ticket, all in one message, in the background, each in its own git worktree (`isolation: worktree`) on branch `build/<slug>-<n>`. Brief with **context pointers**, never copies: the spec and ticket refs, the spec, and the notes, plus the integration branch name. `.specs/` is often gitignored, so a worktree lacks it. Each implementer:
    - confirms its worktree is based on the integration branch tip, and resets onto it if not; installs dependencies if the worktree lacks them;
-   - calls the Skill tool with `tdd` for its ticket's acceptance criteria, then with `check`, then with `commit`, one skill per call;
+   - calls the Skill tool with `tdd` for its ticket's acceptance criteria, then with `check`, then with `commit` with the **Commit ref**, one skill per call;
    - merges the integration branch tip into its branch before reporting;
-   - never edits the tickets file, and reports in a few lines: branch, commits, which criteria hold.
-7. **Merge**: as each implementer reports, merge its branch into the integration branch. A conflict → a merger subagent resolves it there and runs `check`. Then flip that ticket's checkboxes.
+   - never ticks boxes or closes tickets, and reports in a few lines: branch, commits, which criteria hold.
+7. **Merge**: as each implementer reports, merge its branch into the integration branch. A conflict → a merger subagent resolves it there and runs `check`. Then **Tick boxes** and **Close ticket** for it.
 8. **Refill**: a merge that unblocks tickets → spawn implementers for the new frontier at once, without waiting for the rest of the wave.
 9. **Stop and ask** before spawning a `hitl` ticket, when an implementer reports a check still red after 3 fixes, when the spec is ambiguous or silent on a needed decision, or when a ticket does something `git revert` can't undo: auth or permission changes, destructive migrations, payments, deletes, deploys, secrets. Running implementers keep going. Rerunning `/hb:build <slug> --all` resumes at the current frontier.
 
