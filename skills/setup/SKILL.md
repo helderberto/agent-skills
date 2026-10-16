@@ -2,11 +2,12 @@
 name: setup
 description: Configure this repo's issue tracker for the flow skills: GitHub, Jira, or local markdown (the default).
 disable-model-invocation: true
+argument-hint: '[local | github | jira <KEY>]'
 ---
 
 # Setup
 
-One-time, per repo. Records where `to-spec` and `to-tickets` publish. No config → local markdown under `.specs/` only, which is the default.
+Per repo. Records where every flow skill keeps specs and tickets. No config → markdown under `.specs/`, the default. GitHub or Jira → only in that tracker. Rerun to switch: new work follows the new choice, nothing migrates.
 
 ## 1. Explore
 
@@ -16,7 +17,7 @@ One-time, per repo. Records where `to-spec` and `to-tickets` publish. No config 
 
 ## 2. Ask one question
 
-Which tracker? Lead with the recommendation: GitHub when the remote is on GitHub, else local.
+Argument given (`local`, `github`, `jira <KEY>`) → skip the question. Otherwise: which tracker? Lead with the recommendation: GitHub when the remote is on GitHub, else local.
 
 - **GitHub** → `gh` CLI
 - **Jira** → ask the project key; Atlassian MCP
@@ -26,7 +27,7 @@ Which tracker? Lead with the recommendation: GitHub when the remote is on GitHub
 
 Never touch committed files: no `AGENTS.md`, `CLAUDE.md`, or `.gitignore` edits. The skills read the config directly.
 
-**Local** → remove `.specs/issue-tracker.md` if present. Done.
+**Local** → remove `.specs/issue-tracker.md` if present; skills fall back to [issue-tracker-local.md](issue-tracker-local.md). Done.
 
 **GitHub / Jira** → copy the seed ([issue-tracker-github.md](issue-tracker-github.md) or [issue-tracker-jira.md](issue-tracker-jira.md)) to `.specs/issue-tracker.md`, filling the placeholders.
 

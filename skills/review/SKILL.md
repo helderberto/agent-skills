@@ -20,13 +20,13 @@ PR number → `gh pr view` + `gh pr diff` (fails → current-branch diff, warn).
 
 ### 2. Select reviewers
 
-Always: correctness (`code-review`), standards, sensitive data (`safe-repo --diff <base>`), test effectiveness, quality bar. Spec whenever `.specs/specs/` holds this work's spec. Add the rest from the diff. An explicit count in `$ARGUMENTS` (2–8) caps the subagents; drop diff-selected ones first. Never spawn `visual-review` in UI mode: it needs a dev server the user owns.
+Always: correctness (`code-review`), standards, sensitive data (`safe-repo --diff <base>`), test effectiveness, quality bar. Spec whenever this work has one, read from the tracker (`.specs/issue-tracker.md`, else [the local default](../setup/issue-tracker-local.md)) by branch slug or the ticket refs in commits. Add the rest from the diff. An explicit count in `$ARGUMENTS` (2–8) caps the subagents; drop diff-selected ones first. Never spawn `visual-review` in UI mode: it needs a dev server the user owns.
 
 | Reviewer | When | Agent type |
 |----------|------|------------|
 | Correctness (`code-review`; in Claude Code, `hb:code-review`, not the built-in) | always | `general-purpose` |
 | Standards | always | `general-purpose` |
-| Spec conformance + ticket checkboxes | `.specs/specs/<slug>.md` matches the branch or tickets | `general-purpose` |
+| Spec conformance + ticket checkboxes | a spec matches the branch or tickets | `general-purpose` |
 | Quality bar (floor-guard) | always | none: run inline |
 | Sensitive data (`safe-repo --diff <base>`) | always | `general-purpose` |
 | Test effectiveness + changed-line coverage | always | `test-auditor` |
@@ -41,13 +41,13 @@ Always: correctness (`code-review`), standards, sensitive data (`safe-repo --dif
 Match each reviewer to an agent type **available in the harness**; never invent one. Announce chosen reviewers before spawning and skip irrelevant ones with a one-line reason.
 
 - **Standards**: first find every file that documents how code should be written; `CODING_STANDARDS.md` and `CONTRIBUTING.md` must be on the list when present. Brief: report every place the diff breaks a documented standard, citing the file and the rule. Skip what tooling enforces.
-- **Spec**: several specs and none matches → ask which. Brief, verbatim: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding." With tickets in `.specs/tickets/<slug>.md`, also check every ticket checkbox against the code: a checked box that doesn't hold is Important; an unchecked box the diff satisfies is a Suggestion. Report only, never edit the tickets file.
+- **Spec**: several specs and none matches → ask which. Brief, verbatim: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding." With tickets, also check every ticket checkbox against the code: a checked box that doesn't hold is Important; an unchecked box the diff satisfies is a Suggestion. Report only, never edit tickets.
 - **Test effectiveness**: besides the `test-auditor` brief, if the project emits coverage, confirm the changed lines (`git diff -U0 <base>`) are exercised, not just the global %. Uncovered changed lines are Important. No coverage tooling → note the check as skipped.
 - **Quality bar**: run `bash ${CLAUDE_SKILL_DIR}/scripts/floor-guard.sh --base <base>`. Exit 1 → each `[rule] file:line` is Important unless the diff or a commit message gives the reason. Exit 2 → note the check as skipped.
 
 ### 3. Fan out
 
-Spawn all reviewers in **one message** so they run concurrently. Each gets: repo path (note if it's a worktree), the exact diff command and its subset of files, one paragraph of context, its instruction (run the audit skill via the Skill tool; `*-auditor` agents have it preloaded — fall back to the skill's checklist if subagents can't load skills — or apply the lens), a pointer to `.specs/tickets/*.md` if present, and the output contract — findings with `file:line`, severity (`critical` / `important` / `suggestion`), one-line rationale. **Read-only**: no edits, staging, commits, or pushes. Brief with the artifact and the requirements, never your own conclusion: a reviewer told what to find finds it.
+Spawn all reviewers in **one message** so they run concurrently. Each gets: repo path (note if it's a worktree), the exact diff command and its subset of files, one paragraph of context, its instruction (run the audit skill via the Skill tool; `*-auditor` agents have it preloaded — fall back to the skill's checklist if subagents can't load skills — or apply the lens), the ticket refs if present, and the output contract — findings with `file:line`, severity (`critical` / `important` / `suggestion`), one-line rationale. **Read-only**: no edits, staging, commits, or pushes. Brief with the artifact and the requirements, never your own conclusion: a reviewer told what to find finds it.
 
 **Build/install collisions**: `perf-audit` builds and `deps-audit` may touch `node_modules` — give those worktree isolation or run them serially after the read-only reviewers.
 

@@ -1,7 +1,7 @@
 ---
 name: to-spec
 effort: high
-description: Turn the settled conversation into a spec (PRD) at `.specs/specs/<slug>.md`, published to the repo's issue tracker when one is configured.
+description: Turn the settled conversation into a spec (PRD), published through the repo's tracker: `.specs/specs/<slug>.md` by default.
 disable-model-invocation: true
 argument-hint: <idea>
 ---
@@ -10,7 +10,9 @@ argument-hint: <idea>
 
 Idea: $ARGUMENTS (if empty, ask for the problem and any solution ideas first).
 
-Derive a kebab-case `<slug>` from the text before the first `—`/`–` (≤4 meaningful words, no command verbs or filler). Output: `.specs/specs/<slug>.md`. If it exists, update it in place (Recommended) or pick a new name.
+Derive a kebab-case `<slug>` from the text before the first `—`/`–` (≤4 meaningful words, no command verbs or filler). Output: the spec, in the tracker.
+
+**Tracker**: follow `.specs/issue-tracker.md`, else [the local default](../setup/issue-tracker-local.md), for where specs and tickets live and when a ticket is done.
 
 ## Workflow
 
@@ -40,7 +42,7 @@ Sketch modules. Favor **deep modules** — simple interface (1–3 entry points)
 
 ### 4. Write spec
 
-Save to `.specs/specs/<slug>.md`. Omit empty sections. No file paths or code snippets. A related ticket (a key or `#42` in the conversation, the argument, or the branch name) → record it in frontmatter; no ticket → no frontmatter.
+Draft it. Omit empty sections. No file paths or code snippets. A related ticket (a key or `#42` in the conversation, the argument, or the branch name) → record it in frontmatter; no ticket → no frontmatter.
 
 ```
 ---
@@ -63,8 +65,6 @@ ticket: <key>
 
 ### 5. Publish
 
-Only when `.specs/issue-tracker.md` exists and the argument doesn't say "local only"; follow its commands. No file → local only, the default.
+Publish the spec to the tracker. GitHub or Jira → name the target and confirm once. The argument names an existing spec → update it instead.
 
-Name the target and confirm once. Create one issue: title = feature name, body = the spec. Add `**Issue**: <ref>` under the spec's title so `to-tickets` parents its tickets to it. Spec already has an `**Issue**` line → update that issue's body instead of creating one.
-
-Next: `/hb:to-tickets <slug>`
+Next: `/hb:to-tickets <spec ref>`
