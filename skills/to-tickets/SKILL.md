@@ -80,6 +80,8 @@ Each ticket: thin vertical slice through all layers (schema → service → API 
   1. Split the spec (Recommended)
   2. Continue anyway
 
+**Splitting a spec:** write one sub-spec per independently shippable part to `.specs/specs/<slug>-<part>.md`, each opening with `**Parent**: <spec ref>` and its blockers, and keeping the parent's story numbers. The parent spec stays unchanged. Tracker configured → publish each sub-spec as a child of the spec's issue, in dependency order, with the tracker's native blocking links, and add its `**Issue**` line. Then continue this skill on the first sub-spec only. Later parts get tickets once earlier ones ship.
+
 Count "modules touched" by scanning the spec's New Modules and Schema Changes sections.
 
 ### 5. Approve the granularity
