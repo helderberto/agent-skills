@@ -97,7 +97,7 @@ With a tracker set, nothing is written to `.specs/specs/` or `.specs/tickets/`. 
 
 To switch, run `/hb:setup` again. New work goes to the new place. Existing specs and tickets stay where they are.
 
-The choice is saved in `.specs/issue-tracker.md`. Each option's commands are in [`skills/setup/`](skills/setup/).
+The choice is saved in `.specs/issue-tracker.md`. Each option's rules are in [`skills/setup/`](skills/setup/).
 
 ### On-demand tools
 

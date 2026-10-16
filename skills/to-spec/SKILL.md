@@ -10,9 +10,9 @@ argument-hint: <idea>
 
 Idea: $ARGUMENTS (if empty, ask for the problem and any solution ideas first).
 
-Derive a kebab-case `<slug>` from the text before the first `—`/`–` (≤4 meaningful words, no command verbs or filler). Output: the spec, through **Publish spec**.
+Derive a kebab-case `<slug>` from the text before the first `—`/`–` (≤4 meaningful words, no command verbs or filler). Output: the spec, in the tracker.
 
-**Tracker**: follow `.specs/issue-tracker.md`, else [the local default](../setup/issue-tracker-local.md). Its verbs (**Publish spec**, **List tickets**, …) are the only tracker steps.
+**Tracker**: follow `.specs/issue-tracker.md`, else [the local default](../setup/issue-tracker-local.md), for where specs and tickets live and when a ticket is done.
 
 ## Workflow
 
@@ -65,6 +65,6 @@ ticket: <key>
 
 ### 5. Publish
 
-**Publish spec**. A remote tracker → name the target and confirm once. The argument names an existing spec → update it instead.
+Publish the spec to the tracker. GitHub or Jira → name the target and confirm once. The argument names an existing spec → update it instead.
 
 Next: `/hb:to-tickets <spec ref>`

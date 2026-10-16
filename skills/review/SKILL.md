@@ -20,7 +20,7 @@ PR number → `gh pr view` + `gh pr diff` (fails → current-branch diff, warn).
 
 ### 2. Select reviewers
 
-Always: correctness (`code-review`), standards, sensitive data (`safe-repo --diff <base>`), test effectiveness, quality bar. Spec whenever this work has one: **Read** it through `.specs/issue-tracker.md`, else [the local default](../setup/issue-tracker-local.md), from the branch slug or the commits' **Commit ref**. Add the rest from the diff. An explicit count in `$ARGUMENTS` (2–8) caps the subagents; drop diff-selected ones first. Never spawn `visual-review` in UI mode: it needs a dev server the user owns.
+Always: correctness (`code-review`), standards, sensitive data (`safe-repo --diff <base>`), test effectiveness, quality bar. Spec whenever this work has one, read from the tracker (`.specs/issue-tracker.md`, else [the local default](../setup/issue-tracker-local.md)) by branch slug or the ticket refs in commits. Add the rest from the diff. An explicit count in `$ARGUMENTS` (2–8) caps the subagents; drop diff-selected ones first. Never spawn `visual-review` in UI mode: it needs a dev server the user owns.
 
 | Reviewer | When | Agent type |
 |----------|------|------------|
@@ -41,7 +41,7 @@ Always: correctness (`code-review`), standards, sensitive data (`safe-repo --dif
 Match each reviewer to an agent type **available in the harness**; never invent one. Announce chosen reviewers before spawning and skip irrelevant ones with a one-line reason.
 
 - **Standards**: first find every file that documents how code should be written; `CODING_STANDARDS.md` and `CONTRIBUTING.md` must be on the list when present. Brief: report every place the diff breaks a documented standard, citing the file and the rule. Skip what tooling enforces.
-- **Spec**: several specs and none matches → ask which. Brief, verbatim: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding." With tickets (**List tickets**), also check every ticket checkbox against the code: a checked box that doesn't hold is Important; an unchecked box the diff satisfies is a Suggestion. Report only, never edit tickets.
+- **Spec**: several specs and none matches → ask which. Brief, verbatim: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding." With tickets, also check every ticket checkbox against the code: a checked box that doesn't hold is Important; an unchecked box the diff satisfies is a Suggestion. Report only, never edit tickets.
 - **Test effectiveness**: besides the `test-auditor` brief, if the project emits coverage, confirm the changed lines (`git diff -U0 <base>`) are exercised, not just the global %. Uncovered changed lines are Important. No coverage tooling → note the check as skipped.
 - **Quality bar**: run `bash ${CLAUDE_SKILL_DIR}/scripts/floor-guard.sh --base <base>`. Exit 1 → each `[rule] file:line` is Important unless the diff or a commit message gives the reason. Exit 2 → note the check as skipped.
 
