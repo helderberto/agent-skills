@@ -30,6 +30,7 @@ Arguments: $ARGUMENTS
    - Template found → it is the body, verbatim structure: fill every section and placeholder, check applicable boxes, add nothing outside it. Its summary section carries the visual, its testing section the Evidence, its risk section the Merge Danger. No template → [assets/pr-template.md](assets/pr-template.md), filled the same way.
    - Evidence you can't show → say what wasn't verified. Never invent it.
    - Reference the ticket in the summary (`Resolves TICKET-123`).
+   - `.specs/issue-tracker.md` exists → for every ticket in `.specs/tickets/<slug>.md` (slug from the branch) with all boxes checked and an open `**Issue**`, add the tracker's **PR closing keyword**, else its ref.
 9. `gh pr create` with a HEREDOC body. Return the URL.
 10. `gh pr checks --watch` (skipped with `--skip-ci`). Red → call the Skill tool with `debug` on the failing check, fix, commit, push. At most 2 rounds; still red → stop and report the failing checks.
 

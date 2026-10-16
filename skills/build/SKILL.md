@@ -59,6 +59,10 @@ POTENTIAL CONCERNS:
 
 "Ticket N complete — all checks pass. Commit?" If yes, call the Skill tool with `commit`, passing the ticket's files (`.specs/` only when the project commits specs). Never push.
 
+### 8. Close the issue
+
+Only when `.specs/issue-tracker.md` exists and the ticket has an `**Issue**` line. After the commit, close it with the tracker's **Close** command. On a feature branch with a tracker **PR closing keyword**, leave it open: `to-pr` links it and the merge closes it. No commit → leave it open. Config without a **Close** line → say so and suggest rerunning `/hb:setup`.
+
 Next: `/hb:build <slug>` for Ticket N+1, or `/hb:review` once every ticket is done.
 
 ## `--all`
@@ -82,7 +86,7 @@ You are the orchestrator. You own the **integration branch** and the tickets fil
    - calls the Skill tool with `tdd` for its ticket's acceptance criteria, then with `check`, then with `commit`, one skill per call;
    - merges the integration branch tip into its branch before reporting;
    - never edits the tickets file, and reports in a few lines: branch, commits, which criteria hold.
-7. **Merge**: as each implementer reports, merge its branch into the integration branch. A conflict → a merger subagent resolves it there and runs `check`. Then flip that ticket's checkboxes.
+7. **Merge**: as each implementer reports, merge its branch into the integration branch. A conflict → a merger subagent resolves it there and runs `check`. Then flip that ticket's checkboxes, and close its issue as in [step 8](#8-close-the-issue).
 8. **Refill**: a merge that unblocks tickets → spawn implementers for the new frontier at once, without waiting for the rest of the wave.
 9. **Stop and ask** before spawning a `hitl` ticket, when an implementer reports a check still red after 3 fixes, when the spec is ambiguous or silent on a needed decision, or when a ticket does something `git revert` can't undo: auth or permission changes, destructive migrations, payments, deletes, deploys, secrets. Running implementers keep going. Rerunning `/hb:build <slug> --all` resumes at the current frontier.
 
