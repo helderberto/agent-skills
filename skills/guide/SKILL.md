@@ -15,12 +15,12 @@ A **flow** is a path through the skills. Most work runs along the **main flow**;
 
 ### Main flow: idea → PR
 
-0. **`/hb:setup`**, once per repo, picks the tracker `to-spec`, `to-tickets`, `build`, and `to-pr` follow: GitHub, Jira, or local markdown in `.specs/` (the default, no setup needed).
+0. **`/hb:setup`**, once per repo, picks the tracker every flow skill follows: local markdown in `.specs/` (the default, no setup needed), GitHub, or Jira. With a tracker, specs and tickets live only there.
 1. **`/hb:triage`** classifies the input, sizes it, and names the entry. S work skips to `/hb:build`; M work with a crisp ticket skips to `/hb:to-tickets`.
 2. **`/hb:grill`** sharpens the idea by interview, in rounds over the design-tree frontier. It writes settled terms to `GLOSSARY.md` (via `domain-modeling`) and hard-to-reverse decisions to ADRs (via `to-adr`) as they land.
    - **A question needs a runnable answer?** A state model, business logic, a UI you have to see → detour through **`/hb:prototype`**, kept on a `prototype/<name>` branch, then back to the grill with what you learned.
-3. **`/hb:to-spec`** turns the settled conversation into `.specs/specs/<slug>.md`. No interview: an open branch sends you back to `/hb:grill`.
-4. **`/hb:to-tickets`** slices the spec into tracer-bullet tickets in `.specs/tickets/<slug>.md`, each with **blocking edges**. Only exceptions get a `hitl` label.
+3. **`/hb:to-spec`** turns the settled conversation into `.specs/specs/<slug>.md`, or one issue when a tracker is set. No interview: an open branch sends you back to `/hb:grill`.
+4. **`/hb:to-tickets`** slices the spec into tracer-bullet tickets in `.specs/tickets/<slug>.md`, or child issues when a tracker is set, each with **blocking edges**. Only exceptions get a `hitl` label.
 5. **`/hb:build`** implements the next unblocked ticket test-first through `tdd`, runs `check`, and commits. `--all` fans the tickets out to parallel implementer subagents, frontier by frontier, after one approval, and stops before each `hitl` one.
 6. **`/hb:review`** fans out parallel reviewers: correctness, standards, spec conformance with ticket checkboxes, test effectiveness with changed-line coverage, the quality bar, and the audits the diff calls for.
 7. **`/hb:to-pr`** is the only command that publishes: gate, an optional `--safe` secret scan, push, PR body with evidence and merge danger, `gh pr create`, CI watch.
