@@ -11,7 +11,7 @@ One-time, per repo. Records where `to-spec` and `to-tickets` publish. No config 
 ## 1. Explore
 
 - `git remote -v`: GitHub remote?
-- `CLAUDE.md` / `AGENTS.md` at the root: an `## Agent skills` block already?
+- `AGENTS.md` at the root: an `## Agent skills` block already?
 - `.specs/issue-tracker.md`: prior output of this skill?
 
 ## 2. Ask one question
@@ -26,7 +26,7 @@ Which tracker? Lead with the recommendation: GitHub when the remote is on GitHub
 
 **Local** → remove `.specs/issue-tracker.md` and the `### Issue tracker` sub-block if present. Done.
 
-**GitHub / Jira** → copy the seed ([issue-tracker-github.md](issue-tracker-github.md) or [issue-tracker-jira.md](issue-tracker-jira.md)) to `.specs/issue-tracker.md`, filling the placeholders. Then add to `CLAUDE.md` if it exists, else `AGENTS.md` (create it if neither exists):
+**GitHub / Jira** → copy the seed ([issue-tracker-github.md](issue-tracker-github.md) or [issue-tracker-jira.md](issue-tracker-jira.md)) to `.specs/issue-tracker.md`, filling the placeholders. Then add to `AGENTS.md`, creating it if missing:
 
 ```markdown
 ## Agent skills
@@ -37,6 +37,8 @@ Which tracker? Lead with the recommendation: GitHub when the remote is on GitHub
 ```
 
 Block exists → update it in place. Never touch the surrounding sections.
+
+`CLAUDE.md` exists without `@AGENTS.md` → warn: Claude Code reads `AGENTS.md` only when there's no `CLAUDE.md`. Suggest adding `@AGENTS.md` to it; never edit it yourself.
 
 GitHub + `hitl` label missing → `gh label create hitl --force`.
 
