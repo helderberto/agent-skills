@@ -1,7 +1,7 @@
 ---
 name: to-tickets
 effort: high
-description: Slice a spec or a ticket into tracer-bullet tickets with blocking edges, saved to `.specs/tickets/<slug>.md`.
+description: Slice a spec or a ticket into tracer-bullet tickets with blocking edges, saved to `.specs/tickets/<slug>.md` and published to the repo's issue tracker when one is configured.
 disable-model-invocation: true
 argument-hint: '<ticket | spec>'
 ---
@@ -10,7 +10,7 @@ argument-hint: '<ticket | spec>'
 
 Break a spec, or a ticket with acceptance criteria, into tracer-bullet tickets: thin vertical slices with blocking edges.
 
-Output: `.specs/tickets/<slug>.md`.
+Output: `.specs/tickets/<slug>.md`. `.specs/issue-tracker.md` exists → also one issue per ticket (step 7).
 
 ## Input
 
@@ -84,7 +84,7 @@ Count "modules touched" by scanning the spec's New Modules and Schema Changes se
 
 ### 5. Approve the granularity
 
-Present the breakdown (title, stories covered, acceptance criteria, blocked-by, `hitl`) and ask: proceed (Recommended), merge tickets, or split a ticket. Iterate until approved.
+Present the breakdown (title, stories covered, acceptance criteria, blocked-by, `hitl`) and ask: proceed (Recommended), merge tickets, or split a ticket. Iterate until approved. A tracker is configured → name it in the question: approval covers creating the issues. The argument says "local only" → skip publishing.
 
 ### 6. Save tickets
 
@@ -132,6 +132,16 @@ Gaps found in the spec needing resolution. Blank if none.
 ```
 
 Print one line per ticket: `Ticket N — <title> (<criteria summary>)`.
+
+### 7. Publish
+
+Only when `.specs/issue-tracker.md` exists; follow its commands. No file → local only, the default.
+
+One issue per ticket, in dependency order, so blockers exist before the tickets they block. Body: "What it delivers" and the acceptance criteria. Parent: the spec's `**Issue**` line, or the input ticket. Blockers: the tracker's native blocking link.
+
+After each create, add `**Issue**: <ref>` under the ticket's heading. The tickets file stays the source of truth for `/hb:build`. A create fails → stop and report what was created. A rerun skips tickets that already have an `**Issue**` line.
+
+Print one line per issue: `Ticket N → <ref>`.
 
 Next: `/hb:build <slug>` (Recommended — one ticket per invocation) or done for now.
 

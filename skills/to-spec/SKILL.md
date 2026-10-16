@@ -1,7 +1,7 @@
 ---
 name: to-spec
 effort: high
-description: Turn the settled conversation into a spec (PRD) at `.specs/specs/<slug>.md`.
+description: Turn the settled conversation into a spec (PRD) at `.specs/specs/<slug>.md`, published to the repo's issue tracker when one is configured.
 disable-model-invocation: true
 argument-hint: <idea>
 ---
@@ -60,5 +60,11 @@ ticket: <key>
 ## Testing Decisions (behavior tests, key cases, prior art)
 ## Out of Scope (be specific)
 ```
+
+### 5. Publish
+
+Only when `.specs/issue-tracker.md` exists and the argument doesn't say "local only"; follow its commands. No file → local only, the default.
+
+Name the target and confirm once. Create one issue: title = feature name, body = the spec. Add `**Issue**: <ref>` under the spec's title so `to-tickets` parents its tickets to it. Spec already has an `**Issue**` line → update that issue's body instead of creating one.
 
 Next: `/hb:to-tickets <slug>`
