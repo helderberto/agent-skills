@@ -11,8 +11,8 @@ One-time, per repo. Records where `to-spec` and `to-tickets` publish. No config 
 ## 1. Explore
 
 - `git remote -v`: GitHub remote?
-- `AGENTS.md` at the root: an `## Agent skills` block already?
 - `.specs/issue-tracker.md`: prior output of this skill?
+- `git check-ignore -q .specs`: already ignored?
 
 ## 2. Ask one question
 
@@ -24,21 +24,13 @@ Which tracker? Lead with the recommendation: GitHub when the remote is on GitHub
 
 ## 3. Write
 
-**Local** → remove `.specs/issue-tracker.md` and the `### Issue tracker` sub-block if present. Done.
+Never touch committed files: no `AGENTS.md`, `CLAUDE.md`, or `.gitignore` edits. The skills read the config directly.
 
-**GitHub / Jira** → copy the seed ([issue-tracker-github.md](issue-tracker-github.md) or [issue-tracker-jira.md](issue-tracker-jira.md)) to `.specs/issue-tracker.md`, filling the placeholders. Then add to `AGENTS.md`, creating it if missing:
+**Local** → remove `.specs/issue-tracker.md` if present. Done.
 
-```markdown
-## Agent skills
+**GitHub / Jira** → copy the seed ([issue-tracker-github.md](issue-tracker-github.md) or [issue-tracker-jira.md](issue-tracker-jira.md)) to `.specs/issue-tracker.md`, filling the placeholders.
 
-### Issue tracker
-
-<GitHub issues | Jira project KEY>. See `.specs/issue-tracker.md`.
-```
-
-Block exists → update it in place. Never touch the surrounding sections.
-
-`CLAUDE.md` exists without `@AGENTS.md` → warn: Claude Code reads `AGENTS.md` only when there's no `CLAUDE.md`. Suggest adding `@AGENTS.md` to it; never edit it yourself.
+`.specs/` not ignored → append `.specs/` to `.git/info/exclude`: ignored for this clone, never committed.
 
 GitHub + `hitl` label missing → `gh label create hitl --force`.
 
