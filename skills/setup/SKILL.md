@@ -19,7 +19,7 @@ One-time, per repo. Records where `to-spec` and `to-tickets` publish. No config 
 Which tracker? Lead with the recommendation: GitHub when the remote is on GitHub, else local.
 
 - **GitHub** → `gh` CLI
-- **Jira** → ask the project key; `acli` CLI, else the Atlassian MCP
+- **Jira** → ask the project key; Atlassian MCP
 - **Local** → markdown in `.specs/` only
 
 ## 3. Write
