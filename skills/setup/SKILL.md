@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Setup
 
-One-time, per repo. Records where `to-spec` and `to-tickets` publish. No config → local markdown under `.specs/` only, which is the default.
+One-time, per repo. Records the tracker every flow skill follows. No config → specs and tickets are markdown under `.specs/`, the default. GitHub or Jira → they live only in that tracker, with no `.specs/specs/` or `.specs/tickets/` files.
 
 ## 1. Explore
 
