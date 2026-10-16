@@ -15,7 +15,7 @@ A **flow** is a path through the skills. Most work runs along the **main flow**;
 
 ### Main flow: idea → PR
 
-0. **`/hb:setup`**, once per repo, picks where `to-spec` and `to-tickets` publish: GitHub, Jira, or local markdown (the default, no setup needed).
+0. **`/hb:setup`**, once per repo, picks the tracker `to-spec`, `to-tickets`, `build`, and `to-pr` follow: GitHub, Jira, or local markdown in `.specs/` (the default, no setup needed).
 1. **`/hb:triage`** classifies the input, sizes it, and names the entry. S work skips to `/hb:build`; M work with a crisp ticket skips to `/hb:to-tickets`.
 2. **`/hb:grill`** sharpens the idea by interview, in rounds over the design-tree frontier. It writes settled terms to `GLOSSARY.md` (via `domain-modeling`) and hard-to-reverse decisions to ADRs (via `to-adr`) as they land.
    - **A question needs a runnable answer?** A state model, business logic, a UI you have to see → detour through **`/hb:prototype`**, kept on a `prototype/<name>` branch, then back to the grill with what you learned.
