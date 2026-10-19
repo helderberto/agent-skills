@@ -23,7 +23,7 @@ Resolve the input first. A ticket key or `#42` → read it through `.specs/issue
 | Refactor | `/hb:refactor` (characterization tests first) | S–M |
 | Chore | `/hb:check` → `/hb:to-pr` | S |
 | Question / spike | `/hb:zoom-out` · `/hb:research` · `/hb:prototype` | S |
-| Someone's PR | `/hb:review <PR>` | S |
+| Someone's PR | `/hb:code-review <PR>` | S |
 | Comments on my PR | `/hb:feedback` | S |
 
 **Size**: S = one commit, no spec. M = one ticket. L = spec + tickets. **One-way doors** (schema, public API, data migration) bump the size one step: S → M, M → L. An L entry is always `/hb:grill`, whatever the class.

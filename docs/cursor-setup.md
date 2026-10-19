@@ -27,7 +27,7 @@ For every workspace, sync into `~/.cursor/skills/` instead. Project skills win f
 | Skill                | Why it helps in Cursor                                  |
 | -------------------- | ------------------------------------------------------- |
 | `tdd`                | Forces red-green-refactor for new features and bugs     |
-| `code-review`        | Correctness lens on a diff: bugs, security, performance |
+| `code-review`        | PR or branch review: quality and spec, side by side     |
 | `commit`             | Atomic commits in the repository's message style        |
 | `debug`              | Disciplined debugging loop for hard bugs                |
 | `source-driven`      | Forces use of official docs over training data          |

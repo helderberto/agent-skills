@@ -36,7 +36,7 @@ Past the window where the model still reasons sharply (~150k tokens), don't push
 
 - **Something's broken, flaky, or slow** → **`/hb:debug`**. It builds a feedback loop that goes red on *this* bug before any theory, then fixes with a regression test. Then `/hb:retro` asks what would have prevented it; a missing seam becomes an `/hb:architecture-audit` run.
 - **Review comments piling up on your PR** → **`/hb:feedback`** sorts them into Address / Skip / Optional / Discuss, then fixes the Address items test-first.
-- **Someone else's PR** → **`/hb:review <PR>`**.
+- **Someone else's PR** → **`/hb:code-review <PR>`**: quality and spec, side by side. **`/hb:review <PR>`** for the full panel.
 - **Unsure a risky change is worth it** — a PR, a branch, a plan → **`/hb:debate`**: advocate, skeptic, and neutral investigator argue it over two rounds, then one recommendation.
 - **Existing code that needs tests, splitting, or simplifying** → **`/hb:refactor`**, behavior frozen.
 
@@ -64,7 +64,7 @@ Model skills that other skills pull in. Reach for them directly in plain words w
 - **`/hb:handoff`** — a portable doc for a new harness, directory, or colleague.
 - **`/hb:wait-what`** — the last message didn't land; re-pitch it plainly in glossary terms.
 - **`/hb:teach`** — learn a concept over multiple sessions in a stateful workspace.
-- Model skills route themselves from plain words: test-first work (`tdd`), official-docs implementation (`source-driven`), UI construction (`frontend-ui-engineering`), a correctness review (`code-review`), accessibility, i18n, bundle size, dependency CVEs, trust boundaries, a visual diff report, a browser check.
+- Model skills route themselves from plain words: test-first work (`tdd`), official-docs implementation (`source-driven`), UI construction (`frontend-ui-engineering`), accessibility, i18n, bundle size, dependency CVEs, trust boundaries, a visual diff report, a browser check.
 
 ## Phase boundaries
 
