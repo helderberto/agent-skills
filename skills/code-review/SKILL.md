@@ -1,47 +1,57 @@
 ---
 name: code-review
 effort: high
-description: Correctness lens for a PR or diff, used by build and review — bugs, security, performance, and code quality. Use when asked to review a PR or give pull request feedback, even when the diff is pasted inline. Don't use for local uncommitted changes, creating PRs, or merging.
-user-invocable: false
-argument-hint: '[PR] [BUGS|SECURITY|PERFORMANCE]'
+description: Review a PR, or the current branch, on two axes in parallel subagents, quality and spec, reported side by side.
+disable-model-invocation: true
+argument-hint: '[PR-number-or-URL]'
 ---
 
-# Review Pull Request
+# Code Review
 
-Arguments: $ARGUMENTS — a PR number or URL, and/or a mode. `BUGS`, `SECURITY`, or `PERFORMANCE` narrows the review to that axis; otherwise apply all.
+Two axes, each in its own subagent so neither pollutes the other's context:
 
-## Input
+- **Quality**: correctness, readability, architecture, security, performance, the repo's documented standards, and a smell baseline
+- **Spec**: does the diff do what its issue, spec, or PR description asked?
 
-A diff pasted inline → review that text, nothing to fetch. Otherwise the PR number or URL, else the current branch's PR → `gh pr view` + `gh pr diff`. No PR found → ask for one.
+A change can pass one and fail the other, so the axes are never merged or re-ranked. For the full panel (audits, test effectiveness, quality bar), use `/hb:review`.
 
-## Approval standard
+## 1. Resolve the diff
 
-Approve when the change definitely improves overall code health, even if it isn't perfect. Don't block a change because it isn't how you would have written it. If it improves the codebase and follows its conventions, approve.
+`$ARGUMENTS` has a PR number or URL → `gh pr view <PR> --json number,title,body,baseRefName,headRefName,commits` and `gh pr diff <PR>`. None → the current branch's PR (`gh pr view`). No PR → `git diff <base>...HEAD` and `git log <base>..HEAD --oneline`, base from `git merge-base HEAD main` (fall back `master`).
 
-If the change is too large to review well (~1000+ lines), asking the author to split it is a valid outcome. Suggest a strategy: stack (small change, next one based on it), by file group, horizontal (shared code first, then consumers), or vertical (one end-to-end slice per PR).
+Bad ref or empty diff → stop here, not inside two subagents. PR head ≠ the checked-out branch → tell the subagents files on disk aren't the PR's; read context with `gh api repos/{owner}/{repo}/contents/<path>?ref=<head>`. State the scope: "Reviewing PR #42 (`feat/x` → `main`): 6 files, 224 insertions." ~1000+ changed lines → suggest a split per [axes.md](references/axes.md), then review anyway.
 
-## Review criteria
+## 2. Find the spec
 
-Review every changed file, not just the latest commit. Review the tests first: do they test behavior, cover the edge cases, and would they catch a regression? With the branch checked out locally, answer the last one by experiment: invert one condition the change adds, run the suite, restore the file. Still green → a missing test; name it. Reviewing alongside other agents → skip the experiment: `test-auditor` runs mutants in a scratch copy, and an in-place edit would race it.
+In order: issue refs in the PR body or commits (`#123`, `Closes #45`, Jira keys), fetched the tracker's way (`.specs/issue-tracker.md`, else [the local default](../setup/issue-tracker-local.md)); a spec in the tracker matching the branch slug; the PR description. Nothing → skip the Spec subagent and say so.
 
-- **Correctness**: logic bugs, off-by-ones, race conditions, unhandled states, missing error paths
-- **Readability**: functions > 50 lines, nesting > 2 levels, dead code, unused imports
-- **Security**: exposed secrets, unvalidated external data
-- **Type safety & immutability**: `any` or unjustified assertions; in-place mutation of shared data
-- **Patterns**: consistent with codebase conventions, no reinvented wheels
-- **Performance**: unnecessary re-renders, O(n²) where O(n) works
-- **Code smells**: match the diff against the baseline in [smells.md](references/smells.md) — always judgement calls; the repo's documented style overrides the baseline
-- **Dependency upgrades** (manifest/lockfile in the diff): one dependency per change — a bulk bump that breaks hides which package did it; verify against the changelog, not the version number; review the lockfile diff (one direct bump pulls dozens of transitive changes); flag hand-edited lockfiles
+## 3. Find the standards
 
-## Output
+Every file that documents how code should be written. `CODING_STANDARDS.md`, `CONTRIBUTING.md`, `AGENTS.md`, and `CLAUDE.md` must be on the list when present.
 
-Group by severity, `file:line` on every finding, a suggested fix for every Critical:
+## 4. Fan out
 
-- **Critical** — must fix before merge (bugs, vulnerabilities)
-- **Suggestions** — improvements worth considering
-- **Nit** — minor and optional; label true nitpicks as Nit rather than dropping or inflating them
-- **FYI** — informational
-- **Positives** — good patterns to call out
-- **Verified** — what you ran (tests, build, experiments) and what you only read
+Spawn both `general-purpose` subagents in **one message**. Each gets the repo path, the diff and log commands, and a read-only rule: no edits, staging, commits, or pushes. Brief with the artifact, never your own conclusion.
 
-One structural problem and ten nits: the structural problem _is_ the review — lead with it. Close with the verdict against the approval standard.
+**Quality** also gets the standards files and the absolute paths of [axes.md](references/axes.md) and [smells.md](references/smells.md) under `${CLAUDE_SKILL_DIR}/references/`. Brief: "Review the diff along every axis in axes.md. Report (a) every documented-standard violation, citing file and rule; (b) baseline smells as judgement calls, quoting the hunk. A documented standard overrides the baseline; skip what tooling enforces. Each finding: `file:line`, severity (Critical / Important / Suggestion / Nit), one-line rationale, the structural remedy, and a fix for every Critical. Then list what you ran versus only read. Under 500 words."
+
+**Spec** also gets the spec contents or path. Brief, verbatim: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding. Under 400 words."
+
+## 5. Report
+
+```
+## Code Review
+**Scope**: <PR or branch, files/lines> · **Spec source**: <issue / spec / PR description / none>
+
+## Quality
+### Critical · Important · Suggestion · Nit
+### Verified — what ran, what was only read
+
+## Spec
+### Missing · Scope creep · Looks wrong
+
+**Summary**: Quality <n> findings, worst: <one line> · Spec <n> findings, worst: <one line>
+**Verdict**: APPROVE / REQUEST CHANGES, against the approval standard in axes.md
+```
+
+Relay each subagent's findings verbatim or lightly cleaned. A subagent that errors is noted as skipped. One structural problem and ten nits: the structural problem _is_ the review, so lead with it. Name the worst finding per axis, never one winner across both.
