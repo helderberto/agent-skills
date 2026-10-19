@@ -17,7 +17,7 @@ Rule: on the flow, outward-facing, expensive, or session control → **typed-onl
 | Both (12)       | default                          | debug · to-adr · zoom-out · commit · check · feedback · refactor · prototype · research · revise · create-skill · safe-repo                                            |
 | Model only (11) | `user-invocable: false`          | tdd · codebase-design · domain-modeling · harden · source-driven · frontend-ui-engineering · visual-review · a11y-audit · i18n · perf-audit · deps-audit               |
 
-The `/hb:` menu shows typed-only and both (28 entries); the model sees both and model-only descriptions (23). Typed-only skills call model skills through the Skill tool and mention other typed-only skills only in `Next:` lines; the routers `triage` and `guide` name commands by design. Typed-only descriptions keep one what-it-does sentence; trigger phrases live only on model-visible skills.
+The `/hb:` menu shows typed-only and both (28 entries); the model sees both and model-only descriptions (23). Typed-only skills call model skills through the Skill tool; a typed-only skill other skills rely on exposes its checklist in `references/`, read by path. Typed-only skills mention other typed-only skills only in `Next:` lines; the routers `triage` and `guide` name commands by design. Typed-only descriptions keep one what-it-does sentence; trigger phrases live only on model-visible skills.
 
 ## Effort
 
