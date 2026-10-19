@@ -81,6 +81,7 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Write end-to-end tests                  | `tdd`                                          |
 | Commit changes (atomic, grouped by concern) | `commit`                                   |
 | Push and create a pull request          | suggest `/hb:to-pr`                            |
+| Release a library (version, changelog, tag, GH release) | suggest `/hb:to-release`        |
 | Record an architectural decision        | `to-adr`                                       |
 | Pin down domain terminology / glossary  | `domain-modeling`                              |
 | Stress-test a plan or design            | suggest `/hb:grill`                            |
@@ -104,7 +105,7 @@ When the user has a non-trivial task, suggest the flow commands in order. They a
 - **TICKETS** → `to-tickets` slices the spec into tracer-bullet tickets, with `architecture-audit` or `codebase-design` as needed
 - **BUILD** → `build` (one ticket per invocation, or `--all`), driven by `tdd`, `source-driven`, and `check`
 - **REVIEW** → `review` (audits as parallel reviewers plus agent lenses: spec conformance with ticket checkboxes, standards, test effectiveness with changed-line coverage, floor-guard), covering `a11y-audit`, `i18n`, `perf-audit`, `deps-audit`, `safe-repo`, `harden`; `feedback` sorts existing reviewer comments
-- **SHIP** → `to-pr` (gate, push, PR, CI watch); `--safe` adds a `safe-repo` scan before the push
+- **SHIP** → `to-pr` (gate, push, PR, CI watch); `--safe` adds a `safe-repo` scan before the push. Libraries then run `to-release`: draft release on the PR, tag and publish after the merge
 - **RETRO** → `retro`, in the same session before `/clear`
 
 ## Conventions
@@ -118,7 +119,7 @@ When the user has a non-trivial task, suggest the flow commands in order. They a
 - Supporting files split into subfolders: `references/` (long-form docs loaded on demand), `scripts/` (deterministic helpers), `assets/` (templates/icons used in output). Split when `SKILL.md` exceeds ~150 lines
 - `.plugin/plugin.json` is a byte copy of `.claude-plugin/plugin.json`: Copilot CLI checks it before the root `plugin.json`. The root `plugin.json` (Antigravity) allows only `name` and `description`, which must match. CI checks both
 - Bump `.claude-plugin/plugin.json` `version` (semver) once per PR that changes a skill users see, so plugin consumers can track updates; then copy the file to `.plugin/plugin.json`
-- After the PR merges: annotated tag `vX.Y.Z` on the merge commit, summarizing changes since the previous tag; `git push origin vX.Y.Z`; then `gh release create vX.Y.Z` with notes shaped like the previous release (`gh release view`)
+- Release: `/hb:to-release <PR>` before the merge drafts the release; rerun it after the merge to tag `vX.Y.Z` on the merge commit and publish
 
 ## Boundaries
 

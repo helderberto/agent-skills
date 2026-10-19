@@ -34,7 +34,7 @@ Arguments: $ARGUMENTS
 9. `gh pr create` with a HEREDOC body. Return the URL.
 10. `gh pr checks --watch` (skipped with `--skip-ci`). Red → call the Skill tool with `debug` on the failing check, fix, commit, push. At most 2 rounds; still red → stop and report the failing checks.
 
-Next: `/hb:retro` in this session, before `/clear`.
+Next: `/hb:to-release <PR>` for a library, else `/hb:retro` in this session, before `/clear`.
 
 ## Writing the body
 
