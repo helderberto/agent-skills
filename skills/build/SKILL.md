@@ -12,7 +12,7 @@ Implement the next unblocked ticket — one ticket per invocation. `--all` fans 
 
 ## Input
 
-**Tracker**: follow `.specs/issue-tracker.md`, else [the local default](../setup/issue-tracker-local.md), for where specs and tickets live and when a ticket is done.
+**Tracker**: follow `.specs/issue-tracker.md`, else [the local default](references/issue-tracker-local.md), for where specs and tickets live and when a ticket is done.
 
 `$ARGUMENTS` is the spec ref (or an `@path` to a tickets file). Empty → ask for it.
 
@@ -90,7 +90,7 @@ You are the orchestrator. You own the **integration branch** and the tickets fil
 
 ### Close
 
-10. All tickets done → review the integration branch against its base along [code-review's axes](../code-review/references/axes.md) and [smells](../code-review/references/smells.md). One implementer fixes the Critical findings and Suggestions; list the rest.
+10. All tickets done → review the integration branch against its base along [quality axes](references/axes.md) and [smells](references/smells.md). One implementer fixes the Critical findings and Suggestions; list the rest.
 11. Remove every implementer worktree and merged `build/<slug>-*` branch.
 12. Summarize: tickets completed, tests added, merges made, anything skipped or flagged. End with `Next: /hb:review`.
 

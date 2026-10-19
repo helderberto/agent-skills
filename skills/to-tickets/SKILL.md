@@ -12,7 +12,7 @@ Break a spec, or a ticket with acceptance criteria, into tracer-bullet tickets: 
 
 Output: the tickets, in the tracker.
 
-**Tracker**: follow `.specs/issue-tracker.md`, else [the local default](../setup/issue-tracker-local.md), for where specs and tickets live and when a ticket is done.
+**Tracker**: follow `.specs/issue-tracker.md`, else [the local default](references/issue-tracker-local.md), for where specs and tickets live and when a ticket is done.
 
 ## Input
 
