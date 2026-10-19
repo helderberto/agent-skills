@@ -49,10 +49,11 @@ The most advanced row that matches wins:
 
 | State | Phase | Next |
 |---|---|---|
+| PR merged, draft release waiting | SHIP | `/hb:to-release <PR>` |
 | PR merged or closed | done | `/hb:retro`, then `/clear` |
 | PR open, CI red | SHIP | `/hb:debug <failing check>` |
 | PR open, unresolved review comments | SHIP | `/hb:feedback` |
-| PR open, CI green | SHIP | `/hb:retro` |
+| PR open, CI green | SHIP | `/hb:to-release` for a library, else `/hb:retro` |
 | Tickets fully checked, no PR | REVIEW | `/hb:review`, then `/hb:to-pr` |
 | Tickets with unchecked boxes | BUILD | `/hb:build <slug>` |
 | Spec, no tickets | TICKETS | `/hb:to-tickets <slug>` |
