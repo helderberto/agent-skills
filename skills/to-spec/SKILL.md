@@ -12,7 +12,7 @@ Idea: $ARGUMENTS (if empty, ask for the problem and any solution ideas first).
 
 Derive a kebab-case `<slug>` from the text before the first `—`/`–` (≤4 meaningful words, no command verbs or filler). Output: the spec, in the tracker.
 
-**Tracker**: follow `.specs/issue-tracker.md`, else [the local default](../setup/issue-tracker-local.md), for where specs and tickets live and when a ticket is done.
+**Tracker**: follow `.specs/issue-tracker.md`, else [the local default](references/issue-tracker-local.md), for where specs and tickets live and when a ticket is done.
 
 ## Workflow
 

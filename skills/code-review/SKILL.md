@@ -23,7 +23,7 @@ Bad ref or empty diff → stop here, not inside two subagents. PR head ≠ the c
 
 ## 2. Find the spec
 
-In order: issue refs in the PR body or commits (`#123`, `Closes #45`, Jira keys), fetched the tracker's way (`.specs/issue-tracker.md`, else [the local default](../setup/issue-tracker-local.md)); a spec in the tracker matching the branch slug; the PR description. Nothing → skip the Spec subagent and say so.
+In order: issue refs in the PR body or commits (`#123`, `Closes #45`, Jira keys), fetched the tracker's way (`.specs/issue-tracker.md`, else [the local default](references/issue-tracker-local.md)); a spec in the tracker matching the branch slug; the PR description. Nothing → skip the Spec subagent and say so.
 
 ## 3. Find the standards
 
