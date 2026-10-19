@@ -13,11 +13,11 @@ Rule: on the flow, outward-facing, expensive, or session control → **typed-onl
 
 | Tier            | Frontmatter                      | Skills                                                                                                                                                                 |
 | --------------- | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Typed-only (15) | `disable-model-invocation: true` | setup · triage · grill · to-spec · to-tickets · build · review · to-pr · retro · architecture-audit · guide · handoff · wait-what · teach · debate                             |
+| Typed-only (16) | `disable-model-invocation: true` | setup · triage · grill · to-spec · to-tickets · build · review · code-review · to-pr · retro · architecture-audit · guide · handoff · wait-what · teach · debate               |
 | Both (12)       | default                          | debug · to-adr · zoom-out · commit · check · feedback · refactor · prototype · research · revise · create-skill · safe-repo                                            |
-| Model only (12) | `user-invocable: false`          | tdd · code-review · codebase-design · domain-modeling · harden · source-driven · frontend-ui-engineering · visual-review · a11y-audit · i18n · perf-audit · deps-audit |
+| Model only (11) | `user-invocable: false`          | tdd · codebase-design · domain-modeling · harden · source-driven · frontend-ui-engineering · visual-review · a11y-audit · i18n · perf-audit · deps-audit               |
 
-The `/hb:` menu shows typed-only and both (27 entries); the model sees both and model-only descriptions (24). Typed-only skills call model skills through the Skill tool and mention other typed-only skills only in `Next:` lines; the routers `triage` and `guide` name commands by design. Typed-only descriptions keep one what-it-does sentence; trigger phrases live only on model-visible skills.
+The `/hb:` menu shows typed-only and both (28 entries); the model sees both and model-only descriptions (23). Typed-only skills call model skills through the Skill tool and mention other typed-only skills only in `Next:` lines; the routers `triage` and `guide` name commands by design. Typed-only descriptions keep one what-it-does sentence; trigger phrases live only on model-visible skills.
 
 ## Effort
 

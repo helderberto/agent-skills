@@ -68,7 +68,7 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Full pre-ship review (parallel reviewers) | suggest `/hb:review`                         |
 | Validate a UI change in a real browser  | `visual-review --ui`                           |
 | Learn a concept over multiple sessions  | suggest `/hb:teach`                            |
-| Code review on a PR or pasted diff      | `code-review`                                  |
+| Review a PR or branch (quality + spec)  | suggest `/hb:code-review`                      |
 | Visual/HTML PR review (annotated diff)  | `visual-review`                                |
 | Triage existing PR review comments (what to fix) | `feedback`                            |
 | Check accessibility                     | `a11y-audit`                                   |
