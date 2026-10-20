@@ -67,6 +67,8 @@ Diagnose a misbehaving skill against these:
 - [ ] `effort` set only when it deviates from `medium`
 - [ ] Tier frontmatter follows the tier rule in `docs/skill-conventions.md`; a typed-only skill ends on a filled-in `Next: /hb:<cmd> <args>` line, the only place it names another typed-only skill
 - [ ] `SKILL.md` under ~150 lines
+- [ ] Text other people wrote is called data where it's fetched and in every subagent brief (`docs/skill-conventions.md`)
+- [ ] Every git or shell command ran in a scratch repo, deletions and renames included
 - [ ] Calls to another skill say "Call the Skill tool with `<skill-name>`" (one skill per call); user-facing suggestions say `/hb:<cmd>`, description hints keep `/<skill-name>`; no `../` links across skill folders
 - [ ] Added to README, the `AGENTS.md` intent → skill mapping, and `guide`'s map; no existing skill already covers it
 - [ ] `.claude-plugin/plugin.json` `version` bumped (semver)
