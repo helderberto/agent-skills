@@ -55,20 +55,24 @@ Arguments: $ARGUMENTS
 
    Done when the top differs from the backup by exactly the fixes.
 
-8. **Write the bodies.** One per layer, on the repo's PR template (`.github/pull_request_template.md` or its variants). Each body holds:
+8. **Open the drafts.**
+   - Push each layer branch with `-u`, and the rewritten PR 1 branch with `--force-with-lease`.
+   - Bottom-up, skip a layer that already has a PR: `gh pr list --head <branch> --state open`.
+   - Otherwise run `gh pr create --draft --base <layer below> --head <branch> --title <title> --body "Part N of M"`. PR 1's base is the base branch.
+   - Record each PR number from the printed URL.
+
+   Done when every layer has a PR whose base is the layer below.
+
+9. **Write the bodies.** One per layer, on the repo's PR template (`.github/pull_request_template.md` or its variants). Each body holds:
    - `Part N of M` and a one-sentence summary
-   - the stack as a numbered list, using `{{PRn}}` placeholders and `← this PR`
+   - the stack as a numbered list of the PR numbers, with `← this PR`
    - what the layer adds
    - review notes on anything that arrives in a later layer
    - the evidence from step 5
 
-   PR 1 keeps the whole-change description, because its squash is what lands, with the stack and "this PR's own diff" on top. Done when every layer has a body file and a `stack.json` lists them (schema in the script).
+   PR 1 keeps the whole-change description, because its squash is what lands, with the stack and "this PR's own diff" on top. Apply each with `gh pr edit <n> --body-file <file>`, and retitle PR 1 to the whole change with `--title`.
 
-9. **Publish.**
-   - Push each layer branch with `-u`, and the rewritten PR 1 branch with `--force-with-lease`.
-   - Run `python3 scripts/open_stack.py <stack.json>` from this skill's folder. It opens each missing PR as a draft on the layer below, fills the PR numbers into every body, and retitles PR 1 to the whole change.
-
-   Done when every layer has a PR whose base is the layer below and whose body links the whole stack.
+   Done when every PR body links the whole stack.
 
 ## Report
 
