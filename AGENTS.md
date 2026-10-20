@@ -81,7 +81,7 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Write end-to-end tests                  | `tdd`                                          |
 | Commit changes (atomic, grouped by concern) | `commit`                                   |
 | Push and create a pull request          | suggest `/hb:to-pr`                            |
-| Split a large PR into small stacked PRs | suggest `/hb:split`                            |
+| Split a large PR into small stacked PRs | suggest `/hb:to-stack`                         |
 | Release a library (version, changelog, tag, GH release) | suggest `/hb:to-release`        |
 | Record an architectural decision        | `to-adr`                                       |
 | Pin down domain terminology / glossary  | `domain-modeling`                              |

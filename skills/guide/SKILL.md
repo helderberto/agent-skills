@@ -36,7 +36,7 @@ Past the window where the model still reasons sharply (~150k tokens), don't push
 
 - **Something's broken, flaky, or slow** → **`/hb:debug`**. It builds a feedback loop that goes red on *this* bug before any theory, then fixes with a regression test. Then `/hb:retro` asks what would have prevented it; a missing seam becomes an `/hb:architecture-audit` run.
 - **Review comments piling up on your PR** → **`/hb:feedback`** sorts them into Address / Skip / Optional / Discuss, then fixes the Address items test-first.
-- **A PR too big to review** → **`/hb:split`** rebuilds it as a stack of small PRs, each on the one below, verified layer by layer, and opens them with linked bodies.
+- **A PR too big to review** → **`/hb:to-stack`** rebuilds it as a stack of small PRs, each on the one below, verified layer by layer, and opens them with linked bodies.
 - **Someone else's PR** → **`/hb:code-review <PR>`**: quality and spec, side by side. **`/hb:review <PR>`** for the full panel.
 - **Unsure a risky change is worth it** — a PR, a branch, a plan → **`/hb:debate`**: advocate, skeptic, and neutral investigator argue it over two rounds, then one recommendation.
 - **Existing code that needs tests, splitting, or simplifying** → **`/hb:refactor`**, behavior frozen.

@@ -1,5 +1,5 @@
 ---
-name: split
+name: to-stack
 description: Split a large branch or PR into a stack of small PRs, each based on the one below, rebuilt from the final tree and verified layer by layer, then push and open them with linked bodies.
 argument-hint: '[PR | branch] [--each]'
 disable-model-invocation: true
