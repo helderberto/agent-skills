@@ -1,7 +1,7 @@
 # helderberto/agent-skills
 
 [![Test Plugin Installation](https://github.com/helderberto/agent-skills/actions/workflows/test-plugin-install.yml/badge.svg)](https://github.com/helderberto/agent-skills/actions/workflows/test-plugin-install.yml)
-[![skills.sh](https://img.shields.io/endpoint?url=https://skills.sh/api/badge/helderberto/agent-skills)](https://skills.sh/helderberto/agent-skills)
+[![skills.sh](https://skills.sh/b/helderberto/agent-skills)](https://skills.sh/helderberto/agent-skills)
 
 **Personal SDLC toolbelt for AI coding agents — from idea to PR.**
 
