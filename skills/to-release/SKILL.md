@@ -25,8 +25,8 @@ Versions follow [semver](https://semver.org): `MAJOR.MINOR.PATCH`, pre-releases 
 
    Bump every file that carries the version, including copies the repo's docs require, in each file's own syntax (PEP 440 writes `1.0.0a0`; the tag stays semver), and commit `chore(release): <tag>`. Done when every version-bearing file reads the new version.
 4. **Changelog**: `CHANGELOG.md` exists without an entry for this version → prepend one in its format and commit. No file → the release notes are the changelog; don't create one.
-5. **Notes**: shaped like the previous release (`gh release view <previous> --json body`): its sections, voice, and closing PR ref. Write them from the PR body and the commits since the previous tag; a stable release spans everything since the previous stable, pre-releases included. No previous release → `## Added` / `## Changed` / `## Fixed`, empty ones omitted.
-6. **Draft**: `gh release create <tag> --draft --title <tag> --notes-file <file>`, plus `--prerelease` for a pre-release so it never becomes Latest; a draft for this tag exists → `gh release edit <tag> --notes-file <file>`. A draft creates no tag. Push the branch.
+5. **Notes**: shaped like the previous release (`gh release view <previous> --json name,body`): its title, sections, voice, and closing PR ref. Write them from the PR body and the commits since the previous tag; a stable release spans everything since the previous stable, pre-releases included. No previous release → `## Added` / `## Changed` / `## Fixed`, empty ones omitted.
+6. **Draft**: `gh release create <tag> --draft --title <title> --notes-file <file>`, plus `--prerelease` for a pre-release so it never becomes Latest; a draft for this tag exists → `gh release edit <tag> --notes-file <file>`. A draft creates no tag. Push the branch.
 
 Stop with the version, the PR URL, and the draft URL: "Review the PR and the draft release, merge, then `/hb:to-release <PR>` again."
 
