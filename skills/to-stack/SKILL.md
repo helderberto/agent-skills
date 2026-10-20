@@ -17,8 +17,10 @@ Arguments: $ARGUMENTS
 
 ## Workflow
 
-1. **Resolve.** `git fetch` the base first, since a stale local base inflates the diff. Then `git diff --stat <base>...<tip>` and the commit list.
+1. **Resolve.**
    - Dirty tree → stop and ask to commit or stash.
+   - A PR → `gh pr view <PR> --json headRefName,baseRefName`, then `gh pr checkout <PR>`. A branch → check it out. Its head is `<tip>`; its base is the PR's `baseRefName`, else the default branch.
+   - `git fetch origin <base>`, then diff against the remote base, since a stale local base inflates the diff: `git diff --stat origin/<base>...<tip>` and `git log --oneline origin/<base>..<tip>`.
    - Tip conflicts with the base, or the base already released the planned version → merge the base in and bump first. A collision belongs to the whole change, not to one layer.
    - Under ~600 changed lines without lockfiles → say a split isn't worth it, and stop unless the user insists.
 
@@ -36,16 +38,16 @@ Arguments: $ARGUMENTS
 4. **Back up.** Run `git branch <branch>-full <tip>`. Every later check compares against it. Done when the backup points at the tip.
 
 5. **Build bottom-up.** For each layer, on a new branch from the one below:
-   - Files that land whole: `git checkout <backup> -- <paths>`.
+   - Files that land whole: `git restore --source=<backup> --staged --worktree -- <paths>`, listing both sides of a rename. Unlike `git checkout`, it also applies deletions.
    - Shared files: write only this layer's slice. In tests, keep the final cases this layer can run. If a core behavior would go untested, write the smallest stand-in case; a later layer restores the final version.
-   - Manifest: only this layer's fields, then regenerate the lockfile (`npm install --package-lock-only --ignore-scripts`, or the repo's equivalent). The version bump goes in layer 1, or in every layer with `--each`.
-   - Docs: only this layer's README and CHANGELOG lines, under the one version heading.
+   - Manifest: only this layer's fields, then regenerate the lockfile (`npm install --package-lock-only --ignore-scripts`, or the repo's equivalent). The version bump goes in layer 1. With `--each`, each layer bumps from the one below by its own change type, so the top's version can be above the backup's.
+   - Docs: only this layer's README and CHANGELOG lines, under the one version heading, or the layer's own heading with `--each`.
    - Stage explicit paths. Delete any generated output the base doesn't ignore yet, such as build shims, before the checks.
    - Call the Skill tool with `check`. Commit only if it's green: chain with `&&`. One conventional commit per layer.
 
    Done when every layer has its commit and `check` passed on that exact tree.
 
-6. **Verify the stack.** `git diff --quiet <backup> <top>` must pass, because the top layer is the original tree. If it fails, find the layer that lost or gained lines, fix it there, and restack as in step 7. Done when the diff is empty.
+6. **Verify the stack.** `git diff --quiet <backup> <top>` must pass, because the top layer is the original tree. With `--each`, run it with `-- . ':!<manifest>' ':!<lockfile>' ':!CHANGELOG.md'`, then check that `git diff <backup> <top> -- <manifest> <lockfile> CHANGELOG.md` shows only version lines and version headings. If it fails, find the layer that lost or gained lines, fix it there, and restack as in step 7. Done when the diff is empty.
 
 7. **Fold in fixes**, only when the user asked for changes along with the split.
    - Commit each fix on the layer that owns the code.
@@ -70,7 +72,10 @@ Arguments: $ARGUMENTS
    - review notes on anything that arrives in a later layer
    - the evidence from step 5
 
-   PR 1 keeps the whole-change description, because its squash is what lands, with the stack and "this PR's own diff" on top. Apply each with `gh pr edit <n> --body-file <file>`, and retitle PR 1 to the whole change with `--title`.
+   - Default: PR 1 keeps the whole-change description, because its squash is what lands, with the stack and "this PR's own diff" on top. Retitle it to the whole change with `--title`.
+   - `--each`: PR 1 lands alone, so its body and title cover its own layer, like the others.
+
+   Apply each body with `gh pr edit <n> --body-file <file>`.
 
    Done when every PR body links the whole stack.
 
@@ -80,7 +85,7 @@ A table of `# | PR | Branch | Lines | Tests`, then how to land it:
 
 - Review from PR 1 up.
 - Default: merge from the top down, squashing each PR into the one below. PR 1 merges to the base last, so no layer needs a rebase.
-- `--each`: merge PR 1 into the base, then rebase PR 2 onto the squashed commit (`git rebase --onto <base> <old PR 1 tip> <PR 2>`) and retarget it, and so on up the stack.
+- `--each`: merge PR 1 into the base, then rebase PR 2 onto the squashed commit (`git fetch origin <base>`, then `git rebase --onto origin/<base> <old PR 1 tip> <PR 2>`) and retarget it, and so on up the stack.
 - A fix on a lower layer: commit it there, restack with `--update-refs`, and push the layers above with `--force-with-lease`.
 - Keep the backup branch until PR 1 merges.
 
