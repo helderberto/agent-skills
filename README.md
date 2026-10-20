@@ -149,6 +149,7 @@ Focused capabilities the agent applies based on the task; both-tier ones are als
 | ---------------------------------- | ------------------------------------------------------------------------ |
 | [`commit`](skills/commit/SKILL.md) | Group unstaged changes into atomic commits by concern (repository style) |
 | [`to-adr`](skills/to-adr/SKILL.md) | Record a 1–3 sentence Architecture Decision Record                       |
+| [`to-stack`](skills/to-stack/SKILL.md) | Typed: split a large branch or PR into a stack of small PRs, each based on the one below, rebuilt from the final tree, checked layer by layer, then pushed and opened with linked bodies |
 
 </details>
 
