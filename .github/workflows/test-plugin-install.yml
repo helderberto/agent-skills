@@ -15,13 +15,8 @@ jobs:
       - name: Install Claude Code
         run: npm install -g @anthropic-ai/claude-code
 
-      - name: Validate marketplace and plugin manifests
-        run: claude plugin validate .
-
-      - name: Plugin manifests in sync
-        run: |
-          cmp .claude-plugin/plugin.json .plugin/plugin.json
-          jq -e --slurpfile c .claude-plugin/plugin.json '.name == $c[0].name and .description == $c[0].description' plugin.json
+      - name: Check
+        run: bash scripts/check.sh
 
   test-install:
     name: Test plugin installation
@@ -44,15 +39,3 @@ jobs:
 
       - name: Install plugin
         run: claude plugin install hb@helderberto-skills --scope user
-
-  test-scripts:
-    name: Test skill scripts
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-
-      - name: floor-guard
-        run: bash skills/review/scripts/floor-guard.test.sh
-
-      - name: scan-secrets
-        run: bash skills/safe-repo/scripts/scan-secrets.test.sh
