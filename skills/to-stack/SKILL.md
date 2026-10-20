@@ -17,7 +17,10 @@ Arguments: $ARGUMENTS
 
 ## Workflow
 
-1. **Resolve.** Dirty tree → stop and ask to commit or stash. A PR → `gh pr view <PR> --json headRefName,baseRefName,headRefOid`, then `gh pr checkout <PR>`: its head is `<tip>`, its base is `<base>`. Run `git fetch origin <base>` and compare against `origin/<base>`, since the local base can be stale: `git diff --stat origin/<base>...<tip>` and the commit list.
+1. **Resolve.**
+   - Dirty tree → stop and ask to commit or stash.
+   - A PR → `gh pr view <PR> --json headRefName,baseRefName`, then `gh pr checkout <PR>`. A branch → check it out. Its head is `<tip>`; its base is the PR's `baseRefName`, else the default branch.
+   - `git fetch origin <base>`, then diff against the remote base, since a stale local base inflates the diff: `git diff --stat origin/<base>...<tip>` and `git log --oneline origin/<base>..<tip>`.
    - Tip conflicts with the base, or the base already released the planned version → merge the base in and bump first. A collision belongs to the whole change, not to one layer.
    - Under ~600 changed lines without lockfiles → say a split isn't worth it, and stop unless the user insists.
 
@@ -37,8 +40,8 @@ Arguments: $ARGUMENTS
 5. **Build bottom-up.** For each layer, on a new branch from the one below:
    - Files that land whole: `git restore --source=<backup> --staged --worktree -- <paths>`, listing both sides of a rename. Unlike `git checkout`, it also applies deletions.
    - Shared files: write only this layer's slice. In tests, keep the final cases this layer can run. If a core behavior would go untested, write the smallest stand-in case; a later layer restores the final version.
-   - Manifest: only this layer's fields, then regenerate the lockfile (`npm install --package-lock-only --ignore-scripts`, or the repo's equivalent). The version bump goes in layer 1, or in every layer with `--each`. With `--each`, each layer bumps from the one below by its own change type, so the top's version can be above the backup's.
-   - Docs: only this layer's README and CHANGELOG lines, under the one version heading.
+   - Manifest: only this layer's fields, then regenerate the lockfile (`npm install --package-lock-only --ignore-scripts`, or the repo's equivalent). The version bump goes in layer 1. With `--each`, each layer bumps from the one below by its own change type, so the top's version can be above the backup's.
+   - Docs: only this layer's README and CHANGELOG lines, under the one version heading, or the layer's own heading with `--each`.
    - Stage explicit paths. Delete any generated output the base doesn't ignore yet, such as build shims, before the checks.
    - Call the Skill tool with `check`. Commit only if it's green: chain with `&&`. One conventional commit per layer.
 
@@ -69,7 +72,10 @@ Arguments: $ARGUMENTS
    - review notes on anything that arrives in a later layer
    - the evidence from step 5
 
-   Default: PR 1 keeps the whole-change description, because its squash is what lands, with the stack and "this PR's own diff" on top. Retitle it to the whole change with `--title`. With `--each`, every PR lands on its own, so PR 1 gets its own layer body like the rest. Apply each with `gh pr edit <n> --body-file <file>`.
+   - Default: PR 1 keeps the whole-change description, because its squash is what lands, with the stack and "this PR's own diff" on top. Retitle it to the whole change with `--title`.
+   - `--each`: PR 1 lands alone, so its body and title cover its own layer, like the others.
+
+   Apply each body with `gh pr edit <n> --body-file <file>`.
 
    Done when every PR body links the whole stack.
 
