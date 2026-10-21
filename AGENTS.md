@@ -89,7 +89,7 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Is a risky change or PR worth it?       | suggest `/hb:debate`                           |
 | Fix prose / typos in markdown           | `revise`                                       |
 | Restructure an article draft            | `revise`                                       |
-| Write a doc or one-pager (Confluence, Markdown) | suggest `/hb:to-doc`                   |
+| Write a doc or one-pager (Confluence, GitHub issue, Markdown) | suggest `/hb:to-doc`     |
 | Hand off mid-session work to a fresh agent | suggest `/hb:handoff`                       |
 | Retrospective on a session (improve the agent's environment) | suggest `/hb:retro`       |
 | Last message didn't land — re-explain plainly | suggest `/hb:wait-what`                  |
