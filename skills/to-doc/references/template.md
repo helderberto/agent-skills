@@ -10,6 +10,8 @@ One skeleton, two formats. Sections the context has nothing for are dropped, nev
 | Diagrams | one per idea | 3 at most |
 | What we learned, Sources | full | the strongest 3–5 items each |
 
+Confluence pages open with a metadata header: status, authors, date, reviewers. A GitHub issue keeps that in its assignees and labels, a Markdown file in its git history.
+
 ## Rules for every section
 
 - **Lead with the point.** The first sentence of a section states what it shows.
@@ -23,7 +25,7 @@ One skeleton, two formats. Sections the context has nothing for are dropped, nev
 
 ## Markdown
 
-GitHub and most Markdown renderers draw a `mermaid` code block, and the raw file is its source, so it needs no expand.
+GitHub and most Markdown renderers draw a `mermaid` code block, and the raw file is its source, so it needs no expand. A GitHub issue takes the `# Title` as its title and the rest as its body.
 
 ````markdown
 # {Title: the takeaway or the question it answers}
@@ -74,7 +76,23 @@ flowchart LR
 
 The patterns behind each element, and what not to do, are in [confluence.md](confluence.md).
 
+The header is a Page Properties macro, so a Page Properties Report can list every doc's status. Status is `DRAFT` on a new page unless the user names another. Keep the Authors, Date and Status rows, drop a row the context has nothing for, and add rows the topic needs (projects, PRs).
+
 ```html
+<div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{},"macroMetadata":{"schemaVersion":{"value":"1"},"title":"Page Properties"}}'>
+  <p><em>Statuses: </em><span data-type="status" data-color="neutral" data-status-style="bold">ABANDONED</span> <span data-type="status" data-color="neutral" data-status-style="bold">DRAFT</span> <span data-type="status" data-color="blue" data-status-style="bold">IN PROGRESS</span> <span data-type="status" data-color="yellow" data-status-style="bold">IN REVIEW</span> <span data-type="status" data-color="green" data-status-style="bold">APPROVED</span></p>
+  <table>
+    <tbody>
+      <tr><th><p><strong>Authors</strong></p></th><td><p><span data-type="mention" data-user-id="{AAID}">@{Name}</span></p></td></tr>
+      <tr><th><p><strong>Date</strong></p></th><td><p><time datetime="{YYYY-MM-DD}">{Month D, YYYY}</time></p></td></tr>
+      <tr><th><p><strong>Status</strong></p></th><td><p><span data-type="status" data-color="neutral" data-status-style="bold">DRAFT</span></p></td></tr>
+      <tr><th><p><strong>Reviewers</strong></p></th><td><p>{mentions}</p></td></tr>
+      <tr><th><p><strong>Approvers</strong> (comment "LGTM" here)</p></th><td><p>{team or mentions}</p></td></tr>
+      <tr><th><p><strong>Related</strong></p></th><td><ul><li><p><a href="{page URL}" data-card-appearance="inline"></a></p></li></ul></td></tr>
+      <tr><th><p><strong>Tickets</strong></p></th><td><ul><li><p><a href="{ticket URL}" data-card-appearance="inline"></a></p></li></ul></td></tr>
+    </tbody>
+  </table>
+</div>
 <div data-type="panel-info">
   <p><strong>TL;DR.</strong> {The takeaway, one sentence.}</p>
   <p>{One or two short paragraphs of context.}</p>
