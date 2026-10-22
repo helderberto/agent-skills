@@ -61,7 +61,7 @@ Model skills that other skills pull in. Reach for them directly in plain words w
 - **`/hb:safe-repo`** — check a repo for secrets and sensitive data.
 - **`/hb:to-adr`** — record one architectural decision.
 - **`/hb:revise`** — restructure a draft or polish prose.
-- **`/hb:to-doc`** — turn an investigation, data, or a decision into a doc on Confluence, a GitHub issue, or Markdown; `--one-pager` for a five-minute read.
+- **`/hb:to-doc`** — turn an investigation, data, or a decision into a doc on Confluence, a GitHub issue, or Markdown; `--one-pager` for a five-minute read, `--adr` for a decision record.
 - **`/hb:create-skill`** — author a new skill.
 - **`/hb:handoff`** — a portable doc for a new harness, directory, or colleague.
 - **`/hb:wait-what`** — the last message didn't land; re-pitch it plainly in glossary terms.
