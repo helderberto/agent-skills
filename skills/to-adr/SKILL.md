@@ -62,7 +62,7 @@ Most ADRs won't need any of these.
 
 ### 5. Show the user
 
-Print the file path and the rendered content. Don't auto-commit — let the user stage it (matches their git rules).
+Print the file path and the rendered content. Don't auto-commit — let the user stage it (matches their git rules). The team needs a full ADR on Confluence → suggest `/hb:to-doc --adr <url>`.
 
 ## Rules
 

@@ -1,14 +1,15 @@
 # Doc template
 
-One skeleton, two formats. Sections the context has nothing for are dropped, never left empty.
+Two skeletons, three formats. Sections the context has nothing for are dropped, never left empty.
 
-| | Doc (default) | `--one-pager` |
-|---|---|---|
-| TL;DR panel | yes | yes |
-| Table of contents | when the page has more than 4 `h2` sections | never |
-| Length | what the topic needs | a five-minute read, about 1,000 words |
-| Diagrams | one per idea | 3 at most |
-| What we learned, Sources | full | the strongest 3–5 items each |
+| | Doc (default) | `--one-pager` | `--adr` |
+|---|---|---|---|
+| Skeleton | doc | doc | [ADR](#adr) |
+| TL;DR panel | yes | yes | yes: the decision |
+| Table of contents | when the page has more than 4 `h2` sections | never | never |
+| Length | what the topic needs | a five-minute read, about 1,000 words | what the decision needs |
+| Diagrams | one per idea | 3 at most | one per flow that changes |
+| What we learned, Sources | full | the strongest 3–5 items each | References only |
 
 Confluence pages open with a metadata header: status, authors, date, reviewers. A GitHub issue keeps that in its assignees and labels, a Markdown file in its git history.
 
@@ -124,3 +125,64 @@ The header is a Page Properties macro, so a Page Properties Report can list ever
 ```
 
 Drop the `toc` extension for `--one-pager` and for pages with 4 `h2` sections or fewer.
+
+## ADR
+
+One decision per page, same rules as above. The title is `ADR-NNNN: {the decision}`, not the question: "ADR-0003: Use Postgres for the write model". `NNNN` is the next number among the ADRs beside it: the parent page's children, or `docs/adr/`. Present tense, no hedging. Context, Decision and Consequences are required; Technical details, Alternative options and References are optional.
+
+The Confluence header keeps only the Authors, Date, Status and Approvers rows. Its statuses line is `DRAFT` (yellow), `PROPOSED` (blue), `APPROVED` (green), `REJECTED` (red) and `SUPERSEDED` (purple). The Approvers row reads "For each approval needed, create an action item assigned to the approver." The TL;DR panel holds the decision, and **Ask:** names the approvers.
+
+````markdown
+# ADR-{NNNN}: {The decision}
+
+> **TL;DR.** {What we decided and the main reason, one sentence.}
+>
+> **Ask:** {Who must approve it, and by when. Drop once approved.}
+
+## Context
+
+{The issue that motivates this decision. Point first, then how it works today.}
+
+## Decision
+
+{The change we propose or make, in present tense. The one reason that tipped it.}
+
+## Consequences
+
+{What becomes easier or harder because of this change.}
+
+**Positive**
+
+- {What gets easier.}
+
+**Negative**
+
+- {What gets harder, what we accept.}
+
+## Technical details
+
+### {Proposed change, one heading per area}
+
+{The new behavior. A diagram when a flow changes.}
+
+### Implementation plan
+
+1. {Step, in delivery order.}
+
+### Rollout
+
+{The flag, the environments in order, the stop condition, who to page.}
+
+## Alternative options considered
+
+| Option | Pros | Cons | Outcome |
+|---|---|---|---|
+| **A.** {option} | {pro} | {con} | Chosen |
+| **B.** {option} | {pro} | {con: why it lost} | Rejected |
+
+## References
+
+- <{official URL or supporting doc}>
+````
+
+In Confluence HTML, each section follows the doc skeleton's patterns, and Related and Tickets stay in the header.
