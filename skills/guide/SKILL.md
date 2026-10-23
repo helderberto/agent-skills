@@ -80,4 +80,6 @@ Decide at a boundary, never mid-phase: mid-phase, continue or split the rest int
 
 Every move but Continue replaces the session with a summary of it, so rule Continue out first.
 
+A session cut off by quota, a crash, or a closed terminal isn't a boundary: `claude --resume <session-id>` restores it in full, no handoff needed.
+
 Next: `/hb:<cmd> <args>` for the skill that fits.
