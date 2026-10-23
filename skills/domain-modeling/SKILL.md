@@ -1,7 +1,7 @@
 ---
 name: domain-modeling
 effort: high
-description: Build a project's domain model — challenge terms, pin down a ubiquitous language, write the glossary down. Use when defining domain terminology, resolving ambiguous terms, or another skill needs the shared vocabulary. Don't use for a single architectural decision (/to-adr) or explaining code (/zoom-out).
+description: Build a project's domain model — challenge terms, pin down a ubiquitous language, write the glossary down. Use when defining domain terminology, naming a concept, resolving terms used inconsistently, or updating the glossary. Don't use for a single architectural decision (/to-adr) or explaining code (/zoom-out).
 user-invocable: false
 ---
 

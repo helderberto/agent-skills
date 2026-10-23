@@ -1,7 +1,7 @@
 ---
 name: code-review
 effort: high
-description: Review a PR, or the current branch, on two axes in parallel subagents, quality and spec, reported side by side.
+description: Review a PR or branch on two axes only, quality and spec, in parallel subagents reported side by side.
 disable-model-invocation: true
 argument-hint: '[PR-number-or-URL]'
 ---

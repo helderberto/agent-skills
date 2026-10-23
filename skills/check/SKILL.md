@@ -1,6 +1,6 @@
 ---
 name: check
-description: Validate code quality — auto-fix formatting/lint, verify types, run tests. Use when asked to "validate code", "check code", or validate before committing; also lint-only asks ("run linter", "fix lint errors"). Don't use for committing, pushing, or writing new tests.
+description: Validate code quality — auto-fix formatting/lint, verify types, run tests. Use when asked to "validate code", "check code", or validate before committing; also lint-only asks ("run linter", "fix lint errors"). Don't use for committing (/commit), pushing (/to-pr), or writing new tests (/tdd).
 argument-hint: '[--check]'
 ---
 

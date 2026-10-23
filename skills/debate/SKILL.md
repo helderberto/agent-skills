@@ -1,7 +1,7 @@
 ---
 name: debate
 effort: high
-description: Weigh one risky change against a named alternative through an advocate, a skeptic, and a neutral investigator, then recommend.
+description: Settle a go/no-go on one risky change against an alternative through an advocate, a skeptic, and a neutral investigator.
 disable-model-invocation: true
 argument-hint: '<PR | branch | plan file | change> [vs <alternative>] [--quick]'
 ---

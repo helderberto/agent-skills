@@ -1,6 +1,6 @@
 ---
 name: to-doc
-description: Turn what's in context (an investigation, measured data, a decision) into a doc for readers across the company, published to Confluence, a GitHub issue or a Markdown file; `--one-pager` keeps it to a five-minute read, `--adr` records one architectural decision.
+description: Turn an investigation, data, or a decision into a doc for readers across the company, published to Confluence, a GitHub issue, or Markdown.
 disable-model-invocation: true
 argument-hint: '<topic> [<confluence-url | issue-url | github | path.md>] [--one-pager | --adr]'
 ---

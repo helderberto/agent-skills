@@ -1,6 +1,6 @@
 ---
 name: perf-audit
-description: Audit frontend bundle size and Core Web Vitals risks. Use when asked to "audit performance", "analyze bundle", "check bundle size", "check Core Web Vitals", or find frontend bottlenecks. Don't use for backend performance or database queries.
+description: Audit frontend bundle size and Core Web Vitals risks. Use when asked to "audit performance", "analyze bundle", "check bundle size", "check Core Web Vitals", or find frontend bottlenecks. Don't use for backend performance, database queries, or diagnosing a specific slowdown (/debug).
 user-invocable: false
 ---
 

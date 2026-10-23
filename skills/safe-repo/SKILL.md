@@ -1,6 +1,6 @@
 ---
 name: safe-repo
-description: Check the repository for sensitive data. Use when asked to "check for sensitive data" or verify no credentials or company data are committed; `--diff [<base>]` scopes to a branch's changes. Don't use for general code review or non-git directories.
+description: Scan the repository for committed secrets and sensitive data; `--diff [<base>]` scopes to a branch's changes. Use when asked to "check for sensitive data", "scan for secrets", or verify no credentials or company data are committed. Don't use for code-level security (/harden), dependency CVEs (/deps-audit), or non-git directories.
 argument-hint: '[--diff [<base>]]'
 ---
 

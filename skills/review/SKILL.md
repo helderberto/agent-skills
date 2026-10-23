@@ -1,7 +1,7 @@
 ---
 name: review
 effort: high
-description: Fan out parallel read-only reviewers over a diff and consolidate one severity-ranked verdict.
+description: Run the full pre-merge panel: parallel audit and lens reviewers over a diff, consolidated into one severity-ranked verdict.
 disable-model-invocation: true
 argument-hint: '[PR-number-or-branch] [agent-count]'
 ---
