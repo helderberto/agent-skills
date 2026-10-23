@@ -2,6 +2,7 @@ name: Test Plugin Installation
 
 on:
   push:
+    branches: [main]
   pull_request:
   workflow_dispatch:
 
@@ -11,12 +12,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Install Claude Code
         run: npm install -g @anthropic-ai/claude-code
 
       - name: Check
         run: bash scripts/check.sh
+        env:
+          BASE_REF: origin/${{ github.base_ref || 'main' }}
 
   test-install:
     name: Test plugin installation
