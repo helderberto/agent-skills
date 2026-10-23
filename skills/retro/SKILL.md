@@ -2,7 +2,7 @@
 name: retro
 description: Run a retrospective on a coding session and suggest changes to the agent's environment, not the code.
 disable-model-invocation: true
-argument-hint: '[session-id or path]'
+argument-hint: '[transcript path]'
 ---
 
 # Retro
@@ -11,7 +11,7 @@ Look back over a session and suggest changes to the agent's **environment** — 
 
 ## Steps
 
-1. **Read the session.** Default: this one, before `/clear`. An earlier session (`$ARGUMENTS`) lives at `~/.claude/projects/<cwd with / as ->/<session-id>.jsonl`. Redact secrets when you quote it.
+1. **Read the session.** Default: this one, before `/clear`. An earlier session: read the transcript at the path in `$ARGUMENTS`. Redact secrets when you quote it.
 2. **Read the environment first**: `CLAUDE.md` / `AGENTS.md` (repo and global), `CODING_STANDARDS.md`, the repo's own lint / typecheck / test commands, pre-commit hooks, CI workflows.
 3. **Find candidates** in every category below. Completion: each category has a candidate or "nothing found".
 4. **Present them most severe first**, each with its session evidence (what happened, where) and the proposed change. Apply only what the user picks. Before drafting steering text, call the Skill tool with `create-skill` for its Writing style: the no-op test, prompt the positive.
@@ -25,7 +25,7 @@ Look back over a session and suggest changes to the agent's **environment** — 
 - **Tool economy** — expensive or token-heavy calls a cheaper call or script would replace.
 - **No-ops** — steering lines that don't change behavior.
 - **Information access** — what the agent lacked: dev-server logs, read-only access to a third-party service.
-- **Bug prevention** — after `/debug`: what would have prevented the bug? No good test seam, tangled callers, hidden coupling → the candidate is an architecture audit with those specifics.
+- **Bug prevention** — after `debug`: what would have prevented the bug? No good test seam, tangled callers, hidden coupling → the candidate is an architecture audit with those specifics.
 
 ## Where things go
 

@@ -61,7 +61,7 @@ Done when the write or the publish call succeeds.
 
 - **Markdown** → re-read the file: headings in template order, each diagram in a `mermaid` block.
 - **GitHub issue** → `gh issue view <url> --json title,body`: the same checks on the body.
-- **Confluence** → in a subagent, fetch the page as `adf` and run `bash ${CLAUDE_SKILL_DIR}/scripts/adf-outline.sh <file>`: the file the harness saved the result to, or, for a small page that came back inline, the result written to a file. Have it return only the outline. Exit 1 → a diagram got a second macro: fix the body and publish again.
+- **Confluence** → in a subagent, fetch the page as `adf` and run this skill's `scripts/adf-outline.sh <file>` with `bash`: the file the harness saved the result to, or, for a small page that came back inline, the result written to a file. Have it return only the outline. Exit 1 → a diagram got a second macro: fix the body and publish again.
 
 Done when the Confluence outline opens with `macro details` then `panel info`, shows one `macro` then one `expand` with `code mermaid` per diagram, and has no `FLAG` line.
 

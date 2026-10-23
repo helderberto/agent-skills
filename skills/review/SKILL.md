@@ -40,11 +40,11 @@ Always: correctness, standards, sensitive data (`safe-repo --diff <base>`), test
 
 Match each reviewer to an agent type **available in the harness**; never invent one. Announce chosen reviewers before spawning and skip irrelevant ones with a one-line reason.
 
-- **Correctness**: `/hb:code-review` is typed-only, so brief with the absolute paths of `${CLAUDE_SKILL_DIR}/references/axes.md` and `smells.md` and have the reviewer apply them.
+- **Correctness**: brief with the absolute paths of `axes.md` and `smells.md` in this skill's `references/` folder and have the reviewer apply them.
 - **Standards**: first find every file that documents how code should be written; `CODING_STANDARDS.md` and `CONTRIBUTING.md` must be on the list when present. Brief: report every place the diff breaks a documented standard, citing the file and the rule. Skip what tooling enforces.
 - **Spec**: several specs and none matches → ask which. Brief, verbatim: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding." With tickets, also check every ticket checkbox against the code: a checked box that doesn't hold is Important; an unchecked box the diff satisfies is a Suggestion. Report only, never edit tickets.
 - **Test effectiveness**: besides the `test-auditor` brief, if the project emits coverage, confirm the changed lines (`git diff -U0 <base>`) are exercised, not just the global %. Uncovered changed lines are Important. No coverage tooling → note the check as skipped.
-- **Quality bar**: run `bash ${CLAUDE_SKILL_DIR}/scripts/floor-guard.sh --base <base>`. Exit 1 → each `[rule] file:line` is Important unless the diff or a commit message gives the reason. Exit 2 → note the check as skipped.
+- **Quality bar**: run this skill's `scripts/floor-guard.sh --base <base>` with `bash`. Exit 1 → each `[rule] file:line` is Important unless the diff or a commit message gives the reason. Exit 2 → note the check as skipped.
 
 ### 3. Fan out
 
