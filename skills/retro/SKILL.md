@@ -31,7 +31,7 @@ Look back over a session and suggest changes to the agent's **environment** — 
 
 The implementer carries the most context pressure; the reviewer gets a diff and little else. So the reviewer enforces standards, not the implementer.
 
-- `CLAUDE.md` / `AGENTS.md` — loaded into every session. Navigation pointers only.
+- `CLAUDE.md` / `AGENTS.md` — loaded into every session. Navigation pointers only. The budget is fixed: a new line evicts an old one. Admit a line only if forgetting it causes a mistake on many tasks; narrower rules go below.
 - `CODING_STANDARDS.md` — read at review time by the Standards reviewer. Past ~1,000 lines, split it into docs it points at.
 - Docs — reference files other files point at. Extend an existing one before writing a new one.
 - Skills — knowledge loaded on demand, or user-invoked commands.
