@@ -18,7 +18,7 @@ Uses the deep-module vocabulary and principles — call the Skill tool with `cod
 
 **Scope first (YAGNI).** Deepening pays off where code keeps changing. A direction in `$ARGUMENTS` (module, subsystem, pain point) → take it. Otherwise read a good stretch of `git log --oneline` for hot spots, the files and areas that keep coming up, and start there; no clear hot spot → widen the net. Read the ADRs in the area: a candidate an ADR already rejected comes back only when the friction is worth reopening it.
 
-Use the Agent tool with subagent_type=Explore to navigate the codebase organically. Note where you experience friction:
+Use a read-only explore subagent to navigate the codebase organically. Note where you experience friction:
 
 - Understanding one concept requires bouncing between many small **modules**
 - A module's **interface** is nearly as complex as its **implementation** (shallow module)

@@ -2,7 +2,7 @@
 name: handoff
 description: Compact the current conversation into a handoff document for a fresh agent.
 disable-model-invocation: true
-argument-hint: "What will the next session be used for?"
+argument-hint: '[next-session focus]'
 ---
 
 Write a handoff document summarising the current conversation so a fresh agent can continue the work. Save to `$TMPDIR`, else `/tmp` (`%TEMP%` on Windows) - not the current workspace - and print the absolute path.

@@ -34,7 +34,7 @@ It writes to `.agents/skills/` in the project, or to `~/.gemini/antigravity-cli/
 
 - No `disable-model-invocation`: the agent may start a flow skill unasked. `user-invocable: false` skills still show in the `/` menu.
 - `agents/` subagents load but list Claude Code tool names (`Read`, `Bash`). Antigravity warns unmapped tool names can hang a subagent; press `k` on it in `/agents` to cancel.
-- Antigravity documents no `$ARGUMENTS` or `${CLAUDE_SKILL_DIR}`. Pass arguments in plain words; `safe-repo` and `review` keep their scripts in `skills/<name>/scripts/`.
+- Antigravity documents no `$ARGUMENTS`. Pass arguments in plain words.
 - With the skills CLI, `/feedback` collides with the built-in feedback panel.
 
 ## Updating

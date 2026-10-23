@@ -1,6 +1,6 @@
 ---
 name: to-doc
-description: Turn what's in context (an investigation, measured data, a decision) into a doc for readers across the company, published to Confluence, a GitHub issue or a Markdown file; `--one-pager` keeps it to a five-minute read, `--adr` records one architectural decision.
+description: Turn an investigation, data, or a decision into a doc for readers across the company, published to Confluence, a GitHub issue, or Markdown.
 disable-model-invocation: true
 argument-hint: '<topic> [<confluence-url | issue-url | github | path.md>] [--one-pager | --adr]'
 ---
@@ -27,7 +27,7 @@ Done when you know whether you create, fill or replace, and any replacement is c
 
 One question round at most, only for what the context doesn't answer: the one takeaway, the audience, the destination. Confluence adds the header's reviewers, approvers, related pages and tickets.
 
-`--adr` → check [to-adr](../to-adr/SKILL.md)'s gate first: hard to reverse, surprising without context, a real trade-off. A failed criterion → name it and stop.
+`--adr` → check the `to-adr` gate first: hard to reverse, surprising without context, a real trade-off. A failed criterion → name it and stop.
 
 Done when the takeaway is one sentence you could put after `TL;DR.`
 
@@ -61,7 +61,7 @@ Done when the write or the publish call succeeds.
 
 - **Markdown** → re-read the file: headings in template order, each diagram in a `mermaid` block.
 - **GitHub issue** → `gh issue view <url> --json title,body`: the same checks on the body.
-- **Confluence** → in a subagent, fetch the page as `adf` and run `bash ${CLAUDE_SKILL_DIR}/scripts/adf-outline.sh <file>`: the file the harness saved the result to, or, for a small page that came back inline, the result written to a file. Have it return only the outline. Exit 1 → a diagram got a second macro: fix the body and publish again.
+- **Confluence** → in a subagent, fetch the page as `adf` and run this skill's `scripts/adf-outline.sh <file>` with `bash`: the file the harness saved the result to, or, for a small page that came back inline, the result written to a file. Have it return only the outline. Exit 1 → a diagram got a second macro: fix the body and publish again.
 
 Done when the Confluence outline opens with `macro details` then `panel info`, shows one `macro` then one `expand` with `code mermaid` per diagram, and has no `FLAG` line.
 

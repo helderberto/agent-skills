@@ -1,12 +1,12 @@
 ---
 name: to-stack
-description: Split a large branch or PR into a stack of small PRs, each based on the one below, rebuilt from the final tree and verified layer by layer, then push and open them with linked bodies.
+description: Split a large branch or PR into a stack of small PRs, verified layer by layer, and open them as linked drafts.
 argument-hint: '[PR | branch] [--each]'
 disable-model-invocation: true
 effort: high
 ---
 
-# Split
+# To Stack
 
 Turn one large change into a **stack**: PR 1 on the base branch, each later PR on the one below it. Reviewers read one concern at a time, and the top of the stack is byte-for-byte the tree you already tested.
 

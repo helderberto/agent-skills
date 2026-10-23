@@ -3,7 +3,7 @@ name: build
 effort: high
 description: Implement the next unblocked ticket test-first and commit it, or fan every ticket out to parallel subagents with `--all`.
 disable-model-invocation: true
-argument-hint: '[slug] [--all]'
+argument-hint: '[spec-ref | @tickets-file] [--all]'
 ---
 
 # Build

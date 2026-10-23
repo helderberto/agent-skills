@@ -1,7 +1,6 @@
 ---
 name: a11y-audit
 description: Audit accessibility (WCAG) in frontend code. Use when asked to "check accessibility", "audit a11y", "check WCAG", or find accessibility issues. Don't use for backend code, bundle size (/perf-audit), or translations (/i18n).
-user-invocable: false
 ---
 
 # Accessibility Audit

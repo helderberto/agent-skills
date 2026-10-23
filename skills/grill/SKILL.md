@@ -2,9 +2,12 @@
 name: grill
 description: Interview in rounds until a plan or idea has no open decisions.
 disable-model-invocation: true
+argument-hint: '[idea | slug]'
 ---
 
 # Grill
+
+Topic: `$ARGUMENTS`, an idea or a slug naming earlier work; empty → the plan in the conversation.
 
 Interview the user relentlessly until you reach a shared understanding. Map the plan as a **design tree**: every decision branches into the decisions that hang off it.
 

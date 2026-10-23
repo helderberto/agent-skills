@@ -1,6 +1,6 @@
 ---
 name: safe-repo
-description: Check the repository for sensitive data. Use when asked to "check for sensitive data" or verify no credentials or company data are committed; `--diff [<base>]` scopes to a branch's changes. Don't use for general code review or non-git directories.
+description: Scan the repository for committed secrets and sensitive data; `--diff [<base>]` scopes to a branch's changes. Use when asked to "check for sensitive data", "scan for secrets", or verify no credentials or company data are committed. Don't use for code-level security (/harden), dependency CVEs (/deps-audit), or non-git directories.
 argument-hint: '[--diff [<base>]]'
 ---
 
@@ -19,7 +19,7 @@ Security audit for sensitive data in repository. Check for credentials, API keys
 
 ### Default (full-scan)
 
-1. Run `bash ${CLAUDE_SKILL_DIR}/scripts/scan-secrets.sh` to scan all tracked files for credential patterns
+1. Run this skill's `scripts/scan-secrets.sh` with `bash` to scan all tracked files for credential patterns
 2. Check for sensitive tracked files by name: `.env*` (except `.env.example`), `*.pem`, `*.key`, `*_rsa*`, `*secret*`, `*credential*`
 3. Analyze git history for removed secrets: `git log --all --full-history -- "*.env" "*.pem" "*.key" "*secret*" "*credential*"`
 4. Review `.gitignore` for proper patterns
@@ -28,7 +28,7 @@ Security audit for sensitive data in repository. Check for credentials, API keys
 ### `--diff` mode
 
 1. Compute changed files: `git diff --name-only <base>...HEAD` when a base is given, plus `git diff --name-only HEAD` + `git diff --name-only --cached`
-2. Scan only those files with the regexes in `${CLAUDE_SKILL_DIR}/scripts/scan-secrets.sh` (grep them directly) plus the filename checks above
+2. Scan only those files with the regexes in this skill's `scripts/scan-secrets.sh` (grep them directly) plus the filename checks above
 3. Skip history analysis (not relevant for in-flight changes)
 4. Report findings scoped to changed files only
 

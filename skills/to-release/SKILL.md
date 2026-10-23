@@ -11,7 +11,7 @@ For libraries and other versioned packages. One command, two runs; the PR's stat
 
 ## 1. Resolve
 
-`gh auth status` fails → stop: "Run `! gh auth login`, then `/hb:to-release` again." PR from `$ARGUMENTS`, else the current branch's: `gh pr view <PR> --json number,state,headRefName,baseRefName,mergeCommit,title,body`. Closed unmerged → stop.
+`gh auth status` fails → stop: "Run `gh auth login`, then `/hb:to-release` again." PR from `$ARGUMENTS`, else the current branch's: `gh pr view <PR> --json number,state,headRefName,baseRefName,mergeCommit,title,body`. Closed unmerged → stop.
 
 Versions follow [semver](https://semver.org): `MAJOR.MINOR.PATCH`, pre-releases `X.Y.Z-<id>.N` with `alpha` < `beta` < `rc` < the release. `git fetch origin --tags`, then sort with `git -c versionsort.suffix=- tag --sort=-v:refname`: plain `v:refname` ranks `1.0.0` below its own `-rc`. The first line is the previous tag; the first without a `-` suffix is the previous stable. New tags match their format (`v1.2.3` or `1.2.3`). No tag yet → first release at the manifest version.
 
