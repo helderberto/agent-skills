@@ -1,7 +1,6 @@
 ---
 name: deps-audit
 description: Check dependencies for known CVEs and staleness. Use when asked to "audit dependencies", "check for vulnerable packages", or find outdated packages. Don't use for code-level security (/harden) or committed secrets (/safe-repo).
-user-invocable: false
 ---
 
 # Dependency Audit

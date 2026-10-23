@@ -1,7 +1,6 @@
 ---
 name: i18n
 description: Audit internationalization coverage and find hardcoded strings. Use when asked to "check i18n", "find hardcoded strings", or verify translation coverage. Don't use for backend code, projects without an i18n library, accessibility (/a11y-audit), or bundle size (/perf-audit).
-user-invocable: false
 ---
 
 # i18n Audit
