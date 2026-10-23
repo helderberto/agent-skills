@@ -2,7 +2,7 @@
 name: teach
 description: Teach a concept over multiple sessions, with lessons and records kept in this workspace.
 disable-model-invocation: true
-argument-hint: "What would you like to learn about?"
+argument-hint: '[topic]'
 ---
 
 The user has asked you to teach them something. This is a stateful request - they intend to learn the topic over multiple sessions.

@@ -1,6 +1,5 @@
 ---
 name: research
-effort: medium
 description: Investigate a question against primary sources and capture cited findings as Markdown. Use when the user wants a topic researched, docs or API facts gathered, or reading delegated to a background agent. Pass the question as the argument. Don't use for implementing against pinned dependency versions (/source-driven) or codebase search.
 argument-hint: <question>
 context: fork

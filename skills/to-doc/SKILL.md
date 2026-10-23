@@ -27,7 +27,7 @@ Done when you know whether you create, fill or replace, and any replacement is c
 
 One question round at most, only for what the context doesn't answer: the one takeaway, the audience, the destination. Confluence adds the header's reviewers, approvers, related pages and tickets.
 
-`--adr` → check [to-adr](../to-adr/SKILL.md)'s gate first: hard to reverse, surprising without context, a real trade-off. A failed criterion → name it and stop.
+`--adr` → check the `to-adr` gate first: hard to reverse, surprising without context, a real trade-off. A failed criterion → name it and stop.
 
 Done when the takeaway is one sentence you could put after `TL;DR.`
 

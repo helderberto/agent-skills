@@ -6,7 +6,7 @@ disable-model-invocation: true
 effort: high
 ---
 
-# Split
+# To Stack
 
 Turn one large change into a **stack**: PR 1 on the base branch, each later PR on the one below it. Reviewers read one concern at a time, and the top of the stack is byte-for-byte the tree you already tested.
 

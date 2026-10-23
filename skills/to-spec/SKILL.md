@@ -3,7 +3,7 @@ name: to-spec
 effort: high
 description: Turn the settled conversation into a spec (PRD), published through the repo's tracker: `.specs/specs/<slug>.md` by default.
 disable-model-invocation: true
-argument-hint: <idea>
+argument-hint: '[idea | spec slug]'
 ---
 
 # To Spec

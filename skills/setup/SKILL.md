@@ -2,6 +2,7 @@
 name: setup
 description: Configure this repo's issue tracker for the flow skills: GitHub, Jira, or local markdown (the default).
 disable-model-invocation: true
+effort: low
 argument-hint: '[local | github | jira <KEY>]'
 ---
 
