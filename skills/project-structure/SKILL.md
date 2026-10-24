@@ -23,10 +23,10 @@ src/                      imported as @/…
 - **`@` alias.** Import across folders with `@/…`; `./` only within one folder. Map `@/*` to `src/*` in `tsconfig.json` and in the bundler and test-runner config, so all three resolve the same path.
 - **`components/`** holds components used by two or more features. `components/index.ts` is the barrel: `import { Button } from '@/components'`. A component one feature uses lives in that feature.
 - **`features/<feature>/`** is a deep module: a lot of behaviour behind a small interface. `index.ts` exports that interface and nothing else; callers import `@/features/<feature>`, never a file inside it. Call the Skill tool with `codebase-design` to decide what the interface hides.
-- **`views/`** is thin: layout and composition. Logic found in a view moves into a feature. With file-based routing (Next.js `app/`, Remix `routes/`), a route file loads data, sets metadata and renders its view.
+- **`views/`** is thin: layout and composition. Logic found in a view moves into a feature.
 - **`hooks/`** holds hooks shared across features. A hook one feature uses stays in that feature; promote it when a second feature needs it.
 - **`types/`** holds domain types and DTOs (the shapes that cross the network), one file per domain: `types/order.ts`.
-- **`lib/<library>/index.ts`** re-exports what the app uses from a third-party library, configured once. The app imports `@/lib/<library>`, so swapping or configuring the library touches one folder. The framework itself (React, Next.js, Vue) is imported directly. `vi.mock('<package>')` still works on a wrapped package, since the wrapper re-exports the mocked module. Tests import Testing Library from `@/lib/testing-library`, which re-exports `render`, `screen`, `within` and `userEvent` (and a `render` wrapped in the app's providers when it has any).
+- **`lib/<library>/index.ts`** re-exports what the app uses from a third-party library, configured once. The app imports `@/lib/<library>`, so swapping or configuring the library touches one folder. Tests import Testing Library from `@/lib/testing-library`, which re-exports `render`, `screen`, `within` and `userEvent` (and a `render` wrapped in the app's providers when it has any).
 
 ## Files
 
