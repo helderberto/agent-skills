@@ -64,3 +64,5 @@ The SDK approach means:
 - Use `userEvent` (via `@testing-library/user-event`) instead of `fireEvent` — it simulates real browser interactions
 - Prefer `vi.spyOn` over `vi.mock(` when mocking your own code — less invasive and auto-restorable
 - Only use `vi.mock(` when mocking a library or external module behavior
+- Stub browser globals (`navigator`, `matchMedia`, `fetch`, `localStorage`) with `vi.stubGlobal`, not `Object.defineProperty` or `vi.spyOn` on `window`; `unstubGlobals` in the config restores them after each test
+- Query by role and accessible name first, then label, then visible text; a test id only when no accessible handle exists. The same order holds in end-to-end tests ([ui-tests.md](ui-tests.md))
