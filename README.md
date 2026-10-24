@@ -160,6 +160,7 @@ Focused capabilities the agent applies based on the task; both-tier ones are als
 | Skill                                                                | What it does                                                                                                                       |
 | -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | [`codebase-design`](skills/codebase-design/SKILL.md)                 | Shared deep-module vocabulary for designing or improving an interface                                                              |
+| [`project-structure`](skills/project-structure/SKILL.md)             | Folder layout and file rules — `@` alias, barrels, deep feature modules, lib wrappers, kebab-case, sibling tests, named exports      |
 | [`frontend-ui-engineering`](skills/frontend-ui-engineering/SKILL.md) | Front-load UI construction decisions — prop API, state placement, required states, a11y by construction                            |
 | [`architecture-audit`](skills/architecture-audit/SKILL.md)           | Surface architectural friction in git hot spots, propose refactors toward deep modules as RFCs; `--html` for a before/after report |
 | [`domain-modeling`](skills/domain-modeling/SKILL.md)                 | Build and sharpen the project's ubiquitous language and glossary                                                                   |

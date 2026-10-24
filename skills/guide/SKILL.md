@@ -51,6 +51,7 @@ Model skills that other skills pull in. Reach for them directly in plain words w
 
 - **`domain-modeling`** — the project's domain language in `GLOSSARY.md`: challenge a fuzzy term, split an overloaded word.
 - **`codebase-design`** — the deep-module vocabulary (module, interface, depth, seam, adapter, leverage, locality) for a module's shape.
+- **`project-structure`** — where a file goes: the `src/` layout, barrels, feature modules, file naming, sibling tests, when to split a file.
 
 ### Standalone
 

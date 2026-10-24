@@ -15,9 +15,9 @@ Rule: on the flow, outward-facing, expensive, session control, or a router → *
 | --------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Typed-only (19) | `disable-model-invocation: true` | setup · triage · grill · to-spec · to-tickets · build · review · code-review · to-stack · to-pr · to-release · retro · architecture-audit · guide · handoff · wait-what · teach · debate · to-doc |
 | Both (15)       | default                          | debug · to-adr · zoom-out · commit · check · feedback · refactor · prototype · research · revise · create-skill · safe-repo · a11y-audit · i18n · deps-audit                 |
-| Model only (8)  | `user-invocable: false`          | tdd · codebase-design · domain-modeling · harden · source-driven · frontend-ui-engineering · visual-review · perf-audit                                                       |
+| Model only (9)  | `user-invocable: false`          | tdd · codebase-design · project-structure · domain-modeling · harden · source-driven · frontend-ui-engineering · visual-review · perf-audit                                                       |
 
-The `/hb:` menu shows typed-only and both (34 entries); the model sees both and model-only descriptions (23). Typed-only skills call model skills through the Skill tool; a skill that needs another's checklist keeps its own copy in `references/`. Typed-only skills mention other typed-only skills only in `Next:` lines; the routers `triage` and `guide` name commands by design. Typed-only descriptions keep one what-it-does sentence; trigger phrases live only on model-visible skills.
+The `/hb:` menu shows typed-only and both (34 entries); the model sees both and model-only descriptions (24). Typed-only skills call model skills through the Skill tool; a skill that needs another's checklist keeps its own copy in `references/`. Typed-only skills mention other typed-only skills only in `Next:` lines; the routers `triage` and `guide` name commands by design. Typed-only descriptions keep one what-it-does sentence; trigger phrases live only on model-visible skills.
 
 ## Effort
 

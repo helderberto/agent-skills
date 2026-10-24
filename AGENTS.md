@@ -60,6 +60,7 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Bug, error, unexpected behavior         | `debug`                                        |
 | Backfill tests / split functions / simplify | `refactor`                                 |
 | Design or improve a module's interface  | `codebase-design`                              |
+| Where a file goes / scaffold folders    | `project-structure`                            |
 | Architectural friction in codebase      | suggest `/hb:architecture-audit`               |
 | Prototype a design (logic demo or UI)   | `prototype`                                    |
 | Explain code or codebase area           | `zoom-out`                                     |
