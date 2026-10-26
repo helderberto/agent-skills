@@ -19,6 +19,17 @@ VS Code picks up plugins installed by the CLI. Without the CLI, run **Chat: Inst
 
 Alternative, skills only with manual updates: `npx skills add helderberto/agent-skills -a github-copilot` copies them into `.agents/skills/` (`-g`: `~/.copilot/skills/`). Pick one route.
 
+To recommend the plugin to a team, commit `.github/copilot/settings.json` in their repo. VS Code prompts on the first chat message and lists it under `@agentPlugins @recommended`:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "helderberto-skills": { "source": { "source": "github", "repo": "helderberto/agent-skills" } }
+  },
+  "enabledPlugins": { "hb@helderberto-skills": true }
+}
+```
+
 ## Invoking skills
 
 | Surface     | Typed form                            |
