@@ -88,6 +88,7 @@ OpenCode uses a **skill-driven execution model** — the agent reads this file p
 | Stress-test a plan or design            | suggest `/hb:grill`                            |
 | Is a risky change or PR worth it?       | suggest `/hb:debate`                           |
 | Fix prose / typos in markdown           | `revise`                                       |
+| Polish a PR description, comments, or any text | `revise`                                |
 | Restructure an article draft            | `revise`                                       |
 | Write a doc, one-pager or ADR (Confluence, GitHub issue, Markdown) | suggest `/hb:to-doc`     |
 | Hand off mid-session work to a fresh agent | suggest `/hb:handoff`                       |
