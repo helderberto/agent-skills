@@ -63,7 +63,7 @@ Model skills that other skills pull in. Reach for them directly in plain words w
 - **`/hb:a11y-audit`** — WCAG accessibility audit of frontend code.
 - **`/hb:i18n`** — hardcoded strings and translation coverage.
 - **`/hb:to-adr`** — record one architectural decision.
-- **`/hb:revise`** — restructure a draft, tighten docs, or polish any text: PR descriptions, comments, messages.
+- **`/hb:revise`** — improve any text in place: restructure, tighten, polish.
 - **`/hb:to-doc`** — turn an investigation, data, or a decision into a doc on Confluence, a GitHub issue, or Markdown; `--one-pager` for a five-minute read, `--adr` for a decision record.
 - **`/hb:create-skill`** — author a new skill.
 - **`/hb:handoff`** — a portable doc for a new harness, directory, or colleague.
