@@ -181,6 +181,7 @@ Focused capabilities the agent applies based on the task; both-tier ones are als
 | [`zoom-out`](skills/zoom-out/SKILL.md)         | Explain code with visual diagrams and analogies                                                                                     |
 | [`create-skill`](skills/create-skill/SKILL.md) | Author a new skill with proper structure                                                                                            |
 | [`revise`](skills/revise/SKILL.md)             | Improve any text in place (articles, docs, PR descriptions, comments, messages): restructure, tighten, polish                      |
+| [`draft`](skills/draft/SKILL.md)               | Typed: write an article from a blank page: interview for raw fragments, then shape them into a draft block by block, and revise it |
 | [`to-doc`](skills/to-doc/SKILL.md)             | Typed: turn an investigation, data, or a decision into a doc on Confluence (with a Page Properties header), a GitHub issue, or Markdown: TL;DR panel, tables, Mermaid diagrams, verified sources; `--one-pager` keeps it to a five-minute read, `--adr` records a decision |
 
 </details>

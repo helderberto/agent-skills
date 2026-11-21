@@ -1,6 +1,6 @@
 ---
 name: revise
-description: Improve any text in place (articles, docs, PR and issue descriptions, code comments, messages): restructure, tighten, and polish without changing the author's voice. Use when asked to "revise", "improve this text", "edit my draft", "fix my PR description", "clean up comments", or "fix typos". Don't use for code style (/check), commit messages (/commit), or writing a new doc (/to-doc).
+description: Improve any text in place (articles, docs, PR and issue descriptions, code comments, messages): restructure, tighten, and polish without changing the author's voice. Use when asked to "revise", "improve this text", "edit my draft", "fix my PR description", "clean up comments", or "fix typos". Don't use for code style (/check), commit messages (/commit), or writing new docs (/to-doc) or articles (/draft).
 ---
 
 # Revise
