@@ -86,12 +86,16 @@ You are the orchestrator. You own the **integration branch** and the tickets fil
    - never ticks boxes or closes tickets, and reports in a few lines: branch, commits, which criteria hold.
 7. **Merge**: as each implementer reports, merge its branch into the integration branch. A conflict → a merger subagent resolves it there and runs `check`. Then tick its boxes and close it the tracker's way.
 8. **Refill**: a merge that unblocks tickets → spawn implementers for the new frontier at once, without waiting for the rest of the wave.
-9. **Stop and ask** before spawning a `hitl` ticket, when an implementer reports a check still red after 3 fixes, when the spec is ambiguous or silent on a needed decision, or when a ticket does something `git revert` can't undo: auth or permission changes, destructive migrations, payments, deletes, deploys, secrets. Running implementers keep going. Rerunning `/hb:build <slug> --all` resumes at the current frontier.
+9. **Park and continue** on a `hitl` ticket, an implementer whose check is still red after 3 fixes, or a spec ambiguous or silent on a needed decision. Park that ticket with its question and its branch unmerged, park every ticket it blocks, and keep spawning the rest of the frontier. Nothing left to spawn or merge → ask every parked question in one batch. Answered → unpark and spawn. Deferred → it stays parked through Close.
+
+   **Stop and ask** before spawning a ticket that does something `git revert` can't undo: auth or permission changes, destructive migrations, payments, deletes, deploys, secrets. Running implementers keep going.
+
+   Rerunning `/hb:build <slug> --all` resumes at the current frontier, parked tickets included.
 
 ### Close
 
-10. All tickets done → review the integration branch against its base along [quality axes](references/axes.md) and [smells](references/smells.md). One implementer fixes the Critical findings and Suggestions; list the rest.
+10. Every ticket done or parked → review the integration branch against its base along [quality axes](references/axes.md) and [smells](references/smells.md). One implementer fixes the Critical findings and Suggestions; list the rest.
 11. Remove every implementer worktree and merged `build/<slug>-*` branch.
-12. Summarize: tickets completed, tests added, merges made, anything skipped or flagged. End with `Next: /hb:review`.
+12. Summarize: tickets completed, tests added, merges made, anything skipped, parked with its open question, or flagged. End with `Next: /hb:review`.
 
 No subagent support → run [the workflow](#workflow) per ticket in blocking order instead, committing each without asking, scoped to that ticket's files, never `git add -A`.
