@@ -29,7 +29,7 @@ Format a round like so:
 
 Each answered round reshapes the tree: settled decisions push the frontier outward and unblock the questions that depended on them. Recompute the frontier and ask the next round. A question whose answer depends on another question still open in this round belongs to a _later_ round, not this one.
 
-**Facts are your job; decisions are the user's.** If a frontier question can be answered from the codebase or environment, dispatch a subagent to find it — never ask the user for anything you could look up yourself. Don't block the round on a running lookup: only the questions downstream of it wait; ask the rest of the frontier now.
+**Facts are your job; decisions are the user's.** If a frontier question can be answered from the codebase or environment, dispatch a subagent with a fresh context window to find it — never ask the user for anything you could look up yourself. Don't block the round on a running lookup: only the questions downstream of it wait; ask the rest of the frontier now.
 
 **Write as you go.** A domain term settles → call the Skill tool with `domain-modeling` to write it into the glossary. A decision settles that is hard to reverse, surprising without context, and a real trade-off → call the Skill tool with `to-adr` to record it. Do both inline, the moment it settles, not in a batch at the end.
 

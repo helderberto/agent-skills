@@ -18,7 +18,7 @@ Show the frame in five lines: the change, the alternative, who it affects, the a
 
 ## 2. Round 1: fan out
 
-Spawn the three in **one message**, as general-purpose subagents. Each brief is self-contained: the frame, the repo path (note a worktree), the artifact, its role below, and this contract:
+Spawn the three in **one message**, as general-purpose subagents, each with a fresh context window. Each brief is self-contained: the frame, the repo path (note a worktree), the artifact, its role below, and this contract:
 
 - **Read-only**: no edits, staging, commits, pushes, issues, comments, or messages.
 - ≤400 words. Every claim cites `file:line`, a command with its output, or a link.

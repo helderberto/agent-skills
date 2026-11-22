@@ -75,7 +75,7 @@ Every remaining ticket after one approval, fanned out to **implementer subagents
 
 ### Orchestrate
 
-You are the orchestrator. You own the **integration branch** and the tickets file, and you write no feature code.
+You are the orchestrator. You own the **integration branch** and the tickets file, and you write no feature code. Start every subagent with a fresh context window, not a fork of this conversation.
 
 4. **Integration branch**: the current branch, or `feat/<slug>` when on the default branch.
 5. **Explore** (optional): tickets that need codebase or docs exploration → one Explore subagent saves notes to `<tmpdir>/build-<slug>/notes.md`, outside the repo, so implementers build instead of explore.
