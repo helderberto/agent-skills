@@ -180,7 +180,7 @@ Focused capabilities the agent applies based on the task; both-tier ones are als
 | [`wait-what`](skills/wait-what/SKILL.md)       | Last message didn't land — re-pitch it with context, in Simplified Technical English and glossary terms                             |
 | [`zoom-out`](skills/zoom-out/SKILL.md)         | Explain code with visual diagrams and analogies                                                                                     |
 | [`create-skill`](skills/create-skill/SKILL.md) | Author a new skill with proper structure                                                                                            |
-| [`revise`](skills/revise/SKILL.md)             | Restructure article drafts, or polish any markdown (typos, dashes, filler)                                                          |
+| [`revise`](skills/revise/SKILL.md)             | Restructure or polish any existing text, commit and PR messages included (cut, collapse, typos, dashes, filler)                    |
 | [`draft`](skills/draft/SKILL.md)               | Typed: write an article from a blank page: interview for raw fragments, then shape them into a draft block by block, and revise it |
 | [`to-doc`](skills/to-doc/SKILL.md)             | Typed: turn an investigation, data, or a decision into a doc on Confluence (with a Page Properties header), a GitHub issue, or Markdown: TL;DR panel, tables, Mermaid diagrams, verified sources; `--one-pager` keeps it to a five-minute read, `--adr` records a decision |
 
