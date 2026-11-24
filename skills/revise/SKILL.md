@@ -1,26 +1,47 @@
 ---
 name: revise
-description: Edit prose in place — restructure article drafts (reorder sections, tighten arguments) or polish markdown/text (typos, dashes, filler). Use when asked to "revise", "edit my draft", "improve my article", "fix typos", or "fix dashes" in a doc or post. Don't use for code style or linting (/check), commit messages (/commit), or writing new docs (/to-doc) or articles (/draft).
+description: Edit prose in place — restructure a draft (reorder sections, cut, collapse) or polish any text (typos, dashes, filler). Use when asked to "revise", "edit my draft", "improve this doc", "fix typos", or "fix dashes" in an article, a technical or design doc, a README, or a commit or PR message, or asked whether a draft needs reordering or cutting. Don't use for code style or linting (/check), or writing a new doc (/to-doc) or article (/draft).
 ---
 
 # Revise
 
 Edit prose in place without changing the author's voice or meaning. Preserve code blocks, code references, technical terms, and proper nouns exactly. If no file is given, ask which.
 
-Two depths:
+Three depths:
 
-- **Full revise** — an article draft: steps 1–4.
-- **Polish only** — the ask is typos, dashes, AI tells, or formatting, or the file isn't an article: step 4.
+- **Full revise** — a draft to restructure: steps 1–4.
+- **Polish only** — the ask is typos, dashes, AI tells, or formatting: step 4.
+- **Question** — "worth reordering?", "anything to cut?", "can a section collapse?": run the step the question names, then answer with numbered candidates, each with a recommendation. Edit nothing until the user picks.
 
-## 1. Context
+Constraints the user sets during the session (a term to keep, a rule like "no counts") bind every later pass.
 
-Ask for the **one takeaway** the reader should remember, unless the draft already states it. Assume engineers reading a public post unless told otherwise.
+## 1. Reader and takeaway
+
+Name the doc type. It sets the reader and where the takeaway lives:
+
+| Type | Reader | Takeaway lives in |
+| --- | --- | --- |
+| Article | engineers reading a public post | the opening, reinforced by the conclusion |
+| Design or architecture doc | reviewers deciding | the TL;DR, as the decision |
+| Docs or README | someone doing a task | the first line: what it's for |
+| Commit or PR message | a future `git log` reader | the subject: the change. The body says why |
+
+Ask for the takeaway only when the draft doesn't state it.
 
 ## 2. Analyze structure
 
-Map the sections as an information DAG — each concept depends on prior concepts. Identify dependency violations (concept used before introduced), redundant sections, missing bridges, a weak intro (hook + expectations) or weak conclusion (does it reinforce the takeaway?).
+Every concept is **grounded** before a passage leans on it: the reader brings it, or an earlier section introduced it. Ground a term where it's first used, so a glossary block up front becomes definitions at first use.
 
-Present the current outline and a proposed reordering. **Wait for confirmation before rewriting.** Already well-structured → skip to step 4.
+Check each section for:
+
+- **Ungrounded concepts**: used before introduced.
+- **Cuts**: "if I cut this, what breaks?" Nothing → cut it. A section that repeats what the body already states folds away; rejected options go in one table (We go with | Instead of | Because).
+- **Owned elsewhere**: detail another doc or the code owns (implementation, full option lists) → a link.
+- **Collapse**: a section most readers skip → an expand, its lead sentence visible.
+- **Format**: prose carries an argument, a list carries parallel items, a table carries a shape repeated 3+ times.
+- **Roadmap**: an intro that lists sections names only the ones that exist, in their order.
+
+Present the outline and the proposed changes. **Wait for confirmation before rewriting.** Done when every section has been run through every check.
 
 ## 3. Rewrite section by section
 
@@ -28,13 +49,16 @@ Edit in place, one section at a time:
 
 - **Lead with the point** — first sentence states what the section proves or teaches
 - **Max 240 characters per paragraph** — split longer ones
-- **Cut ruthlessly** — drop sentences that don't serve the section's point
+- **One job per sentence** — a sentence doing two jobs splits. After merging or splitting, reread each changed sentence on its own
 - **Smooth transitions** — each opening connects to the previous conclusion
 - **Show, don't tell** — concrete examples over abstract claims
+- **A code name you add exists** — grep the source before writing it
 
-Re-read the whole for flow: intro promises what the article delivers, conclusion reinforces the takeaway.
+Re-read the whole for flow: the takeaway lands where step 1 put it.
 
 ## 4. Polish
+
+Re-read the file before every write and keep the user's edits. On a page with open inline comments, keep the words under each comment anchor.
 
 One pass per category, in order: formatting → typos → AI tells → clarity. This pass only removes or substitutes; it never adds words, and never rewrites a sentence that is already clear.
 
@@ -64,5 +88,8 @@ Run `grep -nE '—| – | -- '` before and after to confirm none remain outside 
 - Remove filler ("very", "just", "really", "basically", "actually")
 - Split run-on sentences
 - Flatten weak constructions ("is able to" → "can", "in order to" → "to")
+- One term per concept, the same everywhere
+- A lead-in names the category, not the count ("these rules:"), so it stays true as items change. Check with `grep -nE '\b(two|three|four|five|six|seven|eight|nine|ten)\b [a-z ]+:'`
+- A cross-reference uses its target heading's exact text
 
-Report structural changes (full revise), then polish changes by category.
+Report structural changes (full revise), then polish changes by category, then the session constraints applied.
