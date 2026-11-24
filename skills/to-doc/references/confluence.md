@@ -22,5 +22,6 @@ Call `getContentFormatGuide` with `toolName: "createConfluencePage"` (or `"updat
 - **The converter builds the diagram.** A top-level Mermaid code block becomes the Mermaid app macro, then a "Diagram" expand holding the source. Wrap it in `<details>` yourself and the expand gets a second macro.
 - **Diagrams stay on the page.** An external renderer (mermaid.ink and the like) sends the diagram text out on every page view, and the MCP can't upload attachments. The code block is the only path.
 - **Storage XML renders as raw text.** Write the guide's HTML, never `<ac:structured-macro>` or `<ri:page>`.
+- **Inline comments live in the body.** Each one is a `<span class="annotation" data-annotation-id="…">` around its words. An update that rewrites those words or drops the span orphans the comment. Before replacing a page, list its annotation IDs and send each back around the same words.
 - **A retitle sends the full body.** Fetch the page as `html` and send that body back unchanged with the new title.
 - **Only `adf` shows macros.** `markdown` and `html` both show a diagram as a bare code block, macro and expand gone. A large `adf` read is saved to a file. Outline that file with `scripts/adf-outline.sh`, so the body never enters the context.

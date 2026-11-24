@@ -23,6 +23,11 @@ Confluence pages open with a metadata header: status, authors, date, reviewers. 
 - **One idea per diagram**: a loop, or a decision tree. Mermaid, rendered, its source kept with it.
 - **Our data carries its caveats**: the sample size, what it doesn't cover, a link to the raw data.
 - **Sources are official pages**, grouped by vendor or owner.
+- **Ground each term where it's first used**, so the doc needs no glossary section.
+- **Link what another doc or the code owns**: implementation, exports, full option lists.
+- **Lead-ins name the category, not the count** ("these rules:"), so they stay true as items change.
+- **Collapse what most readers skip** (check tables, option lists) into an expand, its lead sentence visible. A diagram stays outside the expand.
+- **State what we do; rejected options go in one table** (We go with | Instead of | Because), not a Decisions section that repeats the body.
 
 ## Markdown
 
