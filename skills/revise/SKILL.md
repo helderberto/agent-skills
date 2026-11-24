@@ -1,6 +1,6 @@
 ---
 name: revise
-description: Edit prose in place — restructure a draft (reorder sections, cut, collapse) or polish any text (typos, dashes, filler). Use when asked to "revise", "edit my draft", "improve this doc", "fix typos", or "fix dashes" in an article, a technical or design doc, a README, or a commit or PR message, or asked whether a draft needs reordering or cutting. Don't use for code style or linting (/check), or writing a new doc (/to-doc) or article (/draft).
+description: Edit any prose in place — restructure a draft (reorder, cut, collapse) or polish it (typos, dashes, filler). Use when asked to "revise", "edit", "improve", or "fix typos" in existing text, commit and PR messages included, or asked whether a draft needs reordering or cutting. Don't use for code style (/check), or writing new text from scratch (/to-doc, /draft).
 ---
 
 # Revise
