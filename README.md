@@ -64,7 +64,7 @@ Codex invokes skills as `$hb:<skill>`; the others use `/hb:<skill>`.
 
 ## Skills
 
-Typed as `/hb:<name>` or triggered from the task. Naming, invocation tiers, and effort hints: [docs/skill-conventions.md](docs/skill-conventions.md).
+Typed as `/hb:<name>` or triggered from the task. Naming, invocation tiers, and effort: [docs/skill-conventions.md](docs/skill-conventions.md).
 
 ### SDLC workflow
 

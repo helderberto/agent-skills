@@ -1,6 +1,5 @@
 ---
 name: review
-effort: high
 description: Run the full pre-merge panel: parallel audit and lens reviewers over a diff, consolidated into one severity-ranked verdict.
 disable-model-invocation: true
 argument-hint: '[PR-number-or-branch] [agent-count]'

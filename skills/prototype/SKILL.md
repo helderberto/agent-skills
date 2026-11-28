@@ -1,6 +1,5 @@
 ---
 name: prototype
-effort: high
 description: Build a throwaway prototype — a shareable HTML demo for state/logic questions, or several UI variations toggleable from one route. Use when comparing design directions before committing, or the user says "prototype", "mock up", "try a few approaches". Don't use for production code (/build, /tdd).
 ---
 

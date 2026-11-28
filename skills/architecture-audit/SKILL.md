@@ -1,6 +1,5 @@
 ---
 name: architecture-audit
-effort: xhigh
 description: Surface architectural friction across a codebase and propose deep-module refactors as RFCs.
 disable-model-invocation: true
 argument-hint: '[direction] [--html]'

@@ -3,7 +3,6 @@ name: to-stack
 description: Split a large branch or PR into a stack of small PRs, verified layer by layer, and open them as linked drafts.
 argument-hint: '[PR | branch] [--each]'
 disable-model-invocation: true
-effort: high
 ---
 
 # To Stack

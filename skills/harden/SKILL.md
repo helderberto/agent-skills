@@ -1,6 +1,5 @@
 ---
 name: harden
-effort: xhigh
 description: Harden code where untrusted input enters the system. Use when implementing auth, handling user input, storing sensitive data, integrating external APIs, adding file uploads or LLM features, or crossing any trust boundary. Don't use for secret scanning (/safe-repo) or dependency CVEs (/deps-audit).
 user-invocable: false
 ---
