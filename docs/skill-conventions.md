@@ -21,7 +21,7 @@ The `/hb:` menu shows typed-only and both (35 entries); the model sees both and 
 
 ## Effort
 
-Skills also carry an **effort** hint: mechanical ones (`commit`, `to-adr`) run at low reasoning effort, heavy ones (`architecture-audit`, `harden`, `debug`) at high or xhigh, and the rest at the implicit medium default. The override lasts only for the turn the skill fires — so complexity matches the task without you touching `/effort`.
+You pick effort per session with `/effort`. Only mechanical skills (`commit`, `to-adr`, `setup`) set `effort: low`, so they stay cheap whatever the session runs at. No skill raises it.
 
 ## Untrusted text
 

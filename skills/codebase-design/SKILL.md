@@ -1,6 +1,5 @@
 ---
 name: codebase-design
-effort: high
 description: Shared vocabulary for designing deep modules — interface, seam, depth. Use when designing or improving a module's interface, placing a seam, or deciding what an API hides. Don't use for codebase-wide audits (/architecture-audit), behavior-preserving cleanup (/refactor), or UI components (/frontend-ui-engineering).
 user-invocable: false
 ---

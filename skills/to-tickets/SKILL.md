@@ -1,6 +1,5 @@
 ---
 name: to-tickets
-effort: high
 description: Slice a spec or a ticket into tracer-bullet tickets with blocking edges, published through the repo's tracker: `.specs/tickets/<slug>.md` by default.
 disable-model-invocation: true
 argument-hint: '<ticket | spec>'

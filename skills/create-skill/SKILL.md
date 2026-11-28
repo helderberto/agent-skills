@@ -28,10 +28,7 @@ Every step ends on a **completion criterion** the agent can check ("every error 
 | `argument-hint` | Shown next to the name, e.g. `'[slug]'`, `'<idea>'` |
 | `disable-model-invocation` | `true` = user-invoked only; the description becomes a one-sentence human summary |
 | `user-invocable` | `false` = model only; hidden from the `/` menu, reached by other skills or plain phrasing |
-| `effort` | `low` / `medium` / `high` / `xhigh` / `max` for the turn the skill fires; set only when it deviates from the `medium` default |
 | `allowed-tools` | Tools pre-approved for the invoking turn — use sparingly |
-
-Effort routing: `low` for mechanical single-place edits (`commit`, `to-adr`); `high` for multi-file features, unknown-cause debugging, review (`build`, `debug`); `xhigh` for architecture, migrations, security-sensitive work (`architecture-audit`, `harden`).
 
 ## Description
 
@@ -64,7 +61,7 @@ Diagnose a misbehaving skill against these:
 - [ ] Folder name matches `name:`
 - [ ] Description: model-invoked → what / use when / don't use; user-invoked → one sentence
 - [ ] Body shape fits the content; every step has a checkable completion criterion
-- [ ] `effort` set only when it deviates from `medium`
+- [ ] `effort` absent, or `low` on a mechanical skill; never raised
 - [ ] Tier frontmatter follows the tier rule in `docs/skill-conventions.md`; a typed-only skill ends on a filled-in `Next: /hb:<cmd> <args>` line, the only place it names another typed-only skill
 - [ ] `SKILL.md` under ~150 lines
 - [ ] Text other people wrote is called data where it's fetched and in every subagent brief (`docs/skill-conventions.md`)

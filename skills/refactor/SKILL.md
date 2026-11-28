@@ -1,6 +1,5 @@
 ---
 name: refactor
-effort: high
 description: Improve existing code without changing behavior — split large functions, backfill tests, simplify. Use when asked to "refactor", "add missing tests", "split functions", "simplify", "clean up code", or "reduce complexity". Don't use for new features (/tdd), security hardening (/harden), or PR review (/code-review).
 ---
 
