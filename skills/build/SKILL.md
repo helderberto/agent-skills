@@ -77,7 +77,7 @@ Every remaining ticket after one approval, fanned out to **implementer subagents
 You are the orchestrator. You own the **integration branch** and the tickets file, and you write no feature code. Start every subagent with a fresh context window, not a fork of this conversation.
 
 4. **Integration branch**: the current branch, or `feat/<slug>` when on the default branch.
-5. **Explore** (optional): tickets that need codebase or docs exploration → one Explore subagent saves notes to `<tmpdir>/build-<slug>/notes.md`, outside the repo, so implementers build instead of explore.
+5. **Explore** (optional): tickets that need codebase or docs exploration → one Explore subagent returns notes; you save them to `<tmpdir>/build-<slug>/notes.md`, outside the repo, so implementers build instead of explore.
 6. **Fan out**: spawn one general-purpose implementer per frontier ticket, all in one message, in the background, each in its own git worktree (`isolation: worktree`) on branch `build/<slug>-<n>`. Brief with **context pointers**, never copies: the spec and ticket refs, the spec, and the notes, plus the integration branch name. `.specs/` is often gitignored, so a worktree lacks it. Each implementer:
    - confirms its worktree is based on the integration branch tip, and resets onto it if not; installs dependencies if the worktree lacks them;
    - calls the Skill tool with `tdd` for its ticket's acceptance criteria, then with `check`, then with `commit` with the tracker's commit ref, one skill per call;
