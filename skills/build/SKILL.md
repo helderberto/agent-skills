@@ -1,6 +1,5 @@
 ---
 name: build
-effort: high
 description: Implement the next unblocked ticket test-first and commit it, or fan every ticket out to parallel subagents with `--all`.
 disable-model-invocation: true
 argument-hint: '[spec-ref | @tickets-file] [--all]'
@@ -78,7 +77,7 @@ Every remaining ticket after one approval, fanned out to **implementer subagents
 You are the orchestrator. You own the **integration branch** and the tickets file, and you write no feature code. Start every subagent with a fresh context window, not a fork of this conversation.
 
 4. **Integration branch**: the current branch, or `feat/<slug>` when on the default branch.
-5. **Explore** (optional): tickets that need codebase or docs exploration → one Explore subagent saves notes to `<tmpdir>/build-<slug>/notes.md`, outside the repo, so implementers build instead of explore.
+5. **Explore** (optional): tickets that need codebase or docs exploration → one Explore subagent returns notes; you save them to `<tmpdir>/build-<slug>/notes.md`, outside the repo, so implementers build instead of explore.
 6. **Fan out**: spawn one general-purpose implementer per frontier ticket, all in one message, in the background, each in its own git worktree (`isolation: worktree`) on branch `build/<slug>-<n>`. Brief with **context pointers**, never copies: the spec and ticket refs, the spec, and the notes, plus the integration branch name. `.specs/` is often gitignored, so a worktree lacks it. Each implementer:
    - confirms its worktree is based on the integration branch tip, and resets onto it if not; installs dependencies if the worktree lacks them;
    - calls the Skill tool with `tdd` for its ticket's acceptance criteria, then with `check`, then with `commit` with the tracker's commit ref, one skill per call;
@@ -94,7 +93,7 @@ You are the orchestrator. You own the **integration branch** and the tickets fil
 
 ### Close
 
-10. Every ticket done or parked → review the integration branch against its base along [quality axes](references/axes.md) and [smells](references/smells.md). One implementer fixes the Critical findings and Suggestions; list the rest.
+10. Every ticket done or parked → one fresh read-only reviewer subagent reviews the integration branch against its base along [quality axes](references/axes.md) and [smells](references/smells.md), and returns findings only. A fresh implementer fixes the Critical findings and Suggestions; list the rest.
 11. Remove every implementer worktree and merged `build/<slug>-*` branch.
 12. Summarize: tickets completed, tests added, merges made, anything skipped, parked with its open question, or flagged. End with `Next: /hb:review`.
 
