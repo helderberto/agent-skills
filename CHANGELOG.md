@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.19.1] - 2026-11-28
+
+`AGENTS.md` keeps only rules for work on this repo, which cuts it from 133 lines to 37.
+
+### Changed
+
+- The OpenCode intent → skill mapping moved from `AGENTS.md` to `docs/opencode-setup.md`, where OpenCode users copy it
+- `create-skill` and the skill conventions allow a fixed `effort` level when a skill needs one
+
 ## [4.19.0] - 2026-11-28
 
 `build` runs the type checker and only the touched tests while iterating, and the full suite once per ticket. Versioning now follows a declared public API, and `CHANGELOG.md` records every release.
@@ -809,7 +818,8 @@ Bug fixes surfaced by a full skill-eval hardening pass (each skill run under eva
 
 **Full Changelog**: https://github.com/helderberto/agent-skills/commits/v0.1.0
 
-[Unreleased]: https://github.com/helderberto/agent-skills/compare/v4.19.0...HEAD
+[Unreleased]: https://github.com/helderberto/agent-skills/compare/v4.19.1...HEAD
+[4.19.1]: https://github.com/helderberto/agent-skills/compare/v4.19.0...v4.19.1
 [4.19.0]: https://github.com/helderberto/agent-skills/compare/v4.18.0...v4.19.0
 [4.18.0]: https://github.com/helderberto/agent-skills/compare/v4.17.0...v4.18.0
 [4.17.0]: https://github.com/helderberto/agent-skills/compare/v4.16.0...v4.17.0

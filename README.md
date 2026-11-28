@@ -55,7 +55,7 @@ Prefer a native integration? Pick your tool below.
 | Antigravity CLI | `agy plugin install https://github.com/helderberto/agent-skills`                                            | [antigravity-setup.md](docs/antigravity-setup.md) |
 | Gemini CLI      | `gemini skills install https://github.com/helderberto/agent-skills.git --path skills`                       | [gemini-cli-setup.md](docs/gemini-cli-setup.md)   |
 | GitHub Copilot  | `copilot plugin marketplace add helderberto/agent-skills` → `copilot plugin install hb@helderberto-skills`   | [copilot-setup.md](docs/copilot-setup.md)         |
-| OpenCode        | Clone, copy `skills/*` to `.opencode/skills/`, paste the OpenCode section of `AGENTS.md` into yours          | [opencode-setup.md](docs/opencode-setup.md)       |
+| OpenCode        | Clone, copy `skills/*` to `.opencode/skills/`, paste the `AGENTS.md` section from the setup guide into yours          | [opencode-setup.md](docs/opencode-setup.md)       |
 | Other agents    | `npx skills@latest add helderberto/agent-skills -a <agent>` (devin, windsurf, amp, pi; omit `-a` to choose) | —                                                 |
 
 Codex invokes skills as `$hb:<skill>`; the others use `/hb:<skill>`.

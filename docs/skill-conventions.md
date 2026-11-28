@@ -21,7 +21,7 @@ The `/hb:` menu shows typed-only and both (35 entries); the model sees both and 
 
 ## Effort
 
-You pick effort per session with `/effort`. Only mechanical skills (`commit`, `to-adr`, `setup`) set `effort: low`, so they stay cheap whatever the session runs at. No skill raises it.
+You pick effort per session with `/effort`. Only mechanical skills (`commit`, `to-adr`, `setup`) set `effort: low`, so they stay cheap whatever the session runs at.
 
 ## Untrusted text
 
