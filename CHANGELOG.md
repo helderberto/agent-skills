@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.18.0] - 2026-11-28
+
+Effort comes from the session (`/effort`); skills no longer raise it. `build --all` delegates its close review to fresh subagents.
+
+### Changed
+
+- Removed `effort: high`/`xhigh` from 18 skills; only mechanical skills (`commit`, `to-adr`, `setup`) keep `effort: low`
+- `build --all` close: a fresh read-only reviewer subagent returns findings, and a fresh implementer fixes them
+
+### Fixed
+
+- `build --all` explore: the orchestrator saves the Explore subagent's notes, since Explore can't write files
+
+Full change list in [#40](https://github.com/helderberto/agent-skills/pull/40).
+
 ## [4.17.0] - 2026-11-24
 
 `to-doc` writes with the same rules `revise` checks, and keeps Confluence inline comments attached on an update.
@@ -777,7 +792,8 @@ Bug fixes surfaced by a full skill-eval hardening pass (each skill run under eva
 
 **Full Changelog**: https://github.com/helderberto/agent-skills/commits/v0.1.0
 
-[Unreleased]: https://github.com/helderberto/agent-skills/compare/v4.17.0...HEAD
+[Unreleased]: https://github.com/helderberto/agent-skills/compare/v4.18.0...HEAD
+[4.18.0]: https://github.com/helderberto/agent-skills/compare/v4.17.0...v4.18.0
 [4.17.0]: https://github.com/helderberto/agent-skills/compare/v4.16.0...v4.17.0
 [4.16.0]: https://github.com/helderberto/agent-skills/compare/v4.15.0...v4.16.0
 [4.15.0]: https://github.com/helderberto/agent-skills/compare/v4.14.0...v4.15.0
