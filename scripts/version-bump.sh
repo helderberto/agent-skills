@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Fails when skills/ changed since <base> and .claude-plugin/plugin.json doesn't carry
-# the bump its commits imply: `!` or BREAKING CHANGE -> major, feat -> minor, else patch.
+# the bump its commits imply (`!` or BREAKING CHANGE -> major, feat -> minor, else patch),
+# or CHANGELOG.md has no entry for the new version.
 #
 # Usage:
 #   bash scripts/version-bump.sh [base]   # default: origin/main
@@ -33,5 +34,10 @@ fi
 
 if [ "$new" != "$want" ]; then
   echo "commits since $base imply $want, but .claude-plugin/plugin.json reads $new" >&2
+  exit 1
+fi
+
+if ! grep -qF "## [$new]" CHANGELOG.md 2> /dev/null; then
+  echo "CHANGELOG.md has no entry for $new" >&2
   exit 1
 fi
