@@ -9,12 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [4.19.0] - 2026-11-28
 
-`build` runs the type checker and only the touched tests while iterating, and the full suite once per ticket.
+`build` runs the type checker and only the touched tests while iterating, and the full suite once per ticket. Versioning now follows a declared public API, and `CHANGELOG.md` records every release.
+
+### Added
+
+- `CHANGELOG.md` in Keep a Changelog format, covering every release since v0.1.0
+- `CONTRIBUTING.md` declares the public API and what counts as a major, minor, or patch change
 
 ### Changed
 
 - `build`: single-ticket and `--all` runs iterate on the type checker and touched test files; `check` runs the full suite once
-- Contributors run `revise` on prose (skills, docs, PR bodies, changelog entries) before committing
+- CI requires the version bump that the PR's commits imply: `!` or `BREAKING CHANGE` → major, `feat` → minor, else patch
+- Contributors run `revise` on prose before committing
+
+Full change list in [#41](https://github.com/helderberto/agent-skills/pull/41) and [#42](https://github.com/helderberto/agent-skills/pull/42).
 
 ## [4.18.0] - 2026-11-28
 
