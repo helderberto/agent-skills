@@ -12,6 +12,7 @@ cmp .claude-plugin/plugin.json .plugin/plugin.json
 jq -e --slurpfile c .claude-plugin/plugin.json '.name == $c[0].name and .description == $c[0].description' plugin.json > /dev/null
 bash scripts/tiers.test.sh
 bash scripts/version-bump.test.sh
+bash scripts/release-notes.test.sh
 bash scripts/tiers.sh
 bash scripts/version-bump.sh "${BASE_REF:-origin/main}"
 ! grep -nE '\]\(\.\./' skills/*/SKILL.md

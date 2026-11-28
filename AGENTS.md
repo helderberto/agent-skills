@@ -123,7 +123,7 @@ When the user has a non-trivial task, suggest the flow commands in order. They a
 - Supporting files split into subfolders: `references/` (long-form docs loaded on demand), `scripts/` (deterministic helpers), `assets/` (templates/icons used in output). Split when `SKILL.md` exceeds ~150 lines
 - `.plugin/plugin.json` is a byte copy of `.claude-plugin/plugin.json`: Copilot CLI checks it before the root `plugin.json`. The root `plugin.json` (Antigravity) allows only `name` and `description`, which must match. CI checks both
 - Bump `.claude-plugin/plugin.json` `version` (semver) once per PR that changes a skill users see, so plugin consumers can track updates; then copy the file to `.plugin/plugin.json`. CI fails a PR that touches `skills/` without the bump its commits imply: `!` or `BREAKING CHANGE` → major, `feat` → minor, else patch. Public API and levels: [CONTRIBUTING.md](./CONTRIBUTING.md#versioning)
-- Release: `/hb:to-release <PR>` before the merge drafts the release and adds its `CHANGELOG.md` entry; rerun it after the merge to tag `vX.Y.Z` on the merge commit and publish
+- Release: `/hb:to-release <PR>` before the merge adds the `CHANGELOG.md` entry and drafts the release title. On merge, `.github/workflows/release.yml` tags `vX.Y.Z` and publishes with that entry as the notes. CI fails a bump without an entry
 - `bash scripts/check.sh` runs every CI check locally; `bash scripts/audits.sh` lists each skill's skills.sh audit status
 - Untrusted text and verifying a skill's commands: [docs/skill-conventions.md](./docs/skill-conventions.md)
 

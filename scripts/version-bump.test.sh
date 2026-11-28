@@ -55,7 +55,11 @@ passes() {
 }
 
 append() { printf '%s\n' "$2" >> "$1"; }
-bump() { printf '{ "version": "%s" }\n' "${1:-1.1.0}" > .claude-plugin/plugin.json; }
+bump() {
+  printf '{ "version": "%s" }\n' "${1:-1.1.0}" > .claude-plugin/plugin.json
+  printf '## [%s] - 2026-01-01\n' "${1:-1.1.0}" >> CHANGELOG.md
+}
+bare_bump() { printf '{ "version": "%s" }\n' "$1" > .claude-plugin/plugin.json; }
 edit() { append skills/fix/SKILL.md more; bump "$1"; }
 
 passes "change outside skills" append README.md 'more'
@@ -69,6 +73,7 @@ msg='fix: typo' flags "fix with minor bump" edit 1.1.0
 msg='feat: add' flags "feat with patch bump" edit 1.0.1
 msg='feat!: drop flag' passes "bang bumps major" edit 2.0.0
 msg='feat!: drop flag' flags "bang with minor bump" edit 1.1.0
+msg='feat: add' flags "bump without changelog entry" eval "append skills/fix/SKILL.md more; bare_bump 1.1.0"
 msg=$'refactor: x\n\nBREAKING CHANGE: renamed' passes "footer bumps major" edit 2.0.0
 
 exit "$failed"

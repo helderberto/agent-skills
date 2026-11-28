@@ -58,7 +58,7 @@ When in doubt, open an issue first to discuss scope.
 - **Minor** (`feat`): a new skill, flag, or behavior
 - **Patch** (anything else): wording or a fix that doesn't change how you use a skill
 
-CI derives the level from the PR's commits and checks the bump matches. [CHANGELOG.md](CHANGELOG.md) follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); `/hb:to-release` adds each version's entry.
+CI derives the level from the PR's commits and checks the bump matches. [CHANGELOG.md](CHANGELOG.md) follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); `/hb:to-release` adds each version's entry, and the release workflow publishes it as the notes on merge.
 
 ## Structure
 
