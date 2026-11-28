@@ -93,7 +93,7 @@ You are the orchestrator. You own the **integration branch** and the tickets fil
 
 ### Close
 
-10. Every ticket done or parked → review the integration branch against its base along [quality axes](references/axes.md) and [smells](references/smells.md). One implementer fixes the Critical findings and Suggestions; list the rest.
+10. Every ticket done or parked → one fresh read-only reviewer subagent reviews the integration branch against its base along [quality axes](references/axes.md) and [smells](references/smells.md), and returns findings only. A fresh implementer fixes the Critical findings and Suggestions; list the rest.
 11. Remove every implementer worktree and merged `build/<slug>-*` branch.
 12. Summarize: tickets completed, tests added, merges made, anything skipped, parked with its open question, or flagged. End with `Next: /hb:review`.
 
