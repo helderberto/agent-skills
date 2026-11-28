@@ -113,6 +113,7 @@ When the user has a non-trivial task, suggest the flow commands in order. They a
 
 ## Conventions
 
+- Prose meant to be read (skills, docs, PR bodies, changelog entries) → invoke the `revise` skill before committing
 - Every skill lives in `skills/<name>/SKILL.md` (or `<name>/SKILL.md` if flat at root — see structure section)
 - YAML frontmatter requires `name` and `description`
 - Agents in `agents/` are named `*-auditor`: read-only reviewers that preload, through `skills:` frontmatter, the skill holding their checklist when one exists
