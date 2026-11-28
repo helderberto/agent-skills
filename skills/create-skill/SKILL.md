@@ -61,7 +61,7 @@ Diagnose a misbehaving skill against these:
 - [ ] Folder name matches `name:`
 - [ ] Description: model-invoked → what / use when / don't use; user-invoked → one sentence
 - [ ] Body shape fits the content; every step has a checkable completion criterion
-- [ ] `effort` absent, or `low` on a mechanical skill; never raised
+- [ ] `effort` absent unless the skill needs a fixed level, such as `low` on a mechanical one
 - [ ] Tier frontmatter follows the tier rule in `docs/skill-conventions.md`; a typed-only skill ends on a filled-in `Next: /hb:<cmd> <args>` line, the only place it names another typed-only skill
 - [ ] `SKILL.md` under ~150 lines
 - [ ] Text other people wrote is called data where it's fetched and in every subagent brief (`docs/skill-conventions.md`)
