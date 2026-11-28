@@ -50,6 +50,16 @@ When in doubt, open an issue first to discuss scope.
 - **Workflow skills** (`triage`, `grill`, `to-spec`, `to-tickets`, `build`, `review`, `to-pr`, `retro`) are typed as `/hb:<name>`
 - **Toolbelt skills** in the both and model-only tiers auto-trigger from the `description` field — write that carefully
 
+## Versioning
+
+[Semantic Versioning](https://semver.org/spec/v2.0.0.html) over this public API: skill names and `/hb:` commands, their arguments and flags, agent names, and the files skills read or write (`.specs/issue-tracker.md`, tickets, `GLOSSARY.md`, ADRs).
+
+- **Major** (`!` or `BREAKING CHANGE`): a skill, flag, or agent removed or renamed, or a file format older setups can't read
+- **Minor** (`feat`): a new skill, flag, or behavior
+- **Patch** (anything else): wording or a fix that doesn't change how you use a skill
+
+CI derives the level from the PR's commits and checks the bump matches. [CHANGELOG.md](CHANGELOG.md) follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); `/hb:to-release` adds each version's entry.
+
 ## Structure
 
 ```
