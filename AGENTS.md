@@ -21,7 +21,7 @@ plugin.json      → Plugin manifest (Antigravity CLI)
 
 ## Conventions
 
-- Prose meant to be read (skills, docs, PR bodies, changelog entries) → invoke the `revise` skill before committing
+- Prose a person reads at length (skills you author or restructure, docs, README, PR bodies) → invoke the `revise` skill before committing. Short edits and changelog entries skip it
 - Author or restructure a skill with the `create-skill` skill
 - Agents in `agents/` are named `*-auditor`: read-only reviewers that preload, through `skills:` frontmatter, the skill holding their checklist when one exists
 - No Claude Code hooks: they would block the user's own sessions. Safety checks run when the user asks (`/hb:safe-repo`, `/hb:to-pr --safe`)
