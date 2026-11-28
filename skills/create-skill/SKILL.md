@@ -68,5 +68,5 @@ Diagnose a misbehaving skill against these:
 - [ ] Every subagent the skill spawns starts with a fresh context window (`docs/skill-conventions.md`)
 - [ ] Every git or shell command ran in a scratch repo, deletions and renames included
 - [ ] Calls to another skill say "Call the Skill tool with `<skill-name>`" (one skill per call); user-facing suggestions say `/hb:<cmd>`, description hints keep `/<skill-name>`; no `../` links across skill folders
-- [ ] Added to README, the `AGENTS.md` intent → skill mapping, and `guide`'s map; no existing skill already covers it
+- [ ] Added to README, the intent → skill mapping in `docs/opencode-setup.md`, and `guide`'s map; no existing skill already covers it
 - [ ] `.claude-plugin/plugin.json` `version` bumped (semver)

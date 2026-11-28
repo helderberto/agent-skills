@@ -72,7 +72,7 @@ agent-skills/
 ├── skills/              one folder per skill, each with SKILL.md
 ├── agents/              subagent definitions (Claude Code only)
 ├── docs/                per-agent setup guides, workflow, skill conventions
-├── AGENTS.md            Intent → skill mapping (drives OpenCode auto-routing)
+├── AGENTS.md            Guidance for agents working on this repo
 ├── CONTRIBUTING.md      How to contribute new skills or improvements
 ├── LICENSE              MIT
 └── README.md
