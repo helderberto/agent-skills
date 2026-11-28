@@ -27,7 +27,7 @@ repo() {
 check() {
   local want=$1 name=$2 got
   git add -A
-  git commit -qm change
+  git commit -qm "${msg:-chore: change}"
   bash scripts/version-bump.sh main > /dev/null 2>&1
   got=$?
   if [ "$got" = "$want" ]; then
@@ -55,13 +55,20 @@ passes() {
 }
 
 append() { printf '%s\n' "$2" >> "$1"; }
-bump() { printf '{ "version": "1.1.0" }\n' > .claude-plugin/plugin.json; }
+bump() { printf '{ "version": "%s" }\n' "${1:-1.1.0}" > .claude-plugin/plugin.json; }
+edit() { append skills/fix/SKILL.md more; bump "$1"; }
 
 passes "change outside skills" append README.md 'more'
 flags "skill edited, no bump" append skills/fix/SKILL.md 'more'
-passes "skill edited, bumped" eval "append skills/fix/SKILL.md more; bump"
+msg='feat: add' passes "skill edited, bumped" edit 1.1.0
 flags "skill deleted, no bump" rm -r skills/fix
 flags "skill renamed, no bump" git mv skills/fix skills/repair
-passes "skill renamed, bumped" eval "git mv skills/fix skills/repair; bump"
+msg='feat: rename' passes "skill renamed, bumped" eval "git mv skills/fix skills/repair; bump"
+msg='fix: typo' passes "fix bumps patch" edit 1.0.1
+msg='fix: typo' flags "fix with minor bump" edit 1.1.0
+msg='feat: add' flags "feat with patch bump" edit 1.0.1
+msg='feat!: drop flag' passes "bang bumps major" edit 2.0.0
+msg='feat!: drop flag' flags "bang with minor bump" edit 1.1.0
+msg=$'refactor: x\n\nBREAKING CHANGE: renamed' passes "footer bumps major" edit 2.0.0
 
 exit "$failed"
