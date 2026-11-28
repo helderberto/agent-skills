@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.19.0] - 2026-11-28
+
+`build` runs the type checker and only the touched tests while iterating, and the full suite once per ticket.
+
+### Changed
+
+- `build`: single-ticket and `--all` runs iterate on the type checker and touched test files; `check` runs the full suite once
+- Contributors run `revise` on prose (skills, docs, PR bodies, changelog entries) before committing
+
 ## [4.18.0] - 2026-11-28
 
 Effort comes from the session (`/effort`); skills no longer raise it. `build --all` delegates its close review to fresh subagents.
@@ -792,7 +801,8 @@ Bug fixes surfaced by a full skill-eval hardening pass (each skill run under eva
 
 **Full Changelog**: https://github.com/helderberto/agent-skills/commits/v0.1.0
 
-[Unreleased]: https://github.com/helderberto/agent-skills/compare/v4.18.0...HEAD
+[Unreleased]: https://github.com/helderberto/agent-skills/compare/v4.19.0...HEAD
+[4.19.0]: https://github.com/helderberto/agent-skills/compare/v4.18.0...v4.19.0
 [4.18.0]: https://github.com/helderberto/agent-skills/compare/v4.17.0...v4.18.0
 [4.17.0]: https://github.com/helderberto/agent-skills/compare/v4.16.0...v4.17.0
 [4.16.0]: https://github.com/helderberto/agent-skills/compare/v4.15.0...v4.16.0

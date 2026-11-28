@@ -31,7 +31,7 @@ Show the title, its `hitl` label if any, and unchecked items. If on the default 
 
 ### 3. Implement
 
-For each unchecked item, in order: read the architectural decisions and the item's context, explore the surrounding code, and follow the project's conventions (CLAUDE.md, linter, test setup). Call the Skill tool with `tdd` at the ticket's seams — the ones its acceptance criteria name. Completion: every item's test went red before it went green.
+For each unchecked item, in order: read the architectural decisions and the item's context, explore the surrounding code, and follow the project's conventions (CLAUDE.md, linter, test setup). Call the Skill tool with `tdd` at the ticket's seams — the ones its acceptance criteria name. While iterating, run the type checker and only the test files you touched; the full suite runs once, in step 4. Completion: every item's test went red before it went green.
 
 Stay inside the ticket boundary — never implement items from other tickets. Never impose conventions the project doesn't already use.
 
@@ -81,6 +81,7 @@ You are the orchestrator. You own the **integration branch** and the tickets fil
 6. **Fan out**: spawn one general-purpose implementer per frontier ticket, all in one message, in the background, each in its own git worktree (`isolation: worktree`) on branch `build/<slug>-<n>`. Brief with **context pointers**, never copies: the spec and ticket refs, the spec, and the notes, plus the integration branch name. `.specs/` is often gitignored, so a worktree lacks it. Each implementer:
    - confirms its worktree is based on the integration branch tip, and resets onto it if not; installs dependencies if the worktree lacks them;
    - calls the Skill tool with `tdd` for its ticket's acceptance criteria, then with `check`, then with `commit` with the tracker's commit ref, one skill per call;
+   - while iterating, runs the type checker and only the test files it touched; `check` runs the full suite once;
    - merges the integration branch tip into its branch before reporting;
    - never ticks boxes or closes tickets, and reports in a few lines: branch, commits, which criteria hold.
 7. **Merge**: as each implementer reports, merge its branch into the integration branch. A conflict → a merger subagent resolves it there and runs `check`. Then tick its boxes and close it the tracker's way.
